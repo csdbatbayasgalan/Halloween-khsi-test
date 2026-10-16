@@ -396,6 +396,18 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 @media (max-width:420px){.sndbtn{height:50px;padding:0 14px 0 11px;font-size:.8rem}
   .sndbtn .ic{font-size:20px}}
 #ytwrap{position:fixed;width:1px;height:1px;left:-9999px;top:-9999px;opacity:0;pointer-events:none}
+.board{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.board li{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:10px;
+  background:var(--cream-2);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink)}
+.board li.top{background:var(--yellow)}
+.board .rk{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+  font-family:var(--display);font-weight:900;font-size:.82rem;
+  background:var(--ink);color:var(--cream)}
+.board li.top .rk{background:#f0824a;color:#fff6ea}
+.board .nmx{flex:1;min-width:0;font-weight:700;font-size:.88rem;word-break:break-word}
+.board .pt{flex:none;font-family:var(--display);font-weight:900;font-size:.95rem}
+.board .pt small{font-weight:700;font-size:.62rem;opacity:.7;margin-left:3px}
+.bnone{margin:0;font-size:.84rem;font-weight:700;opacity:.7;text-align:center;padding:6px 0}
 .secret{margin-top:18px;padding:16px 14px;border-radius:12px;text-align:center;
   background:linear-gradient(165deg,#2a1109,#140905 65%,#1d0b06);
   border:3px solid #f6c62a;box-shadow:0 0 0 3px rgba(23,19,16,.55),0 0 26px rgba(246,198,42,.35);
@@ -513,6 +525,12 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     <div class="who-h"><h2 id="who-h">Ирэх хүмүүс</h2><span class="count" id="count">0</span></div>
     <ul class="ghosts" id="ghosts"></ul>
     <p class="none" id="none">Эхнийх нь бол! 👻</p>
+  </section>
+
+  <section class="card" aria-labelledby="board-h">
+    <div class="who-h"><h2 id="board-h">🏅 Нууц даалгаврын оноо</h2></div>
+    <ul class="board" id="board"></ul>
+    <p class="bnone" id="bnone">Одоогоор хэн ч оноо аваагүй байна 🦇</p>
   </section>
 
   <footer>KHSI Engagement team · Halloween 2026<br>
@@ -956,10 +974,14 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       listEl.appendChild(li);
     });
   }
-  var PRIZE_ID = "PRIZE";          /* хуучин мөрийг жагсаалтаас нуухад л хэрэглэнэ */
+  /* Энэ удаагийн даалгаврын ялагч "PRIZE" мөрөнд бичигдэнэ.
+     Шинэ 7 хоног эхлэхэд шийт дээрх "PRIZE" мөрийн id-г "PRIZE-1", "PRIZE-2" ...
+     болгож сольчихвол шинэ даалгавар дахин нээгдэж, хуучин ялагчдын оноо хэвээр үлдэнэ. */
+  var TASK_ID  = "PRIZE";
+  var PRIZE_ID = TASK_ID;
   function isQuestRow(id){
     id = String(id || "");
-    return id === PRIZE_ID || id.indexOf("Q-") === 0;
+    return id.indexOf("PRIZE") === 0 || id.indexOf("Q-") === 0;
   }
   window.ZEELY = {
     winner: null,
@@ -1011,10 +1033,38 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
 
   /* --- Google Sheet (өөрийн сайт дээрх нийтлэг жагсаалт) --- */
   var sheetTimer = 0;
+  function renderBoard(rows){
+    var boardEl = document.getElementById("board"),
+        bnoneEl = document.getElementById("bnone");
+    if(!boardEl || !bnoneEl) return;
+    var tally = {};
+    (rows || []).forEach(function(v){
+      if(String(v.id || "").indexOf("PRIZE") !== 0) return;
+      var nm = String(v.name || "").trim();
+      if(!nm) return;
+      tally[nm] = (tally[nm] || 0) + 1;
+    });
+    var list = Object.keys(tally).map(function(nm){ return { name: nm, pts: tally[nm] }; });
+    list.sort(function(a, b){ return b.pts - a.pts || a.name.localeCompare(b.name); });
+    boardEl.innerHTML = "";
+    bnoneEl.hidden = list.length > 0;
+    var MED = ["🥇", "🥈", "🥉"];
+    list.forEach(function(r, i){
+      var li = document.createElement("li");
+      if(i === 0) li.className = "top";
+      li.innerHTML = '<span class="rk">' + (MED[i] || (i + 1)) + '</span>'
+                   + '<span class="nmx"></span>'
+                   + '<span class="pt">' + r.pts + '<small>оноо</small></span>';
+      li.querySelector(".nmx").textContent = r.name;
+      boardEl.appendChild(li);
+    });
+  }
+
   function renderRows(rows){
     firstLoad = false;
     if(!rows || !rows.length){ render([]); return; }
     try { localStorage.setItem("zeely.rows", JSON.stringify(rows)); } catch(e){}
+    renderBoard(rows);
     rows = rows.filter(function(v){ return !isQuestRow(v.id); });
     var list = rows.map(function(v){
       return { id: String(v.id || ""), name: String(v.name || "").slice(0, 24),
