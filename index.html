@@ -928,30 +928,6 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       listEl.appendChild(li);
     });
   }
-  var cached = null;
-  try { cached = JSON.parse(localStorage.getItem("zeely.rows") || "null"); } catch(e){ cached = null; }
-  if(cached && cached.length){ renderRows(cached); } else { render(local); }
-
-  function mark(going){
-    yesEl.setAttribute("aria-pressed", going === true ? "true" : "false");
-    if(going === null) return;
-    nameEl.hidden = true;
-    yesEl.hidden = true;
-    if(noEl) noEl.hidden = true;
-    if(noBub){ noBub.remove(); noBub = null; }
-    changeEl.hidden = true;
-    statusEl.textContent = going ? "Амжилттай бүртгэгдлээ 👻" : "Ойлголоо, дараагийн шөнө уулзъя 🦇";
-    if(youBox) youBox.hidden = !going;
-  }
-  changeEl.addEventListener("click", function(){
-    nameEl.hidden = false; yesEl.hidden = false;
-    changeEl.hidden = true; statusEl.textContent = "";
-    if(youBox) youBox.hidden = true;
-    nameEl.focus();
-  });
-
-  /* --- Google Sheet (өөрийн сайт дээрх нийтлэг жагсаалт) --- */
-  var sheetTimer = 0;
   var PRIZE_ID = "PRIZE";
   var winnerEl = document.getElementById("winner");
   function showWinner(nm){
@@ -985,6 +961,30 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     }
   };
 
+  var cached = null;
+  try { cached = JSON.parse(localStorage.getItem("zeely.rows") || "null"); } catch(e){ cached = null; }
+  if(cached && cached.length){ renderRows(cached); } else { render(local); }
+
+  function mark(going){
+    yesEl.setAttribute("aria-pressed", going === true ? "true" : "false");
+    if(going === null) return;
+    nameEl.hidden = true;
+    yesEl.hidden = true;
+    if(noEl) noEl.hidden = true;
+    if(noBub){ noBub.remove(); noBub = null; }
+    changeEl.hidden = true;
+    statusEl.textContent = going ? "Амжилттай бүртгэгдлээ 👻" : "Ойлголоо, дараагийн шөнө уулзъя 🦇";
+    if(youBox) youBox.hidden = !going;
+  }
+  changeEl.addEventListener("click", function(){
+    nameEl.hidden = false; yesEl.hidden = false;
+    changeEl.hidden = true; statusEl.textContent = "";
+    if(youBox) youBox.hidden = true;
+    nameEl.focus();
+  });
+
+  /* --- Google Sheet (өөрийн сайт дээрх нийтлэг жагсаалт) --- */
+  var sheetTimer = 0;
   function renderRows(rows){
     firstLoad = false;
     if(!rows || !rows.length){ render([]); return; }
