@@ -396,6 +396,22 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 @media (max-width:420px){.sndbtn{height:50px;padding:0 14px 0 11px;font-size:.8rem}
   .sndbtn .ic{font-size:20px}}
 #ytwrap{position:fixed;width:1px;height:1px;left:-9999px;top:-9999px;opacity:0;pointer-events:none}
+.secret{margin-top:18px;padding:16px 14px;border-radius:12px;text-align:center;
+  background:linear-gradient(165deg,#2a1109,#140905 65%,#1d0b06);
+  border:3px solid #f6c62a;box-shadow:0 0 0 3px rgba(23,19,16,.55),0 0 26px rgba(246,198,42,.35);
+  animation:secglow 2.4s ease-in-out infinite alternate}
+@keyframes secglow{
+  from{box-shadow:0 0 0 3px rgba(23,19,16,.55),0 0 14px rgba(246,198,42,.25)}
+  to  {box-shadow:0 0 0 3px rgba(23,19,16,.55),0 0 34px rgba(246,198,42,.6)}}
+@media (prefers-reduced-motion: reduce){.secret{animation:none}}
+.secret .se{font-family:var(--display);font-weight:700;font-size:.6rem;letter-spacing:.3em;
+  text-transform:uppercase;color:#f0a04a;margin:0 0 8px}
+.secret h3{font-family:var(--display);font-weight:900;margin:0 0 8px;color:#f6c62a;
+  font-size:clamp(1.3rem,6vw,1.8rem);letter-spacing:.05em;
+  text-shadow:0 0 14px rgba(246,198,42,.55)}
+.secret p{margin:0;color:#efd9c5;font-size:.88rem;line-height:1.6}
+.secret .sk{display:block;margin-top:10px;font-family:var(--display);font-weight:700;
+  font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:#f0824a}
 .credit{display:inline-block;margin-top:7px;font-family:var(--display);font-weight:700;
   font-size:.68rem;letter-spacing:.1em;color:var(--yellow);opacity:.85}
 footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-top:4px}
@@ -533,6 +549,14 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         <span class="cup" aria-hidden="true">🥉</span>
         <span class="pl">3-р байр</span>
       </div>
+    </div>
+
+    <div class="secret">
+      <p class="se">✦ Зөвхөн ганц хүнд ✦</p>
+      <h3>🔮 НУУЦ ШАГНАЛ 🔮</h3>
+      <p>Энэ вэб хуудсанд нэг нууц нуугдсан байгаа.<br>
+         Олсон хүнд тусгай шагнал хүлээж байна!</p>
+      <span class="sk">Сайн ажиглаарай 👀</span>
     </div>
   </div>
 </div>
@@ -928,36 +952,19 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       listEl.appendChild(li);
     });
   }
-  var PRIZE_ID = "PRIZE";
-  var winnerEl = document.getElementById("winner");
-  function showWinner(nm){
-    if(!winnerEl) return;
-    winnerEl.hidden = !nm;
-    if(nm) winnerEl.textContent = "🏆 Нууц шагналыг " + nm + " аль хэдийн авсан байна!";
+  var PRIZE_ID = "PRIZE";          /* хуучин мөрийг жагсаалтаас нуухад л хэрэглэнэ */
+  function isQuestRow(id){
+    id = String(id || "");
+    return id === PRIZE_ID || id.indexOf("Q-") === 0;
   }
   window.ZEELY = {
-    winner: null,
-    /* шийтээс ялагчийг шалгана */
-    check: function(cb){
-      fetch(SHEET_URL + "?t=" + Date.now())
-        .then(function(r){ return r.json(); })
-        .then(function(rows){
-          var w = null;
-          (rows || []).forEach(function(v){ if(String(v.id) === PRIZE_ID) w = String(v.name || ""); });
-          window.ZEELY.winner = w; showWinner(w); cb(w);
-        })
-        .catch(function(){ cb(undefined); });   /* undefined = шалгаж чадсангүй */
-    },
-    /* ялагчийг бүртгэнэ (нэг л хүн) */
+    /* нууц шагналд оролцогчийг бүртгэнэ — хэн түрүүлснийг хэнд ч харуулахгүй */
     claim: function(nm, done, fail){
-      window.ZEELY.check(function(w){
-        if(w){ fail("taken", w); return; }
-        fetch(SHEET_URL + "?id=" + encodeURIComponent(PRIZE_ID)
-            + "&name=" + encodeURIComponent(nm) + "&going=1&t=" + Date.now())
-          .then(function(r){ return r.json(); })
-          .then(function(){ window.ZEELY.winner = nm; showWinner(nm); done(); })
-          .catch(function(){ fail("net"); });
-      });
+      fetch(SHEET_URL + "?id=" + encodeURIComponent("Q-" + myId)
+          + "&name=" + encodeURIComponent(nm) + "&going=1&t=" + Date.now())
+        .then(function(r){ return r.json(); })
+        .then(function(){ done(); })
+        .catch(function(){ fail(); });
     }
   };
 
@@ -989,13 +996,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     firstLoad = false;
     if(!rows || !rows.length){ render([]); return; }
     try { localStorage.setItem("zeely.rows", JSON.stringify(rows)); } catch(e){}
-    /* ялагчийн мөрийг жагсаалтаас салгана */
-    var w = null;
-    rows = rows.filter(function(v){
-      if(String(v.id) === PRIZE_ID){ w = String(v.name || ""); return false; }
-      return true;
-    });
-    window.ZEELY.winner = w; showWinner(w);
+    rows = rows.filter(function(v){ return !isQuestRow(v.id); });
     var list = rows.map(function(v){
       return { id: String(v.id || ""), name: String(v.name || "").slice(0, 24),
                going: v.going === true || v.going === "true" };
@@ -1469,33 +1470,22 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     o.querySelector(".qx").addEventListener("click", close);
     o.addEventListener("click", function(e){ if(e.target === o) close(); });
 
-    if(!window.ZEELY){ lead.textContent = "Холболт алга."; return; }
-    window.ZEELY.check(function(w){
-      if(w){
-        lead.innerHTML = "Харамсалтай — нууц шагналыг <b>" + w + "</b> аль хэдийн авчихжээ. 🦇";
-        return;
-      }
-      lead.textContent = "Чи постерын нууцыг оллоо! Нэрээ үлдээгээрэй.";
-      form.hidden = false;
-      nm.focus();
-    });
+    lead.textContent = "Чи постерын нууцыг оллоо! Нэрээ үлдээгээрэй.";
+    form.hidden = false;
+    setTimeout(function(){ nm.focus(); }, 500);
 
     function send(){
       var v = nm.value.trim();
       if(!v){ msg.textContent = "Нэрээ бичээрэй 🎃"; nm.focus(); return; }
       msg.textContent = "Илгээж байна…";
-      window.ZEELY.claim(v, function(){
+      function ok(){
         form.hidden = true;
-        lead.innerHTML = "🏆 Баяр хүргэе, <b>" + v + "</b>! Нууц шагнал чинийх.";
+        lead.innerHTML = "🎃 Амжилттай оролцлоо, <b>" + v + "</b>!<br>Баярлалаа — шагналыг <b>10 сарын 30</b>-нд өгнө.";
         msg.textContent = "";
-      }, function(why, who){
-        if(why === "taken"){
-          form.hidden = true;
-          lead.innerHTML = "Хоцорчихлоо — <b>" + who + "</b> түрүүлжээ. 🦇";
-          msg.textContent = "";
-        } else {
-          msg.textContent = "Илгээж чадсангүй, дахин оролдоно уу.";
-        }
+      }
+      if(!window.ZEELY){ ok(); return; }
+      window.ZEELY.claim(v, ok, function(){
+        msg.textContent = "Илгээж чадсангүй, дахин оролдоно уу.";
       });
     }
     o.querySelector("#qsend").addEventListener("click", send);
