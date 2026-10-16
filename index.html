@@ -1492,7 +1492,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     if(!window.ZEELY){ lead.textContent = "Холболт алга."; return; }
     window.ZEELY.check(function(w){
       if(w){
-        lead.innerHTML = "Харамсалтай — нууц шагналыг <b>" + w + "</b> аль хэдийн авчихжээ. 🦇";
+        lead.innerHTML = "Харамсалтай — энэ удаагийн даалгаврыг <b>" + w + "</b> аль хэдийн биелүүлжээ. 🦇";
         return;
       }
       lead.textContent = "Чи постерын нууцыг оллоо! Нэрээ үлдээгээрэй.";
@@ -1506,12 +1506,12 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       msg.textContent = "Илгээж байна…";
       window.ZEELY.claim(v, function(){
         form.hidden = true;
-        lead.innerHTML = "🏆 Баяр хүргэе, <b>" + v + "</b>!<br>Нууц шагнал чинийх — <b>10 сарын 30</b>-нд гардуулна.";
+        lead.innerHTML = "🏆 Баяр хүргэе, <b>" + v + "</b>!<br>Энэ удаагийн даалгавар чинийх боллоо.";
         msg.textContent = "";
       }, function(why, who){
         if(why === "taken"){
           form.hidden = true;
-          lead.innerHTML = "Хоцорчихлоо — <b>" + who + "</b> түрүүлжээ. 🦇";
+          lead.innerHTML = "Харамсалтай — энэ удаагийн даалгаврыг <b>" + who + "</b> аль хэдийн биелүүлжээ. 🦇";
           msg.textContent = "";
         } else {
           msg.textContent = "Илгээж чадсангүй, дахин оролдоно уу.";
