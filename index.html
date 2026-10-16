@@ -962,13 +962,28 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     return id === PRIZE_ID || id.indexOf("Q-") === 0;
   }
   window.ZEELY = {
-    /* нууц шагналд оролцогчийг бүртгэнэ — хэн түрүүлснийг хэнд ч харуулахгүй */
-    claim: function(nm, done, fail){
-      fetch(SHEET_URL + "?id=" + encodeURIComponent("Q-" + myId)
-          + "&name=" + encodeURIComponent(nm) + "&going=1&t=" + Date.now())
+    winner: null,
+    /* шийтээс ялагчийг шалгана */
+    check: function(cb){
+      fetch(SHEET_URL + "?t=" + Date.now())
         .then(function(r){ return r.json(); })
-        .then(function(){ done(); })
-        .catch(function(){ fail(); });
+        .then(function(rows){
+          var w = null;
+          (rows || []).forEach(function(v){ if(String(v.id) === PRIZE_ID) w = String(v.name || ""); });
+          window.ZEELY.winner = w; cb(w);
+        })
+        .catch(function(){ cb(undefined); });
+    },
+    /* зөвхөн нэг хүн — аль хэдийн эзэнтэй бол бүртгэхгүй */
+    claim: function(nm, done, fail){
+      window.ZEELY.check(function(w){
+        if(w){ fail("taken", w); return; }
+        fetch(SHEET_URL + "?id=" + encodeURIComponent(PRIZE_ID)
+            + "&name=" + encodeURIComponent(nm) + "&going=1&t=" + Date.now())
+          .then(function(r){ return r.json(); })
+          .then(function(){ window.ZEELY.winner = nm; done(); })
+          .catch(function(){ fail("net"); });
+      });
     }
   };
 
@@ -1474,22 +1489,33 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     o.querySelector(".qx").addEventListener("click", close);
     o.addEventListener("click", function(e){ if(e.target === o) close(); });
 
-    lead.textContent = "Чи постерын нууцыг оллоо! Нэрээ үлдээгээрэй.";
-    form.hidden = false;
-    setTimeout(function(){ nm.focus(); }, 500);
+    if(!window.ZEELY){ lead.textContent = "Холболт алга."; return; }
+    window.ZEELY.check(function(w){
+      if(w){
+        lead.innerHTML = "Харамсалтай — нууц шагналыг <b>" + w + "</b> аль хэдийн авчихжээ. 🦇";
+        return;
+      }
+      lead.textContent = "Чи постерын нууцыг оллоо! Нэрээ үлдээгээрэй.";
+      form.hidden = false;
+      setTimeout(function(){ nm.focus(); }, 500);
+    });
 
     function send(){
       var v = nm.value.trim();
       if(!v){ msg.textContent = "Нэрээ бичээрэй 🎃"; nm.focus(); return; }
       msg.textContent = "Илгээж байна…";
-      function ok(){
+      window.ZEELY.claim(v, function(){
         form.hidden = true;
-        lead.innerHTML = "🎃 Амжилттай оролцлоо, <b>" + v + "</b>!<br>Баярлалаа — шагналыг <b>10 сарын 30</b>-нд өгнө.";
+        lead.innerHTML = "🏆 Баяр хүргэе, <b>" + v + "</b>!<br>Нууц шагнал чинийх — <b>10 сарын 30</b>-нд гардуулна.";
         msg.textContent = "";
-      }
-      if(!window.ZEELY){ ok(); return; }
-      window.ZEELY.claim(v, ok, function(){
-        msg.textContent = "Илгээж чадсангүй, дахин оролдоно уу.";
+      }, function(why, who){
+        if(why === "taken"){
+          form.hidden = true;
+          lead.innerHTML = "Хоцорчихлоо — <b>" + who + "</b> түрүүлжээ. 🦇";
+          msg.textContent = "";
+        } else {
+          msg.textContent = "Илгээж чадсангүй, дахин оролдоно уу.";
+        }
       });
     }
     o.querySelector("#qsend").addEventListener("click", send);
