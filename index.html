@@ -448,6 +448,17 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 #adm .ax{position:fixed;right:14px;top:14px;z-index:2;width:38px;height:38px;border-radius:50%;
   background:var(--cream);border:3px solid var(--ink);box-shadow:2px 2px 0 var(--ink);
   font-size:17px;cursor:pointer;padding:0}
+#adm .actl{display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  background:#1e1816;border:2px solid #3a2f2a;border-radius:11px;padding:11px 13px;margin:0 0 14px}
+#adm .alab{font-family:var(--display);font-weight:900;font-size:.95rem;color:#fff6ea}
+#adm .ast{font-family:var(--display);font-weight:900;font-size:.76rem;letter-spacing:.1em;
+  padding:4px 10px;border-radius:999px;background:#3a2f2a;color:#efe4d6}
+#adm .ast.so{background:#2c5c23;color:#d5f5c8}
+#adm .ast.sh{background:#6b2018;color:#ffd9d0}
+#adm .abtn{margin-left:auto;font-family:var(--display);font-weight:900;font-size:.85rem;
+  padding:9px 18px;border-radius:9px;background:var(--yellow);color:var(--ink);
+  border:3px solid var(--ink);box-shadow:3px 3px 0 #000;cursor:pointer}
+#adm .abtn:disabled{opacity:.6;cursor:default}
 #adm .ap{background:#1e1816;border:2px solid #3a2f2a;border-radius:11px;padding:13px 14px;margin:0 0 12px}
 #adm .ap h3{margin:0 0 2px;font-family:var(--display);font-weight:900;font-size:1rem;color:#fff6ea}
 #adm .ap .asc{font-family:var(--display);font-weight:900;color:#f0824a;font-size:.9rem;margin:0 0 9px}
@@ -1194,7 +1205,22 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       if(o && !document.body.contains(o)) o = null;   /* DOM-оос алга болсон бол шинэчилнэ */
       if(o) return;
       shell();
-      intro();
+      body.innerHTML = '<p class="zlead">Шалгаж байна…</p>';
+      if(!(window.ZEELY && window.ZEELY.getCfg)){ intro(); return; }
+      window.ZEELY.getCfg("task2", function(val){
+        if(val === "closed"){ shut(); return; }       /* зохион байгуулагч хаасан */
+        intro();
+      });
+    }
+
+    function shut(){
+      locked = false; xbtn.hidden = false;
+      body.innerHTML =
+        '<h2>🔒 ХААЛТТАЙ</h2>'
+      + '<p class="zlead">Энэ даалгавар одоогоор хаалттай байна.<br>'
+      +   'Зохион байгуулагч нээхийг хүлээгээрэй 🦇</p>'
+      + '<button class="zbtn" id="zclose">Хаах</button>';
+      body.querySelector("#zclose").addEventListener("click", close);
     }
 
     function intro(){
@@ -1469,7 +1495,12 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
 
       var html = '<button class="ax" type="button" aria-label="Хаах">✕</button>'
                + '<h2>🗒️ Хариултын дэлгэрэнгүй</h2>'
-               + '<p class="asub">Даалгавар 2 · ' + people.length + ' оролцогч</p>';
+               + '<p class="asub">Даалгавар 2 · ' + people.length + ' оролцогч</p>'
+               + '<div class="actl" id="actl">'
+               +   '<span class="alab">Даалгавар 2</span>'
+               +   '<span class="ast" id="ast">шалгаж байна…</span>'
+               +   '<button class="abtn" id="atog" disabled>…</button>'
+               + '</div>';
 
       if(!people.length){
         html += '<p class="empty">Одоогоор хэн ч хариулаагүй байна.</p>';
@@ -1525,6 +1556,32 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       });
 
       box.querySelector(".ax").addEventListener("click", function(){ box.remove(); });
+
+      /* --- нээх / хаах --- */
+      var st = box.querySelector("#ast"), tog = box.querySelector("#atog");
+      var state = "open";
+      function paint(){
+        var closed = (state === "closed");
+        st.textContent = closed ? "ХААЛТТАЙ" : "НЭЭЛТТЭЙ";
+        st.className = "ast " + (closed ? "sh" : "so");
+        tog.textContent = closed ? "Нээх" : "Хаах";
+        tog.disabled = false;
+      }
+      if(window.ZEELY && window.ZEELY.getCfg){
+        window.ZEELY.getCfg("task2", function(val){
+          state = (val === "closed") ? "closed" : "open";
+          paint();
+        });
+      } else { paint(); }
+      tog.addEventListener("click", function(){
+        var next = (state === "closed") ? "open" : "closed";
+        tog.disabled = true; st.textContent = "хадгалж байна…";
+        window.ZEELY.setCfg("task2", next, function(){
+          state = next; paint();
+        }, function(){
+          st.textContent = "алдаа гарлаа"; tog.disabled = false;
+        });
+      });
     }
 
     var drawn = false;
@@ -1622,11 +1679,14 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     var id  = String(v.id || "");
     var raw = String(v.name || "").trim();
     if(id.indexOf("QUIZ") !== 0) return null;
+    var go = String(v.going === undefined || v.going === null ? "" : v.going).trim();
     var p = id.split("~");
     if(p.length >= 2){
       var sc = p[1].split("/");
+      /* дэлгэрэнгүй нь going баганад; хуучин бичлэгт id-д байсан */
+      var det = (go.indexOf(":") > -1) ? go : p.slice(2).join("~");
       return { name: raw, score: parseInt(sc[0], 10) || 0,
-               total: sc[1] || "?", detail: p.slice(2).join("~") };
+               total: sc[1] || "?", detail: det };
     }
     var m = raw.match(/^(.*?)\s*[—-]\s*(\d+)\s*\/\s*(\d+)\s*(?:[—-]\s*([0-9\-]+))?/);
     if(!m) return { name: raw, score: 0, total: "?", detail: "" };
@@ -1638,13 +1698,34 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
   var PRIZE_ID = TASK_ID;
   function isQuestRow(id){
     id = String(id || "");
-    return id.indexOf("PRIZE") === 0 || id.indexOf("Q-") === 0 || id.indexOf("QUIZ") === 0;
+    return id.indexOf("PRIZE") === 0 || id.indexOf("Q-") === 0
+        || id.indexOf("QUIZ") === 0 || id.indexOf("CFG-") === 0;
   }
   window.ZEELY = {
     winner: null,
     refresh: function(){ sheetLoad(); },
     url: SHEET_URL,
     nameKey: key,
+    /* тохиргоо: CFG-<түлхүүр> мөрөнд хадгална */
+    getCfg: function(k, cb){
+      fetch(SHEET_URL + "?t=" + Date.now())
+        .then(function(r){ return r.json(); })
+        .then(function(rows){
+          var val = null;
+          (rows || []).forEach(function(v){
+            if(String(v.id || "") === "CFG-" + k) val = String(v.name || "").trim();
+          });
+          return val;
+        }, function(){ return undefined; })
+        .then(function(val){ setTimeout(function(){ cb(val); }, 0); });
+    },
+    setCfg: function(k, val, done, fail){
+      fetch(SHEET_URL + "?id=" + encodeURIComponent("CFG-" + k)
+          + "&name=" + encodeURIComponent(val) + "&going=1&t=" + Date.now())
+        .then(function(r){ return r.json(); })
+        .then(function(){ done && done(); })
+        .catch(function(){ fail && fail(); });
+    },
     parseQuiz: parseQuiz,
     /* тухайн нэр QUIZ-д аль хэдийн хариулсан эсэх */
     findQuiz: function(nm, cb){
@@ -1670,11 +1751,11 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     },
     /* QUIZ-ийн хариуг шийт рүү хадгална */
     quiz: function(nm, sc, total, done, fail, detail){
-      /* оноо, сонголтууд id-д; name-д зөвхөн нэр */
-      fetch(SHEET_URL + "?id=" + encodeURIComponent("QUIZ2-" + myId + "~" + sc + "/" + total
-                                                    + "~" + (detail || ""))
+      /* id: зөвхөн түлхүүр ба оноо · name: зөвхөн нэр · going: хариултын дэлгэрэнгүй */
+      fetch(SHEET_URL + "?id=" + encodeURIComponent("QUIZ2-" + myId + "~" + sc + "/" + total)
           + "&name=" + encodeURIComponent(nm)
-          + "&going=1&t=" + Date.now())
+          + "&going=" + encodeURIComponent(detail || "1")
+          + "&t=" + Date.now())
         .then(function(r){ return r.json(); })
         .then(function(){ done(); })
         .catch(function(){ fail(); });
