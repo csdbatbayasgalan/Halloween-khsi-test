@@ -417,7 +417,7 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
   font-size:17px;line-height:1;cursor:pointer;padding:0;z-index:2}
 #quizo h2{font-family:var(--display);font-weight:900;margin:0 0 10px;color:#e8402a;
   font-size:clamp(1.4rem,6.5vw,2rem);letter-spacing:.03em;line-height:1.1}
-#quizo .zlead{margin:0 0 16px;font-weight:700;font-size:.88rem;line-height:1.65}
+#quizo .zlead{margin:0 0 16px;font-weight:700;font-size:.88rem;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}
 #quizo .zfacts{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:7px;text-align:left}
 #quizo .zfacts li{display:flex;gap:9px;align-items:flex-start;font-size:.84rem;font-weight:700;
   background:var(--cream-2);border:2px solid var(--ink);border-radius:9px;padding:8px 10px}
@@ -461,16 +461,18 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
   background:#141010;color:#f3ece0;border:2px solid #3a2f2a;font:inherit;font-size:.82rem;line-height:1.45}
 #adm #amsg:focus{outline:none;border-color:#f6c62a}
 #adm .ahint{margin:7px 0 0;font-size:.72rem;opacity:.68}
+#adm .acnt{margin:3px 0 0;font-size:.7rem;opacity:.55;text-align:right}
+#adm .acnt.warn{color:#f0a04a;opacity:1}
 #adm .asave{margin-top:9px;font-size:.78rem;padding:7px 15px}
 #adm .abtn{margin-left:auto;font-family:var(--display);font-weight:900;font-size:.85rem;
   padding:9px 18px;border-radius:9px;background:var(--yellow);color:var(--ink);
   border:3px solid var(--ink);box-shadow:3px 3px 0 #000;cursor:pointer}
 #adm .abtn:disabled{opacity:.6;cursor:default}
 #adm .ap{background:#1e1816;border:2px solid #3a2f2a;border-radius:11px;padding:13px 14px;margin:0 0 12px}
-#adm .ap h3{margin:0 0 2px;font-family:var(--display);font-weight:900;font-size:1rem;color:#fff6ea}
+#adm .ap h3{overflow-wrap:anywhere;margin:0 0 2px;font-family:var(--display);font-weight:900;font-size:1rem;color:#fff6ea}
 #adm .ap .asc{font-family:var(--display);font-weight:900;color:#f0824a;font-size:.9rem;margin:0 0 9px}
 #adm ol{margin:0;padding-left:20px;display:grid;gap:5px}
-#adm li{line-height:1.45}
+#adm li{line-height:1.45;overflow-wrap:anywhere}
 #adm li.bad{color:#f0a08c}
 #adm li.miss{opacity:.6}
 #adm .aq{font-weight:700}
@@ -1510,9 +1512,10 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
                +     '<button class="abtn" id="atog" disabled>…</button>'
                +   '</div>'
                +   '<label class="amsgl" for="amsg">Хаалттай үед оролцогчдод харуулах текст</label>'
-               +   '<textarea id="amsg" rows="2" maxlength="300" '
+               +   '<textarea id="amsg" rows="3" maxlength="160" '
                +     'placeholder="Жишээ: Маргааш 10:00 цагт нээгдэнэ 🦇"></textarea>'
                +   '<p class="ahint" id="ahint">Хаах товч дарахад энэ текст хамт хадгалагдана.</p>'
+               +   '<p class="acnt" id="acnt">0 / 160</p>'
                + '</div>';
 
       if(!people.length){
@@ -1573,6 +1576,13 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       /* --- нээх / хаах --- */
       var st = box.querySelector("#ast"), tog = box.querySelector("#atog");
       var msgEl = box.querySelector("#amsg"), hint = box.querySelector("#ahint");
+      var cnt = box.querySelector("#acnt");
+      function count(){
+        var n = msgEl.value.length;
+        cnt.textContent = n + " / 160";
+        cnt.className = "acnt" + (n > 140 ? " warn" : "");
+      }
+      msgEl.addEventListener("input", count);
       var state = "open";
       function paint(){
         var closed = (state === "closed");
@@ -1588,13 +1598,17 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         window.ZEELY.cfgAll(function(cfg){
           state = (cfg && cfg.task2 === "closed") ? "closed" : "open";
           if(cfg && cfg.task2msg && cfg.task2msg !== "closed") msgEl.value = cfg.task2msg;
-          paint();
+          count(); paint();
         });
-      } else { paint(); }
+      } else { count(); paint(); }
 
       function save(next, done){
-        tog.disabled = true; st.textContent = "хадгалж байна…";
         var txt = msgEl.value.trim();
+        if(encodeURIComponent(txt).length > 1500){
+          hint.textContent = "Текст хэт урт байна — богиносгоно уу.";
+          return;
+        }
+        tog.disabled = true; st.textContent = "хадгалж байна…";
         window.ZEELY.setCfg("task2msg", txt || "-", function(){
           window.ZEELY.setCfg("task2", next, function(){
             state = next; paint(); done && done();
