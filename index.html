@@ -1037,6 +1037,24 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     box.appendChild(li);
   })();
 
+  /* ---------- тест хийх: хаягийн ард ?reset гэвэл түгжээг тайлна ---------- */
+  (function(){
+    if(!/[?&#]reset/.test(location.search + location.hash)) return;
+    try {
+      localStorage.removeItem("zeely.quiz2");
+      localStorage.removeItem("zeely.quest");
+      localStorage.removeItem("zeely.rsvp");
+      localStorage.removeItem("zeely.rows");
+    } catch(e){}
+    var n = document.createElement("div");
+    n.style.cssText = "position:fixed;left:50%;top:14px;transform:translateX(-50%);z-index:400;"
+      + "background:#f6c62a;color:#171310;border:3px solid #171310;border-radius:10px;"
+      + "box-shadow:3px 3px 0 #171310;padding:10px 16px;font-weight:800;font-size:.85rem";
+    n.textContent = "Түгжээ тайлагдлаа — дахин оролцох боломжтой ✅";
+    document.body.appendChild(n);
+    setTimeout(function(){ n.remove(); }, 4000);
+  })();
+
   /* ---------- Даалгавар 2: QUIZ ---------- */
   var QUIZ = {
     title: "ХАЛЛОУИН QUIZ",
@@ -1129,7 +1147,6 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
 
   (function(){
     var row = null, done = false;
-    try { done = localStorage.getItem("zeely.quiz2") === "1"; } catch(e){}
 
     function hook(){
       row = document.querySelector("#tlist li.now");
@@ -1196,24 +1213,40 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       +   '<li><span>🔥</span><span><b>3-р үе давхар оноотой:</b> зөв бол <b>+2</b>, буруу бол <b>−1</b>.</span></li>'
       +   '<li><span>🏅</span><span>Хамгийн их оноо цуглуулсан нэг хүн энэ өдрийн эзэн болно.</span></li>'
       + '</ul>'
-      + (done
-          ? '<p class="zlead"><b>Чи энэ даалгаврыг аль хэдийн өгсөн байна 🦇</b><br>'
-            + 'Нэг хүн ганц л удаа оролцох боломжтой. Оноогоо онооны самбараас шалгаарай 🏅</p>'
-            + '<button class="zbtn" id="zclose">Хаах</button>'
-          : '<input type="text" id="zname" placeholder="Нэрээ бичээрэй" maxlength="24" autocomplete="name">'
-            + '<button class="zbtn" id="zgo">Эхлэх 🔮</button>'
-            + '<p class="zmsg" id="zmsg"></p>');
-      if(done){
-        body.querySelector("#zclose").addEventListener("click", close);
-        return;
-      }
+      + '<input type="text" id="zname" placeholder="Нэрээ бичээрэй" maxlength="24" autocomplete="name">'
+      + '<button class="zbtn" id="zgo">Эхлэх 🔮</button>'
+      + '<p class="zmsg" id="zmsg"></p>';
+
       var nm = body.querySelector("#zname"), msg = body.querySelector("#zmsg");
-      function go(){
-        var v = nm.value.trim();
-        if(!v){ msg.textContent = "Нэрээ бичээрэй 🎃"; nm.focus(); return; }
+      var btn = body.querySelector("#zgo");
+
+      function already(hit){
+        body.innerHTML =
+          '<h2>🦇 АЛЬ ХЭДИЙН ХАРИУЛСАН</h2>'
+        + '<p class="zlead"><b></b> гэсэн нэрээр энэ даалгаврыг аль хэдийн өгсөн байна.</p>'
+        + '<p class="zscore">' + hit.score + '/' + hit.total + '</p>'
+        + '<p class="zlead">Нэг хүн ганц л удаа оролцоно. Онооны самбараас шалгаарай 🏅</p>'
+        + '<button class="zbtn" id="zclose">Хаах</button>';
+        body.querySelector("b").textContent = hit.name;
+        body.querySelector("#zclose").addEventListener("click", close);
+      }
+
+      function start(v){
         player = v;
         locked = true; xbtn.hidden = true;     /* эхэлсэн бол гарах боломжгүй */
         ri = 0; qi = 0; score = 0; picks = []; roundIntro();
+      }
+
+      function go(){
+        var v = nm.value.trim();
+        if(!v){ msg.textContent = "Нэрээ бичээрэй 🎃"; nm.focus(); return; }
+        if(!window.ZEELY || !window.ZEELY.findQuiz){ start(v); return; }
+        msg.textContent = "Шалгаж байна…";
+        btn.disabled = true; nm.disabled = true;
+        window.ZEELY.findQuiz(v, function(hit){
+          if(hit){ already(hit); return; }       /* тэр нэр аль хэдийн хариулсан */
+          start(v);                              /* олдсонгүй, эсвэл шалгаж чадсангүй */
+        });
       }
       body.querySelector("#zgo").addEventListener("click", go);
       nm.addEventListener("keydown", function(e){ if(e.key === "Enter") go(); });
@@ -1417,12 +1450,11 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       }
 
       people.forEach(function(v){
-        var raw = String(v.name || "");
-        var m = raw.match(/^(.*?)\s*[—-]\s*(\d+)\s*\/\s*(\d+)\s*(?:[—-]\s*([0-9\-]+))?\s*$/);
-        var nm  = m ? m[1].trim() : raw;
-        var sc  = m ? m[2] : "?";
-        var tot = m ? m[3] : "?";
-        var det = m && m[4] ? m[4] : "";
+        var q   = (window.ZEELY && window.ZEELY.parseQuiz) ? window.ZEELY.parseQuiz(v) : null;
+        var nm  = q ? q.name   : String(v.name || "");
+        var sc  = q ? q.score  : "?";
+        var tot = q ? q.total  : "?";
+        var det = q ? q.detail : "";
 
         html += '<div class="ap"><h3></h3><p class="asc">' + sc + ' / ' + tot + ' оноо</p>';
         if(!det){
@@ -1454,9 +1486,8 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       /* текстийг аюулгүйгээр суулгана */
       var h3s = box.querySelectorAll(".ap h3");
       people.forEach(function(v, idx){
-        var raw = String(v.name || "");
-        var m = raw.match(/^(.*?)\s*[—-]\s*\d+\s*\/\s*\d+/);
-        if(h3s[idx]) h3s[idx].textContent = m ? m[1].trim() : raw;
+        var q = (window.ZEELY && window.ZEELY.parseQuiz) ? window.ZEELY.parseQuiz(v) : null;
+        if(h3s[idx]) h3s[idx].textContent = q ? q.name : String(v.name || "");
       });
       var qs = box.querySelectorAll(".aq");
       var per = all.length;
@@ -1529,6 +1560,40 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
   /* Энэ удаагийн даалгаврын ялагч "PRIZE" мөрөнд бичигдэнэ.
      Шинэ 7 хоног эхлэхэд шийт дээрх "PRIZE" мөрийн id-г "PRIZE-1", "PRIZE-2" ...
      болгож сольчихвол шинэ даалгавар дахин нээгдэж, хуучин ялагчдын оноо хэвээр үлдэнэ. */
+/* нэрийг жигдрүүлж бүлэглэнэ: том/жижиг үсэг, илүү зай,
+     кирилл/латин бичиглэлийн зөрүүг үл хайхарна */
+  var CYR = { "а":"a","б":"b","в":"v","г":"g","д":"d","е":"e","ё":"yo","ж":"j","з":"z",
+              "и":"i","й":"i","к":"k","л":"l","м":"m","н":"n","о":"o","ө":"o","п":"p",
+              "р":"r","с":"s","т":"t","у":"u","ү":"u","ф":"f","х":"h","ц":"c","ч":"ch",
+              "ш":"sh","щ":"sh","ъ":"","ы":"i","ь":"","э":"e","ю":"yu","я":"ya" };
+  function key(nm){
+    var t = nm.toLowerCase().replace(/\s+/g, " ").trim(), out = "";
+    for(var i = 0; i < t.length; i++){
+      var c = t.charAt(i);
+      out += (CYR[c] !== undefined) ? CYR[c] : c;
+    }
+    return out.replace(/[^a-z0-9]/g, "");
+  }
+
+  /* QUIZ мөрийг задлана.
+     Шинэ хэлбэр: id = "QUIZ2-<төхөөрөмж>~<оноо>/<нийт>~<сонголтууд>", name = зөвхөн нэр.
+     Хуучин хэлбэр: name = "Нэр — 26/40 — 0132..." (хэвээр уншина). */
+  function parseQuiz(v){
+    var id  = String(v.id || "");
+    var raw = String(v.name || "").trim();
+    if(id.indexOf("QUIZ") !== 0) return null;
+    var p = id.split("~");
+    if(p.length >= 2){
+      var sc = p[1].split("/");
+      return { name: raw, score: parseInt(sc[0], 10) || 0,
+               total: sc[1] || "?", detail: p[2] || "" };
+    }
+    var m = raw.match(/^(.*?)\s*[—-]\s*(\d+)\s*\/\s*(\d+)\s*(?:[—-]\s*([0-9\-]+))?/);
+    if(!m) return { name: raw, score: 0, total: "?", detail: "" };
+    return { name: m[1].trim(), score: parseInt(m[2], 10) || 0,
+             total: m[3], detail: m[4] || "" };
+  }
+
   var TASK_ID  = "PRIZE";
   var PRIZE_ID = TASK_ID;
   function isQuestRow(id){
@@ -1539,6 +1604,24 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     winner: null,
     refresh: function(){ sheetLoad(); },
     url: SHEET_URL,
+    nameKey: key,
+    parseQuiz: parseQuiz,
+    /* тухайн нэр QUIZ-д аль хэдийн хариулсан эсэх */
+    findQuiz: function(nm, cb){
+      var want = key(nm);
+      if(!want){ cb(undefined); return; }
+      fetch(SHEET_URL + "?t=" + Date.now())
+        .then(function(r){ return r.json(); })
+        .then(function(rows){
+          var hit = null;
+          (rows || []).forEach(function(v){
+            var q = parseQuiz(v);
+            if(q && key(q.name) === want) hit = q;
+          });
+          cb(hit);
+        })
+        .catch(function(){ cb(undefined); });
+    },
     fetchRows: function(cb){
       fetch(SHEET_URL + "?t=" + Date.now())
         .then(function(r){ return r.json(); })
@@ -1547,9 +1630,10 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     },
     /* QUIZ-ийн хариуг шийт рүү хадгална */
     quiz: function(nm, sc, total, done, fail, detail){
-      fetch(SHEET_URL + "?id=" + encodeURIComponent("QUIZ2-" + myId)
-          + "&name=" + encodeURIComponent(nm + " — " + sc + "/" + total
-                                          + (detail ? " — " + detail : ""))
+      /* оноо, сонголтууд id-д; name-д зөвхөн нэр */
+      fetch(SHEET_URL + "?id=" + encodeURIComponent("QUIZ2-" + myId + "~" + sc + "/" + total
+                                                    + "~" + (detail || ""))
+          + "&name=" + encodeURIComponent(nm)
           + "&going=1&t=" + Date.now())
         .then(function(r){ return r.json(); })
         .then(function(){ done(); })
@@ -1607,21 +1691,24 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     var boardEl = document.getElementById("board"),
         bnoneEl = document.getElementById("bnone");
     if(!boardEl || !bnoneEl) return;
-    var tally = {};
+    var tally = {}, label = {};
     (rows || []).forEach(function(v){
       var id = String(v.id || ""), raw = String(v.name || "").trim();
       if(!raw) return;
+      var nm, pt;
       if(id.indexOf("QUIZ") === 0){
-        /* "Нэр — 12/15" хэлбэрээс оноог салгана */
-        var m = raw.match(/^(.*?)\s*[—-]\s*(\d+)\s*\/\s*\d+/);
-        var nm = m ? m[1].trim() : raw;
-        var pt = m ? parseInt(m[2], 10) : 0;
-        if(nm) tally[nm] = (tally[nm] || 0) + pt;
+        var q = parseQuiz(v);
+        nm = q.name; pt = q.score;
       } else if(id.indexOf("PRIZE") === 0){
-        tally[raw] = (tally[raw] || 0) + 1;
-      }
+        nm = raw; pt = 1;
+      } else return;
+      if(!nm) return;
+      var k = key(nm);
+      if(!k) return;
+      tally[k] = (tally[k] || 0) + pt;
+      if(!label[k]) label[k] = nm;          /* эхний бичиглэлийг харуулна */
     });
-    var list = Object.keys(tally).map(function(nm){ return { name: nm, pts: tally[nm] }; });
+    var list = Object.keys(tally).map(function(k){ return { name: label[k], pts: tally[k] }; });
     list.sort(function(a, b){ return b.pts - a.pts || a.name.localeCompare(b.name); });
     boardEl.innerHTML = "";
     bnoneEl.hidden = list.length > 0;
