@@ -1206,8 +1206,13 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       function ok(){
         locked = false; xbtn.hidden = false;
         msg.textContent = "";
+        /* онооны самбарыг шууд шинэчилнэ */
+        if(window.ZEELY && window.ZEELY.refresh){
+          window.ZEELY.refresh();
+          setTimeout(window.ZEELY.refresh, 1500);
+        }
         body.insertAdjacentHTML("beforeend",
-          '<p class="zlead">Хариулт хүлээн авлаа. Энэ өдрийн эзэн удахгүй тодорно 🏅</p>'
+          '<p class="zlead">Хариулт хүлээн авлаа — <b>' + score + ' оноо</b> нэмэгдлээ!<br>Онооны самбараас шалгаарай 🏅</p>'
         + '<button class="zbtn" id="zgo">Хаах</button>');
         body.querySelector("#zgo").addEventListener("click", close);
       }
@@ -1289,6 +1294,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
   }
   window.ZEELY = {
     winner: null,
+    refresh: function(){ sheetLoad(); },
     /* QUIZ-ийн хариуг шийт рүү хадгална */
     quiz: function(nm, sc, total, done, fail){
       fetch(SHEET_URL + "?id=" + encodeURIComponent("QUIZ2-" + myId)
@@ -1352,10 +1358,17 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     if(!boardEl || !bnoneEl) return;
     var tally = {};
     (rows || []).forEach(function(v){
-      if(String(v.id || "").indexOf("PRIZE") !== 0) return;
-      var nm = String(v.name || "").trim();
-      if(!nm) return;
-      tally[nm] = (tally[nm] || 0) + 1;
+      var id = String(v.id || ""), raw = String(v.name || "").trim();
+      if(!raw) return;
+      if(id.indexOf("QUIZ") === 0){
+        /* "Нэр — 12/15" хэлбэрээс оноог салгана */
+        var m = raw.match(/^(.*?)\s*[—-]\s*(\d+)\s*\/\s*\d+$/);
+        var nm = m ? m[1].trim() : raw;
+        var pt = m ? parseInt(m[2], 10) : 0;
+        if(nm) tally[nm] = (tally[nm] || 0) + pt;
+      } else if(id.indexOf("PRIZE") === 0){
+        tally[raw] = (tally[raw] || 0) + 1;
+      }
     });
     var list = Object.keys(tally).map(function(nm){ return { name: nm, pts: tally[nm] }; });
     list.sort(function(a, b){ return b.pts - a.pts || a.name.localeCompare(b.name); });
