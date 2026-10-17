@@ -1274,12 +1274,10 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       var r = QUIZ.rounds[ri], item = r.qs[qi];
       var total = qCount();
       var num = offset(ri) + qi + 1;
+      /* бүх хүнд ижил байрлалтай — холихгүй */
       var order = [0, 1, 2, 3];
-      for(var i = order.length - 1; i > 0; i--){
-        var j = Math.floor(Math.random() * (i + 1)), t = order[i];
-        order[i] = order[j]; order[j] = t;
-      }
       var L = ["А", "Б", "В", "Г"];
+
       body.innerHTML =
         '<div class="zbar"><span>' + r.name + '</span>'
       +   '<span class="zp"><i style="width:' + ((num - 1) / total * 100) + '%"></i></span>'
@@ -1333,7 +1331,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
 
     function pick(btn, ok, box, item, order, chosen){
       clearInterval(tmr);
-      picks.push(chosen);
+      picks.push({ c: chosen, ok: ok });
       [].forEach.call(box.children, function(b){ b.disabled = true; });
       var r = QUIZ.rounds[ri], pts = r.pts || 1, pen = r.pen || 0;
       if(ok){ btn.classList.add("good"); score += pts; }
@@ -1348,7 +1346,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     }
 
     function timeout(box, item, order){
-      picks.push(-1);
+      picks.push({ c: -1, ok: false });
       reveal(box, item, order);
       body.querySelector("#zmsg").textContent = "Хугацаа дууслаа ⏱️";
       setTimeout(next, 1250);
@@ -1414,7 +1412,12 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         });
       }
       function send(){
-        var detail = picks.map(function(v){ return v < 0 ? "-" : String(v); }).join("");
+        /* "1:B:+ 2:A:- 3:-:-" — асуулт : сонгосон хувилбар : зөв эсэх */
+        var LT = "ABCD";
+        var detail = picks.map(function(v, i){
+          return (i + 1) + ":" + (v.c < 0 ? "-" : LT.charAt(v.c))
+                         + ":" + (v.c < 0 ? "-" : (v.ok ? "+" : "-"));
+        }).join(" ");
         if(window.ZEELY && window.ZEELY.quiz) window.ZEELY.quiz(player, score, total, ok, fail, detail);
         else ok();
       }
@@ -1434,6 +1437,29 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       return out;
     }
     var L = ["А", "Б", "В", "Г"];
+
+    /* дэлгэрэнгүйг задлана: шинэ "1:B:+ 2:A:-" эсвэл хуучин "012-3" */
+    function decode(det, n){
+      var out = [];
+      var i;
+      for(i = 0; i < n; i++) out.push(-1);
+      if(!det) return out;
+      if(det.indexOf(":") > -1){
+        det.split(/\s+/).forEach(function(tok){
+          var pr = tok.split(":");
+          var qi = parseInt(pr[0], 10) - 1;
+          if(isNaN(qi) || qi < 0 || qi >= n) return;
+          var li = "ABCD".indexOf(pr[1]);
+          out[qi] = li;
+        });
+      } else {
+        for(i = 0; i < n; i++){
+          var ch = det.charAt(i);
+          out[i] = (ch === "" || ch === "-") ? -1 : parseInt(ch, 10);
+        }
+      }
+      return out;
+    }
 
     function draw(rows){
       var box = document.createElement("div");
@@ -1461,10 +1487,10 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
           html += '<p class="empty">Асуулт тус бүрийн мэдээлэл алга (хуучин бичлэг).</p></div>';
           return;
         }
+        var picked = decode(det, all.length);
         html += '<ol>';
         all.forEach(function(it, k){
-          var ch = det.charAt(k);
-          var chosen = (ch === "" || ch === "-") ? -1 : parseInt(ch, 10);
+          var chosen = picked[k];
           var ok = chosen === it.q.c;
           var cls = chosen < 0 ? "miss" : (ok ? "" : "bad");
           html += '<li class="' + cls + '">'
@@ -1501,11 +1527,25 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       box.querySelector(".ax").addEventListener("click", function(){ box.remove(); });
     }
 
-    function load(){
-      if(window.ZEELY && window.ZEELY.fetchRows) window.ZEELY.fetchRows(draw);
-      else setTimeout(load, 300);
+    var drawn = false;
+    function render(rows){
+      var has = (rows || []).some(function(v){ return String(v.id || "").indexOf("QUIZ") === 0; });
+      var old = document.getElementById("adm");
+      if(old && !has) return;              /* хоосон хариугаар дарж бичихгүй */
+      if(old) old.remove();
+      draw(rows);
+      drawn = drawn || has;
     }
-    setTimeout(load, 400);
+    function load(tries){
+      tries = tries || 0;
+      if(!(window.ZEELY && window.ZEELY.fetchRows)){ setTimeout(function(){ load(tries); }, 300); return; }
+      window.ZEELY.fetchRows(function(rows){
+        render(rows);
+        /* эхний хүсэлт хоосон ирвэл хэд дахин оролдоно */
+        if(!drawn && tries < 5) setTimeout(function(){ load(tries + 1); }, 900);
+      });
+    }
+    setTimeout(function(){ load(0); }, 400);
   })();
 
   /* ---------- RSVP ---------- */
@@ -1586,7 +1626,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     if(p.length >= 2){
       var sc = p[1].split("/");
       return { name: raw, score: parseInt(sc[0], 10) || 0,
-               total: sc[1] || "?", detail: p[2] || "" };
+               total: sc[1] || "?", detail: p.slice(2).join("~") };
     }
     var m = raw.match(/^(.*?)\s*[—-]\s*(\d+)\s*\/\s*(\d+)\s*(?:[—-]\s*([0-9\-]+))?/);
     if(!m) return { name: raw, score: 0, total: "?", detail: "" };
@@ -1625,8 +1665,8 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     fetchRows: function(cb){
       fetch(SHEET_URL + "?t=" + Date.now())
         .then(function(r){ return r.json(); })
-        .then(function(rows){ cb(rows || []); })
-        .catch(function(){ cb(null); });
+        .then(function(rows){ return rows || []; }, function(){ return null; })
+        .then(function(rows){ setTimeout(function(){ cb(rows); }, 0); });
     },
     /* QUIZ-ийн хариуг шийт рүү хадгална */
     quiz: function(nm, sc, total, done, fail, detail){
