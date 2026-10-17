@@ -1447,12 +1447,9 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         });
       }
       function send(){
-        /* "1:B:+ 2:A:- 3:-:-" — асуулт : сонгосон хувилбар : зөв эсэх */
-        var LT = "ABCD";
-        var detail = picks.map(function(v, i){
-          return (i + 1) + ":" + (v.c < 0 ? "-" : LT.charAt(v.c))
-                         + ":" + (v.c < 0 ? "-" : (v.ok ? "+" : "-"));
-        }).join(" ");
+        /* асуулт бүрт нэг тэмдэгт: 0-3 = А/Б/В/Г, "-" = хариулаагүй.
+           (нүдэнд 40 тэмдэгтийн хязгаар байгаа тул авсаархан хэлбэр) */
+        var detail = picks.map(function(v){ return v.c < 0 ? "-" : String(v.c); }).join("");
         if(window.ZEELY && window.ZEELY.quiz) window.ZEELY.quiz(player, score, total, ok, fail, detail);
         else ok();
       }
@@ -1609,7 +1606,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
           return;
         }
         tog.disabled = true; st.textContent = "хадгалж байна…";
-        window.ZEELY.setCfg("task2msg", txt || "-", function(){
+        window.ZEELY.setCfgLong("task2msg", txt, function(){
           window.ZEELY.setCfg("task2", next, function(){
             state = next; paint(); done && done();
           }, bad);
@@ -1627,7 +1624,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       box.querySelector("#actl").appendChild(sbtn);
       sbtn.addEventListener("click", function(){
         sbtn.disabled = true; hint.textContent = "хадгалж байна…";
-        window.ZEELY.setCfg("task2msg", msgEl.value.trim() || "-", function(){
+        window.ZEELY.setCfgLong("task2msg", msgEl.value.trim(), function(){
           sbtn.disabled = false; hint.textContent = "Хадгаллаа ✅";
         }, function(){
           sbtn.disabled = false; hint.textContent = "Алдаа гарлаа";
@@ -1735,7 +1732,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     if(p.length >= 2){
       var sc = p[1].split("/");
       /* дэлгэрэнгүй нь going баганад; хуучин бичлэгт id-д байсан */
-      var det = (go.indexOf(":") > -1) ? go : p.slice(2).join("~");
+      var det = /^[0-9\-]+$/.test(go) || go.indexOf(":") > -1 ? go : p.slice(2).join("~");
       return { name: raw, score: parseInt(sc[0], 10) || 0,
                total: sc[1] || "?", detail: det };
     }
@@ -1762,10 +1759,21 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       fetch(SHEET_URL + "?t=" + Date.now())
         .then(function(r){ return r.json(); })
         .then(function(rows){
-          var out = {};
+          var out = {}, parts = {};
           (rows || []).forEach(function(v){
             var id = String(v.id || "");
-            if(id.indexOf("CFG-") === 0) out[id.slice(4)] = String(v.name || "").trim();
+            if(id.indexOf("CFG-") !== 0) return;
+            var k = id.slice(4), dot = k.lastIndexOf(".");
+            if(dot > -1 && /^\d+$/.test(k.slice(dot + 1))){
+              var base = k.slice(0, dot), ix = parseInt(k.slice(dot + 1), 10);
+              (parts[base] = parts[base] || [])[ix] = String(v.name || "");
+            } else {
+              out[k] = String(v.name || "").trim();
+            }
+          });
+          Object.keys(parts).forEach(function(base){
+            var t = parts[base].map(function(x){ return x === "-" ? "" : (x || ""); }).join("");
+            if(t.trim()) out[base] = t.trim();
           });
           return out;
         }, function(){ return null; })
@@ -1783,6 +1791,24 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
           return val;
         }, function(){ return undefined; })
         .then(function(val){ setTimeout(function(){ cb(val); }, 0); });
+    },
+    /* урт текстийг 36 тэмдэгтээр хэсэглэж хадгална (нүдний хязгаарыг тойрох) */
+    setCfgLong: function(k, val, done, fail){
+      var parts = [], t = String(val || "");
+      for(var i = 0; i < t.length; i += 36) parts.push(t.slice(i, i + 36));
+      if(!parts.length) parts = ["-"];
+      var n = 0, bad = false;
+      function step(){
+        if(n >= 8){ finish(); return; }                 /* дээд тал нь 8 хэсэг */
+        var piece = parts[n] !== undefined ? parts[n] : "";
+        fetch(SHEET_URL + "?id=" + encodeURIComponent("CFG-" + k + "." + n)
+            + "&name=" + encodeURIComponent(piece || "-")
+            + "&going=1&t=" + Date.now())
+          .then(function(r){ return r.json(); })
+          .then(function(){ n++; step(); }, function(){ bad = true; finish(); });
+      }
+      function finish(){ if(bad){ fail && fail(); } else { done && done(); } }
+      step();
     },
     setCfg: function(k, val, done, fail){
       fetch(SHEET_URL + "?id=" + encodeURIComponent("CFG-" + k)
@@ -1918,7 +1944,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     rows = rows.filter(function(v){ return !isQuestRow(v.id); });
     var list = rows.map(function(v){
       return { id: String(v.id || ""), name: String(v.name || "").slice(0, 24),
-               going: v.going === true || v.going === "true" };
+               going: v.going === true || v.going === "true" || v.going === "1" || v.going === 1 };
     });
     render(list);
     var mine = list.filter(function(x){ return x.id === myId; })[0];
