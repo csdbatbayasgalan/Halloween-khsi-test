@@ -407,21 +407,21 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 /* --- QUIZ --- */
 .tlist li.now{cursor:pointer}
 .tlist li.now:active{transform:translate(2px,2px)}
-#quizo,#puzzo{position:fixed;inset:0;z-index:220;display:grid;place-items:center;padding:16px;
-  background:rgba(12,6,3,.88);overflow-y:auto;animation:qfade .35s ease}#quizo .qz,#puzzo .qz{max-width:460px;width:100%;background:var(--cream);border:4px solid var(--ink);
+#quizo,#wso,#puzzo{position:fixed;inset:0;z-index:220;display:grid;place-items:center;padding:16px;
+  background:rgba(12,6,3,.88);overflow-y:auto;animation:qfade .35s ease}#quizo .qz,#wso .qz,#puzzo .qz{max-width:460px;width:100%;background:var(--cream);border:4px solid var(--ink);
   border-radius:14px;box-shadow:7px 7px 0 var(--ink);padding:24px 20px;position:relative;
-  text-align:center;animation:pop .4s cubic-bezier(.2,1.5,.4,1)}#quizo .qx,#puzzo .qx{position:absolute;right:-13px;top:-13px;width:38px;height:38px;border-radius:50%;
+  text-align:center;animation:pop .4s cubic-bezier(.2,1.5,.4,1)}#quizo .qx,#wso .qx,#puzzo .qx{position:absolute;right:-13px;top:-13px;width:38px;height:38px;border-radius:50%;
   background:var(--cream);border:3px solid var(--ink);box-shadow:2px 2px 0 var(--ink);
-  font-size:17px;line-height:1;cursor:pointer;padding:0;z-index:2}#quizo h2,#puzzo h2{font-family:var(--display);font-weight:900;margin:0 0 10px;color:#e8402a;
-  font-size:clamp(1.4rem,6.5vw,2rem);letter-spacing:.03em;line-height:1.1}#quizo .zlead,#puzzo .zlead{margin:0 0 16px;font-weight:700;font-size:.88rem;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}#quizo .zfacts,#puzzo .zfacts{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:7px;text-align:left}#quizo .zfacts li,#puzzo .zfacts li{display:flex;gap:9px;align-items:flex-start;font-size:.84rem;font-weight:700;
-  background:var(--cream-2);border:2px solid var(--ink);border-radius:9px;padding:8px 10px}#quizo .zbtn,#puzzo .zbtn{font-family:var(--display);font-weight:900;font-size:1rem;padding:13px 30px;
+  font-size:17px;line-height:1;cursor:pointer;padding:0;z-index:2}#quizo h2,#wso h2,#puzzo h2{font-family:var(--display);font-weight:900;margin:0 0 10px;color:#e8402a;
+  font-size:clamp(1.4rem,6.5vw,2rem);letter-spacing:.03em;line-height:1.1}#quizo .zlead,#wso .zlead,#puzzo .zlead{margin:0 0 16px;font-weight:700;font-size:.88rem;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}#quizo .zfacts,#wso .zfacts,#puzzo .zfacts{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:7px;text-align:left}#quizo .zfacts li,#wso .zfacts li,#puzzo .zfacts li{display:flex;gap:9px;align-items:flex-start;font-size:.84rem;font-weight:700;
+  background:var(--cream-2);border:2px solid var(--ink);border-radius:9px;padding:8px 10px}#quizo .zbtn,#wso .zbtn,#puzzo .zbtn{font-family:var(--display);font-weight:900;font-size:1rem;padding:13px 30px;
   border-radius:11px;background:var(--yellow);color:var(--ink);border:3px solid var(--ink);
-  box-shadow:4px 4px 0 var(--ink);cursor:pointer}#quizo .zbtn:active,#puzzo .zbtn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}#quizo .zstage,#puzzo .zstage{font-family:var(--display);font-weight:900;font-size:clamp(2.4rem,14vw,3.6rem);
-  color:#f0824a;margin:6px 0 2px;-webkit-text-stroke:3px var(--ink);paint-order:stroke fill}#quizo .zbar,#puzzo .zbar{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-weight:800;font-size:.74rem}#quizo .zbar .zp,#puzzo .zbar .zp{flex:1;height:10px;border:2px solid var(--ink);border-radius:999px;overflow:hidden;
-  background:var(--cream-2)}#quizo .zbar .zp i,#puzzo .zbar .zp i{display:block;height:100%;background:#f0824a;width:0;transition:width .3s}#quizo .ztime,#puzzo .ztime{display:flex;align-items:center;gap:9px;margin:0 0 13px}#quizo .ztime .zt,#puzzo .ztime .zt{flex:none;min-width:40px;height:30px;padding:0 9px;border-radius:999px;
+  box-shadow:4px 4px 0 var(--ink);cursor:pointer}#quizo .zbtn:active,#wso .zbtn:active,#puzzo .zbtn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}#quizo .zstage,#wso .zstage,#puzzo .zstage{font-family:var(--display);font-weight:900;font-size:clamp(2.4rem,14vw,3.6rem);
+  color:#f0824a;margin:6px 0 2px;-webkit-text-stroke:3px var(--ink);paint-order:stroke fill}#quizo .zbar,#wso .zbar,#puzzo .zbar{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-weight:800;font-size:.74rem}#quizo .zbar .zp,#wso .zbar .zp,#puzzo .zbar .zp{flex:1;height:10px;border:2px solid var(--ink);border-radius:999px;overflow:hidden;
+  background:var(--cream-2)}#quizo .zbar .zp i,#wso .zbar .zp i,#puzzo .zbar .zp i{display:block;height:100%;background:#f0824a;width:0;transition:width .3s}#quizo .ztime,#wso .ztime,#puzzo .ztime{display:flex;align-items:center;gap:9px;margin:0 0 13px}#quizo .ztime .zt,#wso .ztime .zt,#puzzo .ztime .zt{flex:none;min-width:40px;height:30px;padding:0 9px;border-radius:999px;
   display:grid;place-items:center;font-family:var(--display);font-weight:900;font-size:.9rem;
-  background:var(--ink);color:var(--cream)}#quizo .ztime .zt.warn,#puzzo .ztime .zt.warn{background:#e8402a;color:#fff2ea;animation:ztick .5s steps(2) infinite}@keyframes ztick{from{transform:scale(1)}to{transform:scale(1.1)}}#quizo .ztime .ztp,#puzzo .ztime .ztp{flex:1;height:9px;border:2px solid var(--ink);border-radius:999px;
-  overflow:hidden;background:var(--cream-2)}#quizo .ztime .ztp i,#puzzo .ztime .ztp i{display:block;height:100%;background:#f6c62a;width:100%;transition:width .9s linear}/* --- зохион байгуулагчийн харагдац (?admin) --- */
+  background:var(--ink);color:var(--cream)}#quizo .ztime .zt.warn,#wso .ztime .zt.warn,#puzzo .ztime .zt.warn{background:#e8402a;color:#fff2ea;animation:ztick .5s steps(2) infinite}@keyframes ztick{from{transform:scale(1)}to{transform:scale(1.1)}}#quizo .ztime .ztp,#wso .ztime .ztp,#puzzo .ztime .ztp{flex:1;height:9px;border:2px solid var(--ink);border-radius:999px;
+  overflow:hidden;background:var(--cream-2)}#quizo .ztime .ztp i,#wso .ztime .ztp i,#puzzo .ztime .ztp i{display:block;height:100%;background:#f6c62a;width:100%;transition:width .9s linear}/* --- зохион байгуулагчийн харагдац (?admin) --- */
 #adm{position:fixed;inset:0;z-index:300;background:#141010;color:#f3ece0;
   overflow-y:auto;padding:18px 14px 60px;font-size:.84rem}#adm h2{font-family:var(--display);font-weight:900;margin:0 0 4px;color:#f6c62a;font-size:1.3rem}#adm .asub{margin:0 0 16px;opacity:.7;font-size:.78rem}#adm .ax{position:fixed;right:14px;top:14px;z-index:2;width:38px;height:38px;border-radius:50%;
   background:var(--cream);border:3px solid var(--ink);box-shadow:2px 2px 0 var(--ink);
@@ -430,19 +430,70 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
   padding:4px 10px;border-radius:999px;background:#3a2f2a;color:#efe4d6}#adm .ast.so{background:#2c5c23;color:#d5f5c8}#adm .ast.sh{background:#6b2018;color:#ffd9d0}#adm .arow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}#adm .amsgl{display:block;margin:12px 0 5px;font-size:.74rem;opacity:.75;font-weight:700}#adm #amsg{width:100%;box-sizing:border-box;padding:9px 11px;border-radius:9px;resize:vertical;
   background:#141010;color:#f3ece0;border:2px solid #3a2f2a;font:inherit;font-size:.82rem;line-height:1.45}#adm #amsg:focus{outline:none;border-color:#f6c62a}#adm .ahint{margin:7px 0 0;font-size:.72rem;opacity:.68}#adm .acnt{margin:3px 0 0;font-size:.7rem;opacity:.55;text-align:right}#adm .acnt.warn{color:#f0a04a;opacity:1}#adm .asave{margin-top:9px;font-size:.78rem;padding:7px 15px}#adm .abtn{margin-left:auto;font-family:var(--display);font-weight:900;font-size:.85rem;
   padding:9px 18px;border-radius:9px;background:var(--yellow);color:var(--ink);
-  border:3px solid var(--ink);box-shadow:3px 3px 0 #000;cursor:pointer}#adm .abtn:disabled{opacity:.6;cursor:default}#adm .ap{background:#1e1816;border:2px solid #3a2f2a;border-radius:11px;padding:13px 14px;margin:0 0 12px}#adm .ap h3{overflow-wrap:anywhere;margin:0 0 2px;font-family:var(--display);font-weight:900;font-size:1rem;color:#fff6ea}#adm .ap .asc{font-family:var(--display);font-weight:900;color:#f0824a;font-size:.9rem;margin:0 0 9px}#adm ol{margin:0;padding-left:20px;display:grid;gap:5px}#adm li{line-height:1.45;overflow-wrap:anywhere}#adm li.bad{color:#f0a08c}#adm li.miss{opacity:.6}#adm .aq{font-weight:700}#adm .aa{display:block;font-size:.78rem;opacity:.85}#adm .tick{font-weight:900}#adm .empty{opacity:.65;padding:10px 0}#quizo .zrimg,#puzzo .zrimg{display:block;width:100%;max-width:300px;margin:4px auto 14px;border-radius:12px;
-  border:4px solid var(--ink);box-shadow:5px 5px 0 var(--ink)}#quizo .zcap,#puzzo .zcap{margin:-8px 0 14px;font-family:var(--display);font-weight:900;
-  font-size:1.05rem;color:#b8401c;letter-spacing:.02em}#quizo .zmeta,#puzzo .zmeta{font-size:.78rem;opacity:.72}#quizo .znote,#puzzo .znote{margin:4px 0 16px;padding:9px 11px;border-radius:9px;
+  border:3px solid var(--ink);box-shadow:3px 3px 0 #000;cursor:pointer}#adm .abtn:disabled{opacity:.6;cursor:default}#adm .ap{background:#1e1816;border:2px solid #3a2f2a;border-radius:11px;padding:13px 14px;margin:0 0 12px}#adm .ap h3{overflow-wrap:anywhere;margin:0 0 2px;font-family:var(--display);font-weight:900;font-size:1rem;color:#fff6ea}#adm .ap .asc{font-family:var(--display);font-weight:900;color:#f0824a;font-size:.9rem;margin:0 0 9px}#adm ol{margin:0;padding-left:20px;display:grid;gap:5px}#adm li{line-height:1.45;overflow-wrap:anywhere}#adm li.bad{color:#f0a08c}#adm li.miss{opacity:.6}#adm .aq{font-weight:700}#adm .aa{display:block;font-size:.78rem;opacity:.85}#adm .tick{font-weight:900}#adm .empty{opacity:.65;padding:10px 0}#quizo .zrimg,#wso .zrimg,#puzzo .zrimg{display:block;width:100%;max-width:300px;margin:4px auto 14px;border-radius:12px;
+  border:4px solid var(--ink);box-shadow:5px 5px 0 var(--ink)}#quizo .zcap,#wso .zcap,#puzzo .zcap{margin:-8px 0 14px;font-family:var(--display);font-weight:900;
+  font-size:1.05rem;color:#b8401c;letter-spacing:.02em}#quizo .zmeta,#wso .zmeta,#puzzo .zmeta{font-size:.78rem;opacity:.72}#quizo .znote,#wso .znote,#puzzo .znote{margin:4px 0 16px;padding:9px 11px;border-radius:9px;
   background:var(--cream-2);border:2px dashed var(--ink);
-  font-weight:700;font-size:.78rem;line-height:1.5}#quizo .zimg,#puzzo .zimg{display:block;width:100%;max-height:200px;object-fit:cover;border-radius:10px;
-  border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);margin:0 0 13px}#quizo .zq,#puzzo .zq{font-weight:800;font-size:1rem;line-height:1.45;margin:0 0 15px;text-align:left}#quizo .zopts,#puzzo .zopts{display:grid;gap:8px;margin-bottom:6px}#quizo .zopts button,#puzzo .zopts button{display:flex;gap:9px;align-items:center;text-align:left;width:100%;
+  font-weight:700;font-size:.78rem;line-height:1.5}#quizo .zimg,#wso .zimg,#puzzo .zimg{display:block;width:100%;max-height:200px;object-fit:cover;border-radius:10px;
+  border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);margin:0 0 13px}#quizo .zq,#wso .zq,#puzzo .zq{font-weight:800;font-size:1rem;line-height:1.45;margin:0 0 15px;text-align:left}#quizo .zopts,#wso .zopts,#puzzo .zopts{display:grid;gap:8px;margin-bottom:6px}#quizo .zopts button,#wso .zopts button,#puzzo .zopts button{display:flex;gap:9px;align-items:center;text-align:left;width:100%;
   font:inherit;font-weight:700;font-size:.86rem;padding:11px 12px;border-radius:10px;
   background:var(--cream-2);color:var(--ink);border:3px solid var(--ink);
-  box-shadow:3px 3px 0 var(--ink);cursor:pointer}#quizo .zopts button .zl,#puzzo .zopts button .zl{flex:none;width:22px;height:22px;border-radius:50%;display:grid;
+  box-shadow:3px 3px 0 var(--ink);cursor:pointer}#quizo .zopts button .zl,#wso .zopts button .zl,#puzzo .zopts button .zl{flex:none;width:22px;height:22px;border-radius:50%;display:grid;
   place-items:center;font-family:var(--display);font-weight:900;font-size:.68rem;
-  background:var(--ink);color:var(--cream)}#quizo .zopts button.good,#puzzo .zopts button.good{background:#6fd45a;color:#0d2a07}#quizo .zopts button.bad,#puzzo .zopts button.bad{background:#e8503a;color:#fff2ea}#quizo .zopts button:disabled,#puzzo .zopts button:disabled{cursor:default}#quizo .zscore,#puzzo .zscore{font-family:var(--display);font-weight:900;font-size:clamp(2.6rem,15vw,4rem);
-  color:#f0824a;margin:4px 0 2px;-webkit-text-stroke:3px var(--ink);paint-order:stroke fill}#quizo input,#puzzo input{width:100%;box-sizing:border-box;padding:12px 14px;font:inherit;font-weight:700;
-  border:3px solid var(--ink);border-radius:9px;background:var(--cream-2);margin:14px 0 12px}#quizo .zmsg,#puzzo .zmsg{margin:10px 0 0;font-size:.82rem;font-weight:700;min-height:1.2em}
+  background:var(--ink);color:var(--cream)}#quizo .zopts button.good,#wso .zopts button.good,#puzzo .zopts button.good{background:#6fd45a;color:#0d2a07}#quizo .zopts button.bad,#wso .zopts button.bad,#puzzo .zopts button.bad{background:#e8503a;color:#fff2ea}#quizo .zopts button:disabled,#wso .zopts button:disabled,#puzzo .zopts button:disabled{cursor:default}#quizo .zscore,#wso .zscore,#puzzo .zscore{font-family:var(--display);font-weight:900;font-size:clamp(2.6rem,15vw,4rem);
+  color:#f0824a;margin:4px 0 2px;-webkit-text-stroke:3px var(--ink);paint-order:stroke fill}#quizo input,#wso input,#puzzo input{width:100%;box-sizing:border-box;padding:12px 14px;font:inherit;font-weight:700;
+  border:3px solid var(--ink);border-radius:9px;background:var(--cream-2);margin:14px 0 12px}#quizo .zmsg,#wso .zmsg,#puzzo .zmsg{margin:10px 0 0;font-size:.82rem;font-weight:700;min-height:1.2em}
+/* --- WORD SEARCH (Даалгавар 4) --- */
+#wso{grid-template-columns:minmax(0,1fr)}
+#wso .qz{max-width:760px;justify-self:center}
+#wso .wswrap{min-width:0;max-width:100%}
+@media (max-width:640px){
+  #wso{padding:6px}
+  #wso .qz{padding:14px 8px;box-shadow:5px 5px 0 var(--ink)}
+}
+#wso .wswrap{width:100%;margin:0 auto 8px}
+#wso .wswrap.z{overflow:auto;max-height:62vh;border:3px solid var(--ink);border-radius:8px;
+  -webkit-overflow-scrolling:touch}
+#wso .wsgrid{display:grid;gap:0;background:var(--ink);border:3px solid var(--ink);
+  border-radius:8px;overflow:hidden;touch-action:none;user-select:none;
+  -webkit-user-select:none;font-family:ui-monospace,Menlo,Consolas,monospace;line-height:1}
+#wso .wswrap.z .wsgrid{width:max-content;touch-action:auto;border:0;border-radius:0}
+#wso .wsc{aspect-ratio:1;display:grid;place-items:center;background:var(--cream-2);
+  color:var(--ink);font-weight:800;outline:.5px solid rgba(23,19,16,.14);cursor:pointer}
+#wso .wswrap.z .wsc{width:26px;height:26px;aspect-ratio:auto}
+#wso .wsc.sel{background:#171310;color:#f6c62a}
+#wso .wsc.got{color:#171310}
+#wso .wshint{margin:0 0 10px;font-size:.78rem;font-weight:800;min-height:1.2em}
+#wso .wsmain{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px}
+#wso .wsmain .wswrap{flex:1 1 auto;min-width:0;margin:0}
+#wso .wsside{flex:0 0 190px;text-align:left;background:var(--cream-2);
+  border:3px solid var(--ink);border-radius:10px;padding:10px 9px;box-sizing:border-box}
+#wso .wsside h4{margin:0 0 8px;font-family:var(--display);font-weight:900;
+  font-size:.82rem;letter-spacing:.03em;border-bottom:2px solid var(--ink);padding-bottom:6px}
+#wso .wslist{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+#wso .wslist li{display:flex;gap:7px;align-items:center;font-size:.64rem;font-weight:800;
+  padding:4px 7px;border-radius:7px;border:2px solid var(--ink);background:var(--cream);
+  line-height:1.15}
+#wso .wslist li b{flex:none;opacity:.5;font-size:.6rem}
+#wso .wslist li.got span{text-decoration:line-through}
+#wso .wslist li.got{opacity:.8;border-width:3px}
+@media (max-width:620px){
+  #wso .wsmain{flex-direction:column;gap:8px}
+  #wso .wsside{flex:none;width:100%}
+  #wso .wslist{grid-template-columns:1fr 1fr}
+}
+#wso .wsres{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:4px;text-align:left}
+#wso .wsres li{font-size:.78rem;font-weight:800;padding:5px 9px;border-radius:7px;
+  background:var(--cream-2)}
+#wso .wsres li.n{opacity:.55}
+#wso .wskey{margin:12px auto 0;max-width:520px;cursor:default;touch-action:auto}
+#wso .wskey .wsc{cursor:default}
+#wso .pbar{display:flex;gap:8px;align-items:center;justify-content:center;
+  margin:0 0 10px;font-weight:800;font-size:.78rem;flex-wrap:wrap}
+#wso .pbar span{background:var(--ink);color:var(--cream);border-radius:999px;padding:5px 12px}
+#wso .psmall{font-family:inherit;font-weight:800;font-size:.72rem;padding:6px 13px;
+  border:3px solid var(--ink);border-radius:999px;background:var(--cream-2);
+  box-shadow:2px 2px 0 var(--ink);cursor:pointer}
 /* --- PUZZLE (Даалгавар 3) --- */
 #puzzo .qz{max-width:900px}
 @media (max-width:640px){
@@ -1013,7 +1064,8 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     /* бэлэн болсон даалгаврууд — цагийн хуваарь ямар ч байсан харагдана */
     var READY = [
       { no: 2, title: "Даалгавар 2" },
-      { no: 3, title: "Даалгавар 3" }
+      { no: 3, title: "Даалгавар 3" },
+      { no: 4, title: "Даалгавар 4" }
     ];
     var shown = READY.slice();
     if(!shown.some(function(x){ return x.no === activeNo; }))
@@ -1059,6 +1111,24 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     function z(x){ return (x < 10 ? "0" : "") + x; }
     return d.getFullYear() + "-" + z(d.getMonth() + 1) + "-" + z(d.getDate())
          + ", " + z(d.getHours()) + ":" + z(d.getMinutes());
+  }
+
+  /* ---------- автоматаар хадгална: алдвал өөрөө дахин оролдоно ---------- */
+  function autoSave(call, msgEl, onOk, onDead){
+    var n = 0;
+    function go(){
+      call(function(){ onOk(); }, function(){
+        n++;
+        if(n >= 10){
+          if(msgEl) msgEl.textContent = "Сүлжээ холбогдохгүй байна 🦇 Хэсэг хүлээгээд хуудсаа сэргээнэ үү.";
+          onDead && onDead();
+          return;
+        }
+        if(msgEl) msgEl.textContent = "Хадгалж байна… 👻 (" + (n + 1) + ")";
+        setTimeout(go, 1500);
+      });
+    }
+    go();
   }
 
   /* ---------- Даалгавар 2: QUIZ ---------- */
@@ -1419,19 +1489,16 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         body.appendChild(bt);
         if(window.ZEELY && window.ZEELY.refresh) window.ZEELY.refresh();
       }
-      function bad(){
+      function dead(){
         locked = false; xbtn.hidden = false;
-        msg.textContent = "Хадгалахад алдаа гарлаа. Дахин оролдоно уу 🦇";
         var bt = document.createElement("button");
-        bt.className = "zbtn"; bt.textContent = "Дахин хадгалах";
-        bt.addEventListener("click", function(){
-          bt.remove(); msg.textContent = "Хадгалж байна… 👻";
-          window.ZEELY.quiz(player, score, MAXPTS, ok, bad, detail);
-        });
+        bt.className = "zbtn"; bt.textContent = "Хаах";
+        bt.addEventListener("click", close);
         body.appendChild(bt);
       }
-      if(window.ZEELY && window.ZEELY.quiz) window.ZEELY.quiz(player, score, MAXPTS, ok, bad, detail);
-      else bad();
+      if(window.ZEELY && window.ZEELY.quiz){
+        autoSave(function(d, f){ window.ZEELY.quiz(player, score, MAXPTS, d, f, detail); }, msg, ok, dead);
+      } else { dead(); }
     }
   })();
 
@@ -1756,19 +1823,386 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         body.appendChild(bt);
         if(window.ZEELY && window.ZEELY.refresh) window.ZEELY.refresh();
       }
-      function bad(){
+      function dead(){
         locked = false; xbtn.hidden = false;
-        m2.textContent = "Хадгалахад алдаа гарлаа. Дахин оролдоно уу 🦇";
         var bt = document.createElement("button");
-        bt.className = "zbtn"; bt.textContent = "Дахин хадгалах";
-        bt.addEventListener("click", function(){
-          bt.remove(); m2.textContent = "Хадгалж байна… 👻";
-          window.ZEELY.quiz3(player, sc, TOPN, ok, bad, det);
-        });
+        bt.className = "zbtn"; bt.textContent = "Хаах";
+        bt.addEventListener("click", close);
         body.appendChild(bt);
       }
-      if(window.ZEELY && window.ZEELY.quiz3) window.ZEELY.quiz3(player, sc, TOPN, ok, bad, det);
-      else bad();
+      if(window.ZEELY && window.ZEELY.quiz3){
+        autoSave(function(d, f){ window.ZEELY.quiz3(player, sc, TOPN, d, f, det); }, m2, ok, dead);
+      } else { dead(); }
+    }
+  })();
+
+  /* ---------- Даалгавар 4: КИНОНЫ НЭР ХАЙХ ---------- */
+  var WSROWS = ["TGBGBEITDQURYWNTHECONJURINGZZO", "FBZDGQYHWSSSUJETHKMSZTHERINGSM", "IVBQDWFETXBGSCAINNCUFCEMHVTFIV", "HXQQIZUNHCPKBJKTIHSRILJAAIXSXE", "KOZHWSXUETXAJBUDHRQVNTHILTDQAV", "ETURGXUNEINFJWODKAEEAEDILCXFBJ", "GMKWDANXXMVOWUTOFZLLLXFZOHPWOK", "GJCSNHCHOBWLMAUUCKPMDJXZWAYUCM", "DKZDZDEBRFIZTCGBHLNDEKEAEPFYKI", "FNUPLAICCAUZGAZRZZSQSLCGETAGRI", "IIUQXSNTIYCCBUPROSPATFOUNEITVG", "KRUVFBYESOBMPMBHEJKEIYHLCRESLS", "XZHJZMRMTRHTRNZTUCHWNTDWITFLQB", "WIUBPLHCCCHUCKYHZSNGARLJZWOQUG", "YRHRJEPAXPTODSVMWGPCTVYBXOPEPG", "RRGLIGLFJINSIDIOUSSIISCREAMDXZ", "GOPSQCGCFGWJWZNEXHYIOHNHZNCBYC", "ZANALTCRYEQNNRURIZVANJBZQWVMQZ", "HARJDFKRUTUITFGFIUTBZPFMNUVRIF", "ACNKSYXOEUMCFUGAXKHDVCMPANPTIL", "UOGDOXDBTZIFSHUUXNRAEAGUMTKLQM", "NTRAINTOBUSANOZCUZORUZFNTZUKLS", "YVABIRATIWWYSYUIERXPZHTXNNACHM", "WPKLNVANNABELLEOFEZMAKKZESQNHV"];
+  var WSWORDS = [{"t": "IT: CHAPTER TWO", "w": "ITCHAPTERTWO"}, {"t": "SCREAM", "w": "SCREAM"}, {"t": "ANNABELLE", "w": "ANNABELLE"}, {"t": "THE CONJURING", "w": "THECONJURING"}, {"t": "THE NUN", "w": "THENUN"}, {"t": "CHUCKY", "w": "CHUCKY"}, {"t": "HALLOWEEN", "w": "HALLOWEEN"}, {"t": "INSIDIOUS", "w": "INSIDIOUS"}, {"t": "THE RING", "w": "THERING"}, {"t": "TRAIN TO BUSAN", "w": "TRAINTOBUSAN"}, {"t": "FINAL DESTINATION", "w": "FINALDESTINATION"}, {"t": "THE EXORCIST", "w": "THEEXORCIST"}];
+  (function(){
+    var NR = 24, NC = 30, SECS = 60, MAXW = WSWORDS.length;
+    var o, body, xbtn, locked = false, player = "";
+    var cells = [], found = [], pend = null, tmr = 0, t0 = 0, zoom = false;
+    var COLORS = ["#6fd45a","#f6c62a","#f0824a","#7ec8ff","#c79bff","#ff8fc7",
+                  "#5fe0c8","#ffd9a0","#9bd36f","#ff9b9b","#8fd0ff","#e0c3ff"];
+
+    function hook(){
+      var row = document.querySelector('#tlist li[data-no="4"]');
+      if(!row) return;
+      row.setAttribute("role", "button");
+      row.setAttribute("tabindex", "0");
+      row.addEventListener("click", open);
+      row.addEventListener("keydown", function(e){ if(e.key === "Enter" || e.key === " ") open(); });
+    }
+    setTimeout(hook, 0);
+
+    function shell(){
+      o = document.createElement("div");
+      o.id = "wso";
+      o.innerHTML = '<div class="qz"><button class="qx" type="button" aria-label="Хаах">✕</button>'
+                  + '<div id="wsbody"></div></div>';
+      document.body.appendChild(o);
+      body = o.querySelector("#wsbody");
+      xbtn = o.querySelector(".qx");
+      xbtn.addEventListener("click", function(){ if(!locked) close(); });
+    }
+    function close(){ clearInterval(tmr); tmr = 0; if(o){ o.remove(); o = null; } }
+
+    function open(){
+      if(o && !document.body.contains(o)) o = null;
+      if(o) return;
+      shell();
+      body.innerHTML = '<p class="zlead">Шалгаж байна…</p>';
+      if(!(window.ZEELY && window.ZEELY.cfgAll)){ intro(); return; }
+      window.ZEELY.cfgAll(function(cfg){
+        if(cfg && cfg.task4 === "closed"){ shut(cfg.task4msg); return; }
+        intro();
+      });
+    }
+    function shut(msg){
+      locked = false; xbtn.hidden = false;
+      body.innerHTML = '<h2>🔒 ХААЛТТАЙ</h2><p class="zlead" id="wsshut"></p>'
+                     + '<button class="zbtn" id="wsclose">Хаах</button>';
+      body.querySelector("#wsshut").textContent =
+        (msg && msg !== "closed") ? msg
+        : "Энэ даалгавар одоогоор хаалттай байна. Зохион байгуулагч нээхийг хүлээгээрэй 🦇";
+      body.querySelector("#wsclose").addEventListener("click", close);
+    }
+
+    function intro(){
+      locked = false; xbtn.hidden = false;
+      body.innerHTML =
+        '<h2>🎬 ДААЛГАВАР 4<br>КИНО ХАЙХ</h2>'
+      + '<p class="zlead">' + (NR * NC) + ' үсгийн дундаас аймшгийн ' + MAXW + ' киноны нэрийг ол!</p>'
+      + '<ul class="zfacts">'
+      +   '<li><span>🔤</span><span><b>' + NC + ' × ' + NR + '</b> үсгийн тор. Нэр нь зөвхөн <b>баруун тийш →</b> эсвэл <b>доошоо ↓</b> бичигдсэн.</span></li>'
+      +   '<li><span>🖐️</span><span>Хулганаар <b>эхний үсгээс сүүлийн үсэг хүртэл чирнэ</b>. Утсан дээр эхний үсгийг дараад сүүлийн үсгийг дарна.</span></li>'
+      +   '<li><span>⚠️</span><span><b>Дутуу эсвэл буруу зурвал тооцогдохгүй</b> — бүтэн нэрийг яг таг зурах ёстой.</span></li>'
+      +   '<li><span>⏱️</span><span>Хугацаа <b>ердөө 1 минут</b>. Эхэлсэн бол зогсохгүй!</span></li>'
+      +   '<li><span>⭐</span><span>Олсон кино бүр <b>1 оноо</b> · нийт <b>' + MAXW + ' оноо</b>.</span></li>'
+      +   '<li><span>🚪</span><span>Нэг л удаа бүртгэгдэнэ — <b>дахин оролцох боломжгүй</b>.</span></li>'
+      + '</ul>'
+      + '<input id="wsname" type="text" maxlength="40" autocomplete="name" placeholder="Овог нэрээ бичнэ үү. Жш: Г.Батбаясгалан">'
+      + '<button class="zbtn" id="wsgo">ЭХЛЭХ 🎬</button>'
+      + '<p class="zmsg" id="wsmsg"></p>';
+      var nm = body.querySelector("#wsname"), msg = body.querySelector("#wsmsg");
+      try { nm.value = localStorage.getItem("zeely.name") || ""; } catch(e){}
+      function go(){
+        var v = (nm.value || "").trim().replace(/\s+/g, " ");
+        if(v.length < 2){ msg.textContent = "Нэрээ бичээрэй 👻"; nm.focus(); return; }
+        player = v;
+        try { localStorage.setItem("zeely.name", v); } catch(e){}
+        msg.textContent = "Шалгаж байна…";
+        body.querySelector("#wsgo").disabled = true;
+        if(!(window.ZEELY && window.ZEELY.findQuiz4)){ play(); return; }
+        window.ZEELY.findQuiz4(v, function(hit){
+          if(hit){ already(hit); return; }
+          play();
+        });
+      }
+      body.querySelector("#wsgo").addEventListener("click", go);
+      nm.addEventListener("keydown", function(e){ if(e.key === "Enter") go(); });
+    }
+
+    function already(hit){
+      locked = false; xbtn.hidden = false;
+      body.innerHTML = '<h2>🦇 БҮРТГЭГДСЭН</h2><p class="zlead"></p>'
+        + '<p class="zscore">' + hit.score + '</p><p class="zmeta">цуглуулсан оноо</p>'
+        + '<button class="zbtn" id="wsclose">Хаах</button>';
+      body.querySelector(".zlead").textContent =
+        player + ", та энэ даалгаврыг аль хэдийн биелүүлсэн байна. Дахин оролцох боломжгүй 👻";
+      body.querySelector("#wsclose").addEventListener("click", close);
+    }
+
+    /* ---- тоглоом ---- */
+    function play(){
+      locked = true; xbtn.hidden = true;
+      found = []; pend = null; zoom = false;
+      var html = '<h2>🎬 КИНО ХАЙХ</h2>'
+        + '<p class="pbar"><span id="wstime">⏱️ 1:00</span><span id="wscnt">🎬 0/' + MAXW + '</span>'
+        +   '</p>'
+        + '<div class="wsmain">'
+        +   '<div class="wswrap" id="wswrap"><div class="wsgrid" id="wsgrid"></div></div>'
+        +   '<div class="wsside"><h4>🎬 ' + MAXW + ' КИНОНЫ НЭР</h4>'
+        +     '<ul class="wslist" id="wslist"></ul></div>'
+        + '</div>'
+        + '<p class="wshint" id="wshint">Эхний үсгээс сүүлийн үсэг хүртэл чирнэ үү</p>';
+      body.innerHTML = html;
+
+      var g = body.querySelector("#wsgrid");
+      g.style.gridTemplateColumns = "repeat(" + NC + ", 1fr)";
+      cells = [];
+      for(var r = 0; r < NR; r++){
+        for(var c = 0; c < NC; c++){
+          var d = document.createElement("div");
+          d.className = "wsc";
+          d.textContent = WSROWS[r].charAt(c);
+          d.setAttribute("data-r", r);
+          d.setAttribute("data-c", c);
+          g.appendChild(d);
+          cells.push(d);
+        }
+      }
+      var ul = body.querySelector("#wslist");
+      WSWORDS.forEach(function(w, i){
+        var li = document.createElement("li");
+        li.setAttribute("data-i", i);
+        li.innerHTML = '<b>' + ("0" + (i + 1)).slice(-2) + '</b><span></span>';
+        li.querySelector("span").textContent = w.t;
+        ul.appendChild(li);
+      });
+      sizeGrid();
+      wire(g);
+      t0 = Date.now();
+      clearInterval(tmr);
+      tmr = setInterval(tick, 250);
+      tick();
+    }
+
+    function sizeGrid(){
+      var wrap = body.querySelector("#wswrap"), g = body.querySelector("#wsgrid");
+      if(!g) return;
+      if(zoom){
+        wrap.classList.add("z");
+        g.style.gridTemplateColumns = "repeat(" + NC + ", 26px)";
+        g.style.fontSize = "15px";
+      } else {
+        wrap.classList.remove("z");
+        g.style.gridTemplateColumns = "repeat(" + NC + ", 1fr)";
+        var w = wrap.clientWidth || 320;
+        g.style.fontSize = Math.max(6, Math.floor((w / NC) * 0.68)) + "px";
+      }
+    }
+
+    function tick(){
+      var left = SECS - Math.floor((Date.now() - t0) / 1000);
+      if(left < 0) left = 0;
+      var el = body.querySelector("#wstime");
+      if(el){
+        el.textContent = "⏱️ " + Math.floor(left / 60) + ":" + ("0" + (left % 60)).slice(-2);
+        el.style.background = left <= 10 ? "#e8402a" : "";
+      }
+      if(left <= 0) finish();
+    }
+
+    var DIRS8 = [[0,1],[0,-1],[1,0],[-1,0],[1,1],[1,-1],[-1,1],[-1,-1]];
+    function locate(w){
+      for(var r = 0; r < NR; r++) for(var c = 0; c < NC; c++)
+        for(var d = 0; d < 8; d++){
+          var dr = DIRS8[d][0], dc = DIRS8[d][1], ok = true;
+          for(var i = 0; i < w.length; i++){
+            var rr = r + dr * i, cc = c + dc * i;
+            if(rr < 0 || rr >= NR || cc < 0 || cc >= NC || WSROWS[rr].charAt(cc) !== w.charAt(i)){ ok = false; break; }
+          }
+          if(ok){
+            var out = [];
+            for(var j = 0; j < w.length; j++) out.push({ r: r + dr * j, c: c + dc * j });
+            return out;
+          }
+        }
+      return null;
+    }
+    function at(r, c){ return cells[r * NC + c]; }
+    function lineOf(a, b){
+      var dr = b.r - a.r, dc = b.c - a.c;
+      var sr = dr === 0 ? 0 : (dr > 0 ? 1 : -1);
+      var sc = dc === 0 ? 0 : (dc > 0 ? 1 : -1);
+      if(!(dr === 0 || dc === 0 || Math.abs(dr) === Math.abs(dc))) return null;
+      var n = Math.max(Math.abs(dr), Math.abs(dc)) + 1;
+      var out = [];
+      for(var i = 0; i < n; i++) out.push({ r: a.r + sr * i, c: a.c + sc * i });
+      return out;
+    }
+    function clearSel(){
+      for(var i = 0; i < cells.length; i++) cells[i].classList.remove("sel");
+    }
+    function paintSel(line){
+      clearSel();
+      if(!line) return;
+      line.forEach(function(p){ at(p.r, p.c).classList.add("sel"); });
+    }
+    function cellOf(el){
+      while(el && el !== document.body){
+        if(el.classList && el.classList.contains("wsc"))
+          return { r: +el.getAttribute("data-r"), c: +el.getAttribute("data-c") };
+        el = el.parentNode;
+      }
+      return null;
+    }
+
+    function check(line){
+      clearSel();
+      if(!line || line.length < 3) return false;
+      var s = line.map(function(p){ return WSROWS[p.r].charAt(p.c); }).join("");
+      var rev = s.split("").reverse().join("");
+      for(var i = 0; i < WSWORDS.length; i++){
+        if(found.indexOf(i) > -1) continue;
+        if(WSWORDS[i].w === s || WSWORDS[i].w === rev){
+          found.push(i);
+          var col = COLORS[i % COLORS.length];
+          line.forEach(function(p){
+            var el = at(p.r, p.c);
+            el.classList.add("got");
+            el.style.background = col;
+          });
+          var li = body.querySelector('#wslist li[data-i="' + i + '"]');
+          if(li){ li.classList.add("got"); li.style.borderColor = col; }
+          var cn = body.querySelector("#wscnt");
+          if(cn) cn.textContent = "🎬 " + found.length + "/" + MAXW;
+          var h = body.querySelector("#wshint");
+          if(h) h.textContent = "✅ " + WSWORDS[i].t + " — олдлоо!";
+          if(found.length >= MAXW) setTimeout(finish, 400);
+          return true;
+        }
+      }
+      var h2 = body.querySelector("#wshint");
+      if(h2) h2.textContent = "❌ Таарсангүй — дахин оролдоорой";
+      return false;
+    }
+
+    function wire(g){
+      var start = null, dragging = false;
+
+      function move(e){
+        if(!start || zoom) return;
+        var p = cellOf(document.elementFromPoint(e.clientX, e.clientY));
+        if(!p) return;
+        dragging = true;
+        e.preventDefault();
+        paintSel(lineOf(start, p));
+      }
+      function up(e){
+        document.removeEventListener("pointermove", move, true);
+        document.removeEventListener("pointerup", up, true);
+        document.removeEventListener("pointercancel", up, true);
+        if(!start) return;
+        var p = cellOf(document.elementFromPoint(e.clientX, e.clientY)) || start;
+        var s = start; start = null;
+        if(dragging && !(p.r === s.r && p.c === s.c)){
+          check(lineOf(s, p));
+          pend = null;
+          return;
+        }
+        /* дарах горим: эхний үсэг → сүүлийн үсэг */
+        if(!pend){
+          pend = s; clearSel(); at(s.r, s.c).classList.add("sel");
+          var h = body.querySelector("#wshint");
+          if(h) h.textContent = "Одоо сүүлийн үсгийг дарна уу";
+        } else if(pend.r === s.r && pend.c === s.c){
+          pend = null; clearSel();
+        } else {
+          check(lineOf(pend, s));
+          pend = null;
+        }
+      }
+      g.addEventListener("pointerdown", function(e){
+        if(!locked) return;
+        var p = cellOf(e.target);
+        if(!p) return;
+        start = p; dragging = false;
+        if(!zoom){ paintSel(pend ? lineOf(pend, p) : [p]); }
+        document.addEventListener("pointermove", move, true);
+        document.addEventListener("pointerup", up, true);
+        document.addEventListener("pointercancel", up, true);
+      });
+      g.addEventListener("contextmenu", function(e){ e.preventDefault(); });
+      g.addEventListener("dragstart", function(e){ e.preventDefault(); });
+    }
+
+    function finish(){
+      clearInterval(tmr); tmr = 0;
+      var sc = found.length;
+      var det = "w" + found.slice().sort(function(a,b){return a-b;})
+                        .map(function(i){ return i.toString(36); }).join("")
+              + "|" + ubStamp();
+      locked = true; xbtn.hidden = true;
+      body.innerHTML =
+        '<h2>⏱️ ХУГАЦАА ДУУСЛАА</h2>'
+      + '<p class="zscore">' + sc + '</p>'
+      + '<p class="zmeta">оноо · ' + MAXW + '-аас ' + sc + ' кино олсон</p>'
+      + '<ul class="wsres" id="wsres"></ul>'
+      + '<button class="psmall" id="wskeyb" type="button" style="margin-top:12px">👁️ Зөв хариултыг харах</button>'
+      + '<div id="wskeybox" hidden><div class="wsgrid wskey" id="wskey"></div>'
+      +   '<p class="wshint">Зөв хариултууд</p></div>'
+      + '<p class="zmsg" id="wsm2">Хадгалж байна… 👻</p>';
+      var ul = body.querySelector("#wsres");
+      WSWORDS.forEach(function(w, i){
+        var li = document.createElement("li");
+        li.className = found.indexOf(i) > -1 ? "y" : "n";
+        li.textContent = (found.indexOf(i) > -1 ? "✅ " : "❌ ") + w.t;
+        ul.appendChild(li);
+      });
+      /* --- зөв хариултын тор --- */
+      var kb = body.querySelector("#wskeyb"), kbox = body.querySelector("#wskeybox");
+      var kbuilt = false;
+      kb.addEventListener("click", function(){
+        if(!kbuilt){
+          var kg = body.querySelector("#wskey");
+          kg.style.gridTemplateColumns = "repeat(" + NC + ", 1fr)";
+          kg.style.fontSize = Math.max(5, Math.floor((kg.clientWidth || 300) / NC * 0.62)) + "px";
+          var kc = [];
+          for(var r = 0; r < NR; r++) for(var c = 0; c < NC; c++){
+            var d = document.createElement("div");
+            d.className = "wsc";
+            d.textContent = WSROWS[r].charAt(c);
+            kg.appendChild(d); kc.push(d);
+          }
+          WSWORDS.forEach(function(w, i){
+            var pts = locate(w.w);
+            if(!pts) return;
+            var col = COLORS[i % COLORS.length];
+            pts.forEach(function(pt){
+              var el = kc[pt.r * NC + pt.c];
+              el.style.background = col; el.classList.add("got");
+            });
+          });
+          kg.style.fontSize = Math.max(5, Math.floor(kg.clientWidth / NC * 0.62)) + "px";
+          kbuilt = true;
+        }
+        kbox.hidden = !kbox.hidden;
+        kb.textContent = kbox.hidden ? "👁️ Зөв хариултыг харах" : "🙈 Нуух";
+      });
+
+      var m2 = body.querySelector("#wsm2");
+      function ok(){
+        locked = false; xbtn.hidden = false;
+        m2.textContent = "Амжилттай бүртгэгдлээ ✅";
+        var bt = document.createElement("button");
+        bt.className = "zbtn"; bt.textContent = "Хаах";
+        bt.addEventListener("click", function(){ close(); if(window.ZEELY) window.ZEELY.refresh(); });
+        body.appendChild(bt);
+        if(window.ZEELY && window.ZEELY.refresh) window.ZEELY.refresh();
+      }
+      function dead(){
+        locked = false; xbtn.hidden = false;
+        var bt = document.createElement("button");
+        bt.className = "zbtn"; bt.textContent = "Хаах";
+        bt.addEventListener("click", close);
+        body.appendChild(bt);
+      }
+      if(window.ZEELY && window.ZEELY.quiz4){
+        autoSave(function(d, f){ window.ZEELY.quiz4(player, sc, MAXW, d, f, det); }, m2, ok, dead);
+      } else { dead(); }
     }
   })();
 
@@ -1835,13 +2269,18 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       var p3 = (rows || []).filter(function(v){
         var q = pq(v); return q && q.pre === "QUIZ3";
       });
+      var p4 = (rows || []).filter(function(v){
+        var q = pq(v); return q && q.pre === "QUIZ4";
+      });
 
       var html = '<button class="ax" type="button" aria-label="Хаах">✕</button>'
                + '<h2>🗒️ Хариултын дэлгэрэнгүй</h2>'
                + '<p class="asub">Даалгавар 2 · ' + people.length + ' оролцогч'
-               +   ' | Даалгавар 3 · ' + p3.length + ' оролцогч</p>'
+               +   ' | Даалгавар 3 · ' + p3.length + ' оролцогч'
+               +   ' | Даалгавар 4 · ' + p4.length + ' оролцогч</p>'
                + ctlHtml(2, "actl2")
-               + ctlHtml(3, "actl3");
+               + ctlHtml(3, "actl3")
+               + ctlHtml(4, "actl4");
 
       /* --- Даалгавар 3: puzzle-ийн үр дүн --- */
       html += '<div class="ap apx"><h3>🧩 Даалгавар 3 · PUZZLE</h3>';
@@ -1859,6 +2298,31 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
                   + (mt ? ' · ⏱ ' + Math.floor(mt[1] / 60) + ":" + ("0" + (mt[1] % 60)).slice(-2) : '')
                   + (mm ? ' · 🔁 ' + mm[1] : '')
                   + (q.at ? ' · 🕒 ' + q.at : '')
+                  + '</span></li>';
+          });
+        html += '</ol>';
+      }
+      html += '</div>';
+
+      /* --- Даалгавар 4: кино хайх --- */
+      html += '<div class="ap apx"><h3>🎬 Даалгавар 4 · КИНО ХАЙХ</h3>';
+      if(!p4.length){
+        html += '<p class="empty">Одоогоор хэн ч биелүүлээгүй байна.</p>';
+      } else {
+        html += '<ol>';
+        p4.slice().sort(function(a, b){ return (pq(b).score || 0) - (pq(a).score || 0); })
+          .forEach(function(v){
+            var q = pq(v), d = String(q.detail || "");
+            var mw = d.match(/^w([0-9a-z]*)/);
+            var names = [];
+            if(mw && mw[1]) mw[1].split("").forEach(function(ch){
+              var ix = parseInt(ch, 36);
+              if(WSWORDS[ix]) names.push(WSWORDS[ix].t);
+            });
+            html += '<li><span class="an4"></span><span class="aa">'
+                  + q.score + ' / ' + q.total + ' оноо'
+                  + (q.at ? ' · 🕒 ' + q.at : '')
+                  + (names.length ? '<br><small>' + names.join(' · ') + '</small>' : '')
                   + '</span></li>';
           });
         html += '</ol>';
@@ -1905,6 +2369,9 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       document.body.appendChild(box);
 
       /* текстийг аюулгүйгээр суулгана */
+      var n4s = box.querySelectorAll(".an4");
+      p4.slice().sort(function(a, b){ return (pq(b).score || 0) - (pq(a).score || 0); })
+        .forEach(function(v, i){ if(n4s[i]) n4s[i].textContent = pq(v).name; });
       var n3s = box.querySelectorAll(".an3");
       p3.slice().sort(function(a, b){ return (pq(b).score || 0) - (pq(a).score || 0); })
         .forEach(function(v, i){ if(n3s[i]) n3s[i].textContent = pq(v).name; });
@@ -1982,6 +2449,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       }
       wireCtl(2, "actl2");
       wireCtl(3, "actl3");
+      wireCtl(4, "actl4");
     }
 
     var drawn = false;
@@ -2192,6 +2660,8 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     findQuiz: function(nm, cb){ findBy(["QUIZ", "QUIZ2"], nm, cb); },
     /* Даалгавар 3 (puzzle) — тухайн нэр аль хэдийн биелүүлсэн эсэх */
     findQuiz3: function(nm, cb){ findBy(["QUIZ3"], nm, cb); },
+    /* Даалгавар 4 (кино хайх) */
+    findQuiz4: function(nm, cb){ findBy(["QUIZ4"], nm, cb); },
     fetchRows: function(cb){
       fetch(SHEET_URL + "?t=" + Date.now())
         .then(function(r){ return r.json(); })
@@ -2212,6 +2682,16 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     /* Даалгавар 3 (puzzle) үр дүнг шийт рүү хадгална */
     quiz3: function(nm, sc, total, done, fail, detail){
       fetch(SHEET_URL + "?id=" + encodeURIComponent("QUIZ3-" + myId + "~" + sc + "/" + total)
+          + "&name=" + encodeURIComponent(nm)
+          + "&going=" + encodeURIComponent(detail || "1")
+          + "&t=" + Date.now())
+        .then(function(r){ return r.json(); })
+        .then(function(){ done(); })
+        .catch(function(){ fail(); });
+    },
+    /* Даалгавар 4 (кино хайх) үр дүнг хадгална */
+    quiz4: function(nm, sc, total, done, fail, detail){
+      fetch(SHEET_URL + "?id=" + encodeURIComponent("QUIZ4-" + myId + "~" + sc + "/" + total)
           + "&name=" + encodeURIComponent(nm)
           + "&going=" + encodeURIComponent(detail || "1")
           + "&t=" + Date.now())
