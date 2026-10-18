@@ -407,21 +407,21 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 /* --- QUIZ --- */
 .tlist li.now{cursor:pointer}
 .tlist li.now:active{transform:translate(2px,2px)}
-#quizo,#wso,#puzzo{position:fixed;inset:0;z-index:220;display:grid;place-items:center;padding:16px;
-  background:rgba(12,6,3,.88);overflow-y:auto;animation:qfade .35s ease}#quizo .qz,#wso .qz,#puzzo .qz{max-width:460px;width:100%;background:var(--cream);border:4px solid var(--ink);
+#quizo,#eqo,#wso,#puzzo{position:fixed;inset:0;z-index:220;display:grid;place-items:center;padding:16px;
+  background:rgba(12,6,3,.88);overflow-y:auto;animation:qfade .35s ease}#quizo .qz,#eqo .qz,#wso .qz,#puzzo .qz{max-width:460px;width:100%;background:var(--cream);border:4px solid var(--ink);
   border-radius:14px;box-shadow:7px 7px 0 var(--ink);padding:24px 20px;position:relative;
-  text-align:center;animation:pop .4s cubic-bezier(.2,1.5,.4,1)}#quizo .qx,#wso .qx,#puzzo .qx{position:absolute;right:-13px;top:-13px;width:38px;height:38px;border-radius:50%;
+  text-align:center;animation:pop .4s cubic-bezier(.2,1.5,.4,1)}#quizo .qx,#eqo .qx,#wso .qx,#puzzo .qx{position:absolute;right:-13px;top:-13px;width:38px;height:38px;border-radius:50%;
   background:var(--cream);border:3px solid var(--ink);box-shadow:2px 2px 0 var(--ink);
-  font-size:17px;line-height:1;cursor:pointer;padding:0;z-index:2}#quizo h2,#wso h2,#puzzo h2{font-family:var(--display);font-weight:900;margin:0 0 10px;color:#e8402a;
-  font-size:clamp(1.4rem,6.5vw,2rem);letter-spacing:.03em;line-height:1.1}#quizo .zlead,#wso .zlead,#puzzo .zlead{margin:0 0 16px;font-weight:700;font-size:.88rem;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}#quizo .zfacts,#wso .zfacts,#puzzo .zfacts{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:7px;text-align:left}#quizo .zfacts li,#wso .zfacts li,#puzzo .zfacts li{display:flex;gap:9px;align-items:flex-start;font-size:.84rem;font-weight:700;
-  background:var(--cream-2);border:2px solid var(--ink);border-radius:9px;padding:8px 10px}#quizo .zbtn,#wso .zbtn,#puzzo .zbtn{font-family:var(--display);font-weight:900;font-size:1rem;padding:13px 30px;
+  font-size:17px;line-height:1;cursor:pointer;padding:0;z-index:2}#quizo h2,#eqo h2,#wso h2,#puzzo h2{font-family:var(--display);font-weight:900;margin:0 0 10px;color:#e8402a;
+  font-size:clamp(1.4rem,6.5vw,2rem);letter-spacing:.03em;line-height:1.1}#quizo .zlead,#eqo .zlead,#wso .zlead,#puzzo .zlead{margin:0 0 16px;font-weight:700;font-size:.88rem;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}#quizo .zfacts,#eqo .zfacts,#wso .zfacts,#puzzo .zfacts{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:7px;text-align:left}#quizo .zfacts li,#eqo .zfacts li,#wso .zfacts li,#puzzo .zfacts li{display:flex;gap:9px;align-items:flex-start;font-size:.84rem;font-weight:700;
+  background:var(--cream-2);border:2px solid var(--ink);border-radius:9px;padding:8px 10px}#quizo .zbtn,#eqo .zbtn,#wso .zbtn,#puzzo .zbtn{font-family:var(--display);font-weight:900;font-size:1rem;padding:13px 30px;
   border-radius:11px;background:var(--yellow);color:var(--ink);border:3px solid var(--ink);
-  box-shadow:4px 4px 0 var(--ink);cursor:pointer}#quizo .zbtn:active,#wso .zbtn:active,#puzzo .zbtn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}#quizo .zstage,#wso .zstage,#puzzo .zstage{font-family:var(--display);font-weight:900;font-size:clamp(2.4rem,14vw,3.6rem);
-  color:#f0824a;margin:6px 0 2px;-webkit-text-stroke:3px var(--ink);paint-order:stroke fill}#quizo .zbar,#wso .zbar,#puzzo .zbar{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-weight:800;font-size:.74rem}#quizo .zbar .zp,#wso .zbar .zp,#puzzo .zbar .zp{flex:1;height:10px;border:2px solid var(--ink);border-radius:999px;overflow:hidden;
-  background:var(--cream-2)}#quizo .zbar .zp i,#wso .zbar .zp i,#puzzo .zbar .zp i{display:block;height:100%;background:#f0824a;width:0;transition:width .3s}#quizo .ztime,#wso .ztime,#puzzo .ztime{display:flex;align-items:center;gap:9px;margin:0 0 13px}#quizo .ztime .zt,#wso .ztime .zt,#puzzo .ztime .zt{flex:none;min-width:40px;height:30px;padding:0 9px;border-radius:999px;
+  box-shadow:4px 4px 0 var(--ink);cursor:pointer}#quizo .zbtn:active,#eqo .zbtn:active,#wso .zbtn:active,#puzzo .zbtn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}#quizo .zstage,#eqo .zstage,#wso .zstage,#puzzo .zstage{font-family:var(--display);font-weight:900;font-size:clamp(2.4rem,14vw,3.6rem);
+  color:#f0824a;margin:6px 0 2px;-webkit-text-stroke:3px var(--ink);paint-order:stroke fill}#quizo .zbar,#eqo .zbar,#wso .zbar,#puzzo .zbar{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-weight:800;font-size:.74rem}#quizo .zbar .zp,#eqo .zbar .zp,#wso .zbar .zp,#puzzo .zbar .zp{flex:1;height:10px;border:2px solid var(--ink);border-radius:999px;overflow:hidden;
+  background:var(--cream-2)}#quizo .zbar .zp i,#eqo .zbar .zp i,#wso .zbar .zp i,#puzzo .zbar .zp i{display:block;height:100%;background:#f0824a;width:0;transition:width .3s}#quizo .ztime,#eqo .ztime,#wso .ztime,#puzzo .ztime{display:flex;align-items:center;gap:9px;margin:0 0 13px}#quizo .ztime .zt,#eqo .ztime .zt,#wso .ztime .zt,#puzzo .ztime .zt{flex:none;min-width:40px;height:30px;padding:0 9px;border-radius:999px;
   display:grid;place-items:center;font-family:var(--display);font-weight:900;font-size:.9rem;
-  background:var(--ink);color:var(--cream)}#quizo .ztime .zt.warn,#wso .ztime .zt.warn,#puzzo .ztime .zt.warn{background:#e8402a;color:#fff2ea;animation:ztick .5s steps(2) infinite}@keyframes ztick{from{transform:scale(1)}to{transform:scale(1.1)}}#quizo .ztime .ztp,#wso .ztime .ztp,#puzzo .ztime .ztp{flex:1;height:9px;border:2px solid var(--ink);border-radius:999px;
-  overflow:hidden;background:var(--cream-2)}#quizo .ztime .ztp i,#wso .ztime .ztp i,#puzzo .ztime .ztp i{display:block;height:100%;background:#f6c62a;width:100%;transition:width .9s linear}/* --- зохион байгуулагчийн харагдац (?admin) --- */
+  background:var(--ink);color:var(--cream)}#quizo .ztime .zt.warn,#eqo .ztime .zt.warn,#wso .ztime .zt.warn,#puzzo .ztime .zt.warn{background:#e8402a;color:#fff2ea;animation:ztick .5s steps(2) infinite}@keyframes ztick{from{transform:scale(1)}to{transform:scale(1.1)}}#quizo .ztime .ztp,#eqo .ztime .ztp,#wso .ztime .ztp,#puzzo .ztime .ztp{flex:1;height:9px;border:2px solid var(--ink);border-radius:999px;
+  overflow:hidden;background:var(--cream-2)}#quizo .ztime .ztp i,#eqo .ztime .ztp i,#wso .ztime .ztp i,#puzzo .ztime .ztp i{display:block;height:100%;background:#f6c62a;width:100%;transition:width .9s linear}/* --- зохион байгуулагчийн харагдац (?admin) --- */
 #adm{position:fixed;inset:0;z-index:300;background:#141010;color:#f3ece0;
   overflow-y:auto;padding:18px 14px 60px;font-size:.84rem}#adm h2{font-family:var(--display);font-weight:900;margin:0 0 4px;color:#f6c62a;font-size:1.3rem}#adm .asub{margin:0 0 16px;opacity:.7;font-size:.78rem}#adm .ax{position:fixed;right:14px;top:14px;z-index:2;width:38px;height:38px;border-radius:50%;
   background:var(--cream);border:3px solid var(--ink);box-shadow:2px 2px 0 var(--ink);
@@ -430,19 +430,26 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
   padding:4px 10px;border-radius:999px;background:#3a2f2a;color:#efe4d6}#adm .ast.so{background:#2c5c23;color:#d5f5c8}#adm .ast.sh{background:#6b2018;color:#ffd9d0}#adm .arow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}#adm .amsgl{display:block;margin:12px 0 5px;font-size:.74rem;opacity:.75;font-weight:700}#adm #amsg{width:100%;box-sizing:border-box;padding:9px 11px;border-radius:9px;resize:vertical;
   background:#141010;color:#f3ece0;border:2px solid #3a2f2a;font:inherit;font-size:.82rem;line-height:1.45}#adm #amsg:focus{outline:none;border-color:#f6c62a}#adm .ahint{margin:7px 0 0;font-size:.72rem;opacity:.68}#adm .acnt{margin:3px 0 0;font-size:.7rem;opacity:.55;text-align:right}#adm .acnt.warn{color:#f0a04a;opacity:1}#adm .asave{margin-top:9px;font-size:.78rem;padding:7px 15px}#adm .abtn{margin-left:auto;font-family:var(--display);font-weight:900;font-size:.85rem;
   padding:9px 18px;border-radius:9px;background:var(--yellow);color:var(--ink);
-  border:3px solid var(--ink);box-shadow:3px 3px 0 #000;cursor:pointer}#adm .abtn:disabled{opacity:.6;cursor:default}#adm .ap{background:#1e1816;border:2px solid #3a2f2a;border-radius:11px;padding:13px 14px;margin:0 0 12px}#adm .ap h3{overflow-wrap:anywhere;margin:0 0 2px;font-family:var(--display);font-weight:900;font-size:1rem;color:#fff6ea}#adm .ap .asc{font-family:var(--display);font-weight:900;color:#f0824a;font-size:.9rem;margin:0 0 9px}#adm ol{margin:0;padding-left:20px;display:grid;gap:5px}#adm li{line-height:1.45;overflow-wrap:anywhere}#adm li.bad{color:#f0a08c}#adm li.miss{opacity:.6}#adm .aq{font-weight:700}#adm .aa{display:block;font-size:.78rem;opacity:.85}#adm .tick{font-weight:900}#adm .empty{opacity:.65;padding:10px 0}#quizo .zrimg,#wso .zrimg,#puzzo .zrimg{display:block;width:100%;max-width:300px;margin:4px auto 14px;border-radius:12px;
-  border:4px solid var(--ink);box-shadow:5px 5px 0 var(--ink)}#quizo .zcap,#wso .zcap,#puzzo .zcap{margin:-8px 0 14px;font-family:var(--display);font-weight:900;
-  font-size:1.05rem;color:#b8401c;letter-spacing:.02em}#quizo .zmeta,#wso .zmeta,#puzzo .zmeta{font-size:.78rem;opacity:.72}#quizo .znote,#wso .znote,#puzzo .znote{margin:4px 0 16px;padding:9px 11px;border-radius:9px;
+  border:3px solid var(--ink);box-shadow:3px 3px 0 #000;cursor:pointer}#adm .abtn:disabled{opacity:.6;cursor:default}#adm .ap{background:#1e1816;border:2px solid #3a2f2a;border-radius:11px;padding:13px 14px;margin:0 0 12px}#adm .ap h3{overflow-wrap:anywhere;margin:0 0 2px;font-family:var(--display);font-weight:900;font-size:1rem;color:#fff6ea}#adm .ap .asc{font-family:var(--display);font-weight:900;color:#f0824a;font-size:.9rem;margin:0 0 9px}#adm ol{margin:0;padding-left:20px;display:grid;gap:5px}#adm li{line-height:1.45;overflow-wrap:anywhere}#adm li.bad{color:#f0a08c}#adm li.miss{opacity:.6}#adm .aq{font-weight:700}#adm .aa{display:block;font-size:.78rem;opacity:.85}#adm .tick{font-weight:900}#adm .empty{opacity:.65;padding:10px 0}#quizo .zrimg,#eqo .zrimg,#wso .zrimg,#puzzo .zrimg{display:block;width:100%;max-width:300px;margin:4px auto 14px;border-radius:12px;
+  border:4px solid var(--ink);box-shadow:5px 5px 0 var(--ink)}#quizo .zcap,#eqo .zcap,#wso .zcap,#puzzo .zcap{margin:-8px 0 14px;font-family:var(--display);font-weight:900;
+  font-size:1.05rem;color:#b8401c;letter-spacing:.02em}#quizo .zmeta,#eqo .zmeta,#wso .zmeta,#puzzo .zmeta{font-size:.78rem;opacity:.72}#quizo .znote,#eqo .znote,#wso .znote,#puzzo .znote{margin:4px 0 16px;padding:9px 11px;border-radius:9px;
   background:var(--cream-2);border:2px dashed var(--ink);
-  font-weight:700;font-size:.78rem;line-height:1.5}#quizo .zimg,#wso .zimg,#puzzo .zimg{display:block;width:100%;max-height:200px;object-fit:cover;border-radius:10px;
-  border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);margin:0 0 13px}#quizo .zq,#wso .zq,#puzzo .zq{font-weight:800;font-size:1rem;line-height:1.45;margin:0 0 15px;text-align:left}#quizo .zopts,#wso .zopts,#puzzo .zopts{display:grid;gap:8px;margin-bottom:6px}#quizo .zopts button,#wso .zopts button,#puzzo .zopts button{display:flex;gap:9px;align-items:center;text-align:left;width:100%;
+  font-weight:700;font-size:.78rem;line-height:1.5}#quizo .zimg,#eqo .zimg,#wso .zimg,#puzzo .zimg{display:block;width:100%;max-height:200px;object-fit:cover;border-radius:10px;
+  border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);margin:0 0 13px}#quizo .zq,#eqo .zq,#wso .zq,#puzzo .zq{font-weight:800;font-size:1rem;line-height:1.45;margin:0 0 15px;text-align:left}#quizo .zopts,#eqo .zopts,#wso .zopts,#puzzo .zopts{display:grid;gap:8px;margin-bottom:6px}#quizo .zopts button,#eqo .zopts button,#wso .zopts button,#puzzo .zopts button{display:flex;gap:9px;align-items:center;text-align:left;width:100%;
   font:inherit;font-weight:700;font-size:.86rem;padding:11px 12px;border-radius:10px;
   background:var(--cream-2);color:var(--ink);border:3px solid var(--ink);
-  box-shadow:3px 3px 0 var(--ink);cursor:pointer}#quizo .zopts button .zl,#wso .zopts button .zl,#puzzo .zopts button .zl{flex:none;width:22px;height:22px;border-radius:50%;display:grid;
+  box-shadow:3px 3px 0 var(--ink);cursor:pointer}#quizo .zopts button .zl,#eqo .zopts button .zl,#wso .zopts button .zl,#puzzo .zopts button .zl{flex:none;width:22px;height:22px;border-radius:50%;display:grid;
   place-items:center;font-family:var(--display);font-weight:900;font-size:.68rem;
-  background:var(--ink);color:var(--cream)}#quizo .zopts button.good,#wso .zopts button.good,#puzzo .zopts button.good{background:#6fd45a;color:#0d2a07}#quizo .zopts button.bad,#wso .zopts button.bad,#puzzo .zopts button.bad{background:#e8503a;color:#fff2ea}#quizo .zopts button:disabled,#wso .zopts button:disabled,#puzzo .zopts button:disabled{cursor:default}#quizo .zscore,#wso .zscore,#puzzo .zscore{font-family:var(--display);font-weight:900;font-size:clamp(2.6rem,15vw,4rem);
-  color:#f0824a;margin:4px 0 2px;-webkit-text-stroke:3px var(--ink);paint-order:stroke fill}#quizo input,#wso input,#puzzo input{width:100%;box-sizing:border-box;padding:12px 14px;font:inherit;font-weight:700;
-  border:3px solid var(--ink);border-radius:9px;background:var(--cream-2);margin:14px 0 12px}#quizo .zmsg,#wso .zmsg,#puzzo .zmsg{margin:10px 0 0;font-size:.82rem;font-weight:700;min-height:1.2em}
+  background:var(--ink);color:var(--cream)}#quizo .zopts button.good,#eqo .zopts button.good,#wso .zopts button.good,#puzzo .zopts button.good{background:#6fd45a;color:#0d2a07}#quizo .zopts button.bad,#eqo .zopts button.bad,#wso .zopts button.bad,#puzzo .zopts button.bad{background:#e8503a;color:#fff2ea}#quizo .zopts button:disabled,#eqo .zopts button:disabled,#wso .zopts button:disabled,#puzzo .zopts button:disabled{cursor:default}#quizo .zscore,#eqo .zscore,#wso .zscore,#puzzo .zscore{font-family:var(--display);font-weight:900;font-size:clamp(2.6rem,15vw,4rem);
+  color:#f0824a;margin:4px 0 2px;-webkit-text-stroke:3px var(--ink);paint-order:stroke fill}#quizo input,#eqo input,#wso input,#puzzo input{width:100%;box-sizing:border-box;padding:12px 14px;font:inherit;font-weight:700;
+  border:3px solid var(--ink);border-radius:9px;background:var(--cream-2);margin:14px 0 12px}#quizo .zmsg,#eqo .zmsg,#wso .zmsg,#puzzo .zmsg{margin:10px 0 0;font-size:.82rem;font-weight:700;min-height:1.2em}
+/* --- EMOJI ТААВАР (Даалгавар 5) --- */
+#eqo .qz{max-width:480px}
+#eqo .eqemo{font-size:clamp(2.6rem,13vw,3.8rem);line-height:1.35;margin:18px 0 6px;
+  letter-spacing:.08em;word-break:break-word}
+#eqo .zmsg b.eqok{color:#2f7d1c}
+#eqo .zmsg b.eqno{color:#c0341e}
+#eqo input{text-align:center}
 /* --- WORD SEARCH (Даалгавар 4) --- */
 #wso{grid-template-columns:minmax(0,1fr)}
 #wso .qz{max-width:760px;justify-self:center}
@@ -1065,7 +1072,8 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     var READY = [
       { no: 2, title: "Даалгавар 2" },
       { no: 3, title: "Даалгавар 3" },
-      { no: 4, title: "Даалгавар 4" }
+      { no: 4, title: "Даалгавар 4" },
+      { no: 5, title: "Даалгавар 5" }
     ];
     var shown = READY.slice();
     if(!shown.some(function(x){ return x.no === activeNo; }))
@@ -2172,6 +2180,299 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     }
   })();
 
+  /* ---------- Даалгавар 5: EMOJI ТААВАР ---------- */
+  var EQUIZ = {
+    rounds: [
+      { name: "1-р ҮЕ", sub: "Кино таа", lead: "Emoji-нууд ямар аймшгийн киног илэрхийлж байна вэ?",
+        qs: [
+          { e: "🎈 🤡 🚽 🌧️", t: "IT", a: ["it", "itchapterone", "itchaptertwo"] },
+          { e: "🏚️ 👻 👏 ✝️", t: "The Conjuring", a: ["theconjuring"] },
+          { e: "🪆 🎀 👹 🏠", t: "Annabelle", a: ["annabelle"] },
+          { e: "⛪ 👰‍♀️ 😈 🕯️", t: "The Nun", a: ["thenun"] },
+          { e: "📞 😱 🎭 🔪", t: "Scream", a: ["scream"] },
+          { e: "🎃 🔪 🎭 🌙", t: "Halloween", a: ["halloween"] },
+          { e: "🧸 🔪 👖 😈", t: "Child's Play", a: ["childsplay"] },
+          { e: "📼 📺 7️⃣ ☠️", t: "The Ring", a: ["thering"] },
+          { e: "🧩 🚲 ⛓️ 🩸", t: "Saw", a: ["saw"] },
+          { e: "✈️ 💥 ☠️ 🔮", t: "Final Destination", a: ["finaldestination"] },
+          { e: "🚆 🧟‍♂️ 🇰🇷 🏃", t: "Train to Busan", a: ["traintobusan"] },
+          { e: "🛏️ 💤 🧤 🔪", t: "A Nightmare on Elm Street", a: ["anightmareonelmstreet", "nightmareonelmstreet"] },
+          { e: "🏨 🪓 👯 ❄️", t: "The Shining", a: ["theshining"] },
+          { e: "👧 🛏️ ✝️ 🤮", t: "The Exorcist", a: ["theexorcist"] },
+          { e: "🤫 👂 👣 👹", t: "A Quiet Place", a: ["aquietplace", "quietplace"] }
+        ] },
+      { name: "2-р ҮЕ", sub: "Дүр таа", lead: "Одоо аймшгийн киноны ДҮРийн нэрийг таа!",
+        qs: [
+          { e: "🤡 🎈 🔴", t: "Pennywise", a: ["pennywise", "pennywisethedancingclown"] },
+          { e: "🧑‍🦰 🧸 🔪", t: "Chucky", a: ["chucky"] },
+          { e: "🪆 🎀 👻", t: "Annabelle", a: ["annabelle"] },
+          { e: "☎️ 😱 👻 🔪", t: "Ghostface", a: ["ghostface"] },
+          { e: "🎃 🔪 🎭 🌙", t: "Michael Myers", a: ["michaelmyers"] },
+          { e: "🏒 🔪 🏕️", t: "Jason Voorhees", a: ["jasonvoorhees"] },
+          { e: "😴 💤 🧤 🔪", t: "Freddy Krueger", a: ["freddykrueger", "freddykruger"] },
+          { e: "⛪ ✝️ 👰‍♀️ 😈", t: "Valak", a: ["valak"] },
+          { e: "📺 📼 👧🏻 💧", t: "Samara", a: ["samara", "samaramorgan"] },
+          { e: "🚲 🌀 🎭 ⛓️", t: "Jigsaw", a: ["jigsaw", "johnkramer"] },
+          { e: "👻 🟢 ⚫ ⚪", t: "Beetlejuice", a: ["beetlejuice", "betelgeuse"] },
+          { e: "👧🏻 🖤 🕷️ ✋", t: "Wednesday Addams", a: ["wednesdayaddams", "wednesdayadams"] },
+          { e: "🧛‍♂️ 🦇 🩸 🌙", t: "Dracula", a: ["dracula", "countdracula"] },
+          { e: "⚡ 🧟‍♂️ 🔩 🧵", t: "Frankenstein's Monster", a: ["frankensteinsmonster", "frankenstein"] },
+          { e: "🪚 🎭 🏚️ 😱", t: "Leatherface", a: ["leatherface"] }
+        ] }
+    ]
+  };
+
+  (function(){
+    var SEC = 15;
+    var o, body, xbtn, locked = false, player = "";
+    var ri = 0, qi = 0, score = 0, marks = [], tmr = 0, left = 0;
+    function allQs(){ var n = 0; EQUIZ.rounds.forEach(function(r){ n += r.qs.length; }); return n; }
+    var TOTAL = allQs();
+
+    function hook(){
+      var row = document.querySelector('#tlist li[data-no="5"]');
+      if(!row) return;
+      row.setAttribute("role", "button"); row.setAttribute("tabindex", "0");
+      row.addEventListener("click", open);
+      row.addEventListener("keydown", function(e){ if(e.key === "Enter" || e.key === " ") open(); });
+    }
+    setTimeout(hook, 0);
+
+    /* --- хариулт харьцуулах --- */
+    function norm(s){
+      return String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+    }
+    function lev(a, b){
+      var m = a.length, n = b.length, i, j, prev = [], cur = [];
+      for(j = 0; j <= n; j++) prev[j] = j;
+      for(i = 1; i <= m; i++){
+        cur[0] = i;
+        for(j = 1; j <= n; j++){
+          cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1,
+                            prev[j - 1] + (a.charAt(i - 1) === b.charAt(j - 1) ? 0 : 1));
+        }
+        prev = cur.slice();
+      }
+      return prev[n];
+    }
+    function match(input, item){
+      var v = norm(input);
+      if(!v) return false;
+      var list = [norm(item.t)].concat(item.a.map(norm));
+      for(var i = 0; i < list.length; i++){
+        var w = list[i];
+        if(!w) continue;
+        if(v === w) return true;
+        var tol = w.length >= 10 ? 2 : (w.length >= 5 ? 1 : 0);
+        if(tol && lev(v, w) <= tol) return true;
+      }
+      return false;
+    }
+
+    function shell(){
+      o = document.createElement("div");
+      o.id = "eqo";
+      o.innerHTML = '<div class="qz"><button class="qx" type="button" aria-label="Хаах">✕</button>'
+                  + '<div id="eqbody"></div></div>';
+      document.body.appendChild(o);
+      body = o.querySelector("#eqbody");
+      xbtn = o.querySelector(".qx");
+      xbtn.addEventListener("click", function(){ if(!locked) close(); });
+    }
+    function close(){ clearInterval(tmr); tmr = 0; if(o){ o.remove(); o = null; } }
+
+    function open(){
+      if(o && !document.body.contains(o)) o = null;
+      if(o) return;
+      shell();
+      body.innerHTML = '<p class="zlead">Шалгаж байна…</p>';
+      if(!(window.ZEELY && window.ZEELY.cfgAll)){ intro(); return; }
+      window.ZEELY.cfgAll(function(cfg){
+        if(cfg && cfg.task5 === "closed"){ shut(cfg.task5msg); return; }
+        intro();
+      });
+    }
+    function shut(msg){
+      locked = false; xbtn.hidden = false;
+      body.innerHTML = '<h2>🔒 ХААЛТТАЙ</h2><p class="zlead" id="eqshut"></p>'
+                     + '<button class="zbtn" id="eqclose">Хаах</button>';
+      body.querySelector("#eqshut").textContent =
+        (msg && msg !== "closed") ? msg
+        : "Энэ даалгавар одоогоор хаалттай байна. Зохион байгуулагч нээхийг хүлээгээрэй 🦇";
+      body.querySelector("#eqclose").addEventListener("click", close);
+    }
+
+    function intro(){
+      locked = false; xbtn.hidden = false;
+      body.innerHTML =
+        '<h2>🫠 ДААЛГАВАР 5<br>EMOJI ТААВАР</h2>'
+      + '<p class="zlead">Emoji-г хараад аймшгийн кино болон дүрийг таа!</p>'
+      + '<ul class="zfacts">'
+      +   '<li><span>🎬</span><span><b>1-р үе:</b> emoji-гоор <b>киноны нэрийг</b> таана (15 асуулт).</span></li>'
+      +   '<li><span>👹</span><span><b>2-р үе:</b> emoji-гоор <b>дүрийн нэрийг</b> таана (15 асуулт).</span></li>'
+      +   '<li><span>⌨️</span><span>Хариултаа <b>латин үсгээр, бүтэн нэрээр</b> нь бичнэ (жнь: The Conjuring).</span></li>'
+      +   '<li><span>⏱️</span><span>Асуулт бүрт <b>15 секунд</b>. Буруу бичвэл <b>хугацаандаа багтаад дахин оролдож болно</b>.</span></li>'
+      +   '<li><span>⭐</span><span>Зөв хариулт бүр <b>1 оноо</b> · нийт <b>' + TOTAL + ' оноо</b>.</span></li>'
+      +   '<li><span>🚪</span><span>Эхэлсэн бол <b>гарах боломжгүй</b>. Нэг л удаа оролцоно.</span></li>'
+      + '</ul>'
+      + '<input id="eqname" type="text" maxlength="40" autocomplete="name" placeholder="Овог нэрээ бичнэ үү. Жш: Г.Батбаясгалан">'
+      + '<button class="zbtn" id="eqgo">ЭХЛЭХ 🫠</button>'
+      + '<p class="zmsg" id="eqmsg"></p>';
+      var nm = body.querySelector("#eqname"), msg = body.querySelector("#eqmsg");
+      try { nm.value = localStorage.getItem("zeely.name") || ""; } catch(e){}
+      function go(){
+        var v = (nm.value || "").trim().replace(/\s+/g, " ");
+        if(v.length < 2){ msg.textContent = "Нэрээ бичээрэй 👻"; nm.focus(); return; }
+        player = v;
+        try { localStorage.setItem("zeely.name", v); } catch(e){}
+        msg.textContent = "Шалгаж байна…";
+        body.querySelector("#eqgo").disabled = true;
+        if(!(window.ZEELY && window.ZEELY.findQuiz5)){ start(); return; }
+        window.ZEELY.findQuiz5(v, function(hit){
+          if(hit){ already(hit); return; }
+          start();
+        });
+      }
+      body.querySelector("#eqgo").addEventListener("click", go);
+      nm.addEventListener("keydown", function(e){ if(e.key === "Enter") go(); });
+    }
+
+    function already(hit){
+      locked = false; xbtn.hidden = false;
+      body.innerHTML = '<h2>🦇 БҮРТГЭГДСЭН</h2><p class="zlead"></p>'
+        + '<p class="zscore">' + hit.score + '</p><p class="zmeta">цуглуулсан оноо</p>'
+        + '<button class="zbtn" id="eqclose">Хаах</button>';
+      body.querySelector(".zlead").textContent =
+        player + ", та энэ даалгаврыг аль хэдийн биелүүлсэн байна. Дахин оролцох боломжгүй 👻";
+      body.querySelector("#eqclose").addEventListener("click", close);
+    }
+
+    function start(){
+      locked = true; xbtn.hidden = true;
+      ri = 0; qi = 0; score = 0; marks = [];
+      roundIntro();
+    }
+    function roundIntro(){
+      clearInterval(tmr);
+      var r = EQUIZ.rounds[ri];
+      body.innerHTML =
+        '<p class="zstage">' + r.name + '</p>'
+      + '<h2>' + r.sub + '</h2>'
+      + '<p class="zlead">' + r.lead + '</p>'
+      + '<p class="zmeta">' + r.qs.length + ' асуулт · асуулт бүрт ' + SEC + ' секунд · зөв бүр +1 оноо</p>'
+      + '<button class="zbtn" id="eqnext">Эхлэх →</button>';
+      body.querySelector("#eqnext").addEventListener("click", function(){ qi = 0; ask(); });
+    }
+
+    function offset(k){ var n = 0; for(var i = 0; i < k; i++) n += EQUIZ.rounds[i].qs.length; return n; }
+
+    function ask(){
+      clearInterval(tmr);
+      var r = EQUIZ.rounds[ri], item = r.qs[qi];
+      var num = offset(ri) + qi + 1;
+      body.innerHTML =
+        '<div class="zbar"><span>' + r.name + '</span><i class="zp"><i style="width:'
+        + Math.round(num / TOTAL * 100) + '%"></i></i><span>' + num + '/' + TOTAL + '</span></div>'
+      + '<div class="ztime"><span class="zt" id="eqt">' + SEC + '</span>'
+      +   '<span class="ztp"><i id="eqtp"></i></span><span class="zt" id="eqsc">⭐ ' + score + '</span></div>'
+      + '<p class="eqemo">' + item.e + '</p>'
+      + '<input id="eqin" type="text" autocomplete="off" autocapitalize="off" autocorrect="off"'
+      +   ' spellcheck="false" maxlength="40" placeholder="Бүтэн нэрийг латинаар…">'
+      + '<button class="zbtn" id="eqsend">Хариулах</button>'
+      + '<p class="zmsg" id="eqm"></p>';
+      var inp = body.querySelector("#eqin");
+      inp.focus();
+      body.querySelector("#eqsend").addEventListener("click", function(){ answer(inp.value); });
+      inp.addEventListener("keydown", function(e){ if(e.key === "Enter") answer(inp.value); });
+
+      left = SEC;
+      var tEl = body.querySelector("#eqt"), pEl = body.querySelector("#eqtp");
+      pEl.style.width = "100%";
+      tmr = setInterval(function(){
+        left--;
+        if(tEl) tEl.textContent = left;
+        if(pEl) pEl.style.width = Math.max(0, left / SEC * 100) + "%";
+        if(tEl && left <= 5) tEl.className = "zt warn";
+        if(left <= 0) answer(null);
+      }, 1000);
+    }
+
+    function answer(val){
+      var item = EQUIZ.rounds[ri].qs[qi];
+      var inp = body.querySelector("#eqin"), btn = body.querySelector("#eqsend");
+      var m = body.querySelector("#eqm");
+
+      /* --- буруу бол шилжихгүй: 30 секунд дуустал дахин оролдоно --- */
+      if(val !== null && !match(val, item)){
+        if(m) m.innerHTML = /[\u0400-\u04FF]/.test(String(val))
+          ? '<b class="eqno">⌨️ Латин үсгээр бичнэ үү</b>'
+          : '<b class="eqno">❌ Буруу — дахин оролдоорой</b>';
+        if(inp){ inp.focus(); inp.select(); }
+        return;
+      }
+
+      clearInterval(tmr);
+      if(inp) inp.disabled = true;
+      if(btn) btn.disabled = true;
+      var ok = val !== null;
+      marks.push(ok ? 1 : 0);
+      if(ok) score++;
+      if(m) m.innerHTML = ok ? '<b class="eqok">✅ Зөв! +1 ⭐</b>'
+                             : '<b class="eqno">⏱️ Хугацаа дууслаа</b>';
+      var sc = body.querySelector("#eqsc");
+      if(sc) sc.textContent = "⭐ " + score;
+      setTimeout(next, 900);
+    }
+
+    function next(){
+      qi++;
+      if(qi < EQUIZ.rounds[ri].qs.length){ ask(); return; }
+      ri++;
+      if(ri < EQUIZ.rounds.length){ roundBreak(); return; }
+      finish();
+    }
+    function roundBreak(){
+      clearInterval(tmr);
+      body.innerHTML =
+        '<h2>Үе дууслаа!</h2>'
+      + '<p class="zstage">' + score + '</p>'
+      + '<p class="zlead">одоогийн оноо · ' + TOTAL + ' онооны боломжоос</p>'
+      + '<button class="zbtn" id="eqnext">Дараагийн үе →</button>';
+      body.querySelector("#eqnext").addEventListener("click", roundIntro);
+    }
+
+    function finish(){
+      clearInterval(tmr); tmr = 0;
+      var det = "e" + marks.join("") + "|" + ubStamp();
+      locked = true; xbtn.hidden = true;
+      body.innerHTML =
+        '<h2>ДУУСЛАА</h2>'
+      + '<p class="zscore">' + score + '</p>'
+      + '<p class="zmeta">' + TOTAL + ' онооны боломжоос</p>'
+      + '<p class="zmsg" id="eqm2">Хадгалж байна… 👻</p>';
+      var m2 = body.querySelector("#eqm2");
+      function ok(){
+        locked = false; xbtn.hidden = false;
+        m2.textContent = "Амжилттай бүртгэгдлээ ✅";
+        var bt = document.createElement("button");
+        bt.className = "zbtn"; bt.textContent = "Хаах";
+        bt.addEventListener("click", function(){ close(); if(window.ZEELY) window.ZEELY.refresh(); });
+        body.appendChild(bt);
+        if(window.ZEELY && window.ZEELY.refresh) window.ZEELY.refresh();
+      }
+      function dead(){
+        locked = false; xbtn.hidden = false;
+        var bt = document.createElement("button");
+        bt.className = "zbtn"; bt.textContent = "Хаах";
+        bt.addEventListener("click", close);
+        body.appendChild(bt);
+      }
+      if(window.ZEELY && window.ZEELY.quiz5){
+        autoSave(function(d, f){ window.ZEELY.quiz5(player, score, TOTAL, d, f, det); }, m2, ok, dead);
+      } else { dead(); }
+    }
+  })();
+
   /* ---------- зохион байгуулагчийн харагдац: хаягийн ард ?admin ---------- */
   (function(){
     if(!/[?&#]admin/.test(location.search + location.hash)) return;
@@ -2238,15 +2539,20 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       var p4 = (rows || []).filter(function(v){
         var q = pq(v); return q && q.pre === "QUIZ4";
       });
+      var p5 = (rows || []).filter(function(v){
+        var q = pq(v); return q && q.pre === "QUIZ5";
+      });
 
       var html = '<button class="ax" type="button" aria-label="Хаах">✕</button>'
                + '<h2>🗒️ Хариултын дэлгэрэнгүй</h2>'
                + '<p class="asub">Даалгавар 2 · ' + people.length + ' оролцогч'
                +   ' | Даалгавар 3 · ' + p3.length + ' оролцогч'
-               +   ' | Даалгавар 4 · ' + p4.length + ' оролцогч</p>'
+               +   ' | Даалгавар 4 · ' + p4.length + ' оролцогч'
+               +   ' | Даалгавар 5 · ' + p5.length + ' оролцогч</p>'
                + ctlHtml(2, "actl2")
                + ctlHtml(3, "actl3")
-               + ctlHtml(4, "actl4");
+               + ctlHtml(4, "actl4")
+               + ctlHtml(5, "actl5");
 
       /* --- Даалгавар 3: puzzle-ийн үр дүн --- */
       html += '<div class="ap apx"><h3>🧩 Даалгавар 3 · PUZZLE</h3>';
@@ -2295,6 +2601,32 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       }
       html += '</div>';
 
+      /* --- Даалгавар 5: emoji таавар --- */
+      html += '<div class="ap apx"><h3>🫠 Даалгавар 5 · EMOJI ТААВАР</h3>';
+      if(!p5.length){
+        html += '<p class="empty">Одоогоор хэн ч биелүүлээгүй байна.</p>';
+      } else {
+        var eall = [];
+        EQUIZ.rounds.forEach(function(r){ r.qs.forEach(function(q){ eall.push(q.t); }); });
+        html += '<ol>';
+        p5.slice().sort(function(a, b){ return (pq(b).score || 0) - (pq(a).score || 0); })
+          .forEach(function(v){
+            var q = pq(v), d = String(q.detail || "");
+            var me = d.match(/^e([01]*)/);
+            var miss = [];
+            if(me && me[1]) me[1].split("").forEach(function(ch, ix){
+              if(ch === "0" && eall[ix]) miss.push(eall[ix]);
+            });
+            html += '<li><span class="an5"></span><span class="aa">'
+                  + q.score + ' / ' + q.total + ' оноо'
+                  + (q.at ? ' · 🕒 ' + q.at : '')
+                  + (miss.length ? '<br><small>❌ ' + miss.join(' · ') + '</small>' : '')
+                  + '</span></li>';
+          });
+        html += '</ol>';
+      }
+      html += '</div>';
+
       if(!people.length){
         html += '<p class="empty">Одоогоор хэн ч хариулаагүй байна.</p>';
       }
@@ -2335,6 +2667,9 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       document.body.appendChild(box);
 
       /* текстийг аюулгүйгээр суулгана */
+      var n5s = box.querySelectorAll(".an5");
+      p5.slice().sort(function(a, b){ return (pq(b).score || 0) - (pq(a).score || 0); })
+        .forEach(function(v, i){ if(n5s[i]) n5s[i].textContent = pq(v).name; });
       var n4s = box.querySelectorAll(".an4");
       p4.slice().sort(function(a, b){ return (pq(b).score || 0) - (pq(a).score || 0); })
         .forEach(function(v, i){ if(n4s[i]) n4s[i].textContent = pq(v).name; });
@@ -2416,6 +2751,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       wireCtl(2, "actl2");
       wireCtl(3, "actl3");
       wireCtl(4, "actl4");
+      wireCtl(5, "actl5");
     }
 
     var drawn = false;
@@ -2628,6 +2964,8 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     findQuiz3: function(nm, cb){ findBy(["QUIZ3"], nm, cb); },
     /* Даалгавар 4 (кино хайх) */
     findQuiz4: function(nm, cb){ findBy(["QUIZ4"], nm, cb); },
+    /* Даалгавар 5 (emoji таавар) */
+    findQuiz5: function(nm, cb){ findBy(["QUIZ5"], nm, cb); },
     fetchRows: function(cb){
       fetch(SHEET_URL + "?t=" + Date.now())
         .then(function(r){ return r.json(); })
@@ -2658,6 +2996,16 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     /* Даалгавар 4 (кино хайх) үр дүнг хадгална */
     quiz4: function(nm, sc, total, done, fail, detail){
       fetch(SHEET_URL + "?id=" + encodeURIComponent("QUIZ4-" + myId + "~" + sc + "/" + total)
+          + "&name=" + encodeURIComponent(nm)
+          + "&going=" + encodeURIComponent(detail || "1")
+          + "&t=" + Date.now())
+        .then(function(r){ return r.json(); })
+        .then(function(){ done(); })
+        .catch(function(){ fail(); });
+    },
+    /* Даалгавар 5 (emoji таавар) үр дүнг хадгална */
+    quiz5: function(nm, sc, total, done, fail, detail){
+      fetch(SHEET_URL + "?id=" + encodeURIComponent("QUIZ5-" + myId + "~" + sc + "/" + total)
           + "&name=" + encodeURIComponent(nm)
           + "&going=" + encodeURIComponent(detail || "1")
           + "&t=" + Date.now())
