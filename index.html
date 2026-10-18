@@ -1052,6 +1052,15 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     setTimeout(function(){ n.remove(); }, 4000);
   })();
 
+  /* ---------- Улаанбаатарын цагаар "2026-10-17, 21:25" ---------- */
+  function ubStamp(){
+    var n = new Date();
+    var d = new Date(n.getTime() + (n.getTimezoneOffset() + 480) * 60000);
+    function z(x){ return (x < 10 ? "0" : "") + x; }
+    return d.getFullYear() + "-" + z(d.getMonth() + 1) + "-" + z(d.getDate())
+         + ", " + z(d.getHours()) + ":" + z(d.getMinutes());
+  }
+
   /* ---------- Даалгавар 2: QUIZ ---------- */
   var QUIZ = {
     title: "ХАЛЛОУИН QUIZ",
@@ -1387,7 +1396,8 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       clearInterval(tmr); tmr = 0;
       var b = band(score);
       /* дэлгэрэнгүй: асуулт бүрт 1 тэмдэгт — 0=А 1=Б 2=В 3=Г, "-"=амжаагүй */
-      var detail = picks.map(function(v){ return v.c < 0 ? "-" : String(v.c); }).join("");
+      var detail = picks.map(function(v){ return v.c < 0 ? "-" : String(v.c); }).join("")
+                 + "|" + ubStamp();
       locked = true; xbtn.hidden = true;
       body.innerHTML =
         '<h2>ДУУСЛАА</h2>'
@@ -1720,7 +1730,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       clearInterval(tmr); tmr = 0;
       var ms = Date.now() - t0;
       var sc = scoreOf(ms);
-      var det = "t" + Math.round(ms / 1000) + "m" + moves;
+      var det = "t" + Math.round(ms / 1000) + "m" + moves + "|" + ubStamp();
       locked = true; xbtn.hidden = true;
       body.innerHTML =
         '<h2>🎉 БҮТЭН БОЛЛОО!</h2>'
@@ -1848,6 +1858,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
                   + q.score + ' оноо'
                   + (mt ? ' · ⏱ ' + Math.floor(mt[1] / 60) + ":" + ("0" + (mt[1] % 60)).slice(-2) : '')
                   + (mm ? ' · 🔁 ' + mm[1] : '')
+                  + (q.at ? ' · 🕒 ' + q.at : '')
                   + '</span></li>';
           });
         html += '</ol>';
@@ -1865,7 +1876,8 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         var tot = q ? q.total  : "?";
         var det = q ? q.detail : "";
 
-        html += '<div class="ap"><h3></h3><p class="asc">' + sc + ' / ' + tot + ' оноо</p>';
+        html += '<div class="ap"><h3></h3><p class="asc">' + sc + ' / ' + tot + ' оноо'
+              + ((q && q.at) ? ' · 🕒 ' + q.at : '') + '</p>';
         if(!det){
           html += '<p class="empty">Асуулт тус бүрийн мэдээлэл алга (хуучин бичлэг).</p></div>';
           return;
@@ -2074,8 +2086,10 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       var sc = p[1].split("/");
       /* дэлгэрэнгүй нь going баганад; хуучин бичлэгт id-д байсан */
       var det = /^[0-9\-]+$/.test(go) || go.indexOf(":") > -1 ? go : p.slice(2).join("~");
+      var cut = det.indexOf("|"), at = "";
+      if(cut > -1){ at = det.slice(cut + 1); det = det.slice(0, cut); }
       return { pre: pre, name: raw, score: parseInt(sc[0], 10) || 0,
-               total: sc[1] || "?", detail: det };
+               total: sc[1] || "?", detail: det, at: at };
     }
     var m = raw.match(/^(.*?)\s*[—-]\s*(\d+)\s*\/\s*(\d+)\s*(?:[—-]\s*([0-9\-]+))?/);
     if(!m) return { pre: pre, name: raw, score: 0, total: "?", detail: "" };
