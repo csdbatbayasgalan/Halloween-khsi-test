@@ -2141,9 +2141,6 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       + '<p class="zscore">' + sc + '</p>'
       + '<p class="zmeta">оноо · ' + MAXW + '-аас ' + sc + ' кино олсон</p>'
       + '<ul class="wsres" id="wsres"></ul>'
-      + '<button class="psmall" id="wskeyb" type="button" style="margin-top:12px">👁️ Зөв хариултыг харах</button>'
-      + '<div id="wskeybox" hidden><div class="wsgrid wskey" id="wskey"></div>'
-      +   '<p class="wshint">Зөв хариултууд</p></div>'
       + '<p class="zmsg" id="wsm2">Хадгалж байна… 👻</p>';
       var ul = body.querySelector("#wsres");
       WSWORDS.forEach(function(w, i){
@@ -2152,37 +2149,6 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         li.textContent = (found.indexOf(i) > -1 ? "✅ " : "❌ ") + w.t;
         ul.appendChild(li);
       });
-      /* --- зөв хариултын тор --- */
-      var kb = body.querySelector("#wskeyb"), kbox = body.querySelector("#wskeybox");
-      var kbuilt = false;
-      kb.addEventListener("click", function(){
-        if(!kbuilt){
-          var kg = body.querySelector("#wskey");
-          kg.style.gridTemplateColumns = "repeat(" + NC + ", 1fr)";
-          kg.style.fontSize = Math.max(5, Math.floor((kg.clientWidth || 300) / NC * 0.62)) + "px";
-          var kc = [];
-          for(var r = 0; r < NR; r++) for(var c = 0; c < NC; c++){
-            var d = document.createElement("div");
-            d.className = "wsc";
-            d.textContent = WSROWS[r].charAt(c);
-            kg.appendChild(d); kc.push(d);
-          }
-          WSWORDS.forEach(function(w, i){
-            var pts = locate(w.w);
-            if(!pts) return;
-            var col = COLORS[i % COLORS.length];
-            pts.forEach(function(pt){
-              var el = kc[pt.r * NC + pt.c];
-              el.style.background = col; el.classList.add("got");
-            });
-          });
-          kg.style.fontSize = Math.max(5, Math.floor(kg.clientWidth / NC * 0.62)) + "px";
-          kbuilt = true;
-        }
-        kbox.hidden = !kbox.hidden;
-        kb.textContent = kbox.hidden ? "👁️ Зөв хариултыг харах" : "🙈 Нуух";
-      });
-
       var m2 = body.querySelector("#wsm2");
       function ok(){
         locked = false; xbtn.hidden = false;
