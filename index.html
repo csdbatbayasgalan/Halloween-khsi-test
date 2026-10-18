@@ -2223,7 +2223,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
   };
 
   (function(){
-    var SEC = 15;
+    var SEC = 30;
     var o, body, xbtn, locked = false, player = "";
     var ri = 0, qi = 0, score = 0, marks = [], tmr = 0, left = 0;
     function allQs(){ var n = 0; EQUIZ.rounds.forEach(function(r){ n += r.qs.length; }); return n; }
@@ -2311,7 +2311,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       +   '<li><span>🎬</span><span><b>1-р үе:</b> emoji-гоор <b>киноны нэрийг</b> таана (15 асуулт).</span></li>'
       +   '<li><span>👹</span><span><b>2-р үе:</b> emoji-гоор <b>дүрийн нэрийг</b> таана (15 асуулт).</span></li>'
       +   '<li><span>⌨️</span><span>Хариултаа <b>латин үсгээр, бүтэн нэрээр</b> нь бичнэ (жнь: The Conjuring).</span></li>'
-      +   '<li><span>⏱️</span><span>Асуулт бүрт <b>15 секунд</b>. Буруу бичвэл <b>хугацаандаа багтаад дахин оролдож болно</b>.</span></li>'
+      +   '<li><span>⏱️</span><span>Асуулт бүрт <b>30 секунд</b>. Буруу бичвэл <b>хугацаандаа багтаад дахин оролдож болно</b>.</span></li>'
       +   '<li><span>⭐</span><span>Зөв хариулт бүр <b>1 оноо</b> · нийт <b>' + TOTAL + ' оноо</b>.</span></li>'
       +   '<li><span>🚪</span><span>Эхэлсэн бол <b>гарах боломжгүй</b>. Нэг л удаа оролцоно.</span></li>'
       + '</ul>'
@@ -2392,7 +2392,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         left--;
         if(tEl) tEl.textContent = left;
         if(pEl) pEl.style.width = Math.max(0, left / SEC * 100) + "%";
-        if(tEl && left <= 5) tEl.className = "zt warn";
+        if(tEl && left <= 7) tEl.className = "zt warn";
         if(left <= 0) answer(null);
       }, 1000);
     }
