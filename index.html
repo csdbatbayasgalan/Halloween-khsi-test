@@ -407,105 +407,72 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 /* --- QUIZ --- */
 .tlist li.now{cursor:pointer}
 .tlist li.now:active{transform:translate(2px,2px)}
-#quizo{position:fixed;inset:0;z-index:220;display:grid;place-items:center;padding:16px;
-  background:rgba(12,6,3,.88);overflow-y:auto;animation:qfade .35s ease}
-#quizo .qz{max-width:460px;width:100%;background:var(--cream);border:4px solid var(--ink);
+#quizo,#puzzo{position:fixed;inset:0;z-index:220;display:grid;place-items:center;padding:16px;
+  background:rgba(12,6,3,.88);overflow-y:auto;animation:qfade .35s ease}#quizo .qz,#puzzo .qz{max-width:460px;width:100%;background:var(--cream);border:4px solid var(--ink);
   border-radius:14px;box-shadow:7px 7px 0 var(--ink);padding:24px 20px;position:relative;
-  text-align:center;animation:pop .4s cubic-bezier(.2,1.5,.4,1)}
-#quizo .qx{position:absolute;right:-13px;top:-13px;width:38px;height:38px;border-radius:50%;
+  text-align:center;animation:pop .4s cubic-bezier(.2,1.5,.4,1)}#quizo .qx,#puzzo .qx{position:absolute;right:-13px;top:-13px;width:38px;height:38px;border-radius:50%;
   background:var(--cream);border:3px solid var(--ink);box-shadow:2px 2px 0 var(--ink);
-  font-size:17px;line-height:1;cursor:pointer;padding:0;z-index:2}
-#quizo h2{font-family:var(--display);font-weight:900;margin:0 0 10px;color:#e8402a;
-  font-size:clamp(1.4rem,6.5vw,2rem);letter-spacing:.03em;line-height:1.1}
-#quizo .zlead{margin:0 0 16px;font-weight:700;font-size:.88rem;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}
-#quizo .zfacts{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:7px;text-align:left}
-#quizo .zfacts li{display:flex;gap:9px;align-items:flex-start;font-size:.84rem;font-weight:700;
-  background:var(--cream-2);border:2px solid var(--ink);border-radius:9px;padding:8px 10px}
-#quizo .zbtn{font-family:var(--display);font-weight:900;font-size:1rem;padding:13px 30px;
+  font-size:17px;line-height:1;cursor:pointer;padding:0;z-index:2}#quizo h2,#puzzo h2{font-family:var(--display);font-weight:900;margin:0 0 10px;color:#e8402a;
+  font-size:clamp(1.4rem,6.5vw,2rem);letter-spacing:.03em;line-height:1.1}#quizo .zlead,#puzzo .zlead{margin:0 0 16px;font-weight:700;font-size:.88rem;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}#quizo .zfacts,#puzzo .zfacts{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:7px;text-align:left}#quizo .zfacts li,#puzzo .zfacts li{display:flex;gap:9px;align-items:flex-start;font-size:.84rem;font-weight:700;
+  background:var(--cream-2);border:2px solid var(--ink);border-radius:9px;padding:8px 10px}#quizo .zbtn,#puzzo .zbtn{font-family:var(--display);font-weight:900;font-size:1rem;padding:13px 30px;
   border-radius:11px;background:var(--yellow);color:var(--ink);border:3px solid var(--ink);
-  box-shadow:4px 4px 0 var(--ink);cursor:pointer}
-#quizo .zbtn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
-#quizo .zstage{font-family:var(--display);font-weight:900;font-size:clamp(2.4rem,14vw,3.6rem);
-  color:#f0824a;margin:6px 0 2px;-webkit-text-stroke:3px var(--ink);paint-order:stroke fill}
-#quizo .zbar{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-weight:800;font-size:.74rem}
-#quizo .zbar .zp{flex:1;height:10px;border:2px solid var(--ink);border-radius:999px;overflow:hidden;
-  background:var(--cream-2)}
-#quizo .zbar .zp i{display:block;height:100%;background:#f0824a;width:0;transition:width .3s}
-#quizo .ztime{display:flex;align-items:center;gap:9px;margin:0 0 13px}
-#quizo .ztime .zt{flex:none;min-width:40px;height:30px;padding:0 9px;border-radius:999px;
+  box-shadow:4px 4px 0 var(--ink);cursor:pointer}#quizo .zbtn:active,#puzzo .zbtn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}#quizo .zstage,#puzzo .zstage{font-family:var(--display);font-weight:900;font-size:clamp(2.4rem,14vw,3.6rem);
+  color:#f0824a;margin:6px 0 2px;-webkit-text-stroke:3px var(--ink);paint-order:stroke fill}#quizo .zbar,#puzzo .zbar{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-weight:800;font-size:.74rem}#quizo .zbar .zp,#puzzo .zbar .zp{flex:1;height:10px;border:2px solid var(--ink);border-radius:999px;overflow:hidden;
+  background:var(--cream-2)}#quizo .zbar .zp i,#puzzo .zbar .zp i{display:block;height:100%;background:#f0824a;width:0;transition:width .3s}#quizo .ztime,#puzzo .ztime{display:flex;align-items:center;gap:9px;margin:0 0 13px}#quizo .ztime .zt,#puzzo .ztime .zt{flex:none;min-width:40px;height:30px;padding:0 9px;border-radius:999px;
   display:grid;place-items:center;font-family:var(--display);font-weight:900;font-size:.9rem;
-  background:var(--ink);color:var(--cream)}
-#quizo .ztime .zt.warn{background:#e8402a;color:#fff2ea;animation:ztick .5s steps(2) infinite}
-@keyframes ztick{from{transform:scale(1)}to{transform:scale(1.1)}}
-#quizo .ztime .ztp{flex:1;height:9px;border:2px solid var(--ink);border-radius:999px;
-  overflow:hidden;background:var(--cream-2)}
-#quizo .ztime .ztp i{display:block;height:100%;background:#f6c62a;width:100%;transition:width .9s linear}
-/* --- зохион байгуулагчийн харагдац (?admin) --- */
+  background:var(--ink);color:var(--cream)}#quizo .ztime .zt.warn,#puzzo .ztime .zt.warn{background:#e8402a;color:#fff2ea;animation:ztick .5s steps(2) infinite}@keyframes ztick{from{transform:scale(1)}to{transform:scale(1.1)}}#quizo .ztime .ztp,#puzzo .ztime .ztp{flex:1;height:9px;border:2px solid var(--ink);border-radius:999px;
+  overflow:hidden;background:var(--cream-2)}#quizo .ztime .ztp i,#puzzo .ztime .ztp i{display:block;height:100%;background:#f6c62a;width:100%;transition:width .9s linear}/* --- зохион байгуулагчийн харагдац (?admin) --- */
 #adm{position:fixed;inset:0;z-index:300;background:#141010;color:#f3ece0;
-  overflow-y:auto;padding:18px 14px 60px;font-size:.84rem}
-#adm h2{font-family:var(--display);font-weight:900;margin:0 0 4px;color:#f6c62a;font-size:1.3rem}
-#adm .asub{margin:0 0 16px;opacity:.7;font-size:.78rem}
-#adm .ax{position:fixed;right:14px;top:14px;z-index:2;width:38px;height:38px;border-radius:50%;
+  overflow-y:auto;padding:18px 14px 60px;font-size:.84rem}#adm h2{font-family:var(--display);font-weight:900;margin:0 0 4px;color:#f6c62a;font-size:1.3rem}#adm .asub{margin:0 0 16px;opacity:.7;font-size:.78rem}#adm .ax{position:fixed;right:14px;top:14px;z-index:2;width:38px;height:38px;border-radius:50%;
   background:var(--cream);border:3px solid var(--ink);box-shadow:2px 2px 0 var(--ink);
-  font-size:17px;cursor:pointer;padding:0}
-#adm .actl{display:block;
-  background:#1e1816;border:2px solid #3a2f2a;border-radius:11px;padding:11px 13px;margin:0 0 14px}
-#adm .alab{font-family:var(--display);font-weight:900;font-size:.95rem;color:#fff6ea}
-#adm .ast{font-family:var(--display);font-weight:900;font-size:.76rem;letter-spacing:.1em;
-  padding:4px 10px;border-radius:999px;background:#3a2f2a;color:#efe4d6}
-#adm .ast.so{background:#2c5c23;color:#d5f5c8}
-#adm .ast.sh{background:#6b2018;color:#ffd9d0}
-#adm .arow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-#adm .amsgl{display:block;margin:12px 0 5px;font-size:.74rem;opacity:.75;font-weight:700}
-#adm #amsg{width:100%;box-sizing:border-box;padding:9px 11px;border-radius:9px;resize:vertical;
-  background:#141010;color:#f3ece0;border:2px solid #3a2f2a;font:inherit;font-size:.82rem;line-height:1.45}
-#adm #amsg:focus{outline:none;border-color:#f6c62a}
-#adm .ahint{margin:7px 0 0;font-size:.72rem;opacity:.68}
-#adm .acnt{margin:3px 0 0;font-size:.7rem;opacity:.55;text-align:right}
-#adm .acnt.warn{color:#f0a04a;opacity:1}
-#adm .asave{margin-top:9px;font-size:.78rem;padding:7px 15px}
-#adm .abtn{margin-left:auto;font-family:var(--display);font-weight:900;font-size:.85rem;
+  font-size:17px;cursor:pointer;padding:0}#adm .actl{display:block;
+  background:#1e1816;border:2px solid #3a2f2a;border-radius:11px;padding:11px 13px;margin:0 0 14px}#adm .alab{font-family:var(--display);font-weight:900;font-size:.95rem;color:#fff6ea}#adm .ast{font-family:var(--display);font-weight:900;font-size:.76rem;letter-spacing:.1em;
+  padding:4px 10px;border-radius:999px;background:#3a2f2a;color:#efe4d6}#adm .ast.so{background:#2c5c23;color:#d5f5c8}#adm .ast.sh{background:#6b2018;color:#ffd9d0}#adm .arow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}#adm .amsgl{display:block;margin:12px 0 5px;font-size:.74rem;opacity:.75;font-weight:700}#adm #amsg{width:100%;box-sizing:border-box;padding:9px 11px;border-radius:9px;resize:vertical;
+  background:#141010;color:#f3ece0;border:2px solid #3a2f2a;font:inherit;font-size:.82rem;line-height:1.45}#adm #amsg:focus{outline:none;border-color:#f6c62a}#adm .ahint{margin:7px 0 0;font-size:.72rem;opacity:.68}#adm .acnt{margin:3px 0 0;font-size:.7rem;opacity:.55;text-align:right}#adm .acnt.warn{color:#f0a04a;opacity:1}#adm .asave{margin-top:9px;font-size:.78rem;padding:7px 15px}#adm .abtn{margin-left:auto;font-family:var(--display);font-weight:900;font-size:.85rem;
   padding:9px 18px;border-radius:9px;background:var(--yellow);color:var(--ink);
-  border:3px solid var(--ink);box-shadow:3px 3px 0 #000;cursor:pointer}
-#adm .abtn:disabled{opacity:.6;cursor:default}
-#adm .ap{background:#1e1816;border:2px solid #3a2f2a;border-radius:11px;padding:13px 14px;margin:0 0 12px}
-#adm .ap h3{overflow-wrap:anywhere;margin:0 0 2px;font-family:var(--display);font-weight:900;font-size:1rem;color:#fff6ea}
-#adm .ap .asc{font-family:var(--display);font-weight:900;color:#f0824a;font-size:.9rem;margin:0 0 9px}
-#adm ol{margin:0;padding-left:20px;display:grid;gap:5px}
-#adm li{line-height:1.45;overflow-wrap:anywhere}
-#adm li.bad{color:#f0a08c}
-#adm li.miss{opacity:.6}
-#adm .aq{font-weight:700}
-#adm .aa{display:block;font-size:.78rem;opacity:.85}
-#adm .tick{font-weight:900}
-#adm .empty{opacity:.65;padding:10px 0}
-#quizo .zrimg{display:block;width:100%;max-width:300px;margin:4px auto 14px;border-radius:12px;
-  border:4px solid var(--ink);box-shadow:5px 5px 0 var(--ink)}
-#quizo .zcap{margin:-8px 0 14px;font-family:var(--display);font-weight:900;
-  font-size:1.05rem;color:#b8401c;letter-spacing:.02em}
-#quizo .zmeta{font-size:.78rem;opacity:.72}
-#quizo .znote{margin:4px 0 16px;padding:9px 11px;border-radius:9px;
+  border:3px solid var(--ink);box-shadow:3px 3px 0 #000;cursor:pointer}#adm .abtn:disabled{opacity:.6;cursor:default}#adm .ap{background:#1e1816;border:2px solid #3a2f2a;border-radius:11px;padding:13px 14px;margin:0 0 12px}#adm .ap h3{overflow-wrap:anywhere;margin:0 0 2px;font-family:var(--display);font-weight:900;font-size:1rem;color:#fff6ea}#adm .ap .asc{font-family:var(--display);font-weight:900;color:#f0824a;font-size:.9rem;margin:0 0 9px}#adm ol{margin:0;padding-left:20px;display:grid;gap:5px}#adm li{line-height:1.45;overflow-wrap:anywhere}#adm li.bad{color:#f0a08c}#adm li.miss{opacity:.6}#adm .aq{font-weight:700}#adm .aa{display:block;font-size:.78rem;opacity:.85}#adm .tick{font-weight:900}#adm .empty{opacity:.65;padding:10px 0}#quizo .zrimg,#puzzo .zrimg{display:block;width:100%;max-width:300px;margin:4px auto 14px;border-radius:12px;
+  border:4px solid var(--ink);box-shadow:5px 5px 0 var(--ink)}#quizo .zcap,#puzzo .zcap{margin:-8px 0 14px;font-family:var(--display);font-weight:900;
+  font-size:1.05rem;color:#b8401c;letter-spacing:.02em}#quizo .zmeta,#puzzo .zmeta{font-size:.78rem;opacity:.72}#quizo .znote,#puzzo .znote{margin:4px 0 16px;padding:9px 11px;border-radius:9px;
   background:var(--cream-2);border:2px dashed var(--ink);
-  font-weight:700;font-size:.78rem;line-height:1.5}
-#quizo .zimg{display:block;width:100%;max-height:200px;object-fit:cover;border-radius:10px;
-  border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);margin:0 0 13px}
-#quizo .zq{font-weight:800;font-size:1rem;line-height:1.45;margin:0 0 15px;text-align:left}
-#quizo .zopts{display:grid;gap:8px;margin-bottom:6px}
-#quizo .zopts button{display:flex;gap:9px;align-items:center;text-align:left;width:100%;
+  font-weight:700;font-size:.78rem;line-height:1.5}#quizo .zimg,#puzzo .zimg{display:block;width:100%;max-height:200px;object-fit:cover;border-radius:10px;
+  border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);margin:0 0 13px}#quizo .zq,#puzzo .zq{font-weight:800;font-size:1rem;line-height:1.45;margin:0 0 15px;text-align:left}#quizo .zopts,#puzzo .zopts{display:grid;gap:8px;margin-bottom:6px}#quizo .zopts button,#puzzo .zopts button{display:flex;gap:9px;align-items:center;text-align:left;width:100%;
   font:inherit;font-weight:700;font-size:.86rem;padding:11px 12px;border-radius:10px;
   background:var(--cream-2);color:var(--ink);border:3px solid var(--ink);
-  box-shadow:3px 3px 0 var(--ink);cursor:pointer}
-#quizo .zopts button .zl{flex:none;width:22px;height:22px;border-radius:50%;display:grid;
+  box-shadow:3px 3px 0 var(--ink);cursor:pointer}#quizo .zopts button .zl,#puzzo .zopts button .zl{flex:none;width:22px;height:22px;border-radius:50%;display:grid;
   place-items:center;font-family:var(--display);font-weight:900;font-size:.68rem;
-  background:var(--ink);color:var(--cream)}
-#quizo .zopts button.good{background:#6fd45a;color:#0d2a07}
-#quizo .zopts button.bad{background:#e8503a;color:#fff2ea}
-#quizo .zopts button:disabled{cursor:default}
-#quizo .zscore{font-family:var(--display);font-weight:900;font-size:clamp(2.6rem,15vw,4rem);
-  color:#f0824a;margin:4px 0 2px;-webkit-text-stroke:3px var(--ink);paint-order:stroke fill}
-#quizo input{width:100%;box-sizing:border-box;padding:12px 14px;font:inherit;font-weight:700;
-  border:3px solid var(--ink);border-radius:9px;background:var(--cream-2);margin:14px 0 12px}
-#quizo .zmsg{margin:10px 0 0;font-size:.82rem;font-weight:700;min-height:1.2em}
+  background:var(--ink);color:var(--cream)}#quizo .zopts button.good,#puzzo .zopts button.good{background:#6fd45a;color:#0d2a07}#quizo .zopts button.bad,#puzzo .zopts button.bad{background:#e8503a;color:#fff2ea}#quizo .zopts button:disabled,#puzzo .zopts button:disabled{cursor:default}#quizo .zscore,#puzzo .zscore{font-family:var(--display);font-weight:900;font-size:clamp(2.6rem,15vw,4rem);
+  color:#f0824a;margin:4px 0 2px;-webkit-text-stroke:3px var(--ink);paint-order:stroke fill}#quizo input,#puzzo input{width:100%;box-sizing:border-box;padding:12px 14px;font:inherit;font-weight:700;
+  border:3px solid var(--ink);border-radius:9px;background:var(--cream-2);margin:14px 0 12px}#quizo .zmsg,#puzzo .zmsg{margin:10px 0 0;font-size:.82rem;font-weight:700;min-height:1.2em}
+/* --- PUZZLE (Даалгавар 3) --- */
+#puzzo .qz{max-width:900px}
+@media (max-width:640px){
+  #puzzo{padding:8px}
+  #puzzo .qz{padding:16px 10px;box-shadow:5px 5px 0 var(--ink)}
+  #puzzo .pgrid{gap:1px}
+}
+#puzzo .zstage{font-size:clamp(1.6rem,8vw,2.2rem);margin:6px 0 0}
+#puzzo .pgrid{display:grid;gap:2px;max-width:860px;background:var(--ink);border:3px solid var(--ink);
+  border-radius:10px;overflow:hidden;margin:0 auto 12px;width:100%;
+  touch-action:none;user-select:none;-webkit-user-select:none}
+#puzzo .pc{position:relative;background-repeat:no-repeat;cursor:grab;
+  background-color:var(--cream-2);transition:outline-color .15s,filter .15s}
+#puzzo .pc.sel{outline:4px solid #f6c62a;outline-offset:-4px;z-index:3;filter:brightness(1.12)}
+#puzzo .pc.hov{outline:4px dashed #6fd45a;outline-offset:-4px}
+#puzzo .pc.fit{cursor:default}
+#puzzo .pc.fit::after{content:"";position:absolute;inset:0;
+  box-shadow:inset 0 0 0 2px rgba(111,212,90,.85)}
+#puzzo .pdrag{position:fixed;z-index:400;pointer-events:none;border-radius:4px;
+  box-shadow:0 10px 22px rgba(0,0,0,.55);outline:3px solid #f6c62a;background-repeat:no-repeat}
+#puzzo .pbar{display:flex;gap:8px;align-items:center;justify-content:center;
+  margin:0 0 12px;font-weight:800;font-size:.78rem;flex-wrap:wrap}
+#puzzo .pbar span{background:var(--ink);color:var(--cream);border-radius:999px;padding:5px 12px}
+#puzzo .phint{display:block;width:100%;max-width:230px;margin:0 auto 12px;border:3px solid var(--ink);
+  border-radius:8px;box-shadow:3px 3px 0 var(--ink)}
+#puzzo .pmini{margin:0 0 12px;font-size:.74rem;font-weight:700;opacity:.75}
+#puzzo .psmall{font-family:inherit;font-weight:800;font-size:.76rem;padding:8px 16px;
+  border:3px solid var(--ink);border-radius:999px;background:var(--cream-2);
+  box-shadow:2px 2px 0 var(--ink);cursor:pointer;margin:0 4px}
+#puzzo .psmall:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink)}
 .secret{margin-top:18px;padding:16px 14px;border-radius:12px;text-align:center;
   background:linear-gradient(165deg,#2a1109,#140905 65%,#1d0b06);
   border:3px solid #f6c62a;box-shadow:0 0 0 3px rgba(23,19,16,.55),0 0 26px rgba(246,198,42,.35);
@@ -552,7 +519,6 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     <h3 id="tsk-h">🗓️ Өнөөдрийн нууц даалгавар</h3>
     <p class="tsub">Ажлын өдөр бүр нэг даалгавар · нийт 9</p>
     <ul class="tlist" id="tlist"></ul>
-    <p class="tfoot">Өдөр бүр хамгийн түрүүнд олсон нэг хүн 1 оноо авна 🏅</p>
   </section>
 </aside>
 
@@ -1045,15 +1011,30 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     var idx = 0;
     for(var i = 0; i < DAYS.length; i++) if(day >= DAYS[i]) idx = i;
 
-    var d  = DAYS[idx];
-    var no = idx + START_NO;
-    var dt = new Date(2026, 9, d);
-    var li = document.createElement("li");
-    li.className = "now";
-    li.innerHTML = '<span class="tn">' + no + '</span>'
-      + '<span class="td">Даалгавар ' + no
-      + '<small>10 сарын ' + d + ' · ' + WD[dt.getDay()] + ' гараг</small></span>';
-    box.appendChild(li);
+    var activeNo = idx + START_NO;
+
+    /* бэлэн болсон даалгаврууд — цагийн хуваарь ямар ч байсан харагдана */
+    var READY = [
+      { no: 2, title: "Даалгавар 2" },
+      { no: 3, title: "Даалгавар 3" }
+    ];
+    var shown = READY.slice();
+    if(!shown.some(function(x){ return x.no === activeNo; }))
+      shown.push({ no: activeNo, title: "Даалгавар " + activeNo });
+    shown.sort(function(a, b){ return a.no - b.no; });
+
+    shown.forEach(function(t){
+      var dd = DAYS[t.no - START_NO];
+      var dt = dd ? new Date(2026, 9, dd) : null;
+      var li = document.createElement("li");
+      li.className = "now";
+      li.setAttribute("data-no", t.no);
+      li.innerHTML = '<span class="tn">' + t.no + '</span>'
+        + '<span class="td">' + t.title
+        + '<small>' + (dt ? ("10 сарын " + dd + " · " + WD[dt.getDay()] + " гараг")
+                          : "удахгүй") + '</small></span>';
+      box.appendChild(li);
+    });
   })();
 
   /* ---------- тест хийх: хаягийн ард ?reset гэвэл түгжээг тайлна ---------- */
@@ -1168,7 +1149,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     var row = null, done = false;
 
     function hook(){
-      row = document.querySelector("#tlist li.now");
+      row = document.querySelector('#tlist li[data-no="2"]');
       if(!row) return;
       row.setAttribute("role", "button");
       row.setAttribute("tabindex", "0");
@@ -1406,54 +1387,381 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     }
 
     function finish(){
-      clearInterval(tmr);
-      var total = MAXPTS;
-      var word = score >= total * 0.85 ? "Гайхалтай! 🏆"
-               : score >= total * 0.6  ? "Сайн байна! 👻" : "Дахин оролдоорой 🦇";
+      clearInterval(tmr); tmr = 0;
+      var b = band(score);
+      /* дэлгэрэнгүй: асуулт бүрт 1 тэмдэгт — 0=А 1=Б 2=В 3=Г, "-"=амжаагүй */
+      var detail = picks.map(function(v){ return v.c < 0 ? "-" : String(v.c); }).join("");
+      locked = true; xbtn.hidden = true;
       body.innerHTML =
         '<h2>ДУУСЛАА</h2>'
-      + '<p class="zscore">' + score + '/' + total + '</p>'
-      + '<p class="zlead"><b></b> · ' + word + '</p>'
-      + (band(score)
-          ? '<img class="zrimg" src="' + band(score).img + '" alt="">'
-            + (band(score).cap ? '<p class="zcap">' + band(score).cap + '</p>' : '')
-          : '')
-      + '<p class="zmsg" id="zmsg">Илгээж байна…</p>';
-      body.querySelector("b").textContent = player;
-      var msg = body.querySelector("#zmsg");
+      + (b && b.img ? '<img class="zrimg" src="' + b.img + '" alt="">' : '')
+      + (b && b.cap ? '<p class="zcap"></p>' : '')
+      + '<p class="zscore">' + score + '</p>'
+      + '<p class="zmeta">' + MAXPTS + ' онооны боломжоос</p>'
+      + '<p class="zmsg" id="zmsg2">Хадгалж байна… 👻</p>';
+      if(b && b.cap) body.querySelector(".zcap").textContent = b.cap;
+      var msg = body.querySelector("#zmsg2");
+
       function ok(){
-        done = true;
+        locked = false; xbtn.hidden = false;
         try { localStorage.setItem("zeely.quiz2", "1"); } catch(e){}
-        locked = false; xbtn.hidden = false;
-        msg.textContent = "";
-        /* онооны самбарыг шууд шинэчилнэ */
-        if(window.ZEELY && window.ZEELY.refresh){
-          window.ZEELY.refresh();
-          setTimeout(window.ZEELY.refresh, 1500);
-        }
-        body.insertAdjacentHTML("beforeend",
-          '<p class="zlead">Хариулт хүлээн авлаа — <b>' + score + ' оноо</b> нэмэгдлээ!<br>Онооны самбараас шалгаарай 🏅</p>'
-        + '<button class="zbtn" id="zgo">Хаах</button>');
-        body.querySelector("#zgo").addEventListener("click", close);
+        msg.textContent = "Амжилттай бүртгэгдлээ ✅";
+        var bt = document.createElement("button");
+        bt.className = "zbtn"; bt.textContent = "Хаах";
+        bt.addEventListener("click", function(){ close(); if(window.ZEELY) window.ZEELY.refresh(); });
+        body.appendChild(bt);
+        if(window.ZEELY && window.ZEELY.refresh) window.ZEELY.refresh();
       }
-      function fail(){
+      function bad(){
         locked = false; xbtn.hidden = false;
-        msg.textContent = "Илгээж чадсангүй.";
-        body.insertAdjacentHTML("beforeend", '<button class="zbtn" id="zgo">Дахин илгээх</button>');
-        body.querySelector("#zgo").addEventListener("click", function(){
-          msg.textContent = "Илгээж байна…";
-          body.querySelector("#zgo").remove();
-          send();
+        msg.textContent = "Хадгалахад алдаа гарлаа. Дахин оролдоно уу 🦇";
+        var bt = document.createElement("button");
+        bt.className = "zbtn"; bt.textContent = "Дахин хадгалах";
+        bt.addEventListener("click", function(){
+          bt.remove(); msg.textContent = "Хадгалж байна… 👻";
+          window.ZEELY.quiz(player, score, MAXPTS, ok, bad, detail);
+        });
+        body.appendChild(bt);
+      }
+      if(window.ZEELY && window.ZEELY.quiz) window.ZEELY.quiz(player, score, MAXPTS, ok, bad, detail);
+      else bad();
+    }
+  })();
+
+  /* ---------- Даалгавар 3: PUZZLE ---------- */
+  (function(){
+    var COLS = 10, ROWS = 5, N = COLS * ROWS;
+    var TOPN = 20;   /* эхний 20 хүн оноотой */
+    var o, body, xbtn, locked = false;
+    var player = "", order = [], sel = -1, moves = 0, t0 = 0, tmr = 0, cells = [], SRC = "";
+    var IMW = 1672, IMH = 941;
+
+    function hook(){
+      var row = document.querySelector('#tlist li[data-no="3"]');
+      if(!row) return;
+      row.setAttribute("role", "button");
+      row.setAttribute("tabindex", "0");
+      row.addEventListener("click", open);
+      row.addEventListener("keydown", function(e){ if(e.key === "Enter" || e.key === " ") open(); });
+    }
+    setTimeout(hook, 0);
+
+    function src(){
+      if(SRC) return SRC;
+      var im = document.querySelector(".banner img");
+      if(im){
+        SRC = im.currentSrc || im.src || "";
+        if(im.naturalWidth){ IMW = im.naturalWidth; IMH = im.naturalHeight; }
+      }
+      return SRC;
+    }
+    function ratio(){ return (IMW / COLS) / (IMH / ROWS); }
+
+    function shell(){
+      o = document.createElement("div");
+      o.id = "puzzo";
+      o.innerHTML = '<div class="qz"><button class="qx" type="button" aria-label="Хаах">✕</button>'
+                  + '<div id="pbody"></div></div>';
+      document.body.appendChild(o);
+      body = o.querySelector("#pbody");
+      xbtn = o.querySelector(".qx");
+      xbtn.addEventListener("click", function(){ if(!locked) close(); });
+    }
+    function close(){
+      clearInterval(tmr); tmr = 0;
+      var d = document.getElementById("pdragx"); if(d) d.remove();
+      if(o){ o.remove(); o = null; }
+    }
+
+    function open(){
+      if(o && !document.body.contains(o)) o = null;
+      if(o) return;
+      shell();
+      body.innerHTML = '<p class="zlead">Шалгаж байна…</p>';
+      if(!(window.ZEELY && window.ZEELY.cfgAll)){ intro(); return; }
+      window.ZEELY.cfgAll(function(cfg){
+        if(cfg && cfg.task3 === "closed"){ shut(cfg.task3msg); return; }
+        intro();
+      });
+    }
+
+    function shut(msg){
+      locked = false; xbtn.hidden = false;
+      body.innerHTML =
+        '<h2>🔒 ХААЛТТАЙ</h2>'
+      + '<p class="zlead" id="pshutmsg"></p>'
+      + '<button class="zbtn" id="pclose">Хаах</button>';
+      body.querySelector("#pshutmsg").textContent =
+        (msg && msg !== "closed") ? msg
+        : "Энэ даалгавар одоогоор хаалттай байна. Зохион байгуулагч нээхийг хүлээгээрэй 🦇";
+      body.querySelector("#pclose").addEventListener("click", close);
+    }
+
+    function intro(){
+      locked = false; xbtn.hidden = false;
+      body.innerHTML =
+        '<h2>🧩 ДААЛГАВАР 3<br>PUZZLE</h2>'
+      + '<p class="zlead">Баннерын зураг ' + N + ' хэсэг болж бутарчээ. Буцаагаад бүтэн болго!</p>'
+      + (src() ? '<img class="phint" src="' + src() + '" alt="Жишиг зураг">' : '')
+      + '<ul class="zfacts">'
+      +   '<li><span>🧩</span><span>Зураг <b>' + COLS + '×' + ROWS + ' = ' + N + ' хэсэг</b> болж холилдсон — хялбар биш шүү!</span></li>'
+      +   '<li><span>🖐️</span><span>Хэсгийг <b>чирж</b> эсвэл <b>дараалан дарж</b> байрыг нь солино.</span></li>'
+      +   '<li><span>✅</span><span>Зөв байрандаа орсон хэсэг <b>ногоон хүрээтэй</b> болно.</span></li>'
+      +   '<li><span>⏱️</span><span><b>3 минут дотор</b> эвлүүлж дуусгавал бүтэн <b>20 оноо</b>.</span></li>'
+      +   '<li><span>📉</span><span>Дараа нь <b>30 секунд тутамд 1 оноо</b> хасагдана: 3:30 = <b>19</b> · 4:00 = <b>18</b> …</span></li>'
+      +   '<li><span>🚪</span><span>Нэг л удаа бүртгэгдэнэ — <b>дахин оролцох боломжгүй</b>.</span></li>'
+      + '</ul>'
+      + '<input id="pname" type="text" maxlength="40" autocomplete="name" placeholder="Овог нэрээ бичнэ үү. Жш: Г.Батбаясгалан">'
+      + '<button class="zbtn" id="pgo">ЭХЛЭХ 🧩</button>'
+      + '<p class="zmsg" id="pmsg"></p>';
+      var nm = body.querySelector("#pname"), msg = body.querySelector("#pmsg");
+      try { nm.value = localStorage.getItem("zeely.name") || ""; } catch(e){}
+      function go(){
+        var v = (nm.value || "").trim().replace(/\s+/g, " ");
+        if(v.length < 2){ msg.textContent = "Нэрээ бичээрэй 👻"; nm.focus(); return; }
+        player = v;
+        try { localStorage.setItem("zeely.name", v); } catch(e){}
+        msg.textContent = "Шалгаж байна…";
+        body.querySelector("#pgo").disabled = true;
+        if(!(window.ZEELY && window.ZEELY.findQuiz3)){ play(); return; }
+        window.ZEELY.findQuiz3(v, function(hit){
+          if(hit){ already(hit); return; }
+          play();
         });
       }
-      function send(){
-        /* асуулт бүрт нэг тэмдэгт: 0-3 = А/Б/В/Г, "-" = хариулаагүй.
-           (нүдэнд 40 тэмдэгтийн хязгаар байгаа тул авсаархан хэлбэр) */
-        var detail = picks.map(function(v){ return v.c < 0 ? "-" : String(v.c); }).join("");
-        if(window.ZEELY && window.ZEELY.quiz) window.ZEELY.quiz(player, score, total, ok, fail, detail);
-        else ok();
+      body.querySelector("#pgo").addEventListener("click", go);
+      nm.addEventListener("keydown", function(e){ if(e.key === "Enter") go(); });
+    }
+
+    function already(hit){
+      locked = false; xbtn.hidden = false;
+      body.innerHTML =
+        '<h2>🦇 БҮРТГЭГДСЭН</h2>'
+      + '<p class="zlead"></p>'
+      + '<p class="zscore">' + hit.score + '</p>'
+      + '<p class="zmeta">цуглуулсан оноо</p>'
+      + '<button class="zbtn" id="pclose">Хаах</button>';
+      body.querySelector(".zlead").textContent =
+        player + ", та энэ даалгаврыг аль хэдийн биелүүлсэн байна. Дахин оролцох боломжгүй 👻";
+      body.querySelector("#pclose").addEventListener("click", close);
+    }
+
+    /* ---- тоглоом ---- */
+    function shuffle(){
+      order = [];
+      for(var i = 0; i < N; i++) order.push(i);
+      var tries = 0;
+      do {
+        for(var j = N - 1; j > 0; j--){
+          var k = Math.floor(Math.random() * (j + 1));
+          var t = order[j]; order[j] = order[k]; order[k] = t;
+        }
+        tries++;
+      } while(fixed() > 2 && tries < 40);
+    }
+    function fixed(){ var n = 0; for(var i = 0; i < N; i++) if(order[i] === i) n++; return n; }
+    function bgpos(id){
+      var cx = id % COLS, cy = Math.floor(id / COLS);
+      return (COLS > 1 ? (cx * 100 / (COLS - 1)) : 0) + "% "
+           + (ROWS > 1 ? (cy * 100 / (ROWS - 1)) : 0) + "%";
+    }
+    function paint(){
+      for(var i = 0; i < N; i++){
+        var c = cells[i];
+        c.style.backgroundPosition = bgpos(order[i]);
+        c.classList.toggle("fit", order[i] === i);
+        c.classList.toggle("sel", i === sel);
+        c.classList.remove("hov");
       }
-      send();
+    }
+    function fmt(ms){
+      var s = Math.floor(ms / 1000);
+      return (Math.floor(s / 60)) + ":" + ("0" + (s % 60)).slice(-2);
+    }
+    function tick(){
+      var el = body.querySelector("#ptime");
+      if(el) el.textContent = "⏱️ " + fmt(Date.now() - t0);
+    }
+
+    function play(){
+      locked = false; xbtn.hidden = false;
+      sel = -1; moves = 0;
+      shuffle();
+      body.innerHTML =
+        '<h2>🧩 PUZZLE</h2>'
+      + '<p class="pbar"><span id="ptime">⏱️ 0:00</span><span id="pmv">🔁 0 хөдөлгөөн</span>'
+      +   '<span id="pfit">✅ 0/' + N + '</span></p>'
+      + '<div class="pgrid" id="pgrid"></div>'
+      + '<p class="pmini">Хэсгийг чирж эсвэл 2 хэсгийг дараалан дарж байрыг нь солино.</p>'
+      + '<button class="psmall" id="pshow" type="button">👁️ Жишиг зураг</button>'
+      + '<div id="phintbox" hidden><img class="phint" src="' + src() + '" alt="Жишиг зураг"></div>';
+
+      var g = body.querySelector("#pgrid");
+      g.style.gridTemplateColumns = "repeat(" + COLS + ", 1fr)";
+      cells = [];
+      for(var i = 0; i < N; i++){
+        var c = document.createElement("div");
+        c.className = "pc";
+        c.setAttribute("data-pos", i);
+        c.style.aspectRatio = String(ratio());
+        c.style.backgroundImage = "url('" + src() + "')";
+        c.style.backgroundSize = (COLS * 100) + "% " + (ROWS * 100) + "%";
+        g.appendChild(c);
+        cells.push(c);
+      }
+      paint(); stat();
+      t0 = Date.now();
+      clearInterval(tmr); tmr = setInterval(tick, 500);
+
+      body.querySelector("#pshow").addEventListener("click", function(){
+        var hb = body.querySelector("#phintbox");
+        hb.hidden = !hb.hidden;
+      });
+      wire(g);
+    }
+
+    function stat(){
+      var m = body.querySelector("#pmv"), f = body.querySelector("#pfit");
+      if(m) m.textContent = "🔁 " + moves + " хөдөлгөөн";
+      if(f) f.textContent = "✅ " + fixed() + "/" + N;
+    }
+
+    function swap(a, b){
+      if(a === b || a < 0 || b < 0) return;
+      var t = order[a]; order[a] = order[b]; order[b] = t;
+      moves++; sel = -1; paint(); stat();
+      if(fixed() === N) finish();
+    }
+
+    function posOf(el){
+      while(el && el !== document.body){
+        if(el.classList && el.classList.contains("pc"))
+          return parseInt(el.getAttribute("data-pos"), 10);
+        el = el.parentNode;
+      }
+      return -1;
+    }
+
+    function wire(g){
+      var from = -1, sx = 0, sy = 0, dragging = false, ghost = null, ow = 0, oh = 0, hov = -1;
+
+      function cleanup(){
+        if(ghost){ ghost.remove(); ghost = null; }
+        if(hov > -1 && cells[hov]) cells[hov].classList.remove("hov");
+        hov = -1; dragging = false; from = -1;
+        document.removeEventListener("pointermove", move, true);
+        document.removeEventListener("pointerup", up, true);
+        document.removeEventListener("pointercancel", up, true);
+      }
+      function move(e){
+        if(from < 0) return;
+        var dx = e.clientX - sx, dy = e.clientY - sy;
+        if(!dragging && (dx * dx + dy * dy) < 49) return;
+        if(!dragging){
+          dragging = true;
+          var r = cells[from].getBoundingClientRect();
+          ow = r.width; oh = r.height;
+          ghost = document.createElement("div");
+          ghost.id = "pdragx";
+          ghost.className = "pdrag";
+          ghost.style.width = ow + "px";
+          ghost.style.height = oh + "px";
+          ghost.style.backgroundImage = "url('" + src() + "')";
+          ghost.style.backgroundSize = (COLS * 100) + "% " + (ROWS * 100) + "%";
+          ghost.style.backgroundPosition = bgpos(order[from]);
+          document.body.appendChild(ghost);
+          cells[from].style.opacity = ".35";
+        }
+        e.preventDefault();
+        ghost.style.left = (e.clientX - ow / 2) + "px";
+        ghost.style.top  = (e.clientY - oh / 2) + "px";
+        var el = document.elementFromPoint(e.clientX, e.clientY);
+        var p = posOf(el);
+        if(p !== hov){
+          if(hov > -1 && cells[hov]) cells[hov].classList.remove("hov");
+          hov = (p > -1 && p !== from) ? p : -1;
+          if(hov > -1) cells[hov].classList.add("hov");
+        }
+      }
+      function up(e){
+        if(from < 0){ cleanup(); return; }
+        var f = from, d = dragging, target = hov;
+        if(cells[f]) cells[f].style.opacity = "";
+        cleanup();
+        if(d){
+          if(target > -1) swap(f, target);
+          else paint();
+          return;
+        }
+        /* дарах горим: 1 дэх даралт сонгоно, 2 дахь нь сольно */
+        if(sel === -1){ sel = f; paint(); }
+        else if(sel === f){ sel = -1; paint(); }
+        else swap(sel, f);
+      }
+      g.addEventListener("pointerdown", function(e){
+        if(locked) return;
+        var p = posOf(e.target);
+        if(p < 0) return;
+        from = p; sx = e.clientX; sy = e.clientY; dragging = false; hov = -1;
+        document.addEventListener("pointermove", move, true);
+        document.addEventListener("pointerup", up, true);
+        document.addEventListener("pointercancel", up, true);
+      });
+      g.addEventListener("contextmenu", function(e){ e.preventDefault(); });
+      g.addEventListener("dragstart", function(e){ e.preventDefault(); });
+    }
+
+    /* оноо: 3 минут дотор дуусгавал 20 оноо, дараа нь 30 секунд тутамд 1 оноо хасагдана */
+    var FREE_MS = 180000, STEP_MS = 30000;
+    function scoreOf(ms){
+      var over = Math.ceil((ms - FREE_MS) / STEP_MS);
+      if(over < 0) over = 0;
+      return Math.max(0, TOPN - over);
+    }
+
+    function finish(){
+      clearInterval(tmr); tmr = 0;
+      var ms = Date.now() - t0;
+      var sc = scoreOf(ms);
+      var det = "t" + Math.round(ms / 1000) + "m" + moves;
+      locked = true; xbtn.hidden = true;
+      body.innerHTML =
+        '<h2>🎉 БҮТЭН БОЛЛОО!</h2>'
+      + (src() ? '<img class="phint" style="max-width:280px" src="' + src() + '" alt="">' : '')
+      + '<p class="zstage">⏱️ ' + fmt(ms) + '</p>'
+      + '<p class="zscore">+' + sc + '</p>'
+      + '<p class="zmeta">оноо · 🔁 ' + moves + ' хөдөлгөөн</p>'
+      + (sc >= TOPN
+          ? '<p class="znote">🏆 3 минут дотор амжлаа — бүтэн ' + TOPN + ' оноо!</p>'
+          : (sc > 0
+              ? '<p class="znote">⏳ 3 минутаас хойш 30 секунд тутамд 1 оноо хасагдсан.</p>'
+              : '<p class="znote">😿 Хугацаа хэтэрсэн тул оноо нэмэгдэхгүй. '
+                + 'Гэхдээ бүтэн болгосонд баяр хүргэе!</p>'))
+      + '<p class="zmsg" id="pmsg3">Хадгалж байна… 👻</p>';
+      var m2 = body.querySelector("#pmsg3");
+
+      function ok(){
+        locked = false; xbtn.hidden = false;
+        m2.textContent = "Амжилттай бүртгэгдлээ ✅";
+        var bt = document.createElement("button");
+        bt.className = "zbtn"; bt.textContent = "Хаах";
+        bt.addEventListener("click", function(){ close(); if(window.ZEELY) window.ZEELY.refresh(); });
+        body.appendChild(bt);
+        if(window.ZEELY && window.ZEELY.refresh) window.ZEELY.refresh();
+      }
+      function bad(){
+        locked = false; xbtn.hidden = false;
+        m2.textContent = "Хадгалахад алдаа гарлаа. Дахин оролдоно уу 🦇";
+        var bt = document.createElement("button");
+        bt.className = "zbtn"; bt.textContent = "Дахин хадгалах";
+        bt.addEventListener("click", function(){
+          bt.remove(); m2.textContent = "Хадгалж байна… 👻";
+          window.ZEELY.quiz3(player, sc, TOPN, ok, bad, det);
+        });
+        body.appendChild(bt);
+      }
+      if(window.ZEELY && window.ZEELY.quiz3) window.ZEELY.quiz3(player, sc, TOPN, ok, bad, det);
+      else bad();
     }
   })();
 
@@ -1493,27 +1801,61 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       return out;
     }
 
+    function pq(v){
+      return (window.ZEELY && window.ZEELY.parseQuiz) ? window.ZEELY.parseQuiz(v) : null;
+    }
+    function ctlHtml(no, id){
+      return '<div class="actl" id="' + id + '">'
+           +   '<div class="arow">'
+           +     '<span class="alab">Даалгавар ' + no + '</span>'
+           +     '<span class="ast" id="ast' + no + '">шалгаж байна…</span>'
+           +     '<button class="abtn" id="atog' + no + '" disabled>…</button>'
+           +   '</div>'
+           +   '<label class="amsgl" for="amsg' + no + '">Хаалттай үед оролцогчдод харуулах текст</label>'
+           +   '<textarea id="amsg' + no + '" rows="3" maxlength="160" '
+           +     'placeholder="Жишээ: Маргааш 10:00 цагт нээгдэнэ 🦇"></textarea>'
+           +   '<p class="ahint" id="ahint' + no + '">Хаах товч дарахад энэ текст хамт хадгалагдана.</p>'
+           +   '<p class="acnt" id="acnt' + no + '">0 / 160</p>'
+           + '</div>';
+    }
     function draw(rows){
       var box = document.createElement("div");
       box.id = "adm";
       var all = flat();
-      var people = (rows || []).filter(function(v){ return String(v.id || "").indexOf("QUIZ") === 0; });
+      var people = (rows || []).filter(function(v){
+        var q = pq(v); return q && (q.pre === "QUIZ" || q.pre === "QUIZ2");
+      });
+      var p3 = (rows || []).filter(function(v){
+        var q = pq(v); return q && q.pre === "QUIZ3";
+      });
 
       var html = '<button class="ax" type="button" aria-label="Хаах">✕</button>'
                + '<h2>🗒️ Хариултын дэлгэрэнгүй</h2>'
-               + '<p class="asub">Даалгавар 2 · ' + people.length + ' оролцогч</p>'
-               + '<div class="actl" id="actl">'
-               +   '<div class="arow">'
-               +     '<span class="alab">Даалгавар 2</span>'
-               +     '<span class="ast" id="ast">шалгаж байна…</span>'
-               +     '<button class="abtn" id="atog" disabled>…</button>'
-               +   '</div>'
-               +   '<label class="amsgl" for="amsg">Хаалттай үед оролцогчдод харуулах текст</label>'
-               +   '<textarea id="amsg" rows="3" maxlength="160" '
-               +     'placeholder="Жишээ: Маргааш 10:00 цагт нээгдэнэ 🦇"></textarea>'
-               +   '<p class="ahint" id="ahint">Хаах товч дарахад энэ текст хамт хадгалагдана.</p>'
-               +   '<p class="acnt" id="acnt">0 / 160</p>'
-               + '</div>';
+               + '<p class="asub">Даалгавар 2 · ' + people.length + ' оролцогч'
+               +   ' | Даалгавар 3 · ' + p3.length + ' оролцогч</p>'
+               + ctlHtml(2, "actl2")
+               + ctlHtml(3, "actl3");
+
+      /* --- Даалгавар 3: puzzle-ийн үр дүн --- */
+      html += '<div class="ap apx"><h3>🧩 Даалгавар 3 · PUZZLE</h3>';
+      if(!p3.length){
+        html += '<p class="empty">Одоогоор хэн ч биелүүлээгүй байна.</p>';
+      } else {
+        html += '<ol>';
+        p3.slice().sort(function(a, b){ return (pq(b).score || 0) - (pq(a).score || 0); })
+          .forEach(function(v){
+            var q = pq(v), d = String(q.detail || "");
+            var mt = d.match(/t(\d+)/), mm = d.match(/m(\d+)/), mr = d.match(/r(\d+)/);
+            html += '<li><span class="an3"></span><span class="aa">'
+                  + (mr ? '🏁 ' + mr[1] + '-р байр · ' : '')
+                  + q.score + ' оноо'
+                  + (mt ? ' · ⏱ ' + Math.floor(mt[1] / 60) + ":" + ("0" + (mt[1] % 60)).slice(-2) : '')
+                  + (mm ? ' · 🔁 ' + mm[1] : '')
+                  + '</span></li>';
+          });
+        html += '</ol>';
+      }
+      html += '</div>';
 
       if(!people.length){
         html += '<p class="empty">Одоогоор хэн ч хариулаагүй байна.</p>';
@@ -1554,12 +1896,15 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       document.body.appendChild(box);
 
       /* текстийг аюулгүйгээр суулгана */
-      var h3s = box.querySelectorAll(".ap h3");
+      var n3s = box.querySelectorAll(".an3");
+      p3.slice().sort(function(a, b){ return (pq(b).score || 0) - (pq(a).score || 0); })
+        .forEach(function(v, i){ if(n3s[i]) n3s[i].textContent = pq(v).name; });
+      var h3s = box.querySelectorAll(".ap:not(.apx) h3");
       people.forEach(function(v, idx){
         var q = (window.ZEELY && window.ZEELY.parseQuiz) ? window.ZEELY.parseQuiz(v) : null;
         if(h3s[idx]) h3s[idx].textContent = q ? q.name : String(v.name || "");
       });
-      var qs = box.querySelectorAll(".aq");
+      var qs = box.querySelectorAll(".ap:not(.apx) .aq");
       var per = all.length;
       people.forEach(function(v, pi){
         all.forEach(function(it, k){
@@ -1570,66 +1915,64 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
 
       box.querySelector(".ax").addEventListener("click", function(){ box.remove(); });
 
-      /* --- нээх / хаах --- */
-      var st = box.querySelector("#ast"), tog = box.querySelector("#atog");
-      var msgEl = box.querySelector("#amsg"), hint = box.querySelector("#ahint");
-      var cnt = box.querySelector("#acnt");
-      function count(){
-        var n = msgEl.value.length;
-        cnt.textContent = n + " / 160";
-        cnt.className = "acnt" + (n > 140 ? " warn" : "");
-      }
-      msgEl.addEventListener("input", count);
-      var state = "open";
-      function paint(){
-        var closed = (state === "closed");
-        st.textContent = closed ? "ХААЛТТАЙ" : "НЭЭЛТТЭЙ";
-        st.className = "ast " + (closed ? "sh" : "so");
-        tog.textContent = closed ? "Нээх" : "Хаах";
-        tog.disabled = false;
-        hint.textContent = closed
-          ? "Текстээ өөрчлөөд «Хадгалах» дарвал шууд шинэчлэгдэнэ."
-          : "«Хаах» товч дарахад энэ текст хамт хадгалагдана.";
-      }
-      if(window.ZEELY && window.ZEELY.cfgAll){
-        window.ZEELY.cfgAll(function(cfg){
-          state = (cfg && cfg.task2 === "closed") ? "closed" : "open";
-          if(cfg && cfg.task2msg && cfg.task2msg !== "closed") msgEl.value = cfg.task2msg;
-          count(); paint();
-        });
-      } else { count(); paint(); }
-
-      function save(next, done){
-        var txt = msgEl.value.trim();
-        if(encodeURIComponent(txt).length > 1500){
-          hint.textContent = "Текст хэт урт байна — богиносгоно уу.";
-          return;
+      /* --- нээх / хаах (Даалгавар 2 ба 3) --- */
+      function wireCtl(no, boxId){
+        var st    = box.querySelector("#ast" + no),
+            tog   = box.querySelector("#atog" + no),
+            msgEl = box.querySelector("#amsg" + no),
+            hint  = box.querySelector("#ahint" + no),
+            cnt   = box.querySelector("#acnt" + no);
+        if(!st || !tog) return;
+        var KS = "task" + no, KM = "task" + no + "msg";
+        var state = "open";
+        function count(){
+          var n = msgEl.value.length;
+          cnt.textContent = n + " / 160";
+          cnt.className = "acnt" + (n > 140 ? " warn" : "");
         }
-        tog.disabled = true; st.textContent = "хадгалж байна…";
-        window.ZEELY.setCfgLong("task2msg", txt, function(){
-          window.ZEELY.setCfg("task2", next, function(){
-            state = next; paint(); done && done();
-          }, bad);
-        }, bad);
+        msgEl.addEventListener("input", count);
+        function paint(){
+          var closed = (state === "closed");
+          st.textContent = closed ? "ХААЛТТАЙ" : "НЭЭЛТТЭЙ";
+          st.className = "ast " + (closed ? "sh" : "so");
+          tog.textContent = closed ? "Нээх" : "Хаах";
+          tog.disabled = false;
+          hint.textContent = closed
+            ? "Текстээ өөрчлөөд «Хадгалах» дарвал шууд шинэчлэгдэнэ."
+            : "«Хаах» товч дарахад энэ текст хамт хадгалагдана.";
+        }
+        function apply(cfg){
+          state = (cfg && cfg[KS] === "closed") ? "closed" : "open";
+          if(cfg && cfg[KM] && cfg[KM] !== "closed") msgEl.value = cfg[KM];
+          count(); paint();
+        }
+        if(window.ZEELY && window.ZEELY.cfgAll) window.ZEELY.cfgAll(apply);
+        else { count(); paint(); }
+
         function bad(){ st.textContent = "алдаа гарлаа"; tog.disabled = false; }
-      }
-
-      tog.addEventListener("click", function(){
-        save((state === "closed") ? "open" : "closed");
-      });
-
-      /* хаалттай байхад текстээ дангаар нь шинэчлэх */
-      var sbtn = document.createElement("button");
-      sbtn.className = "abtn asave"; sbtn.type = "button"; sbtn.textContent = "Хадгалах";
-      box.querySelector("#actl").appendChild(sbtn);
-      sbtn.addEventListener("click", function(){
-        sbtn.disabled = true; hint.textContent = "хадгалж байна…";
-        window.ZEELY.setCfgLong("task2msg", msgEl.value.trim(), function(){
-          sbtn.disabled = false; hint.textContent = "Хадгаллаа ✅";
-        }, function(){
-          sbtn.disabled = false; hint.textContent = "Алдаа гарлаа";
+        tog.addEventListener("click", function(){
+          var next = (state === "closed") ? "open" : "closed";
+          var txt = msgEl.value.trim();
+          tog.disabled = true; st.textContent = "хадгалж байна…";
+          window.ZEELY.setCfgLong(KM, txt, function(){
+            window.ZEELY.setCfg(KS, next, function(){ state = next; paint(); }, bad);
+          }, bad);
         });
-      });
+
+        var sbtn = document.createElement("button");
+        sbtn.className = "abtn asave"; sbtn.type = "button"; sbtn.textContent = "Хадгалах";
+        box.querySelector("#" + boxId).appendChild(sbtn);
+        sbtn.addEventListener("click", function(){
+          sbtn.disabled = true; hint.textContent = "хадгалж байна…";
+          window.ZEELY.setCfgLong(KM, msgEl.value.trim(), function(){
+            sbtn.disabled = false; hint.textContent = "Хадгаллаа ✅";
+          }, function(){
+            sbtn.disabled = false; hint.textContent = "Алдаа гарлаа";
+          });
+        });
+      }
+      wireCtl(2, "actl2");
+      wireCtl(3, "actl3");
     }
 
     var drawn = false;
@@ -1727,18 +2070,19 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     var id  = String(v.id || "");
     var raw = String(v.name || "").trim();
     if(id.indexOf("QUIZ") !== 0) return null;
+    var pre = id.split("-")[0];
     var go = String(v.going === undefined || v.going === null ? "" : v.going).trim();
     var p = id.split("~");
     if(p.length >= 2){
       var sc = p[1].split("/");
       /* дэлгэрэнгүй нь going баганад; хуучин бичлэгт id-д байсан */
       var det = /^[0-9\-]+$/.test(go) || go.indexOf(":") > -1 ? go : p.slice(2).join("~");
-      return { name: raw, score: parseInt(sc[0], 10) || 0,
+      return { pre: pre, name: raw, score: parseInt(sc[0], 10) || 0,
                total: sc[1] || "?", detail: det };
     }
     var m = raw.match(/^(.*?)\s*[—-]\s*(\d+)\s*\/\s*(\d+)\s*(?:[—-]\s*([0-9\-]+))?/);
-    if(!m) return { name: raw, score: 0, total: "?", detail: "" };
-    return { name: m[1].trim(), score: parseInt(m[2], 10) || 0,
+    if(!m) return { pre: pre, name: raw, score: 0, total: "?", detail: "" };
+    return { pre: pre, name: m[1].trim(), score: parseInt(m[2], 10) || 0,
              total: m[3], detail: m[4] || "" };
   }
 
@@ -1748,6 +2092,21 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     id = String(id || "");
     return id.indexOf("PRIZE") === 0 || id.indexOf("Q-") === 0
         || id.indexOf("QUIZ") === 0 || id.indexOf("CFG-") === 0;
+  }
+  function findBy(pres, nm, cb){
+    var want = key(nm);
+    if(!want){ cb(undefined); return; }
+    fetch(SHEET_URL + "?t=" + Date.now())
+      .then(function(r){ return r.json(); })
+      .then(function(rows){
+        var hit = null;
+        (rows || []).forEach(function(v){
+          var q = parseQuiz(v);
+          if(q && pres.indexOf(q.pre) > -1 && key(q.name) === want) hit = q;
+        });
+        setTimeout(function(){ cb(hit); }, 0);
+      })
+      .catch(function(){ cb(undefined); });
   }
   window.ZEELY = {
     winner: null,
@@ -1819,21 +2178,9 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     },
     parseQuiz: parseQuiz,
     /* тухайн нэр QUIZ-д аль хэдийн хариулсан эсэх */
-    findQuiz: function(nm, cb){
-      var want = key(nm);
-      if(!want){ cb(undefined); return; }
-      fetch(SHEET_URL + "?t=" + Date.now())
-        .then(function(r){ return r.json(); })
-        .then(function(rows){
-          var hit = null;
-          (rows || []).forEach(function(v){
-            var q = parseQuiz(v);
-            if(q && key(q.name) === want) hit = q;
-          });
-          cb(hit);
-        })
-        .catch(function(){ cb(undefined); });
-    },
+    findQuiz: function(nm, cb){ findBy(["QUIZ", "QUIZ2"], nm, cb); },
+    /* Даалгавар 3 (puzzle) — тухайн нэр аль хэдийн биелүүлсэн эсэх */
+    findQuiz3: function(nm, cb){ findBy(["QUIZ3"], nm, cb); },
     fetchRows: function(cb){
       fetch(SHEET_URL + "?t=" + Date.now())
         .then(function(r){ return r.json(); })
@@ -1844,6 +2191,16 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     quiz: function(nm, sc, total, done, fail, detail){
       /* id: зөвхөн түлхүүр ба оноо · name: зөвхөн нэр · going: хариултын дэлгэрэнгүй */
       fetch(SHEET_URL + "?id=" + encodeURIComponent("QUIZ2-" + myId + "~" + sc + "/" + total)
+          + "&name=" + encodeURIComponent(nm)
+          + "&going=" + encodeURIComponent(detail || "1")
+          + "&t=" + Date.now())
+        .then(function(r){ return r.json(); })
+        .then(function(){ done(); })
+        .catch(function(){ fail(); });
+    },
+    /* Даалгавар 3 (puzzle) үр дүнг шийт рүү хадгална */
+    quiz3: function(nm, sc, total, done, fail, detail){
+      fetch(SHEET_URL + "?id=" + encodeURIComponent("QUIZ3-" + myId + "~" + sc + "/" + total)
           + "&name=" + encodeURIComponent(nm)
           + "&going=" + encodeURIComponent(detail || "1")
           + "&t=" + Date.now())
