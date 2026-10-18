@@ -1840,7 +1840,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
   var WSROWS = ["TGBGBEITDQURYWNTHECONJURINGZZO", "FBZDGQYHWSSSUJETHKMSZTHERINGSM", "IVBQDWFETXBGSCAINNCUFCEMHVTFIV", "HXQQIZUNHCPKBJKTIHSRILJAAIXSXE", "KOZHWSXUETXAJBUDHRQVNTHILTDQAV", "ETURGXUNEINFJWODKAEEAEDILCXFBJ", "GMKWDANXXMVOWUTOFZLLLXFZOHPWOK", "GJCSNHCHOBWLMAUUCKPMDJXZWAYUCM", "DKZDZDEBRFIZTCGBHLNDEKEAEPFYKI", "FNUPLAICCAUZGAZRZZSQSLCGETAGRI", "IIUQXSNTIYCCBUPROSPATFOUNEITVG", "KRUVFBYESOBMPMBHEJKEIYHLCRESLS", "XZHJZMRMTRHTRNZTUCHWNTDWITFLQB", "WIUBPLHCCCHUCKYHZSNGARLJZWOQUG", "YRHRJEPAXPTODSVMWGPCTVYBXOPEPG", "RRGLIGLFJINSIDIOUSSIISCREAMDXZ", "GOPSQCGCFGWJWZNEXHYIOHNHZNCBYC", "ZANALTCRYEQNNRURIZVANJBZQWVMQZ", "HARJDFKRUTUITFGFIUTBZPFMNUVRIF", "ACNKSYXOEUMCFUGAXKHDVCMPANPTIL", "UOGDOXDBTZIFSHUUXNRAEAGUMTKLQM", "NTRAINTOBUSANOZCUZORUZFNTZUKLS", "YVABIRATIWWYSYUIERXPZHTXNNACHM", "WPKLNVANNABELLEOFEZMAKKZESQNHV"];
   var WSWORDS = [{"t": "IT: CHAPTER TWO", "w": "ITCHAPTERTWO"}, {"t": "SCREAM", "w": "SCREAM"}, {"t": "ANNABELLE", "w": "ANNABELLE"}, {"t": "THE CONJURING", "w": "THECONJURING"}, {"t": "THE NUN", "w": "THENUN"}, {"t": "CHUCKY", "w": "CHUCKY"}, {"t": "HALLOWEEN", "w": "HALLOWEEN"}, {"t": "INSIDIOUS", "w": "INSIDIOUS"}, {"t": "THE RING", "w": "THERING"}, {"t": "TRAIN TO BUSAN", "w": "TRAINTOBUSAN"}, {"t": "FINAL DESTINATION", "w": "FINALDESTINATION"}, {"t": "THE EXORCIST", "w": "THEEXORCIST"}];
   (function(){
-    var NR = 24, NC = 30, SECS = 60, MAXW = WSWORDS.length;
+    var NR = 24, NC = 30, SECS = 180, MAXW = WSWORDS.length;
     var o, body, xbtn, locked = false, player = "";
     var cells = [], found = [], pend = null, tmr = 0, t0 = 0, zoom = false;
     var COLORS = ["#6fd45a","#f6c62a","#f0824a","#7ec8ff","#c79bff","#ff8fc7",
@@ -1898,7 +1898,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       +   '<li><span>🔤</span><span><b>' + NC + ' × ' + NR + '</b> үсгийн тор. Нэр нь зөвхөн <b>баруун тийш →</b> эсвэл <b>доошоо ↓</b> бичигдсэн.</span></li>'
       +   '<li><span>🖐️</span><span>Хулганаар <b>эхний үсгээс сүүлийн үсэг хүртэл чирнэ</b>. Утсан дээр эхний үсгийг дараад сүүлийн үсгийг дарна.</span></li>'
       +   '<li><span>⚠️</span><span><b>Дутуу эсвэл буруу зурвал тооцогдохгүй</b> — бүтэн нэрийг яг таг зурах ёстой.</span></li>'
-      +   '<li><span>⏱️</span><span>Хугацаа <b>ердөө 1 минут</b>. Эхэлсэн бол зогсохгүй!</span></li>'
+      +   '<li><span>⏱️</span><span>Хугацаа <b>3 минут</b>. Эхэлсэн бол зогсохгүй!</span></li>'
       +   '<li><span>⭐</span><span>Олсон кино бүр <b>1 оноо</b> · нийт <b>' + MAXW + ' оноо</b>.</span></li>'
       +   '<li><span>🚪</span><span>Нэг л удаа бүртгэгдэнэ — <b>дахин оролцох боломжгүй</b>.</span></li>'
       + '</ul>'
@@ -1939,7 +1939,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       locked = true; xbtn.hidden = true;
       found = []; pend = null; zoom = false;
       var html = '<h2>🎬 КИНО ХАЙХ</h2>'
-        + '<p class="pbar"><span id="wstime">⏱️ 1:00</span><span id="wscnt">🎬 0/' + MAXW + '</span>'
+        + '<p class="pbar"><span id="wstime">⏱️ 3:00</span><span id="wscnt">🎬 0/' + MAXW + '</span>'
         +   '</p>'
         + '<div class="wsmain">'
         +   '<div class="wswrap" id="wswrap"><div class="wsgrid" id="wsgrid"></div></div>'
