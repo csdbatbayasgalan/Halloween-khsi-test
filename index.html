@@ -481,6 +481,14 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 #wso .wswrap{width:100%;margin:0 auto 8px}
 #wso .wswrap.z{overflow:auto;max-height:62vh;border:3px solid var(--ink);border-radius:8px;
   -webkit-overflow-scrolling:touch}
+#wso .wswrap{position:relative}
+#wso .wsguard{position:absolute;inset:0;z-index:5;display:grid;place-items:center;
+  border-radius:8px;background:rgba(12,6,3,.92);color:#f6c62a;text-align:center;
+  font-family:var(--display);font-weight:900;font-size:clamp(1rem,4vw,1.4rem);
+  padding:14px;line-height:1.35;letter-spacing:.02em}
+#wso .wsguard small{display:block;margin-top:8px;font-family:inherit;font-weight:800;
+  font-size:.72rem;color:#e9e2ce;opacity:.85;letter-spacing:0}
+#wso .wswrap.hide .wsgrid{filter:blur(14px);opacity:.25;pointer-events:none}
 #wso .wsgrid{display:grid;gap:0;background:var(--ink);border:3px solid var(--ink);
   border-radius:8px;overflow:hidden;touch-action:none;user-select:none;
   -webkit-user-select:none;font-family:ui-monospace,Menlo,Consolas,monospace;line-height:1}
@@ -1826,6 +1834,14 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       body = o.querySelector("#wsbody");
       xbtn = o.querySelector(".qx");
       xbtn.addEventListener("click", function(){ if(!locked) close(); });
+      function blk(e){ e.preventDefault(); e.stopPropagation(); return false; }
+      ["copy","cut","dragstart","contextmenu","auxclick"].forEach(function(ev){
+        o.addEventListener(ev, blk, true);
+      });
+      o.addEventListener("keydown", function(e){
+        var k = (e.key || "").toLowerCase();
+        if((e.ctrlKey || e.metaKey) && (k === "c" || k === "a" || k === "p" || k === "s")) blk(e);
+      }, true);
     }
     function close(){
       clearInterval(tmr); tmr = 0;
@@ -2000,7 +2016,10 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         + '<p class="pbar"><span id="wstime">⏱️ 3:00</span><span id="wscnt">🎬 0/' + MAXW + '</span>'
         +   '</p>'
         + '<div class="wsmain">'
-        +   '<div class="wswrap" id="wswrap"><div class="wsgrid" id="wsgrid"></div></div>'
+        +   '<div class="wswrap" id="wswrap"><div class="wsgrid" id="wsgrid"></div>'
+        +     '<div class="wsguard" id="wsguard" hidden>🚫 ДЭЛГЭЦЭЭ БҮҮ ОРХИ!'
+        +       '<small>Энэ цонхноос гарах бүрт тор нуугдаж, тэмдэглэгдэнэ.<br>'
+        +       'Буцаж ирэхэд үргэлжилнэ — цаг зогсохгүй шүү ⏱️</small></div></div>'
         +   '<div class="wsside"><h4>🎬 ' + MAXW + ' КИНОНЫ НЭР</h4>'
         +     '<ul class="wslist" id="wslist"></ul></div>'
         + '</div>'
@@ -2031,6 +2050,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       });
       sizeGrid();
       wire(g);
+      guardOn();
       t0 = GO || Date.now();
       clearInterval(tmr);
       tmr = setInterval(tick, 250);
@@ -2106,6 +2126,34 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         el = el.parentNode;
       }
       return null;
+    }
+
+    /* --- дэлгэц орхих / хуулахаас хамгаалах --- */
+    var away = 0, guarded = false;
+    function running(){ return body && body.getAttribute("data-m") === "run"; }
+    function showGuard(on){
+      var w = body && body.querySelector("#wswrap"), gd = body && body.querySelector("#wsguard");
+      if(!w || !gd) return;
+      w.classList.toggle("hide", !!on);
+      gd.hidden = !on;
+    }
+    function onAway(){
+      if(!running()) return;
+      away++;
+      showGuard(true);
+    }
+    function onBack(){
+      if(!running()) return;
+      showGuard(false);
+    }
+    function guardOn(){
+      if(guarded) return;
+      guarded = true;
+      window.addEventListener("blur", onAway, true);
+      window.addEventListener("focus", onBack, true);
+      document.addEventListener("visibilitychange", function(){
+        if(document.hidden) onAway(); else onBack();
+      }, true);
     }
 
     function check(line){
@@ -2192,6 +2240,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       var sc = found.length * PTS;
       var det = "w" + found.slice().sort(function(a,b){return a-b;})
                         .map(function(i){ return i.toString(36); }).join("")
+              + (away ? "a" + away : "")
               + "|" + ubStamp();
       locked = true; xbtn.hidden = true;
       body.innerHTML =
@@ -2740,7 +2789,8 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         p4.slice().sort(function(a, b){ return (pq(b).score || 0) - (pq(a).score || 0); })
           .forEach(function(v){
             var q = pq(v), d = String(q.detail || "");
-            var mw = d.match(/^w([0-9a-z]*)/);
+            var mw = d.match(/^w([0-9a-z]*?)(?:a(\d+))?$/);
+            var away = mw && mw[2] ? parseInt(mw[2], 10) : 0;
             var names = [];
             if(mw && mw[1]) mw[1].split("").forEach(function(ch){
               var ix = parseInt(ch, 36);
@@ -2749,6 +2799,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
             html += '<li><span class="an4"></span><span class="aa">'
                   + q.score + ' / ' + q.total + ' оноо'
                   + (q.at ? ' · 🕒 ' + q.at : '')
+                  + (away ? ' · <b>⚠️ ' + away + ' удаа дэлгэцээс гарсан</b>' : '')
                   + (names.length ? '<br><small>' + names.join(' · ') + '</small>' : '')
                   + '</span></li>';
           });
