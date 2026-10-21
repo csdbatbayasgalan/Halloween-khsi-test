@@ -453,6 +453,12 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
   pointer-events:none}
 #eqo .zmsg b.eqok{color:#2f7d1c}
 #eqo .zmsg b.eqno{color:#c0341e}
+#eqo .eqdone{display:block;margin-top:6px;padding:14px 12px;border-radius:12px;
+  background:#6fd45a;color:#0d2a07;border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);
+  font-family:var(--display);font-weight:900;font-size:1.15rem;letter-spacing:.02em;
+  animation:pop .35s cubic-bezier(.2,1.5,.4,1)}
+#eqo .eqdone small{display:block;margin-top:4px;font-family:inherit;font-weight:800;
+  font-size:.72rem;opacity:.75;letter-spacing:0}
 #eqo input{text-align:center}
 #eqo .eqwait{margin-top:16px;padding:12px 10px;border-radius:12px;background:var(--cream-2);
   border:3px solid var(--ink);text-align:left}
@@ -1791,7 +1797,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
   })();
 
   /* ---------- Даалгавар 4: КИНОНЫ НЭР ХАЙХ ---------- */
-  var WSROWS = ["TGBGBEITDQURYWNTHECONJURINGZZO", "FBZDGQYHWSSSUJETHKMSZTHERINGSM", "IVBQDWFETXBGSCAINNCUFCEMHVTFIV", "HXQQIZUNHCPKBJKTIHSRILJAAIXSXE", "KOZHWSXUETXAJBUDHRQVNTHILTDQAV", "ETURGXUNEINFJWODKAEEAEDILCXFBJ", "GMKWDANXXMVOWUTOFZLLLXFZOHPWOK", "GJCSNHCHOBWLMAUUCKPMDJXZWAYUCM", "DKZDZDEBRFIZTCGBHLNDEKEAEPFYKI", "FNUPLAICCAUZGAZRZZSQSLCGETAGRI", "IIUQXSNTIYCCBUPROSPATFOUNEITVG", "KRUVFBYESOBMPMBHEJKEIYHLCRESLS", "XZHJZMRMTRHTRNZTUCHWNTDWITFLQB", "WIUBPLHCCCHUCKYHZSNGARLJZWOQUG", "YRHRJEPAXPTODSVMWGPCTVYBXOPEPG", "RRGLIGLFJINSIDIOUSSIISCREAMDXZ", "GOPSQCGCFGWJWZNEXHYIOHNHZNCBYC", "ZANALTCRYEQNNRURIZVANJBZQWVMQZ", "HARJDFKRUTUITFGFIUTBZPFMNUVRIF", "ACNKSYXOEUMCFUGAXKHDVCMPANPTIL", "UOGDOXDBTZIFSHUUXNRAEAGUMTKLQM", "NTRAINTOBUSANOZCUZORUZFNTZUKLS", "YVABIRATIWWYSYUIERXPZHTXNNACHM", "WPKLNVANNABELLEOFEZMAKKZESQNHV"];
+  var WSROWS = ["OXCHJGSFFCXHLNWRATMLPFRSXICDUO", "GHWXLEYTEZFRUCPZIIJARJWRBJBPXC", "MVDJNMFHIKGEJONDUYFDEOVJJROBSF", "MCUBKHPEHLDNLELLJDOTNNUNMCFQQT", "USYWLFVNACWTXQICXUVEVWDODPRQSA", "AQUTNCNUMSUUFMDSPHXVNWAXHAXFFM", "XOMHIQENUCXWQNLWTHEEXORCISTTZA", "NSTEFQAVKKEXQWWGDYPCMHCXJEAHHF", "XKJCKMIQXAJMPNYEMCOSCREAMRREXB", "XTKOAANNABELLEFFOOXGWZTKWERRCE", "RTSNGNUKYMXVDUMXKFNIRDOIJQVIUL", "VDLJVBWZSSCCGXVSPPKLDQJYJYVNLL", "UHBUOVBXPFXFDNHODPVPEWUQQTJGIV", "YBHRALIAZSGXZMLYYJVDCJCMPIHPTA", "ZXTIIEDHQTWDSFAPVMTTKIKLDLYFCA", "SYXNIQHABWEKFINALDESTINATIONHA", "AARGNUNGOCFEEUDTRAINTOBUSANPAP", "AWGVSAQXCHLYXXOIVIVTPZKGOHLGPL", "VCXFIWKLLUHALLOWEENSYZDRYSHATG", "YZIQDNTTOCLYLZNULCQRFHNJVXQUEP", "IRRGIEZLPKYBAMYHSUDFRDPWLLWMRY", "OHCWOOCBQYIXNQHKTJHSQWYEQNHWTW", "PTTOUZNAMLBNGZEPZPPWMQCKJKQXWA", "GGFZSBOMZSTNCBXRNXUHSEUUJKVQOU"];
   var WSWORDS = [{"t": "IT: CHAPTER TWO", "w": "ITCHAPTERTWO"}, {"t": "SCREAM", "w": "SCREAM"}, {"t": "ANNABELLE", "w": "ANNABELLE"}, {"t": "THE CONJURING", "w": "THECONJURING"}, {"t": "THE NUN", "w": "THENUN"}, {"t": "CHUCKY", "w": "CHUCKY"}, {"t": "HALLOWEEN", "w": "HALLOWEEN"}, {"t": "INSIDIOUS", "w": "INSIDIOUS"}, {"t": "THE RING", "w": "THERING"}, {"t": "TRAIN TO BUSAN", "w": "TRAINTOBUSAN"}, {"t": "FINAL DESTINATION", "w": "FINALDESTINATION"}, {"t": "THE EXORCIST", "w": "THEEXORCIST"}];
   (function(){
     var NR = 24, NC = 30, SECS = 180, MAXW = WSWORDS.length;
@@ -2579,9 +2585,11 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       while(marks.length < curIdx) marks.push(0);
       marks[curIdx] = 1;
       score++;
-      if(inp) inp.disabled = true;
-      if(btn) btn.disabled = true;
-      if(m) m.innerHTML = '<b class="eqok">✅ Зөв! +1 ⭐ · дараагийн асуултыг хүлээнэ үү…</b>';
+      /* зөв хариулсан бол хариултаа болон товчийг нуух — хажуугаас харуулахгүй */
+      if(inp){ inp.disabled = true; inp.value = ""; inp.hidden = true; }
+      if(btn) btn.hidden = true;
+      if(m) m.innerHTML = '<span class="eqdone">✅ ЗӨВ! +1 ⭐<br>'
+                        + '<small>дараагийн асуултыг хүлээнэ үү…</small></span>';
       var sc = body.querySelector("#eqsc");
       if(sc) sc.textContent = "⭐ " + score;
     }
