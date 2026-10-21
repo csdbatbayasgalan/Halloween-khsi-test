@@ -488,7 +488,8 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
   padding:14px;line-height:1.35;letter-spacing:.02em}
 #wso .wsguard small{display:block;margin-top:8px;font-family:inherit;font-weight:800;
   font-size:.72rem;color:#e9e2ce;opacity:.85;letter-spacing:0}
-#wso .wswrap.hide .wsgrid{filter:blur(14px);opacity:.25;pointer-events:none}
+#wso .wswrap.hide .wsgrid{filter:blur(16px);opacity:.2;pointer-events:none;transition:none}
+#wso .wsgrid{transition:filter .08s linear,opacity .08s linear}
 #wso .wsgrid{display:grid;gap:0;background:var(--ink);border:3px solid var(--ink);
   border-radius:8px;overflow:hidden;touch-action:none;user-select:none;
   -webkit-user-select:none;font-family:ui-monospace,Menlo,Consolas,monospace;line-height:1}
@@ -2017,9 +2018,10 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         +   '</p>'
         + '<div class="wsmain">'
         +   '<div class="wswrap" id="wswrap"><div class="wsgrid" id="wsgrid"></div>'
-        +     '<div class="wsguard" id="wsguard" hidden>🚫 ДЭЛГЭЦЭЭ БҮҮ ОРХИ!'
-        +       '<small>Энэ цонхноос гарах бүрт тор нуугдаж, тэмдэглэгдэнэ.<br>'
-        +       'Буцаж ирэхэд үргэлжилнэ — цаг зогсохгүй шүү ⏱️</small></div></div>'
+        +     '<div class="wsguard" id="wsguard" hidden>🚫 ТОР НУУГДЛАА'
+        +       '<small>Хулганаа хөдөлгөвөл шууд сэргэнэ.<br>'
+        +       'Дэлгэцийн зураг авах, цонхноос гарах оролдлого тэмдэглэгдэнэ ⚠️<br>'
+        +       'Цаг зогсохгүй шүү ⏱️</small></div></div>'
         +   '<div class="wsside"><h4>🎬 ' + MAXW + ' КИНОНЫ НЭР</h4>'
         +     '<ul class="wslist" id="wslist"></ul></div>'
         + '</div>'
@@ -2144,7 +2146,27 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     }
     function onBack(){
       if(!running()) return;
+      wake();
+    }
+    /* дэлгэцийн зураг авахын өмнө хулгана зогсдог — тэр агшинд бүдгэрүүлнэ */
+    var idleT = 0, shotT = 0, IDLE = 1500;
+    var touchy = ("ontouchstart" in window) ||
+                 (navigator.maxTouchPoints || 0) > 0;
+    function wake(){
+      if(!running() || shotT) return;
       showGuard(false);
+      clearTimeout(idleT);
+      if(touchy) return;                      /* утсан дээр идэвхгүй болгохгүй */
+      idleT = setTimeout(function(){
+        if(running() && !shotT) showGuard(true);
+      }, IDLE);
+    }
+    function shotBlock(){
+      if(!running()) return;
+      away++;
+      showGuard(true);
+      clearTimeout(shotT);
+      shotT = setTimeout(function(){ shotT = 0; wake(); }, 3000);
     }
     function guardOn(){
       if(guarded) return;
@@ -2154,6 +2176,23 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       document.addEventListener("visibilitychange", function(){
         if(document.hidden) onAway(); else onBack();
       }, true);
+      ["pointermove","pointerdown","pointerup","keydown","wheel","touchstart","touchmove"]
+        .forEach(function(ev){ document.addEventListener(ev, wake, true); });
+      /* Win/Cmd товч дармагц шууд бүдгэрүүлнэ — зураг авахаас нь өмнө */
+      document.addEventListener("keydown", function(e){
+        var k = e.key;
+        if(k === "Meta" || k === "OS" || k === "ContextMenu"){ shotBlock(); return; }
+        if(k === "PrintScreen" || k === "F13"){ shotBlock(); return; }
+        if(e.metaKey && (k === "Shift" || k === "s" || k === "S" ||
+                         k === "3" || k === "4" || k === "5")){
+          e.preventDefault(); shotBlock(); return;
+        }
+        if((e.metaKey || e.ctrlKey) && e.shiftKey &&
+           (k === "3" || k === "4" || k === "5" || k === "s" || k === "S")){
+          e.preventDefault(); shotBlock();
+        }
+      }, true);
+      wake();
     }
 
     function check(line){
