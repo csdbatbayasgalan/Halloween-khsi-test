@@ -450,6 +450,16 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 #eqo .zmsg b.eqok{color:#2f7d1c}
 #eqo .zmsg b.eqno{color:#c0341e}
 #eqo input{text-align:center}
+#eqo .eqwait{margin-top:16px;padding:12px 10px;border-radius:12px;background:var(--cream-2);
+  border:3px solid var(--ink);text-align:left}
+#eqo .eqwait h4{margin:0 0 9px;font-family:var(--display);font-weight:900;font-size:.84rem;
+  letter-spacing:.03em;text-align:center}
+#eqo .eqwho{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:5px;
+  justify-content:center;max-height:160px;overflow-y:auto}
+#eqo .eqwho li{font-size:.7rem;font-weight:800;padding:4px 10px;border-radius:999px;
+  border:2px solid var(--ink);background:var(--cream);animation:pop .3s ease}
+#eqo .eqwho li.me{background:var(--yellow);box-shadow:2px 2px 0 var(--ink)}
+#eqo .eqwho li.none{border-style:dashed;opacity:.5}
 /* --- WORD SEARCH (Даалгавар 4) --- */
 #wso{grid-template-columns:minmax(0,1fr)}
 #wso .qz{max-width:760px;justify-self:center}
@@ -493,6 +503,8 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 #wso .wsres li{font-size:.78rem;font-weight:800;padding:5px 9px;border-radius:7px;
   background:var(--cream-2)}
 #wso .wsres li.n{opacity:.55}
+#adm .gorow{margin-top:10px;padding-top:10px;border-top:2px dashed rgba(233,226,206,.25);
+  flex-wrap:wrap;gap:7px}
 #wso .wskey{margin:12px auto 0;max-width:520px;cursor:default;touch-action:auto}
 #wso .wskey .wsc{cursor:default}
 #wso .pbar{display:flex;gap:8px;align-items:center;justify-content:center;
@@ -2154,7 +2166,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
   };
 
   (function(){
-    var SEC = 30;
+    var SEC = 20;
     var o, body, xbtn, locked = false, player = "";
     var ri = 0, qi = 0, score = 0, marks = [], tmr = 0, left = 0;
     function allQs(){ var n = 0; EQUIZ.rounds.forEach(function(r){ n += r.qs.length; }); return n; }
@@ -2210,7 +2222,9 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       xbtn = o.querySelector(".qx");
       xbtn.addEventListener("click", function(){ if(!locked) close(); });
     }
-    function close(){ clearInterval(tmr); tmr = 0; if(o){ o.remove(); o = null; } }
+    function close(){ clearInterval(tmr); tmr = 0; clearInterval(loop); loop = 0;
+                      clearInterval(poll); poll = 0; clearInterval(cdT); cdT = 0;
+                      armed = false; if(o){ o.remove(); o = null; } }
 
     function open(){
       if(o && !document.body.contains(o)) o = null;
@@ -2242,9 +2256,10 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       +   '<li><span>🎬</span><span><b>1-р үе:</b> emoji-гоор <b>киноны нэрийг</b> таана (15 асуулт).</span></li>'
       +   '<li><span>👹</span><span><b>2-р үе:</b> emoji-гоор <b>дүрийн нэрийг</b> таана (15 асуулт).</span></li>'
       +   '<li><span>⌨️</span><span>Хариултаа <b>латин үсгээр, бүтэн нэрээр</b> нь бичнэ (жнь: The Conjuring).</span></li>'
-      +   '<li><span>⏱️</span><span>Асуулт бүрт <b>30 секунд</b>. Буруу бичвэл <b>хугацаандаа багтаад дахин оролдож болно</b>.</span></li>'
+      +   '<li><span>⏱️</span><span>Асуулт бүрт <b>20 секунд</b>. Буруу бичвэл <b>хугацаандаа багтаад дахин оролдож болно</b>.</span></li>'
       +   '<li><span>⭐</span><span>Зөв хариулт бүр <b>1 оноо</b> · нийт <b>' + TOTAL + ' оноо</b>.</span></li>'
-      +   '<li><span>🚪</span><span>Эхэлсэн бол <b>гарах боломжгүй</b>. Нэг л удаа оролцоно.</span></li>'
+      +   '<li><span>🚦</span><span><b>Бүгд нэгэн зэрэг эхэлнэ.</b> Нэрээ бичээд хүлээх танхимд ороорой.</span></li>'
+      +   '<li><span>🚪</span><span>Эхэлсэн хойно орж ирвэл <b>оролцох боломжгүй</b>. Нэг л удаа оролцоно.</span></li>'
       + '</ul>'
       + '<input id="eqname" type="text" maxlength="40" autocomplete="name" placeholder="Овог нэрээ бичнэ үү. Жш: Г.Батбаясгалан">'
       + '<button class="zbtn" id="eqgo">ЭХЛЭХ 🫠</button>'
@@ -2278,102 +2293,187 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       body.querySelector("#eqclose").addEventListener("click", close);
     }
 
+    /* ---- бүх асуултыг нэг дараалалд ---- */
+    var FLAT = [];
+    EQUIZ.rounds.forEach(function(r, rix){
+      r.qs.forEach(function(q){ FLAT.push({ r: r, rix: rix, q: q }); });
+    });
+
+    var GO = 0, curIdx = -1, loop = 0, answered = false, poll = 0;
+    function nowMs(){ return (window.ZEELY && window.ZEELY.now) ? window.ZEELY.now() : Date.now(); }
+    function endMs(){ return GO + TOTAL * SEC * 1000; }
+
+    /* ---- хүлээх танхим: зохион байгуулагч эхлүүлэхийг хүлээнэ ---- */
     function start(){
-      locked = true; xbtn.hidden = true;
-      ri = 0; qi = 0; score = 0; marks = [];
-      roundIntro();
+      locked = false; xbtn.hidden = false;
+      lobby(null);
+      if(window.ZEELY && window.ZEELY.joinLobby) window.ZEELY.joinLobby(player);
+      check();
+      poll = setInterval(check, 3000);
     }
-    function roundIntro(){
-      clearInterval(tmr);
-      var r = EQUIZ.rounds[ri];
+    function stopPoll(){ clearInterval(poll); poll = 0; }
+    function stopCd(){ clearInterval(cdT); cdT = 0; }
+
+    var armed = false, cdT = 0;
+    function check(){
+      if(armed || !(window.ZEELY && window.ZEELY.lobby5)) return;
+      window.ZEELY.lobby5(function(res){
+        if(armed || !res) return;
+        WHO = res.names || [];
+        var g = res.go || 0;
+        if(!g){ GO = 0; lobby(null); return; }
+        GO = g;
+        var t = nowMs();
+        if(t >= GO + 2000){ stopPoll(); late(); return; }     /* хоцорсон */
+        /* эхлэх цаг мэдэгдсэн — цагаа өөрөө тоолно, сүлжээнээс хамаарахгүй */
+        armed = true; stopPoll();
+        lobby(GO);
+        clearInterval(cdT);
+        cdT = setInterval(function(){
+          lobby(GO);
+          if(nowMs() >= GO){ clearInterval(cdT); cdT = 0; begin(); }
+        }, 200);
+        setTimeout(function(){
+          if(cdT){ clearInterval(cdT); cdT = 0; }
+          if(body.getAttribute("data-m") === "lobby") begin();
+        }, Math.max(0, GO - t));
+      });
+    }
+
+    var WHO = [];
+    function lobby(go){
+      if(body.getAttribute("data-m") !== "lobby"){
+        body.setAttribute("data-m", "lobby");
+        body.innerHTML =
+          '<h2>🫠 ДААЛГАВАР 5</h2>'
+        + '<p class="eqemo">⏳</p>'
+        + '<p class="zstage" id="eqcd">—</p>'
+        + '<p class="zlead" id="eqlb"></p>'
+        + '<div class="eqwait"><h4>🕯️ Хүлээж байгаа <b id="eqn">0</b> хүн</h4>'
+        +   '<ul class="eqwho" id="eqlist"></ul></div>';
+      }
+      var cd = body.querySelector("#eqcd"), lb = body.querySelector("#eqlb");
+      if(!go){
+        cd.textContent = "…";
+        lb.textContent = "Зохион байгуулагч эхлүүлэхийг хүлээж байна. Хуудсаа бүү хаагаарай!";
+      } else {
+        var left = Math.max(0, Math.ceil((GO - nowMs()) / 1000));
+        cd.textContent = left;
+        lb.textContent = "Бүгд нэгэн зэрэг эхэлнэ — бэлэн байгаарай! 👻";
+      }
+      var ul = body.querySelector("#eqlist"), nEl = body.querySelector("#eqn");
+      if(ul){
+        var sig = WHO.join("|");
+        if(ul.getAttribute("data-sig") !== sig){
+          ul.setAttribute("data-sig", sig);
+          ul.innerHTML = "";
+          var mine = (window.ZEELY && window.ZEELY.nameKey) ? window.ZEELY.nameKey(player) : player;
+          WHO.forEach(function(n){
+            var li = document.createElement("li");
+            var me = (window.ZEELY && window.ZEELY.nameKey) ? window.ZEELY.nameKey(n) === mine : n === player;
+            if(me) li.className = "me";
+            li.textContent = (me ? "👉 " : "👻 ") + n;
+            ul.appendChild(li);
+          });
+          if(!WHO.length){
+            var li2 = document.createElement("li");
+            li2.className = "none"; li2.textContent = "…";
+            ul.appendChild(li2);
+          }
+        }
+        if(nEl) nEl.textContent = WHO.length;
+      }
+    }
+    function late(){
+      locked = false; xbtn.hidden = false;
+      body.setAttribute("data-m", "late");
       body.innerHTML =
-        '<p class="zstage">' + r.name + '</p>'
-      + '<h2>' + r.sub + '</h2>'
-      + '<p class="zlead">' + r.lead + '</p>'
-      + '<p class="zmeta">' + r.qs.length + ' асуулт · асуулт бүрт ' + SEC + ' секунд · зөв бүр +1 оноо</p>'
-      + '<button class="zbtn" id="eqnext">Эхлэх →</button>';
-      body.querySelector("#eqnext").addEventListener("click", function(){ qi = 0; ask(); });
+        '<h2>⏰ ХОЦОРЧЭЭ</h2>'
+      + '<p class="eqemo">🏃‍♂️💨</p>'
+      + '<p class="zlead">Тэмцээн аль хэдийн эхэлсэн байна. Хоцорсон хүн оролцох боломжгүй 🦇</p>'
+      + '<button class="zbtn" id="eqclose">Хаах</button>';
+      body.querySelector("#eqclose").addEventListener("click", close);
     }
 
-    function offset(k){ var n = 0; for(var i = 0; i < k; i++) n += EQUIZ.rounds[i].qs.length; return n; }
+    /* ---- тэмцээн ---- */
+    function begin(){
+      if(body.getAttribute("data-m") === "run") return;
+      stopPoll(); stopCd();
+      locked = true; xbtn.hidden = true;
+      score = 0; marks = []; curIdx = -1;
+      body.setAttribute("data-m", "run");
+      clearInterval(loop);
+      loop = setInterval(frame, 150);
+      frame();
+    }
 
-    function ask(){
-      clearInterval(tmr);
-      var r = EQUIZ.rounds[ri], item = r.qs[qi];
-      var num = offset(ri) + qi + 1;
+    function frame(){
+      var t = nowMs() - GO;
+      if(t < 0) return;
+      var idx = Math.floor(t / (SEC * 1000));
+      if(idx >= TOTAL){ clearInterval(loop); loop = 0; finish(); return; }
+      if(idx !== curIdx){
+        while(marks.length < idx) marks.push(0);      /* алгассан/амжаагүй асуултууд */
+        curIdx = idx;
+        ask(idx);
+      }
+      var left = Math.max(0, SEC - (t / 1000 - idx * SEC));
+      var tEl = body.querySelector("#eqt"), pEl = body.querySelector("#eqtp");
+      if(tEl){
+        tEl.textContent = Math.ceil(left);
+        tEl.className = "zt" + (left <= 5 ? " warn" : "");
+      }
+      if(pEl) pEl.style.width = (left / SEC * 100) + "%";
+    }
+
+    function ask(idx){
+      var it = FLAT[idx], r = it.r, item = it.q;
+      answered = false;
       body.innerHTML =
         '<div class="zbar"><span>' + r.name + '</span><i class="zp"><i style="width:'
-        + Math.round(num / TOTAL * 100) + '%"></i></i><span>' + num + '/' + TOTAL + '</span></div>'
+        + Math.round((idx + 1) / TOTAL * 100) + '%"></i></i><span>' + (idx + 1) + '/' + TOTAL + '</span></div>'
       + '<div class="ztime"><span class="zt" id="eqt">' + SEC + '</span>'
       +   '<span class="ztp"><i id="eqtp"></i></span><span class="zt" id="eqsc">⭐ ' + score + '</span></div>'
+      + (idx === 15 ? '<p class="znote">🎭 2-р үе эхэллээ — одоо ДҮРийн нэрийг таа!</p>' : '')
       + '<p class="eqemo">' + item.e + '</p>'
       + '<input id="eqin" type="text" autocomplete="off" autocapitalize="off" autocorrect="off"'
       +   ' spellcheck="false" maxlength="40" placeholder="Бүтэн нэрийг латинаар…">'
       + '<button class="zbtn" id="eqsend">Хариулах</button>'
       + '<p class="zmsg" id="eqm"></p>';
       var inp = body.querySelector("#eqin");
-      inp.focus();
+      try { inp.focus(); } catch(e){}
       body.querySelector("#eqsend").addEventListener("click", function(){ answer(inp.value); });
       inp.addEventListener("keydown", function(e){ if(e.key === "Enter") answer(inp.value); });
-
-      left = SEC;
-      var tEl = body.querySelector("#eqt"), pEl = body.querySelector("#eqtp");
-      pEl.style.width = "100%";
-      tmr = setInterval(function(){
-        left--;
-        if(tEl) tEl.textContent = left;
-        if(pEl) pEl.style.width = Math.max(0, left / SEC * 100) + "%";
-        if(tEl && left <= 7) tEl.className = "zt warn";
-        if(left <= 0) answer(null);
-      }, 1000);
     }
 
     function answer(val){
-      var item = EQUIZ.rounds[ri].qs[qi];
+      if(answered || curIdx < 0) return;
+      var item = FLAT[curIdx].q;
       var inp = body.querySelector("#eqin"), btn = body.querySelector("#eqsend");
       var m = body.querySelector("#eqm");
 
-      /* --- буруу бол шилжихгүй: 30 секунд дуустал дахин оролдоно --- */
-      if(val !== null && !match(val, item)){
+      if(!match(val, item)){
         if(m) m.innerHTML = /[\u0400-\u04FF]/.test(String(val))
           ? '<b class="eqno">⌨️ Латин үсгээр бичнэ үү</b>'
           : '<b class="eqno">❌ Буруу — дахин оролдоорой</b>';
         if(inp){ inp.focus(); inp.select(); }
         return;
       }
-
-      clearInterval(tmr);
+      answered = true;
+      while(marks.length < curIdx) marks.push(0);
+      marks[curIdx] = 1;
+      score++;
       if(inp) inp.disabled = true;
       if(btn) btn.disabled = true;
-      var ok = val !== null;
-      marks.push(ok ? 1 : 0);
-      if(ok) score++;
-      if(m) m.innerHTML = ok ? '<b class="eqok">✅ Зөв! +1 ⭐</b>'
-                             : '<b class="eqno">⏱️ Хугацаа дууслаа</b>';
+      if(m) m.innerHTML = '<b class="eqok">✅ Зөв! +1 ⭐ · дараагийн асуултыг хүлээнэ үү…</b>';
       var sc = body.querySelector("#eqsc");
       if(sc) sc.textContent = "⭐ " + score;
-      setTimeout(next, 900);
-    }
-
-    function next(){
-      qi++;
-      if(qi < EQUIZ.rounds[ri].qs.length){ ask(); return; }
-      ri++;
-      if(ri < EQUIZ.rounds.length){ roundBreak(); return; }
-      finish();
-    }
-    function roundBreak(){
-      clearInterval(tmr);
-      body.innerHTML =
-        '<h2>Үе дууслаа!</h2>'
-      + '<p class="zstage">' + score + '</p>'
-      + '<p class="zlead">одоогийн оноо · ' + TOTAL + ' онооны боломжоос</p>'
-      + '<button class="zbtn" id="eqnext">Дараагийн үе →</button>';
-      body.querySelector("#eqnext").addEventListener("click", roundIntro);
     }
 
     function finish(){
       clearInterval(tmr); tmr = 0;
+      clearInterval(loop); loop = 0; stopPoll();
+      while(marks.length < TOTAL) marks.push(0);
       var det = "e" + marks.join("") + "|" + ubStamp();
       locked = true; xbtn.hidden = true;
       body.innerHTML =
@@ -2683,6 +2783,62 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       wireCtl(3, "actl3");
       wireCtl(4, "actl4");
       wireCtl(5, "actl5");
+
+      /* --- Даалгавар 5: нэгэн зэрэг эхлүүлэх --- */
+      (function(){
+        var host = box.querySelector("#actl5");
+        if(!host) return;
+        var row = document.createElement("div");
+        row.className = "arow gorow";
+        row.innerHTML = '<span class="alab">🚦 Нэгэн зэрэг эхлүүлэх</span>'
+                      + '<span class="ast" id="agost">…</span>'
+                      + '<button class="abtn" id="agogo">30 сек дараа эхлүүлэх</button>'
+                      + '<button class="abtn" id="agocl">Цуцлах</button>';
+        host.appendChild(row);
+        var st = row.querySelector("#agost"), gb = row.querySelector("#agogo"),
+            cb = row.querySelector("#agocl");
+        var GO = 0, tick = 0;
+        function nowMs(){ return (window.ZEELY && window.ZEELY.now) ? window.ZEELY.now() : Date.now(); }
+        var TOTALMS = 30 * 20 * 1000;      /* 30 асуулт × 20 сек */
+        function paint(){
+          var t = nowMs();
+          if(!GO){ st.textContent = WAIT + " хүн хүлээж байна"; st.className = "ast"; return; }
+          if(t < GO){
+            st.textContent = Math.ceil((GO - t) / 1000) + " сек дараа";
+            st.className = "ast so";
+          } else if(t < GO + TOTALMS){
+            var m = Math.floor((GO + TOTALMS - t) / 60000);
+            st.textContent = "ЯВАГДАЖ БАЙНА · " + (m + 1) + " мин үлдлээ";
+            st.className = "ast so";
+          } else { st.textContent = "дууссан"; st.className = "ast sh"; }
+        }
+        var WAIT = 0;
+        function load(){
+          if(!(window.ZEELY && window.ZEELY.lobby5)) return;
+          window.ZEELY.lobby5(function(res){
+            if(!res) return;
+            GO = res.go || 0;
+            WAIT = (res.names || []).length;
+            paint();
+          });
+        }
+        load();
+        setInterval(load, 5000);
+        tick = setInterval(paint, 1000);
+        gb.addEventListener("click", function(){
+          gb.disabled = true; cb.disabled = true; st.textContent = "товлож байна…";
+          var at = nowMs() + 30000;
+          window.ZEELY.setCfg("task5go", String(at), function(){
+            GO = at; gb.disabled = false; cb.disabled = false; paint();
+          }, function(){ st.textContent = "алдаа"; gb.disabled = false; cb.disabled = false; });
+        });
+        cb.addEventListener("click", function(){
+          gb.disabled = true; cb.disabled = true; st.textContent = "цуцалж байна…";
+          window.ZEELY.setCfg("task5go", "0", function(){
+            GO = 0; gb.disabled = false; cb.disabled = false; paint();
+          }, function(){ st.textContent = "алдаа"; gb.disabled = false; cb.disabled = false; });
+        });
+      })();
     }
 
     var drawn = false;
@@ -2803,7 +2959,16 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
   function isQuestRow(id){
     id = String(id || "");
     return id.indexOf("PRIZE") === 0 || id.indexOf("Q-") === 0
-        || id.indexOf("QUIZ") === 0 || id.indexOf("CFG-") === 0;
+        || id.indexOf("QUIZ") === 0 || id.indexOf("CFG-") === 0
+        || id.indexOf("LOBBY") === 0;
+  }
+  var SKEW = 0;                     /* Google серверийн цагтай зөрүү */
+  function syncClock(r){
+    try {
+      var d = r.headers && r.headers.get && r.headers.get("date");
+      if(d){ var t = Date.parse(d); if(t) SKEW = t - Date.now(); }
+    } catch(e){}
+    return r;
   }
   function findBy(pres, nm, cb){
     var want = key(nm);
@@ -2826,9 +2991,10 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     url: SHEET_URL,
     nameKey: key,
     /* бүх тохиргоог нэг хүсэлтээр */
+    now: function(){ return Date.now() + SKEW; },
     cfgAll: function(cb){
       fetch(SHEET_URL + "?t=" + Date.now())
-        .then(function(r){ return r.json(); })
+        .then(function(r){ return syncClock(r).json(); })
         .then(function(rows){
           var out = {}, parts = {};
           (rows || []).forEach(function(v){
@@ -2897,6 +3063,36 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     findQuiz4: function(nm, cb){ findBy(["QUIZ4"], nm, cb); },
     /* Даалгавар 5 (emoji таавар) */
     findQuiz5: function(nm, cb){ findBy(["QUIZ5"], nm, cb); },
+    /* хүлээх танхимд бүртгүүлэх */
+    joinLobby: function(nm, done, fail){
+      fetch(SHEET_URL + "?id=" + encodeURIComponent("LOBBY5-" + myId)
+          + "&name=" + encodeURIComponent(nm)
+          + "&going=" + encodeURIComponent(String(Date.now()))
+          + "&t=" + Date.now())
+        .then(function(r){ return r.json(); })
+        .then(function(){ done && done(); })
+        .catch(function(){ fail && fail(); });
+    },
+    /* нэг хүсэлтээр: эхлэх цаг + хүлээж байгаа хүмүүс */
+    lobby5: function(cb){
+      fetch(SHEET_URL + "?t=" + Date.now())
+        .then(function(r){ return syncClock(r).json(); })
+        .then(function(rows){
+          var go = 0, names = [], seen = {}, cut = Date.now() - 45 * 60000;
+          (rows || []).forEach(function(v){
+            var id = String(v.id || "");
+            if(id === "CFG-task5go"){ go = parseInt(String(v.name || "0"), 10) || 0; return; }
+            if(id.indexOf("LOBBY5-") !== 0) return;
+            var ts = parseInt(String(v.going || "0"), 10) || 0;
+            if(ts && ts < cut) return;
+            var nm = String(v.name || "").trim(), k = key(nm);
+            if(!nm || !k || seen[k]) return;
+            seen[k] = 1; names.push(nm);
+          });
+          setTimeout(function(){ cb({ go: go, names: names }); }, 0);
+        })
+        .catch(function(){ cb(null); });
+    },
     fetchRows: function(cb){
       fetch(SHEET_URL + "?t=" + Date.now())
         .then(function(r){ return r.json(); })
