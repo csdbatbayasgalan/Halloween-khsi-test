@@ -634,8 +634,9 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 #mpo .mpc.got{cursor:default}
 #mpo .wshint{margin:0;font-size:.78rem;font-weight:800;min-height:1.2em}
 /* --- Даалгавар 2: ONET --- */
-#onet .qz{max-width:620px}
-@media (max-width:640px){ #onet{padding:8px} #onet .qz{padding:16px 8px} }
+#onet .qz{max-width:880px}
+@media (max-width:1080px){ #onet{padding:8px} #onet .qz{padding:14px 8px} }
+@media (max-width:640px){ #onet .otc{border-width:1px;border-radius:4px} #onet .ongrid{gap:1.5px} }
 #onet .pbar{display:flex;gap:7px;align-items:center;justify-content:center;flex-wrap:wrap;
   font-family:var(--display);font-weight:900;font-size:.8rem;margin:0 0 11px}
 #onet .pbar span{background:var(--ink);color:var(--cream);border-radius:999px;padding:5px 11px}
@@ -643,17 +644,17 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
   border-radius:999px;border:2px solid var(--ink);background:#f6c62a;color:#2a1a10;
   box-shadow:2px 2px 0 var(--ink);cursor:pointer}
 #onet .psmall:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink)}
-#onet .ongrid{position:relative;display:grid;gap:3px;margin:0 0 11px}
+#onet .ongrid{position:relative;display:grid;gap:2px;margin:0 0 11px}
 #onet .otc{aspect-ratio:1;padding:0;cursor:pointer;line-height:1;
   font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;
-  font-size:clamp(15px,4.6vw,27px);
-  border:2px solid var(--ink);border-radius:7px;
+  font-size:clamp(11px,2.3vw,24px);
+  border:1.5px solid var(--ink);border-radius:5px;
   background:linear-gradient(165deg,#fff3e2,#f3d9bb);
   box-shadow:inset 0 -3px 0 rgba(0,0,0,.18),2px 2px 0 var(--ink);
   display:grid;place-items:center;transition:transform .1s,background .15s}
 #onet .otc:active{transform:translate(1px,1px)}
 #onet .otc.sel{background:linear-gradient(165deg,#ffe07a,#f6c62a);
-  box-shadow:inset 0 0 0 3px #e8402a,2px 2px 0 var(--ink)}
+  box-shadow:inset 0 0 0 2px #e8402a,2px 2px 0 var(--ink)}
 #onet .otc.gone{visibility:hidden;pointer-events:none}
 #onet .onpath{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;
   filter:drop-shadow(0 0 3px rgba(232,64,42,.9))}
@@ -1627,9 +1628,11 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
 
   /* ---------- Даалгавар 2: ONET (холбох тоглоом) ---------- */
   var ON_EMOJI = ["🎃","👻","🦇","🕷️","💀","🧟","🧛","🧙","👹","🤡",
-                  "😈","🪦","⚰️","🕯️","🔮","🍬","🧪","🐺","🦴","🗝️"];
+                  "😈","🪦","⚰️","🕯️","🔮","🍬","🧪","🐺","🦴","🗝️",
+                  "🕸️","☠️","🧌","👺","🪄","🍭","🩸","🌕","🧹","🪓",
+                  "🦉","🐀","🦂","🍫","🧿","⛓️","🗡️","🏚️","🌙","🥀"];
   (function(){
-    var C = 8, R = 10, COPIES = 4;                 /* 20 дүрс × 4 = 80 хөзөр */
+    var C = 16, R = 10, COPIES = 4;                /* 40 дүрс × 4 = 160 хөзөр */
     var N = C * R;
     var TOPN = 20, FREE_MS = 180000, STEP_MS = 30000;
     var SKEY = "zeely.on2";
@@ -1695,10 +1698,10 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         '<h2>🀄 ДААЛГАВАР 2<br>ХОЛБОХ</h2>'
       + '<p class="zlead">Ижил хоёр дүрсийг <b>замаар холбож</b> устга. Бүгдийг арилга!</p>'
       + '<ul class="zfacts">'
-      +   '<li><span>🀄</span><span><b>' + N + ' хөзөр.</b> Ижил хоёрыг дараалан дарж сонгоно.</span></li>'
+      +   '<li><span>🀄</span><span><b>' + N + ' хөзөр · ' + (N/2) + ' хос.</b> Ижил хоёрыг дараалан дарж сонгоно.</span></li>'
       +   '<li><span>🔗</span><span>Хоорондох зам нь <b>хоосон нүдээр</b> явж, <b>хамгийн ихдээ 2 удаа эргэнэ</b>.</span></li>'
       +   '<li><span>🚧</span><span>Зам нь <b>самбарын гадуугаар</b> ч тойрч болно.</span></li>'
-      +   '<li><span>🔀</span><span>Холбох боломж дуусвал <b>өөрөө дахин холино</b>.</span></li>'
+      +   '<li><span>✅</span><span>Самбар нь <b>заавал бүрэн арилгаж болохоор</b> зохиогдсон — холих хэрэггүй.</span></li>'
       +   '<li><span>⏱️</span><span><b>3 минут дотор</b> бүгдийг арилгавал бүтэн <b>20 оноо</b>.</span></li>'
       +   '<li><span>📉</span><span>Дараа нь <b>30 секунд тутамд 1 оноо</b> хасагдана.</span></li>'
       +   '<li><span>↩️</span><span>Хуудсаа сэргээсэн ч <b>үргэлжилнэ</b> — цаг зогсохгүй.</span></li>'
@@ -1775,15 +1778,64 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     }
 
     function anyMove(){
-      var pos = [];
-      for(var i = 0; i < N; i++) if(grid[i] >= 0) pos.push(i);
-      for(var a = 0; a < pos.length; a++){
-        for(var b = a + 1; b < pos.length; b++){
-          if(grid[pos[a]] !== grid[pos[b]]) continue;
-          if(path(Math.floor(pos[a]/C), pos[a]%C, Math.floor(pos[b]/C), pos[b]%C)) return true;
-        }
+      var by = {};                                 /* ижил утгатайг нь бүлэглэнэ — хурдан */
+      for(var i = 0; i < N; i++){
+        var v = grid[i];
+        if(v < 0) continue;
+        (by[v] || (by[v] = [])).push(i);
+      }
+      for(var k in by){
+        var g = by[k];
+        for(var a = 0; a < g.length; a++)
+          for(var b = a + 1; b < g.length; b++)
+            if(path(Math.floor(g[a]/C), g[a]%C, Math.floor(g[b]/C), g[b]%C)) return true;
       }
       return false;
+    }
+
+    /* --- УРВУУ БҮТЭЭЛТ: холихгүйгээр заавал дуусгах боломжтой самбар үүсгэнэ ---
+       Хоосон самбар дээр "холбогдож чадах" хос нүд рүү ээлж дараалан тавина.
+       Тавьсан дарааллын ЭСРЭГ дарааллаар арилгавал бүх хөзөр гарцаагүй арилна. */
+    function pickPair(empt){
+      var m = empt.length, a, b;
+      for(var t = 0; t < 150; t++){
+        a = empt[Math.floor(Math.random() * m)];
+        b = empt[Math.floor(Math.random() * m)];
+        if(a === b) continue;
+        if(path(Math.floor(a/C), a%C, Math.floor(b/C), b%C)) return [a, b];
+      }
+      for(var i = 0; i < m; i++)
+        for(var j = i + 1; j < m; j++){
+          a = empt[i]; b = empt[j];
+          if(path(Math.floor(a/C), a%C, Math.floor(b/C), b%C)) return [a, b];
+        }
+      return null;
+    }
+    function genSolvable(){
+      var keep = grid;
+      var vals = [], v, k, i;
+      for(v = 0; v < N / COPIES; v++)
+        for(k = 0; k < COPIES / 2; k++) vals.push(v % ON_EMOJI.length);
+      for(var tryN = 0; tryN < 25; tryN++){
+        for(k = vals.length - 1; k > 0; k--){
+          var j = Math.floor(Math.random() * (k + 1));
+          var tv = vals[k]; vals[k] = vals[j]; vals[j] = tv;
+        }
+        var g = [], empt = [];
+        for(i = 0; i < N; i++){ g.push(-1); empt.push(i); }
+        grid = g;
+        var ok = true;
+        for(var s2 = 0; s2 < vals.length; s2++){
+          var pr = pickPair(empt);
+          if(!pr){ ok = false; break; }
+          g[pr[0]] = vals[s2]; g[pr[1]] = vals[s2];
+          empt.splice(empt.indexOf(pr[0]), 1);
+          empt.splice(empt.indexOf(pr[1]), 1);
+        }
+        if(ok){ grid = keep; return g; }
+      }
+      grid = keep;
+      return null;
     }
 
     function shuffleBoard(){
@@ -1844,16 +1896,19 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         grid = st.g.slice(); moves = st.m || 0; t0 = st.t;
         if(!anyMove()) shuffleBoard();
       } else {
-        grid = [];
-        var pool = [];
-        for(var e = 0; e < N / COPIES; e++)
-          for(var c2 = 0; c2 < COPIES; c2++) pool.push(e % ON_EMOJI.length);
-        for(var k = pool.length - 1; k > 0; k--){
-          var j = Math.floor(Math.random() * (k + 1));
-          var t = pool[k]; pool[k] = pool[j]; pool[j] = t;
+        var made = genSolvable();
+        if(made){ grid = made; }
+        else {                                     /* нөөц хувилбар */
+          var pool = [];
+          for(var e = 0; e < N / COPIES; e++)
+            for(var c2 = 0; c2 < COPIES; c2++) pool.push(e % ON_EMOJI.length);
+          for(var k = pool.length - 1; k > 0; k--){
+            var j = Math.floor(Math.random() * (k + 1));
+            var t = pool[k]; pool[k] = pool[j]; pool[j] = t;
+          }
+          grid = pool;
+          if(!anyMove()) shuffleBoard();
         }
-        grid = pool;
-        if(!anyMove()) shuffleBoard();
         t0 = Date.now();
       }
       left = count();
@@ -1862,8 +1917,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         '<h2>🀄 ХОЛБОХ</h2>'
       + '<p class="pbar"><span id="ontime">⏱️ 0:00</span>'
       +   '<span id="onleft">🀄 ' + left + '</span>'
-      +   '<span id="onmv">🔁 ' + moves + '</span>'
-      +   '<button class="psmall" id="onmix" type="button">🔀 Холих</button></p>'
+      +   '<span id="onmv">🔁 ' + moves + '</span></p>'
       + '<div class="ongrid" id="ongrid"></div>'
       + '<p class="wshint" id="onhint">'
       +   (st ? "↩️ Үргэлжлүүллээ — цаг зогсоогүй шүү" : "Ижил хоёр дүрсийг дараалан дар")
@@ -1880,12 +1934,6 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       }
       paint();
       g.addEventListener("click", onTap);
-      body.querySelector("#onmix").addEventListener("click", function(){
-        if(busy) return;
-        shuffleBoard(); sel = -1; paint(); saveState();
-        var h = body.querySelector("#onhint");
-        if(h) h.textContent = "🔀 Дахин холилоо";
-      });
 
       saveState();
       clearInterval(tmr);
@@ -1915,14 +1963,18 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       var c0 = cell(0);
       if(!c0) return;
       var cr = c0.getBoundingClientRect();
-      var w = cr.width, gap = 3;
+      var cx = cell(1), cy = cell(C);
+      var stepX = cx ? (cx.getBoundingClientRect().left - cr.left) : cr.width;
+      var stepY = cy ? (cy.getBoundingClientRect().top - cr.top) : cr.height;
+      var ox = cr.left - gr.left + cr.width / 2;
+      var oy = cr.top - gr.top + cr.height / 2;
       var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
       svg.setAttribute("class", "onpath");
       svg.setAttribute("viewBox", "0 0 " + gr.width + " " + gr.height);
       var d = "";
       pts.forEach(function(p, k){
-        var x = (p[1] + 0.5) * (w + gap);
-        var y = (p[0] + 0.5) * (cr.height + gap);
+        var x = ox + p[1] * stepX;
+        var y = oy + p[0] * stepY;
         d += (k ? " L" : "M") + x.toFixed(1) + " " + y.toFixed(1);
       });
       svg.innerHTML = '<path d="' + d + '" fill="none" stroke="#f6c62a" stroke-width="5" '
