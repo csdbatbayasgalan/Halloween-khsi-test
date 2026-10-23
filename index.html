@@ -1083,21 +1083,25 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
   }
 
   /* ---------- автоматаар хадгална: алдвал өөрөө дахин оролдоно ---------- */
-  function autoSave(call, msgEl, onOk, onDead){
-    var n = 0;
+  function autoSave(call, msgEl, onOk, onDead, spread){
+    var n = 0, MAX = 16;
     function go(){
       call(function(){ onOk(); }, function(){
         n++;
-        if(n >= 10){
+        if(n >= MAX){
           if(msgEl) msgEl.textContent = "Сүлжээ холбогдохгүй байна 🦇 Хэсэг хүлээгээд хуудсаа сэргээнэ үү.";
           onDead && onDead();
           return;
         }
-        if(msgEl) msgEl.textContent = "Хадгалж байна… 👻 (" + (n + 1) + ")";
-        setTimeout(go, 1500);
+        if(msgEl) msgEl.textContent = "Хадгалж байна… 👻 (" + (n + 1) + "/" + MAX + ")";
+        /* ухарч нэмэгдэх хүлээлт + санамсаргүй зөрүү — бүгд зэрэг дахин цохихгүй */
+        var wait = Math.min(1200 * Math.pow(1.6, n), 12000) + Math.random() * 2500;
+        setTimeout(go, wait);
       });
     }
-    go();
+    /* бөөнөөр дуусахад бүгд нэг агшинд бичихгүйн тулд тарааж илгээнэ */
+    if(spread) setTimeout(go, Math.random() * spread);
+    else go();
   }
 
   /* ---------- Даалгавар 2: QUIZ ---------- */
@@ -2313,7 +2317,8 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         body.appendChild(bt);
       }
       if(window.ZEELY && window.ZEELY.quiz4){
-        autoSave(function(d, f){ window.ZEELY.quiz4(player, sc, MAXW * PTS, d, f, det); }, m2, ok, dead);
+        autoSave(function(d, f){ window.ZEELY.quiz4(player, sc, MAXW * PTS, d, f, det); },
+                 m2, ok, dead, 7000);
       } else { dead(); }
     }
   })();
@@ -2711,7 +2716,8 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         body.appendChild(bt);
       }
       if(window.ZEELY && window.ZEELY.quiz5){
-        autoSave(function(d, f){ window.ZEELY.quiz5(player, score, TOTAL, d, f, det); }, m2, ok, dead);
+        autoSave(function(d, f){ window.ZEELY.quiz5(player, score, TOTAL, d, f, det); },
+                 m2, ok, dead, 7000);
       } else { dead(); }
     }
   })();
@@ -3188,6 +3194,73 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     } catch(e){}
     return r;
   }
+  /* бичээд шууд баталгаажуулна: буцаж ирсэн мөрүүдэд өөрийн мөр байгаа эсэх */
+  function writeVerified(id, nm, going, done, fail){
+    var u = SHEET_URL + "?id=" + encodeURIComponent(id)
+          + "&name=" + encodeURIComponent(nm)
+          + "&going=" + encodeURIComponent(going)
+          + "&t=" + Date.now() + "&r=" + Math.random().toString(36).slice(2, 8);
+    var settled = false;
+    var timer = setTimeout(function(){ if(!settled){ settled = true; fail(); } }, 20000);
+    fetch(u)
+      .then(function(r){ return r.json(); })
+      .then(function(rows){
+        if(settled) return;
+        settled = true; clearTimeout(timer);
+        var hit = false;
+        (rows || []).forEach(function(v){ if(String(v.id || "") === id) hit = true; });
+        if(hit) done(); else fail();          /* бичигдээгүй бол дахин оролдоно */
+      })
+      .catch(function(){
+        if(settled) return;
+        settled = true; clearTimeout(timer);
+        fail();
+      });
+  }
+  /* хадгалсны дараа дахин шалгана — өөр хүн дээрээс нь бичсэн бол дахин бичнэ */
+  function reVerify(id, nm, going, tries){
+    tries = tries || 0;
+    if(tries > 3) return;
+    setTimeout(function(){
+      fetch(SHEET_URL + "?t=" + Date.now())
+        .then(function(r){ return r.json(); })
+        .then(function(rows){
+          var hit = false;
+          (rows || []).forEach(function(v){ if(String(v.id || "") === id) hit = true; });
+          if(!hit) writeVerified(id, nm, going, function(){ reVerify(id, nm, going, tries + 1); },
+                                 function(){ reVerify(id, nm, going, tries + 1); });
+        })
+        .catch(function(){});
+    }, 5000 + Math.random() * 5000 + tries * 8000);
+  }
+  function pend(list){ try { localStorage.setItem("zeely.pending", JSON.stringify(list)); } catch(e){} }
+  function pendGet(){
+    try { return JSON.parse(localStorage.getItem("zeely.pending") || "[]") || []; } catch(e){ return []; }
+  }
+  function pendAdd(o){
+    var l = pendGet().filter(function(x){ return x.id !== o.id; });
+    l.push(o); pend(l);
+  }
+  function pendDel(id){ pend(pendGet().filter(function(x){ return x.id !== id; })); }
+
+  function saveRow(id, nm, going, done, fail){
+    pendAdd({ id: id, nm: nm, going: going });      /* эхлээд төхөөрөмж дээр нөөцлөнө */
+    writeVerified(id, nm, going, function(){
+      pendDel(id);
+      reVerify(id, nm, going, 0);
+      done();
+    }, fail);
+  }
+
+  /* хуудас дахин нээгдэхэд хадгалагдаагүй үр дүнг чимээгүйхэн илгээнэ */
+  setTimeout(function(){
+    pendGet().forEach(function(o, i){
+      setTimeout(function(){
+        writeVerified(o.id, o.nm, o.going, function(){ pendDel(o.id); }, function(){});
+      }, 1500 + i * 2500 + Math.random() * 2000);
+    });
+  }, 4000);
+
   function findBy(pres, nm, cb){
     var want = key(nm);
     if(!want){ cb(undefined); return; }
@@ -3320,44 +3393,23 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     },
     /* QUIZ-ийн хариуг шийт рүү хадгална */
     quiz: function(nm, sc, total, done, fail, detail){
-      /* id: зөвхөн түлхүүр ба оноо · name: зөвхөн нэр · going: хариултын дэлгэрэнгүй */
-      fetch(SHEET_URL + "?id=" + encodeURIComponent("QUIZ2-" + myId + "~" + sc + "/" + total)
-          + "&name=" + encodeURIComponent(nm)
-          + "&going=" + encodeURIComponent(detail || "1")
-          + "&t=" + Date.now())
-        .then(function(r){ return r.json(); })
-        .then(function(){ done(); })
-        .catch(function(){ fail(); });
+      saveRow("QUIZ2-" + myId + "~" + sc + "/" + total,
+              nm, detail || "1", done, fail);
     },
     /* Даалгавар 3 (puzzle) үр дүнг шийт рүү хадгална */
     quiz3: function(nm, sc, total, done, fail, detail){
-      fetch(SHEET_URL + "?id=" + encodeURIComponent("QUIZ3-" + myId + "~" + sc + "/" + total)
-          + "&name=" + encodeURIComponent(nm)
-          + "&going=" + encodeURIComponent(detail || "1")
-          + "&t=" + Date.now())
-        .then(function(r){ return r.json(); })
-        .then(function(){ done(); })
-        .catch(function(){ fail(); });
+      saveRow("QUIZ3-" + myId + "~" + sc + "/" + total,
+              nm, detail || "1", done, fail);
     },
     /* Даалгавар 4 (кино хайх) үр дүнг хадгална */
     quiz4: function(nm, sc, total, done, fail, detail){
-      fetch(SHEET_URL + "?id=" + encodeURIComponent("QUIZ4-" + myId + "~" + sc + "/" + total)
-          + "&name=" + encodeURIComponent(nm)
-          + "&going=" + encodeURIComponent(detail || "1")
-          + "&t=" + Date.now())
-        .then(function(r){ return r.json(); })
-        .then(function(){ done(); })
-        .catch(function(){ fail(); });
+      saveRow("QUIZ4-" + myId + "~" + sc + "/" + total,
+              nm, detail || "1", done, fail);
     },
     /* Даалгавар 5 (emoji таавар) үр дүнг хадгална */
     quiz5: function(nm, sc, total, done, fail, detail){
-      fetch(SHEET_URL + "?id=" + encodeURIComponent("QUIZ5-" + myId + "~" + sc + "/" + total)
-          + "&name=" + encodeURIComponent(nm)
-          + "&going=" + encodeURIComponent(detail || "1")
-          + "&t=" + Date.now())
-        .then(function(r){ return r.json(); })
-        .then(function(){ done(); })
-        .catch(function(){ fail(); });
+      saveRow("QUIZ5-" + myId + "~" + sc + "/" + total,
+              nm, detail || "1", done, fail);
     },
     /* шийтээс ялагчийг шалгана */
     check: function(cb){
