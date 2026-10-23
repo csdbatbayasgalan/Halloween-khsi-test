@@ -656,6 +656,10 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 #onet .otc.sel{background:linear-gradient(165deg,#ffe07a,#f6c62a);
   box-shadow:inset 0 0 0 2px #e8402a,2px 2px 0 var(--ink)}
 #onet .otc.gone{visibility:hidden;pointer-events:none}
+#onet .otc.tip{background:linear-gradient(165deg,#bdf2ad,#6fd45a);
+  box-shadow:inset 0 0 0 2px #1d7a12,2px 2px 0 var(--ink);animation:ontip .55s steps(2) infinite}
+@keyframes ontip{from{filter:none}to{filter:brightness(1.35)}}
+#onet .psmall:disabled{opacity:.45;cursor:default;box-shadow:none;transform:none}
 #onet .onpath{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;
   filter:drop-shadow(0 0 3px rgba(232,64,42,.9))}
 #onet .wshint{margin:0;font-size:.78rem;font-weight:800;min-height:1.2em}
@@ -1638,6 +1642,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     var SKEY = "zeely.on2";
     var o, body, xbtn, locked = false, player = "";
     var grid = [], left = 0, sel = -1, moves = 0, t0 = 0, tmr = 0, busy = false;
+    var HINTS = 3, hints = HINTS, hintTmr = 0;
 
     function hook(){
       var row = document.querySelector('#tlist li[data-no="2"]');
@@ -1701,7 +1706,8 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       +   '<li><span>🀄</span><span><b>' + N + ' хөзөр · ' + (N/2) + ' хос.</b> Ижил хоёрыг дараалан дарж сонгоно.</span></li>'
       +   '<li><span>🔗</span><span>Хоорондох зам нь <b>хоосон нүдээр</b> явж, <b>хамгийн ихдээ 2 удаа эргэнэ</b>.</span></li>'
       +   '<li><span>🚧</span><span>Зам нь <b>самбарын гадуугаар</b> ч тойрч болно.</span></li>'
-      +   '<li><span>✅</span><span>Самбар нь <b>заавал бүрэн арилгаж болохоор</b> зохиогдсон — холих хэрэггүй.</span></li>'
+      +   '<li><span>✅</span><span>Самбар нь <b>бүрэн арилгаж болохоор</b> шалгагдсан — холих хэрэггүй.</span></li>'
+      +   '<li><span>💡</span><span><b>3 сануулга</b> авч болно: холбогдох нэг хосыг гэрэлтүүлж өгнө. Дууссаны дараа дахиж авах боломжгүй.</span></li>'
       +   '<li><span>⏱️</span><span><b>3 минут дотор</b> бүгдийг арилгавал бүтэн <b>20 оноо</b>.</span></li>'
       +   '<li><span>📉</span><span>Дараа нь <b>30 секунд тутамд 1 оноо</b> хасагдана.</span></li>'
       +   '<li><span>↩️</span><span>Хуудсаа сэргээсэн ч <b>үргэлжилнэ</b> — цаг зогсохгүй.</span></li>'
@@ -1793,49 +1799,59 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       return false;
     }
 
-    /* --- УРВУУ БҮТЭЭЛТ: холихгүйгээр заавал дуусгах боломжтой самбар үүсгэнэ ---
-       Хоосон самбар дээр "холбогдож чадах" хос нүд рүү ээлж дараалан тавина.
-       Тавьсан дарааллын ЭСРЭГ дарааллаар арилгавал бүх хөзөр гарцаагүй арилна. */
-    function pickPair(empt){
-      var m = empt.length, a, b;
-      for(var t = 0; t < 150; t++){
-        a = empt[Math.floor(Math.random() * m)];
-        b = empt[Math.floor(Math.random() * m)];
-        if(a === b) continue;
-        if(path(Math.floor(a/C), a%C, Math.floor(b/C), b%C)) return [a, b];
+    /* --- САМБАР ҮҮСГЭХ --------------------------------------------------
+       Санамсаргүй самбар үүсгээд, түүнийг БОДИТООР дуустал нь бодож үзэж
+       шалгана (greedy simulation). Бүрэн арилж чадсан самбарыг л өгнө.
+       Тодорхой хугацаанд тохирох нь олдохгүй бол сүүлийнхийг авна —
+       тоглоом дундуур боломж дуусвал самбар өөрөө сэлгэдэг хамгаалалттай. */
+    function allMoves(){
+      var by = {}, out = [], i, v;
+      for(i = 0; i < N; i++){
+        v = grid[i];
+        if(v < 0) continue;
+        (by[v] || (by[v] = [])).push(i);
       }
-      for(var i = 0; i < m; i++)
-        for(var j = i + 1; j < m; j++){
-          a = empt[i]; b = empt[j];
-          if(path(Math.floor(a/C), a%C, Math.floor(b/C), b%C)) return [a, b];
-        }
-      return null;
+      for(var k in by){
+        var g = by[k];
+        for(var a = 0; a < g.length; a++)
+          for(var b = a + 1; b < g.length; b++)
+            if(path(Math.floor(g[a]/C), g[a]%C, Math.floor(g[b]/C), g[b]%C))
+              out.push([g[a], g[b]]);
+      }
+      return out;
     }
-    function genSolvable(){
+    function randBoard(){
+      var pool = [], e, c2, k, j, t;
+      for(e = 0; e < N / COPIES; e++)
+        for(c2 = 0; c2 < COPIES; c2++) pool.push(e % ON_EMOJI.length);
+      for(k = pool.length - 1; k > 0; k--){
+        j = Math.floor(Math.random() * (k + 1));
+        t = pool[k]; pool[k] = pool[j]; pool[j] = t;
+      }
+      return pool;
+    }
+    function solveTest(g0){
       var keep = grid;
-      var vals = [], v, k, i;
-      for(v = 0; v < N / COPIES; v++)
-        for(k = 0; k < COPIES / 2; k++) vals.push(v % ON_EMOJI.length);
-      for(var tryN = 0; tryN < 25; tryN++){
-        for(k = vals.length - 1; k > 0; k--){
-          var j = Math.floor(Math.random() * (k + 1));
-          var tv = vals[k]; vals[k] = vals[j]; vals[j] = tv;
-        }
-        var g = [], empt = [];
-        for(i = 0; i < N; i++){ g.push(-1); empt.push(i); }
-        grid = g;
-        var ok = true;
-        for(var s2 = 0; s2 < vals.length; s2++){
-          var pr = pickPair(empt);
-          if(!pr){ ok = false; break; }
-          g[pr[0]] = vals[s2]; g[pr[1]] = vals[s2];
-          empt.splice(empt.indexOf(pr[0]), 1);
-          empt.splice(empt.indexOf(pr[1]), 1);
-        }
-        if(ok){ grid = keep; return g; }
+      grid = g0.slice();
+      var left = N, guard = 0;
+      while(left > 0 && guard++ < 400){
+        var mv = allMoves();
+        if(!mv.length){ grid = keep; return false; }
+        var p = mv[Math.floor(Math.random() * mv.length)];
+        grid[p[0]] = -1; grid[p[1]] = -1; left -= 2;
       }
       grid = keep;
-      return null;
+      return left === 0;
+    }
+    function genSolvable(){
+      var t0 = Date.now(), last = randBoard();
+      if(solveTest(last)) return last;
+      while(Date.now() - t0 < 2500){
+        var g = randBoard();
+        last = g;
+        if(solveTest(g)) return g;
+      }
+      return last;
     }
 
     function shuffleBoard(){
@@ -1857,7 +1873,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     function saveState(){
       try {
         localStorage.setItem(SKEY, JSON.stringify({
-          u: AUTH.key || AUTH.name, t: t0, m: moves, g: grid
+          u: AUTH.key || AUTH.name, t: t0, m: moves, g: grid, h: hints
         }));
       } catch(e){}
     }
@@ -1894,8 +1910,10 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
 
       if(st){
         grid = st.g.slice(); moves = st.m || 0; t0 = st.t;
+        hints = (typeof st.h === "number") ? st.h : HINTS;
         if(!anyMove()) shuffleBoard();
       } else {
+        hints = HINTS;
         var made = genSolvable();
         if(made){ grid = made; }
         else {                                     /* нөөц хувилбар */
@@ -1917,7 +1935,8 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         '<h2>🀄 ХОЛБОХ</h2>'
       + '<p class="pbar"><span id="ontime">⏱️ 0:00</span>'
       +   '<span id="onleft">🀄 ' + left + '</span>'
-      +   '<span id="onmv">🔁 ' + moves + '</span></p>'
+      +   '<span id="onmv">🔁 ' + moves + '</span>'
+      +   '<button class="psmall" id="onhelp" type="button"></button></p>'
       + '<div class="ongrid" id="ongrid"></div>'
       + '<p class="wshint" id="onhint">'
       +   (st ? "↩️ Үргэлжлүүллээ — цаг зогсоогүй шүү" : "Ижил хоёр дүрсийг дараалан дар")
@@ -1934,6 +1953,8 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       }
       paint();
       g.addEventListener("click", onTap);
+      paintHelp();
+      body.querySelector("#onhelp").addEventListener("click", useHint);
 
       saveState();
       clearInterval(tmr);
@@ -1942,6 +1963,38 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     }
 
     function cell(i){ return body.querySelector('.otc[data-i="' + i + '"]'); }
+
+    /* ---------- сануулга (3 удаа) ---------- */
+    function paintHelp(){
+      var b = body ? body.querySelector("#onhelp") : null;
+      if(!b) return;
+      b.textContent = "💡 Сануулга " + hints + "/" + HINTS;
+      b.disabled = (hints <= 0);
+    }
+    function clearHint(){
+      if(!body) return;
+      var old = body.querySelectorAll(".otc.tip");
+      for(var i = 0; i < old.length; i++) old[i].classList.remove("tip");
+    }
+    function useHint(){
+      if(busy || hints <= 0) return;
+      var mv = allMoves();
+      var h = body.querySelector("#onhint");
+      if(!mv.length){ if(h) h.textContent = "🔀 Боломж алга — самбар сэлгэгдэнэ"; return; }
+      hints--;
+      paintHelp();
+      saveState();
+      var p = mv[Math.floor(Math.random() * mv.length)];
+      clearHint();
+      clearTimeout(hintTmr);
+      var a = cell(p[0]), b2 = cell(p[1]);
+      if(a) a.classList.add("tip");
+      if(b2) b2.classList.add("tip");
+      if(h) h.textContent = hints > 0
+        ? ("💡 Энэ хоёрыг холбо! Үлдсэн сануулга: " + hints)
+        : "💡 Сүүлчийн сануулга — цаашид өөрөө оллоо шүү 🦇";
+      hintTmr = setTimeout(clearHint, 3000);
+    }
 
     function paint(){
       for(var i = 0; i < N; i++){
@@ -1985,6 +2038,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
 
     function onTap(e){
       if(busy) return;
+      clearHint();
       var el = e.target;
       while(el && el !== body && !(el.classList && el.classList.contains("otc"))) el = el.parentNode;
       if(!el || !el.classList.contains("otc")) return;
