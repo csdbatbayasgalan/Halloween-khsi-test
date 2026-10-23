@@ -440,21 +440,21 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 /* --- QUIZ --- */
 .tlist li.now{cursor:pointer}
 .tlist li.now:active{transform:translate(2px,2px)}
-#quizo,#mpo,#eqo,#wso,#puzzo{position:fixed;inset:0;z-index:220;display:grid;place-items:center;padding:16px;
-  background:rgba(12,6,3,.88);overflow-y:auto;animation:qfade .35s ease}#quizo .qz,#mpo .qz,#eqo .qz,#wso .qz,#puzzo .qz{max-width:460px;width:100%;background:var(--cream);border:4px solid var(--ink);
+#quizo,#mpo,#eqo,#wso,#puzzo,#onet{position:fixed;inset:0;z-index:220;display:grid;place-items:center;padding:16px;
+  background:rgba(12,6,3,.88);overflow-y:auto;animation:qfade .35s ease}#quizo .qz,#mpo .qz,#eqo .qz,#wso .qz,#puzzo .qz,#onet .qz{max-width:460px;width:100%;background:var(--cream);border:4px solid var(--ink);
   border-radius:14px;box-shadow:7px 7px 0 var(--ink);padding:24px 20px;position:relative;
-  text-align:center;animation:pop .4s cubic-bezier(.2,1.5,.4,1)}#quizo .qx,#mpo .qx,#eqo .qx,#wso .qx,#puzzo .qx{position:absolute;right:-13px;top:-13px;width:38px;height:38px;border-radius:50%;
+  text-align:center;animation:pop .4s cubic-bezier(.2,1.5,.4,1)}#quizo .qx,#mpo .qx,#eqo .qx,#wso .qx,#puzzo .qx,#onet .qx{position:absolute;right:-13px;top:-13px;width:38px;height:38px;border-radius:50%;
   background:var(--cream);border:3px solid var(--ink);box-shadow:2px 2px 0 var(--ink);
-  font-size:17px;line-height:1;cursor:pointer;padding:0;z-index:2}#quizo h2,#mpo h2,#eqo h2,#wso h2,#puzzo h2{font-family:var(--display);font-weight:900;margin:0 0 10px;color:#e8402a;
-  font-size:clamp(1.4rem,6.5vw,2rem);letter-spacing:.03em;line-height:1.1}#quizo .zlead,#mpo .zlead,#eqo .zlead,#wso .zlead,#puzzo .zlead{margin:0 0 16px;font-weight:700;font-size:.88rem;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}#quizo .zfacts,#mpo .zfacts,#eqo .zfacts,#wso .zfacts,#puzzo .zfacts{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:7px;text-align:left}#quizo .zfacts li,#mpo .zfacts li,#eqo .zfacts li,#wso .zfacts li,#puzzo .zfacts li{display:flex;gap:9px;align-items:flex-start;font-size:.84rem;font-weight:700;
-  background:var(--cream-2);border:2px solid var(--ink);border-radius:9px;padding:8px 10px}#quizo .zbtn,#mpo .zbtn,#eqo .zbtn,#wso .zbtn,#puzzo .zbtn{font-family:var(--display);font-weight:900;font-size:1rem;padding:13px 30px;
+  font-size:17px;line-height:1;cursor:pointer;padding:0;z-index:2}#quizo h2,#mpo h2,#eqo h2,#wso h2,#puzzo h2,#onet h2{font-family:var(--display);font-weight:900;margin:0 0 10px;color:#e8402a;
+  font-size:clamp(1.4rem,6.5vw,2rem);letter-spacing:.03em;line-height:1.1}#quizo .zlead,#mpo .zlead,#eqo .zlead,#wso .zlead,#puzzo .zlead,#onet .zlead{margin:0 0 16px;font-weight:700;font-size:.88rem;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}#quizo .zfacts,#mpo .zfacts,#eqo .zfacts,#wso .zfacts,#puzzo .zfacts,#onet .zfacts{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:7px;text-align:left}#quizo .zfacts li,#mpo .zfacts li,#eqo .zfacts li,#wso .zfacts li,#puzzo .zfacts li,#onet .zfacts li{display:flex;gap:9px;align-items:flex-start;font-size:.84rem;font-weight:700;
+  background:var(--cream-2);border:2px solid var(--ink);border-radius:9px;padding:8px 10px}#quizo .zbtn,#mpo .zbtn,#eqo .zbtn,#wso .zbtn,#puzzo .zbtn,#onet .zbtn{font-family:var(--display);font-weight:900;font-size:1rem;padding:13px 30px;
   border-radius:11px;background:var(--yellow);color:var(--ink);border:3px solid var(--ink);
-  box-shadow:4px 4px 0 var(--ink);cursor:pointer}#quizo .zbtn:active,#mpo .zbtn:active,#eqo .zbtn:active,#wso .zbtn:active,#puzzo .zbtn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}#quizo .zstage,#mpo .zstage,#eqo .zstage,#wso .zstage,#puzzo .zstage{font-family:var(--display);font-weight:900;font-size:clamp(2.4rem,14vw,3.6rem);
-  color:#f0824a;margin:6px 0 2px;-webkit-text-stroke:3px var(--ink);paint-order:stroke fill}#quizo .zbar,#mpo .zbar,#eqo .zbar,#wso .zbar,#puzzo .zbar{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-weight:800;font-size:.74rem}#quizo .zbar .zp,#mpo .zbar .zp,#eqo .zbar .zp,#wso .zbar .zp,#puzzo .zbar .zp{flex:1;height:10px;border:2px solid var(--ink);border-radius:999px;overflow:hidden;
-  background:var(--cream-2)}#quizo .zbar .zp i,#mpo .zbar .zp i,#eqo .zbar .zp i,#wso .zbar .zp i,#puzzo .zbar .zp i{display:block;height:100%;background:#f0824a;width:0;transition:width .3s}#quizo .ztime,#mpo .ztime,#eqo .ztime,#wso .ztime,#puzzo .ztime{display:flex;align-items:center;gap:9px;margin:0 0 13px}#quizo .ztime .zt,#mpo .ztime .zt,#eqo .ztime .zt,#wso .ztime .zt,#puzzo .ztime .zt{flex:none;min-width:40px;height:30px;padding:0 9px;border-radius:999px;
+  box-shadow:4px 4px 0 var(--ink);cursor:pointer}#quizo .zbtn:active,#mpo .zbtn:active,#eqo .zbtn:active,#wso .zbtn:active,#puzzo .zbtn:active,#onet .zbtn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}#quizo .zstage,#mpo .zstage,#eqo .zstage,#wso .zstage,#puzzo .zstage,#onet .zstage{font-family:var(--display);font-weight:900;font-size:clamp(2.4rem,14vw,3.6rem);
+  color:#f0824a;margin:6px 0 2px;-webkit-text-stroke:3px var(--ink);paint-order:stroke fill}#quizo .zbar,#mpo .zbar,#eqo .zbar,#wso .zbar,#puzzo .zbar,#onet .zbar{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-weight:800;font-size:.74rem}#quizo .zbar .zp,#mpo .zbar .zp,#eqo .zbar .zp,#wso .zbar .zp,#puzzo .zbar .zp,#onet .zbar .zp{flex:1;height:10px;border:2px solid var(--ink);border-radius:999px;overflow:hidden;
+  background:var(--cream-2)}#quizo .zbar .zp i,#mpo .zbar .zp i,#eqo .zbar .zp i,#wso .zbar .zp i,#puzzo .zbar .zp i,#onet .zbar .zp i{display:block;height:100%;background:#f0824a;width:0;transition:width .3s}#quizo .ztime,#mpo .ztime,#eqo .ztime,#wso .ztime,#puzzo .ztime,#onet .ztime{display:flex;align-items:center;gap:9px;margin:0 0 13px}#quizo .ztime .zt,#mpo .ztime .zt,#eqo .ztime .zt,#wso .ztime .zt,#puzzo .ztime .zt,#onet .ztime .zt{flex:none;min-width:40px;height:30px;padding:0 9px;border-radius:999px;
   display:grid;place-items:center;font-family:var(--display);font-weight:900;font-size:.9rem;
-  background:var(--ink);color:var(--cream)}#quizo .ztime .zt.warn,#mpo .ztime .zt.warn,#eqo .ztime .zt.warn,#wso .ztime .zt.warn,#puzzo .ztime .zt.warn{background:#e8402a;color:#fff2ea;animation:ztick .5s steps(2) infinite}@keyframes ztick{from{transform:scale(1)}to{transform:scale(1.1)}}#quizo .ztime .ztp,#mpo .ztime .ztp,#eqo .ztime .ztp,#wso .ztime .ztp,#puzzo .ztime .ztp{flex:1;height:9px;border:2px solid var(--ink);border-radius:999px;
-  overflow:hidden;background:var(--cream-2)}#quizo .ztime .ztp i,#mpo .ztime .ztp i,#eqo .ztime .ztp i,#wso .ztime .ztp i,#puzzo .ztime .ztp i{display:block;height:100%;background:#f6c62a;width:100%;transition:width .9s linear}/* --- зохион байгуулагчийн харагдац (?admin) --- */
+  background:var(--ink);color:var(--cream)}#quizo .ztime .zt.warn,#mpo .ztime .zt.warn,#eqo .ztime .zt.warn,#wso .ztime .zt.warn,#puzzo .ztime .zt.warn,#onet .ztime .zt.warn{background:#e8402a;color:#fff2ea;animation:ztick .5s steps(2) infinite}@keyframes ztick{from{transform:scale(1)}to{transform:scale(1.1)}}#quizo .ztime .ztp,#mpo .ztime .ztp,#eqo .ztime .ztp,#wso .ztime .ztp,#puzzo .ztime .ztp,#onet .ztime .ztp{flex:1;height:9px;border:2px solid var(--ink);border-radius:999px;
+  overflow:hidden;background:var(--cream-2)}#quizo .ztime .ztp i,#mpo .ztime .ztp i,#eqo .ztime .ztp i,#wso .ztime .ztp i,#puzzo .ztime .ztp i,#onet .ztime .ztp i{display:block;height:100%;background:#f6c62a;width:100%;transition:width .9s linear}/* --- зохион байгуулагчийн харагдац (?admin) --- */
 #adm{position:fixed;inset:0;z-index:300;background:#141010;color:#f3ece0;
   overflow-y:auto;padding:18px 14px 60px;font-size:.84rem}#adm h2{font-family:var(--display);font-weight:900;margin:0 0 4px;color:#f6c62a;font-size:1.3rem}#adm .asub{margin:0 0 16px;opacity:.7;font-size:.78rem}#adm .ax{position:fixed;right:14px;top:14px;z-index:2;width:38px;height:38px;border-radius:50%;
   background:var(--cream);border:3px solid var(--ink);box-shadow:2px 2px 0 var(--ink);
@@ -493,10 +493,10 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 #eqo .eqdone small{display:block;margin-top:4px;font-family:inherit;font-weight:800;
   font-size:.72rem;opacity:.75;letter-spacing:0}
 #eqo input{text-align:center}
-#quizo .zwho,#puzzo .zwho,#wso .zwho,#eqo .zwho{margin:14px 0 12px;padding:11px 14px;
+#quizo .zwho,#puzzo .zwho,#onet .zwho,#wso .zwho,#eqo .zwho{margin:14px 0 12px;padding:11px 14px;
   border-radius:10px;background:var(--cream-2);border:3px solid var(--ink);
   font-weight:800;font-size:.9rem}
-#quizo .zwho b,#puzzo .zwho b,#wso .zwho b,#eqo .zwho b{font-family:var(--display);
+#quizo .zwho b,#puzzo .zwho b,#onet .zwho b,#wso .zwho b,#eqo .zwho b{font-family:var(--display);
   font-weight:900;font-size:1rem;letter-spacing:.02em}
 #eqo .eqwait{margin-top:16px;padding:12px 10px;border-radius:12px;background:var(--cream-2);
   border:3px solid var(--ink);text-align:left}
@@ -583,32 +583,32 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
   border:3px solid var(--ink);border-radius:999px;background:var(--cream-2);
   box-shadow:2px 2px 0 var(--ink);cursor:pointer}
 /* --- PUZZLE (Даалгавар 3) --- */
-#puzzo .qz{max-width:900px}
+#puzzo .qz,#onet .qz{max-width:900px}
 @media (max-width:640px){
-  #puzzo{padding:8px}
-  #puzzo .qz{padding:16px 10px;box-shadow:5px 5px 0 var(--ink)}
-  #puzzo .pgrid{gap:1px}
+  #puzzo,#onet{padding:8px}
+  #puzzo .qz,#onet .qz{padding:16px 10px;box-shadow:5px 5px 0 var(--ink)}
+  #puzzo .pgrid,#onet .pgrid{gap:1px}
 }
-#puzzo .zstage{font-size:clamp(1.6rem,8vw,2.2rem);margin:6px 0 0}
-#puzzo .pgrid{display:grid;gap:2px;max-width:860px;background:var(--ink);border:3px solid var(--ink);
+#puzzo .zstage,#onet .zstage{font-size:clamp(1.6rem,8vw,2.2rem);margin:6px 0 0}
+#puzzo .pgrid,#onet .pgrid{display:grid;gap:2px;max-width:860px;background:var(--ink);border:3px solid var(--ink);
   border-radius:10px;overflow:hidden;margin:0 auto 12px;width:100%;
   touch-action:none;user-select:none;-webkit-user-select:none}
-#puzzo .pc{position:relative;background-repeat:no-repeat;cursor:grab;
+#puzzo .pc,#onet .pc{position:relative;background-repeat:no-repeat;cursor:grab;
   background-color:var(--cream-2);transition:outline-color .15s,filter .15s}
-#puzzo .pc.sel{outline:4px solid #f6c62a;outline-offset:-4px;z-index:3;filter:brightness(1.12)}
-#puzzo .pc.hov{outline:4px dashed #6fd45a;outline-offset:-4px}
-#puzzo .pdrag{position:fixed;z-index:400;pointer-events:none;border-radius:4px;
+#puzzo .pc.sel,#onet .pc.sel{outline:4px solid #f6c62a;outline-offset:-4px;z-index:3;filter:brightness(1.12)}
+#puzzo .pc.hov,#onet .pc.hov{outline:4px dashed #6fd45a;outline-offset:-4px}
+#puzzo .pdrag,#onet .pdrag{position:fixed;z-index:400;pointer-events:none;border-radius:4px;
   box-shadow:0 10px 22px rgba(0,0,0,.55);outline:3px solid #f6c62a;background-repeat:no-repeat}
-#puzzo .pbar{display:flex;gap:8px;align-items:center;justify-content:center;
+#puzzo .pbar,#onet .pbar{display:flex;gap:8px;align-items:center;justify-content:center;
   margin:0 0 12px;font-weight:800;font-size:.78rem;flex-wrap:wrap}
-#puzzo .pbar span{background:var(--ink);color:var(--cream);border-radius:999px;padding:5px 12px}
-#puzzo .phint{display:block;width:100%;max-width:230px;margin:0 auto 12px;border:3px solid var(--ink);
+#puzzo .pbar span,#onet .pbar span{background:var(--ink);color:var(--cream);border-radius:999px;padding:5px 12px}
+#puzzo .phint,#onet .phint{display:block;width:100%;max-width:230px;margin:0 auto 12px;border:3px solid var(--ink);
   border-radius:8px;box-shadow:3px 3px 0 var(--ink)}
-#puzzo .pmini{margin:0 0 12px;font-size:.74rem;font-weight:700;opacity:.75}
-#puzzo .psmall{font-family:inherit;font-weight:800;font-size:.76rem;padding:8px 16px;
+#puzzo .pmini,#onet .pmini{margin:0 0 12px;font-size:.74rem;font-weight:700;opacity:.75}
+#puzzo .psmall,#onet .psmall{font-family:inherit;font-weight:800;font-size:.76rem;padding:8px 16px;
   border:3px solid var(--ink);border-radius:999px;background:var(--cream-2);
   box-shadow:2px 2px 0 var(--ink);cursor:pointer;margin:0 4px}
-#puzzo .psmall:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink)}
+#puzzo .psmall:active,#onet .psmall:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink)}
 /* --- ХОС ОЛОХ (Даалгавар 1) --- */
 #mpo .qz{max-width:760px}
 @media (max-width:640px){ #mpo{padding:8px} #mpo .qz{padding:16px 10px} }
@@ -633,6 +633,32 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 #mpo .mpc.got .mpf{background:#6fd45a}
 #mpo .mpc.got{cursor:default}
 #mpo .wshint{margin:0;font-size:.78rem;font-weight:800;min-height:1.2em}
+/* --- Даалгавар 2: ONET --- */
+#onet .qz{max-width:620px}
+@media (max-width:640px){ #onet{padding:8px} #onet .qz{padding:16px 8px} }
+#onet .pbar{display:flex;gap:7px;align-items:center;justify-content:center;flex-wrap:wrap;
+  font-family:var(--display);font-weight:900;font-size:.8rem;margin:0 0 11px}
+#onet .pbar span{background:var(--ink);color:var(--cream);border-radius:999px;padding:5px 11px}
+#onet .psmall{font-family:var(--display);font-weight:900;font-size:.76rem;padding:5px 12px;
+  border-radius:999px;border:2px solid var(--ink);background:#f6c62a;color:#2a1a10;
+  box-shadow:2px 2px 0 var(--ink);cursor:pointer}
+#onet .psmall:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink)}
+#onet .ongrid{position:relative;display:grid;gap:3px;margin:0 0 11px}
+#onet .otc{aspect-ratio:1;padding:0;cursor:pointer;line-height:1;
+  font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;
+  font-size:clamp(15px,4.6vw,27px);
+  border:2px solid var(--ink);border-radius:7px;
+  background:linear-gradient(165deg,#fff3e2,#f3d9bb);
+  box-shadow:inset 0 -3px 0 rgba(0,0,0,.18),2px 2px 0 var(--ink);
+  display:grid;place-items:center;transition:transform .1s,background .15s}
+#onet .otc:active{transform:translate(1px,1px)}
+#onet .otc.sel{background:linear-gradient(165deg,#ffe07a,#f6c62a);
+  box-shadow:inset 0 0 0 3px #e8402a,2px 2px 0 var(--ink)}
+#onet .otc.gone{visibility:hidden;pointer-events:none}
+#onet .onpath{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;
+  filter:drop-shadow(0 0 3px rgba(232,64,42,.9))}
+#onet .wshint{margin:0;font-size:.78rem;font-weight:800;min-height:1.2em}
+#mpo .mpb,#mpo .mpf{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
 .secret{margin-top:18px;padding:16px 14px;border-radius:12px;text-align:center;
   background:linear-gradient(165deg,#2a1109,#140905 65%,#1d0b06);
   border:3px solid #f6c62a;box-shadow:0 0 0 3px rgba(23,19,16,.55),0 0 26px rgba(246,198,42,.35);
@@ -1233,7 +1259,8 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
 
     /* ЭНД шинэ даалгавруудаа нэмнэ: { no: 2, title: "Даалгавар 2" } гэх мэт */
     var READY = [
-      { no: 1, title: "Даалгавар 1" }
+      { no: 1, title: "Даалгавар 1" },
+      { no: 2, title: "Даалгавар 2" }
     ];
 
     if(!READY.length){
@@ -1598,6 +1625,408 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     }
   })();
 
+  /* ---------- Даалгавар 2: ONET (холбох тоглоом) ---------- */
+  var ON_EMOJI = ["🎃","👻","🦇","🕷️","💀","🧟","🧛","🧙","👹","🤡",
+                  "😈","🪦","⚰️","🕯️","🔮","🍬","🧪","🐺","🦴","🗝️"];
+  (function(){
+    var C = 8, R = 10, COPIES = 4;                 /* 20 дүрс × 4 = 80 хөзөр */
+    var N = C * R;
+    var TOPN = 20, FREE_MS = 180000, STEP_MS = 30000;
+    var SKEY = "zeely.on2";
+    var o, body, xbtn, locked = false, player = "";
+    var grid = [], left = 0, sel = -1, moves = 0, t0 = 0, tmr = 0, busy = false;
+
+    function hook(){
+      var row = document.querySelector('#tlist li[data-no="2"]');
+      if(!row) return;
+      row.setAttribute("role", "button");
+      row.setAttribute("tabindex", "0");
+      row.addEventListener("click", open);
+      row.addEventListener("keydown", function(e){ if(e.key === "Enter" || e.key === " ") open(); });
+    }
+    setTimeout(hook, 0);
+
+    function shell(){
+      o = document.createElement("div");
+      o.id = "onet";
+      o.innerHTML = '<div class="qz"><button class="qx" type="button" aria-label="Хаах">✕</button>'
+                  + '<div id="onbody"></div></div>';
+      document.body.appendChild(o);
+      body = o.querySelector("#onbody");
+      xbtn = o.querySelector(".qx");
+      xbtn.addEventListener("click", function(){ if(!locked) close(); });
+      function blk(e){ e.preventDefault(); e.stopPropagation(); return false; }
+      ["copy","cut","dragstart","contextmenu"].forEach(function(ev){
+        o.addEventListener(ev, blk, true);
+      });
+    }
+    function close(){ clearInterval(tmr); tmr = 0; if(o){ o.remove(); o = null; } }
+
+    function open(){
+      if(o && !document.body.contains(o)) o = null;
+      if(o) return;
+      shell();
+      body.innerHTML = '<p class="zlead">Шалгаж байна…</p>';
+      if(!(window.ZEELY && window.ZEELY.cfgAll)){
+        var s0 = loadState();
+        if(s0){ player = AUTH.name; play(s0); } else intro();
+        return;
+      }
+      window.ZEELY.cfgAll(function(cfg){
+        if(cfg && cfg.task2 === "closed"){ shut(cfg.task2msg); return; }
+        var st = loadState();
+        if(st){ player = AUTH.name; play(st); return; }
+        intro();
+      });
+    }
+    function shut(msg){
+      locked = false; xbtn.hidden = false;
+      body.innerHTML = '<h2>🔒 ХААЛТТАЙ</h2><p class="zlead" id="onshut"></p>'
+                     + '<button class="zbtn" id="onclose">Хаах</button>';
+      body.querySelector("#onshut").textContent =
+        (msg && msg !== "closed") ? msg
+        : "Энэ даалгавар одоогоор хаалттай байна. Зохион байгуулагч нээхийг хүлээгээрэй 🦇";
+      body.querySelector("#onclose").addEventListener("click", close);
+    }
+
+    function intro(){
+      locked = false; xbtn.hidden = false;
+      body.innerHTML =
+        '<h2>🀄 ДААЛГАВАР 2<br>ХОЛБОХ</h2>'
+      + '<p class="zlead">Ижил хоёр дүрсийг <b>замаар холбож</b> устга. Бүгдийг арилга!</p>'
+      + '<ul class="zfacts">'
+      +   '<li><span>🀄</span><span><b>' + N + ' хөзөр.</b> Ижил хоёрыг дараалан дарж сонгоно.</span></li>'
+      +   '<li><span>🔗</span><span>Хоорондох зам нь <b>хоосон нүдээр</b> явж, <b>хамгийн ихдээ 2 удаа эргэнэ</b>.</span></li>'
+      +   '<li><span>🚧</span><span>Зам нь <b>самбарын гадуугаар</b> ч тойрч болно.</span></li>'
+      +   '<li><span>🔀</span><span>Холбох боломж дуусвал <b>өөрөө дахин холино</b>.</span></li>'
+      +   '<li><span>⏱️</span><span><b>3 минут дотор</b> бүгдийг арилгавал бүтэн <b>20 оноо</b>.</span></li>'
+      +   '<li><span>📉</span><span>Дараа нь <b>30 секунд тутамд 1 оноо</b> хасагдана.</span></li>'
+      +   '<li><span>↩️</span><span>Хуудсаа сэргээсэн ч <b>үргэлжилнэ</b> — цаг зогсохгүй.</span></li>'
+      + '</ul>'
+      + '<p class="zwho">👤 <b></b></p>'
+      + '<button class="zbtn" id="ongo">ЭХЛЭХ 🀄</button>'
+      + '<p class="zmsg" id="onmsg"></p>';
+      var msg = body.querySelector("#onmsg");
+      body.querySelector(".zwho b").textContent = AUTH.name;
+      body.querySelector("#ongo").addEventListener("click", function(){
+        player = AUTH.name;
+        msg.textContent = "Шалгаж байна…";
+        body.querySelector("#ongo").disabled = true;
+        if(!(window.ZEELY && window.ZEELY.findQuiz2)){ play(); return; }
+        window.ZEELY.findQuiz2(player, function(hit){
+          if(hit){ already(hit); return; }
+          play();
+        });
+      });
+    }
+
+    function already(hit){
+      locked = false; xbtn.hidden = false;
+      body.innerHTML = '<h2>🦇 БҮРТГЭГДСЭН</h2><p class="zlead"></p>'
+        + '<p class="zscore">' + hit.score + '</p><p class="zmeta">цуглуулсан оноо</p>'
+        + '<button class="zbtn" id="onclose">Хаах</button>';
+      body.querySelector(".zlead").textContent =
+        player + ", та энэ даалгаврыг аль хэдийн биелүүлсэн байна. Дахин оролцох боломжгүй 👻";
+      body.querySelector("#onclose").addEventListener("click", close);
+    }
+
+    /* ---------- замын логик (гадна талаар 1 нүдний хүрээтэй) ---------- */
+    function at(r, c){                       /* -1 = хоосон, -2 = хүрээ */
+      if(r < 0 || r >= R || c < 0 || c >= C) return -1;
+      return grid[r * C + c];
+    }
+    function free(r, c){ return at(r, c) === -1; }
+
+    /* a-аас b хүртэл ≤2 эргэлттэй зам хайна. Олдвол цэгүүдийг буцаана. */
+    function path(r1, c1, r2, c2){
+      var DIR = [[-1,0],[1,0],[0,-1],[0,1]];
+      var best = null;
+      /* BFS: төлөв = нүд + ирсэн чиглэл + эргэлтийн тоо */
+      var seen = {}, q = [];
+      for(var d = 0; d < 4; d++){
+        var nr = r1 + DIR[d][0], nc = c1 + DIR[d][1];
+        if(nr === r2 && nc === c2) return [[r1,c1],[r2,c2]];
+        if(nr < -1 || nr > R || nc < -1 || nc > C) continue;
+        if(!free(nr, nc)) continue;
+        q.push({ r: nr, c: nc, d: d, t: 0, p: [[r1,c1],[nr,nc]] });
+        seen[nr + "," + nc + "," + d] = 0;
+      }
+      while(q.length){
+        var s = q.shift();
+        for(var k = 0; k < 4; k++){
+          var t = s.t + (k === s.d ? 0 : 1);
+          if(t > 2) continue;
+          var rr = s.r + DIR[k][0], cc = s.c + DIR[k][1];
+          if(rr < -1 || rr > R || cc < -1 || cc > C) continue;
+          if(rr === r2 && cc === c2){
+            var p2 = s.p.slice(); p2.push([rr,cc]);
+            if(!best || p2.length < best.length) best = p2;
+            continue;
+          }
+          if(!free(rr, cc)) continue;
+          var key = rr + "," + cc + "," + k;
+          if(seen[key] !== undefined && seen[key] <= t) continue;
+          seen[key] = t;
+          var np = s.p.slice(); np.push([rr,cc]);
+          q.push({ r: rr, c: cc, d: k, t: t, p: np });
+        }
+      }
+      return best;
+    }
+
+    function anyMove(){
+      var pos = [];
+      for(var i = 0; i < N; i++) if(grid[i] >= 0) pos.push(i);
+      for(var a = 0; a < pos.length; a++){
+        for(var b = a + 1; b < pos.length; b++){
+          if(grid[pos[a]] !== grid[pos[b]]) continue;
+          if(path(Math.floor(pos[a]/C), pos[a]%C, Math.floor(pos[b]/C), pos[b]%C)) return true;
+        }
+      }
+      return false;
+    }
+
+    function shuffleBoard(){
+      var vals = [];
+      for(var i = 0; i < N; i++) if(grid[i] >= 0) vals.push(grid[i]);
+      var tries = 0;
+      do {
+        for(var k = vals.length - 1; k > 0; k--){
+          var j = Math.floor(Math.random() * (k + 1));
+          var t = vals[k]; vals[k] = vals[j]; vals[j] = t;
+        }
+        var v = 0;
+        for(var m = 0; m < N; m++) if(grid[m] >= 0) grid[m] = vals[v++];
+        tries++;
+      } while(!anyMove() && tries < 60);
+    }
+
+    /* ---------- тоглоом ---------- */
+    function saveState(){
+      try {
+        localStorage.setItem(SKEY, JSON.stringify({
+          u: AUTH.key || AUTH.name, t: t0, m: moves, g: grid
+        }));
+      } catch(e){}
+    }
+    function clearState(){ try { localStorage.removeItem(SKEY); } catch(e){} }
+    function loadState(){
+      try {
+        var st = JSON.parse(localStorage.getItem(SKEY) || "null");
+        if(!st || !st.g || st.g.length !== N) return null;
+        if(st.u !== (AUTH.key || AUTH.name)) return null;
+        if(!st.t || Date.now() - st.t > 45 * 60000) return null;
+        var any = false;
+        for(var i = 0; i < N; i++) if(st.g[i] >= 0) any = true;
+        return any ? st : null;
+      } catch(e){ return null; }
+    }
+
+    function fmt(ms){
+      var s = Math.floor(ms / 1000);
+      return Math.floor(s / 60) + ":" + ("0" + (s % 60)).slice(-2);
+    }
+    function tick(){
+      var el = body.querySelector("#ontime");
+      if(el) el.textContent = "⏱️ " + fmt(Date.now() - t0);
+    }
+    function count(){
+      var n = 0;
+      for(var i = 0; i < N; i++) if(grid[i] >= 0) n++;
+      return n;
+    }
+
+    function play(st){
+      locked = true; xbtn.hidden = true;
+      sel = -1; busy = false; moves = 0;
+
+      if(st){
+        grid = st.g.slice(); moves = st.m || 0; t0 = st.t;
+        if(!anyMove()) shuffleBoard();
+      } else {
+        grid = [];
+        var pool = [];
+        for(var e = 0; e < N / COPIES; e++)
+          for(var c2 = 0; c2 < COPIES; c2++) pool.push(e % ON_EMOJI.length);
+        for(var k = pool.length - 1; k > 0; k--){
+          var j = Math.floor(Math.random() * (k + 1));
+          var t = pool[k]; pool[k] = pool[j]; pool[j] = t;
+        }
+        grid = pool;
+        if(!anyMove()) shuffleBoard();
+        t0 = Date.now();
+      }
+      left = count();
+
+      body.innerHTML =
+        '<h2>🀄 ХОЛБОХ</h2>'
+      + '<p class="pbar"><span id="ontime">⏱️ 0:00</span>'
+      +   '<span id="onleft">🀄 ' + left + '</span>'
+      +   '<span id="onmv">🔁 ' + moves + '</span>'
+      +   '<button class="psmall" id="onmix" type="button">🔀 Холих</button></p>'
+      + '<div class="ongrid" id="ongrid"></div>'
+      + '<p class="wshint" id="onhint">'
+      +   (st ? "↩️ Үргэлжлүүллээ — цаг зогсоогүй шүү" : "Ижил хоёр дүрсийг дараалан дар")
+      + '</p>';
+
+      var g = body.querySelector("#ongrid");
+      g.style.gridTemplateColumns = "repeat(" + C + ", 1fr)";
+      for(var i = 0; i < N; i++){
+        var d = document.createElement("button");
+        d.type = "button";
+        d.className = "otc";
+        d.setAttribute("data-i", i);
+        g.appendChild(d);
+      }
+      paint();
+      g.addEventListener("click", onTap);
+      body.querySelector("#onmix").addEventListener("click", function(){
+        if(busy) return;
+        shuffleBoard(); sel = -1; paint(); saveState();
+        var h = body.querySelector("#onhint");
+        if(h) h.textContent = "🔀 Дахин холилоо";
+      });
+
+      saveState();
+      clearInterval(tmr);
+      tmr = setInterval(tick, 300);
+      tick();
+    }
+
+    function cell(i){ return body.querySelector('.otc[data-i="' + i + '"]'); }
+
+    function paint(){
+      for(var i = 0; i < N; i++){
+        var el = cell(i);
+        if(!el) continue;
+        var v = grid[i];
+        el.textContent = v >= 0 ? ON_EMOJI[v] : "";
+        el.classList.toggle("gone", v < 0);
+        el.classList.toggle("sel", i === sel);
+      }
+      var l = body.querySelector("#onleft");
+      if(l) l.textContent = "🀄 " + count();
+    }
+
+    function drawPath(pts){
+      var g = body.querySelector("#ongrid");
+      if(!g || !pts) return;
+      var gr = g.getBoundingClientRect();
+      var c0 = cell(0);
+      if(!c0) return;
+      var cr = c0.getBoundingClientRect();
+      var w = cr.width, gap = 3;
+      var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("class", "onpath");
+      svg.setAttribute("viewBox", "0 0 " + gr.width + " " + gr.height);
+      var d = "";
+      pts.forEach(function(p, k){
+        var x = (p[1] + 0.5) * (w + gap);
+        var y = (p[0] + 0.5) * (cr.height + gap);
+        d += (k ? " L" : "M") + x.toFixed(1) + " " + y.toFixed(1);
+      });
+      svg.innerHTML = '<path d="' + d + '" fill="none" stroke="#f6c62a" stroke-width="5" '
+                    + 'stroke-linecap="round" stroke-linejoin="round"/>';
+      g.appendChild(svg);
+      setTimeout(function(){ if(svg.parentNode) svg.parentNode.removeChild(svg); }, 420);
+    }
+
+    function onTap(e){
+      if(busy) return;
+      var el = e.target;
+      while(el && el !== body && !(el.classList && el.classList.contains("otc"))) el = el.parentNode;
+      if(!el || !el.classList.contains("otc")) return;
+      var i = parseInt(el.getAttribute("data-i"), 10);
+      if(grid[i] < 0) return;
+
+      if(sel === -1){ sel = i; paint(); return; }
+      if(sel === i){ sel = -1; paint(); return; }
+      if(grid[sel] !== grid[i]){
+        sel = i; paint();
+        var h0 = body.querySelector("#onhint");
+        if(h0) h0.textContent = "❌ Өөр дүрс";
+        return;
+      }
+
+      var a = sel, b = i;
+      var p = path(Math.floor(a/C), a%C, Math.floor(b/C), b%C);
+      moves++;
+      var mv = body.querySelector("#onmv");
+      if(mv) mv.textContent = "🔁 " + moves;
+
+      if(!p){
+        sel = -1; paint();
+        var h1 = body.querySelector("#onhint");
+        if(h1) h1.textContent = "🚧 Зам хаалттай байна";
+        return;
+      }
+
+      busy = true;
+      drawPath(p);
+      grid[a] = -1; grid[b] = -1;
+      sel = -1;
+      setTimeout(function(){
+        paint();
+        saveState();
+        var h = body.querySelector("#onhint");
+        var rest = count();
+        if(rest === 0){ busy = false; finish(); return; }
+        if(!anyMove()){
+          shuffleBoard(); paint(); saveState();
+          if(h) h.textContent = "🔀 Боломж дууссан тул дахин холилоо";
+        } else if(h) h.textContent = "✅ Холбогдлоо! Үлдсэн: " + rest;
+        busy = false;
+      }, 260);
+    }
+
+    function scoreOf(ms){
+      var over = Math.ceil((ms - FREE_MS) / STEP_MS);
+      if(over < 0) over = 0;
+      return Math.max(0, TOPN - over);
+    }
+
+    function finish(){
+      clearInterval(tmr); tmr = 0;
+      clearState();
+      var ms = Date.now() - t0;
+      var sc = scoreOf(ms);
+      var det = "o" + Math.round(ms / 1000) + "m" + moves + "|" + ubStamp();
+      locked = true; xbtn.hidden = true;
+      body.innerHTML =
+        '<h2>🎉 САМБАР ЦЭВЭРЛЭГДЛЭЭ!</h2>'
+      + '<p class="zstage">⏱️ ' + fmt(ms) + '</p>'
+      + '<p class="zscore">+' + sc + '</p>'
+      + '<p class="zmeta">оноо · 🔁 ' + moves + ' хөдөлгөөн</p>'
+      + (sc >= TOPN
+          ? '<p class="znote">🏆 3 минут дотор амжлаа — бүтэн ' + TOPN + ' оноо!</p>'
+          : (sc > 0
+              ? '<p class="znote">⏳ 3 минутаас хойш 30 секунд тутамд 1 оноо хасагдсан.</p>'
+              : '<p class="znote">😿 Хугацаа хэтэрсэн тул оноо нэмэгдэхгүй. '
+                + 'Гэхдээ дуусгасанд баяр хүргэе!</p>'))
+      + '<p class="zmsg" id="onm2">Хадгалж байна… 👻</p>';
+      var m2 = body.querySelector("#onm2");
+      function ok(){
+        locked = false; xbtn.hidden = false;
+        m2.textContent = "Амжилттай бүртгэгдлээ ✅";
+        var bt = document.createElement("button");
+        bt.className = "zbtn"; bt.textContent = "Хаах";
+        bt.addEventListener("click", function(){ close(); if(window.ZEELY) window.ZEELY.refresh(); });
+        body.appendChild(bt);
+        if(window.ZEELY && window.ZEELY.refresh) window.ZEELY.refresh();
+      }
+      function dead(){
+        locked = false; xbtn.hidden = false;
+        var bt = document.createElement("button");
+        bt.className = "zbtn"; bt.textContent = "Хаах";
+        bt.addEventListener("click", close);
+        body.appendChild(bt);
+      }
+      if(window.ZEELY && window.ZEELY.quiz2){
+        autoSave(function(d, f){ window.ZEELY.quiz2(player, sc, TOPN, d, f, det); }, m2, ok, dead, 4000);
+      } else { dead(); }
+    }
+  })();
+
   /* ---------- зохион байгуулагчийн харагдац: хаягийн ард ?admin ---------- */
   (function(){
     if(!/[?&#]admin/.test(location.search + location.hash)) return;
@@ -1698,7 +2127,6 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         }
         step();
       });
-    }
 
       /* --- Даалгавар 1: нээх/хаах + үр дүн --- */
       var t1 = document.createElement("div");
@@ -1784,6 +2212,93 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
           });
         });
       })();
+
+      /* --- Даалгавар 2: нээх/хаах + үр дүн --- */
+      var t2 = document.createElement("div");
+      t2.className = "actl"; t2.id = "actl2";
+      t2.innerHTML =
+        '<div class="arow"><span class="alab">\uD83C\uDC04 Даалгавар 2</span>'
+      +   '<span class="ast" id="ast2">шалгаж байна…</span>'
+      +   '<button class="abtn" id="atog2" disabled>…</button></div>'
+      + '<label class="amsgl" for="amsg2">Хаалттай үед оролцогчдод харуулах текст</label>'
+      + '<textarea id="amsg2" rows="3" maxlength="160" '
+      +   'placeholder="Жишээ: Маргааш 10:00 цагт нээгдэнэ 🦇"></textarea>'
+      + '<p class="ahint" id="ahint2">Хаах товч дарахад энэ текст хамт хадгалагдана.</p>'
+      + '<ul class="aulist" id="ares2"></ul>';
+      box.appendChild(t2);
+
+      (function(){
+        var st = t2.querySelector("#ast2"), tog = t2.querySelector("#atog2"),
+            msgEl = t2.querySelector("#amsg2"), hint = t2.querySelector("#ahint2"),
+            res = t2.querySelector("#ares2");
+        var state = "open";
+        function paint(){
+          var closed = (state === "closed");
+          st.textContent = closed ? "ХААЛТТАЙ" : "НЭЭЛТТЭЙ";
+          st.className = "ast " + (closed ? "sh" : "so");
+          tog.textContent = closed ? "Нээх" : "Хаах";
+          tog.disabled = false;
+        }
+        if(window.ZEELY && window.ZEELY.cfgAll){
+          window.ZEELY.cfgAll(function(cfg){
+            state = (cfg && cfg.task2 === "closed") ? "closed" : "open";
+            if(cfg && cfg.task2msg && cfg.task2msg !== "closed") msgEl.value = cfg.task2msg;
+            paint();
+          });
+        } else paint();
+        function bad(){ st.textContent = "алдаа"; tog.disabled = false; }
+        tog.addEventListener("click", function(){
+          var next = (state === "closed") ? "open" : "closed";
+          tog.disabled = true; st.textContent = "хадгалж байна…";
+          window.ZEELY.setCfgLong("task2msg", msgEl.value.trim(), function(){
+            window.ZEELY.setCfg("task2", next, function(){ state = next; paint(); }, bad);
+          }, bad);
+        });
+        var sbtn = document.createElement("button");
+        sbtn.className = "abtn asave"; sbtn.type = "button"; sbtn.textContent = "Текст хадгалах";
+        t2.appendChild(sbtn);
+        sbtn.addEventListener("click", function(){
+          sbtn.disabled = true; hint.textContent = "хадгалж байна…";
+          window.ZEELY.setCfgLong("task2msg", msgEl.value.trim(), function(){
+            sbtn.disabled = false; hint.textContent = "Хадгаллаа ✅";
+          }, function(){ sbtn.disabled = false; hint.textContent = "Алдаа гарлаа"; });
+        });
+
+        /* үр дүн */
+        if(window.ZEELY && window.ZEELY.fetchRows) window.ZEELY.fetchRows(function(rows){
+          if(!rows) return;
+          var list = [];
+          rows.forEach(function(v){
+            var q = window.ZEELY.parseQuiz(v);
+            if(q && q.pre === "QUIZ2") list.push(q);
+          });
+          list.sort(function(a, b){ return b.score - a.score; });
+          res.innerHTML = "";
+          if(!list.length){
+            var li0 = document.createElement("li");
+            li0.className = "off";
+            li0.innerHTML = '<span>Одоогоор хэн ч биелүүлээгүй</span>';
+            res.appendChild(li0);
+            return;
+          }
+          list.forEach(function(q){
+            var d = String(q.detail || "");
+            var mt = d.match(/o(\d+)/), mm = d.match(/m(\d+)/);
+            var li = document.createElement("li");
+            li.className = "on";
+            var extra = q.score + ' оноо'
+              + (mt ? ' · ⏱ ' + Math.floor(mt[1] / 60) + ":" + ("0" + (mt[1] % 60)).slice(-2) : '')
+              + (mm ? ' · 🔁 ' + mm[1] : '')
+              + (q.at ? ' · 🕒 ' + q.at : '');
+            li.innerHTML = '<span></span><span class="amini"></span>';
+            li.querySelector("span").textContent = q.name;
+            li.querySelector(".amini").textContent = extra;
+            res.appendChild(li);
+          });
+        });
+      })();
+    }
+
 
     setTimeout(draw, 500);
   })();
@@ -2020,7 +2535,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     },
     parseQuiz: parseQuiz,
     /* тухайн нэр QUIZ-д аль хэдийн хариулсан эсэх */
-    findQuiz: function(nm, cb){ findBy(["QUIZ", "QUIZ2"], nm, cb); },
+    findQuiz: function(nm, cb){ findBy(["QUIZ"], nm, cb); },
     /* Даалгавар 3 (puzzle) — тухайн нэр аль хэдийн биелүүлсэн эсэх */
     findQuiz3: function(nm, cb){ findBy(["QUIZ3"], nm, cb); },
     /* Даалгавар 4 (кино хайх) */
@@ -2031,6 +2546,11 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     findQuiz1: function(nm, cb){ findBy(["QUIZ1"], nm, cb); },
     quiz1: function(nm, sc, total, done, fail, detail){
       saveRow("QUIZ1-" + myId + "~" + sc + "/" + total, nm, detail || "1", done, fail);
+    },
+    /* Даалгавар 2 (Onet — холбох) */
+    findQuiz2: function(nm, cb){ findBy(["QUIZ2"], nm, cb); },
+    quiz2: function(nm, sc, total, done, fail, detail){
+      saveRow("QUIZ2-" + myId + "~" + sc + "/" + total, nm, detail || "1", done, fail);
     },
     /* --- нэвтрэх өгөгдөл: хэрэглэгчид + нийтийн нууц үг --- */
     loginData: function(cb){
