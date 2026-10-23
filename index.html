@@ -568,8 +568,7 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
   font-size:.76rem;font-weight:700;padding:6px 10px;border-radius:7px;
   background:rgba(233,226,206,.07)}
 #adm .aulist li.off{opacity:.6}
-#adm .aulist li.on span::before{content:"🔒 "}
-#adm .aulist li.off span::before{content:"⏳ "}
+#adm .aulist li.on span::before{content:"👤 "}
 #adm .aures{font:inherit;font-size:.66rem;font-weight:800;border:2px solid rgba(233,226,206,.4);
   border-radius:999px;background:transparent;color:inherit;padding:3px 10px;cursor:pointer}
 #adm .aures:disabled{opacity:.45;cursor:default}
@@ -726,18 +725,12 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     <p class="lg-sub" id="lgsub">Нэрээ сонгоод нууц үгээ оруулна уу</p>
 
     <div id="lgwrap">
-      <label class="lg-lab" for="lguser">Таны нэр</label>
-      <input id="lgsearch" type="text" autocomplete="off" placeholder="Нэрээ хайх…">
-      <select id="lguser" size="1"></select>
+      <label class="lg-lab" for="lgname">Нэвтрэх нэр</label>
+      <input id="lgname" type="text" autocomplete="username" autocapitalize="off"
+             autocorrect="off" spellcheck="false" placeholder="Нэвтрэх нэрээ бичнэ үү">
 
-      <div id="lgpwbox">
-        <label class="lg-lab" for="lgpw" id="lgpwlab">Нууц үг</label>
-        <input id="lgpw" type="password" autocomplete="current-password" placeholder="••••••">
-        <div id="lgpw2box" hidden>
-          <label class="lg-lab" for="lgpw2">Нууц үгээ давтана уу</label>
-          <input id="lgpw2" type="password" autocomplete="new-password" placeholder="••••••">
-        </div>
-      </div>
+      <label class="lg-lab" for="lgpw">Нууц үг</label>
+      <input id="lgpw" type="password" autocomplete="current-password" placeholder="••••••">
 
       <button class="lg-go" id="lggo" type="button">НЭВТРЭХ 👻</button>
       <p class="lg-msg" id="lgmsg"></p>
@@ -978,6 +971,8 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
   tick();
 
   /* ---------- НЭВТРЭХ ---------- */
+  /* Бүх хүнд нэг нууц үг. Өөрчлөхийг хүсвэл ?admin хуудаснаас солино. */
+  var DEF_PW = "252e26f6b9c15c37a78957d041e18932";   /* = Halloweenzeely123@ */
   var AUTH = { name: "", key: "" };
   (function(){
     try {
@@ -1054,92 +1049,61 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
 
     if(AUTH.name){ unlock(); return; }
 
-    var sel = box.querySelector("#lguser"),
-        search = box.querySelector("#lgsearch"),
-        pw = box.querySelector("#lgpw"),
-        pw2box = box.querySelector("#lgpw2box"),
-        pw2 = box.querySelector("#lgpw2"),
-        pwlab = box.querySelector("#lgpwlab"),
-        go = box.querySelector("#lggo"),
-        msg = box.querySelector("#lgmsg"),
-        sub = box.querySelector("#lgsub");
-    var LIST = [], shown = [];
-
-    function render(){
-      var q = (search.value || "").trim().toLowerCase();
-      shown = LIST.filter(function(u){ return !q || u.name.toLowerCase().indexOf(q) > -1; });
-      sel.innerHTML = "";
-      shown.forEach(function(u, i){
-        var o = document.createElement("option");
-        o.value = String(i); o.textContent = u.name;
-        sel.appendChild(o);
-      });
-      sel.size = Math.min(7, Math.max(1, shown.length));
-      mode();
-    }
-    function cur(){ return shown[parseInt(sel.value, 10)] || null; }
-    function mode(){
-      var u = cur();
-      var fresh = u && (!u.hash || u.hash === "-");
-      pw2box.hidden = !fresh;
-      pwlab.textContent = fresh ? "Шинэ нууц үг зохионо уу" : "Нууц үг";
-      go.textContent = fresh ? "БҮРТГҮҮЛЭХ 🎃" : "НЭВТРЭХ 👻";
-      pw.placeholder = fresh ? "дор хаяж 4 тэмдэгт" : "••••••";
-    }
-    search.addEventListener("input", render);
-    sel.addEventListener("change", mode);
+    var nameEl = box.querySelector("#lgname"),
+        pwEl   = box.querySelector("#lgpw"),
+        go     = box.querySelector("#lggo"),
+        msg    = box.querySelector("#lgmsg"),
+        sub    = box.querySelector("#lgsub");
+    var LIST = null, PWHASH = null, loading = true;
 
     function load(){
-      sub.textContent = "Жагсаалтыг уншиж байна…";
-      if(!(window.ZEELY && window.ZEELY.users)){ setTimeout(load, 400); return; }
-      window.ZEELY.users(function(list){
-        if(!list){ sub.textContent = "Сүлжээний алдаа — дахин оролдож байна…"; setTimeout(load, 3000); return; }
-        LIST = list;
-        if(!LIST.length){
-          sub.textContent = "Хэрэглэгчийн жагсаалт хоосон байна.\nЗохион байгуулагчид хандана уу 🦇";
-          box.querySelector("#lgwrap").hidden = true;
-          return;
-        }
-        sub.textContent = "Нэрээ сонгоод нууц үгээ оруулна уу";
-        render();
+      sub.textContent = "Уншиж байна…";
+      if(!(window.ZEELY && window.ZEELY.loginData)){ setTimeout(load, 400); return; }
+      window.ZEELY.loginData(function(d){
+        if(!d){ sub.textContent = "Сүлжээний алдаа — дахин оролдож байна…"; setTimeout(load, 3000); return; }
+        LIST = d.users; PWHASH = d.pw; loading = false;
+        sub.textContent = LIST.length
+          ? "Нэвтрэх нэр, нууц үгээ оруулна уу"
+          : "Хэрэглэгч бүртгэгдээгүй байна.\nЗохион байгуулагчид хандана уу 🦇";
+        try { nameEl.focus(); } catch(e){}
       });
     }
     load();
 
     function submit(){
-      var u = cur();
-      if(!u){ msg.textContent = "Нэрээ сонгоно уу"; return; }
-      var p = pw.value || "";
-      var fresh = !u.hash || u.hash === "-";
-      if(p.length < 4){ msg.textContent = "Нууц үг дор хаяж 4 тэмдэгт байх ёстой"; return; }
-      if(fresh && p !== (pw2.value || "")){ msg.textContent = "Нууц үг хоорондоо таарахгүй байна"; return; }
+      if(loading){ msg.textContent = "Түр хүлээнэ үү…"; return; }
+      var v = (nameEl.value || "").trim().replace(/\s+/g, " ");
+      var p = pwEl.value || "";
+      if(!v){ msg.textContent = "Нэвтрэх нэрээ бичнэ үү"; nameEl.focus(); return; }
+      if(!p){ msg.textContent = "Нууц үгээ бичнэ үү"; pwEl.focus(); return; }
+
+      var want = window.ZEELY.nameKey(v);
+      var hit = null;
+      (LIST || []).forEach(function(u){
+        if(window.ZEELY.nameKey(u.name) === want) hit = u;
+      });
+      if(!hit){
+        msg.className = "lg-msg";
+        msg.textContent = "Ийм нэвтрэх нэр бүртгэгдээгүй байна 🦇";
+        return;
+      }
       go.disabled = true; msg.className = "lg-msg"; msg.textContent = "Шалгаж байна…";
       sha(p, function(h){
-        if(fresh){
-          window.ZEELY.setUser(u.key, u.name, h, function(){
-            msg.className = "lg-msg ok"; msg.textContent = "Бүртгэгдлээ ✅";
-            AUTH.name = u.name; AUTH.key = u.key;
-            try { localStorage.setItem("zeely.auth", JSON.stringify({ n: u.name, k: u.key })); } catch(e){}
-            setTimeout(unlock, 500);
-          }, function(){
-            go.disabled = false; msg.textContent = "Хадгалж чадсангүй, дахин оролдоно уу 🦇";
-          });
-          return;
-        }
-        if(h !== u.hash){
+        if(h !== (PWHASH || DEF_PW)){
           go.disabled = false;
           msg.textContent = "Нууц үг буруу байна 🦇";
-          pw.value = ""; pw.focus();
+          pwEl.value = ""; pwEl.focus();
           return;
         }
-        AUTH.name = u.name; AUTH.key = u.key;
-        try { localStorage.setItem("zeely.auth", JSON.stringify({ n: u.name, k: u.key })); } catch(e){}
-        msg.className = "lg-msg ok"; msg.textContent = "Тавтай морил, " + u.name + "! 👻";
+        AUTH.name = hit.name; AUTH.key = hit.key;
+        try { localStorage.setItem("zeely.auth", JSON.stringify({ n: hit.name, k: hit.key })); } catch(e){}
+        msg.className = "lg-msg ok";
+        msg.textContent = "Тавтай морил, " + hit.name + "! 👻";
         setTimeout(unlock, 450);
       });
     }
     go.addEventListener("click", submit);
-    [pw, pw2].forEach(function(el){
+    [nameEl, pwEl].forEach(function(el){
       el.addEventListener("keydown", function(e){ if(e.key === "Enter") submit(); });
     });
   })();
@@ -1339,10 +1303,15 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         '<div class="arow"><span class="alab">👥 Хэрэглэгчид</span>'
       +   '<span class="ast" id="austat">…</span>'
       +   '<button class="abtn" id="auadd">Нэмэх</button></div>'
-      + '<label class="amsgl" for="aunames">Нэрсийг мөр бүрт нэгээр нь бичнэ (жнь: Г.Батбаясгалан)</label>'
+      + '<label class="amsgl" for="aunames">Нэвтрэх нэрсийг мөр бүрт нэгээр нь бичнэ</label>'
       + '<textarea id="aunames" rows="5" placeholder="Г.Батбаясгалан&#10;Б.Оргил&#10;С.Сараа"></textarea>'
-      + '<p class="ahint" id="auhint">Нэмсэн хүн сайт руу орохдоо нэрээ сонгоод нууц үгээ өөрөө зохионо.</p>'
-      + '<ul class="aulist" id="aulist"></ul>';
+      + '<p class="ahint" id="auhint">Эдгээр нэрээр л сайт руу нэвтэрнэ. Нууц үг бүгдэд нь адилхан.</p>'
+      + '<ul class="aulist" id="aulist"></ul>'
+      + '<div class="arow gorow"><span class="alab">🔑 Нийтийн нууц үг</span></div>'
+      + '<input id="aupw" type="text" placeholder="Halloweenzeely123@" autocomplete="off">'
+      + '<div class="arow"><button class="abtn" id="aupwset">Нууц үг солих</button>'
+      +   '<span class="ast" id="aupwst"></span></div>'
+      + '<p class="ahint">Хоосон орхивол анхны нууц үг (Halloweenzeely123@) хэвээр ажиллана.</p>';
       box.appendChild(ctl);
 
       var st = ctl.querySelector("#austat"), add = ctl.querySelector("#auadd"),
@@ -1360,14 +1329,13 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
             var li = document.createElement("li");
             var set = u.hash && u.hash !== "-";
             li.className = set ? "on" : "off";
-            li.innerHTML = '<span></span><button class="aures" type="button">'
-                         + (set ? "нууц үг арилгах" : "хүлээгдэж байна") + '</button>';
+            li.className = "on";
+            li.innerHTML = '<span></span><button class="aures" type="button">хасах</button>';
             li.querySelector("span").textContent = u.name;
             var btn = li.querySelector(".aures");
-            if(!set){ btn.disabled = true; }
-            else btn.addEventListener("click", function(){
+            btn.addEventListener("click", function(){
               btn.disabled = true; btn.textContent = "…";
-              window.ZEELY.setUser(u.key, u.name, "-", function(){ load(); },
+              window.ZEELY.setUser(u.key, "", "-", function(){ load(); },
                                    function(){ btn.disabled = false; btn.textContent = "алдаа"; });
             });
             ul.appendChild(li);
@@ -1375,6 +1343,23 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         });
       }
       load();
+
+      /* нийтийн нууц үг солих */
+      var pwIn = ctl.querySelector("#aupw"), pwBtn = ctl.querySelector("#aupwset"),
+          pwSt = ctl.querySelector("#aupwst");
+      pwBtn.addEventListener("click", function(){
+        var v = (pwIn.value || "").trim();
+        if(v.length < 4){ pwSt.textContent = "дор хаяж 4 тэмдэгт"; pwSt.className = "ast"; return; }
+        pwBtn.disabled = true; pwSt.textContent = "хадгалж байна…"; pwSt.className = "ast";
+        sha(v, function(h){
+          window.ZEELY.setCfg("pw", h, function(){
+            pwBtn.disabled = false; pwIn.value = "";
+            pwSt.textContent = "солигдлоо ✅"; pwSt.className = "ast so";
+          }, function(){
+            pwBtn.disabled = false; pwSt.textContent = "алдаа"; pwSt.className = "ast sh";
+          });
+        });
+      });
 
       add.addEventListener("click", function(){
         var names = (ta.value || "").split(/\n+/)
@@ -1642,6 +1627,25 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     findQuiz4: function(nm, cb){ findBy(["QUIZ4"], nm, cb); },
     /* Даалгавар 5 (emoji таавар) */
     findQuiz5: function(nm, cb){ findBy(["QUIZ5"], nm, cb); },
+    /* --- нэвтрэх өгөгдөл: хэрэглэгчид + нийтийн нууц үг --- */
+    loginData: function(cb){
+      fetch(SHEET_URL + "?t=" + Date.now())
+        .then(function(r){ return syncClock(r).json(); })
+        .then(function(rows){
+          var out = [], pw = null;
+          (rows || []).forEach(function(v){
+            var id = String(v.id || "");
+            if(id === "CFG-pw"){ pw = String(v.name || "").trim() || null; return; }
+            if(id.indexOf("USER-") !== 0) return;
+            var nm = String(v.name || "").trim();
+            if(!nm) return;
+            out.push({ id: id, key: id.slice(5), name: nm });
+          });
+          out.sort(function(a, b){ return a.name.localeCompare(b.name, "mn"); });
+          setTimeout(function(){ cb({ users: out, pw: pw }); }, 0);
+        })
+        .catch(function(){ cb(null); });
+    },
     /* --- хэрэглэгчийн сан --- */
     users: function(cb){
       fetch(SHEET_URL + "?t=" + Date.now())
