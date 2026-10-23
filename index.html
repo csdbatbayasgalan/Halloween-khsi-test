@@ -1353,9 +1353,15 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       if(o) return;
       shell();
       body.innerHTML = '<p class="zlead">Шалгаж байна…</p>';
-      if(!(window.ZEELY && window.ZEELY.cfgAll)){ intro(); return; }
+      if(!(window.ZEELY && window.ZEELY.cfgAll)){
+        var st0 = loadState();
+        if(st0){ player = AUTH.name; play(st0); } else intro();
+        return;
+      }
       window.ZEELY.cfgAll(function(cfg){
         if(cfg && cfg.task1 === "closed"){ shut(cfg.task1msg); return; }
+        var st = loadState();
+        if(st){ player = AUTH.name; play(st); return; }   /* дундуураа орхисон тоглоом */
         intro();
       });
     }
@@ -1380,6 +1386,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       +   '<li><span>🧠</span><span>Хаана юу байсныг <b>цээжилж</b> байвал хурдан дуусна.</span></li>'
       +   '<li><span>⏱️</span><span><b>3 минут дотор</b> бүгдийг олбол бүтэн <b>20 оноо</b>.</span></li>'
       +   '<li><span>📉</span><span>Дараа нь <b>30 секунд тутамд 1 оноо</b> хасагдана: 3:30 = <b>19</b> · 4:00 = <b>18</b> …</span></li>'
+      +   '<li><span>↩️</span><span>Хуудсаа сэргээсэн ч <b>яг тэндээсээ үргэлжилнэ</b> — цаг зогсохгүй.</span></li>'
       +   '<li><span>🚪</span><span>Нэг л удаа бүртгэгдэнэ — <b>дахин оролцох боломжгүй</b>.</span></li>'
       + '</ul>'
       + '<p class="zwho">👤 <b></b></p>'
@@ -1419,24 +1426,31 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       if(el) el.textContent = "⏱️ " + fmt(Date.now() - t0);
     }
 
-    function play(){
+    function play(st){
       locked = true; xbtn.hidden = true;
       up = []; done = 0; moves = 0; busy = false;
 
-      deck = [];
-      MP_EMOJI.forEach(function(e, i){ deck.push({ e: e, id: i }); deck.push({ e: e, id: i }); });
-      for(var k = deck.length - 1; k > 0; k--){
-        var j = Math.floor(Math.random() * (k + 1));
-        var t = deck[k]; deck[k] = deck[j]; deck[j] = t;
+      if(st){
+        deck = st.d.map(function(id){ return { e: MP_EMOJI[id], id: id }; });
+        moves = st.m || 0;
+      } else {
+        deck = [];
+        MP_EMOJI.forEach(function(e, i){ deck.push({ e: e, id: i }); deck.push({ e: e, id: i }); });
+        for(var k = deck.length - 1; k > 0; k--){
+          var j = Math.floor(Math.random() * (k + 1));
+          var t = deck[k]; deck[k] = deck[j]; deck[j] = t;
+        }
       }
 
       body.innerHTML =
         '<h2>🃏 ХОС ОЛОХ</h2>'
       + '<p class="pbar"><span id="mptime">⏱️ 0:00</span>'
       +   '<span id="mpfound">🤝 0/' + PAIRS + '</span>'
-      +   '<span id="mpmv">🔁 0</span></p>'
+      +   '<span id="mpmv">🔁 ' + moves + '</span></p>'
       + '<div class="mpgrid" id="mpgrid"></div>'
-      + '<p class="wshint" id="mphint">Хоёр карт дараад ижил эсэхийг хар</p>';
+      + '<p class="wshint" id="mphint">'
+      +   (st ? "↩️ Үргэлжлүүллээ — цаг зогсоогүй шүү" : "Хоёр карт дараад ижил эсэхийг хар")
+      + '</p>';
 
       var g = body.querySelector("#mpgrid");
       deck.forEach(function(c, i){
@@ -1450,13 +1464,50 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         g.appendChild(d);
       });
       g.addEventListener("click", onTap);
-      t0 = Date.now();
+
+      if(st){
+        t0 = st.t;
+        (st.g || []).forEach(function(i){
+          var el = card(i);
+          if(el) el.classList.add("got");
+        });
+        done = Math.floor((st.g || []).length / 2);
+        var f0 = body.querySelector("#mpfound");
+        if(f0) f0.textContent = "🤝 " + done + "/" + PAIRS;
+      } else {
+        t0 = Date.now();
+      }
+      saveState();
       clearInterval(tmr);
       tmr = setInterval(tick, 300);
       tick();
     }
 
     function card(i){ return body.querySelector('.mpc[data-i="' + i + '"]'); }
+
+    /* --- явцыг төхөөрөмж дээр хадгална: хуудас сэргээсэн ч үргэлжилнэ --- */
+    var SKEY = "zeely.mp1";
+    function saveState(){
+      try {
+        var got = [], els = body.querySelectorAll(".mpc.got");
+        for(var i = 0; i < els.length; i++) got.push(parseInt(els[i].getAttribute("data-i"), 10));
+        localStorage.setItem(SKEY, JSON.stringify({
+          u: AUTH.key || AUTH.name, t: t0, m: moves,
+          d: deck.map(function(c){ return c.id; }), g: got
+        }));
+      } catch(e){}
+    }
+    function clearState(){ try { localStorage.removeItem(SKEY); } catch(e){} }
+    function loadState(){
+      try {
+        var st = JSON.parse(localStorage.getItem(SKEY) || "null");
+        if(!st || !st.d || st.d.length !== N) return null;
+        if(st.u !== (AUTH.key || AUTH.name)) return null;
+        if(!st.t || Date.now() - st.t > 45 * 60000) return null;   /* хэт хуучин */
+        if((st.g || []).length >= N) return null;                  /* аль хэдийн дууссан */
+        return st;
+      } catch(e){ return null; }
+    }
 
     function onTap(e){
       if(busy) return;
@@ -1483,10 +1534,12 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         if(f) f.textContent = "🤝 " + done + "/" + PAIRS;
         var h = body.querySelector("#mphint");
         if(h) h.textContent = "✅ " + deck[a].e + " хос олдлоо!";
+        saveState();
         if(done >= PAIRS) setTimeout(finish, 500);
         return;
       }
       busy = true;
+      saveState();
       var h2 = body.querySelector("#mphint");
       if(h2) h2.textContent = "❌ Таарсангүй";
       setTimeout(function(){
@@ -1505,6 +1558,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
 
     function finish(){
       clearInterval(tmr); tmr = 0;
+      clearState();
       var ms = Date.now() - t0;
       var sc = scoreOf(ms);
       var det = "p" + Math.round(ms / 1000) + "m" + moves + "|" + ubStamp();
