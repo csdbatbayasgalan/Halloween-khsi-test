@@ -664,15 +664,15 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
   filter:drop-shadow(0 0 3px rgba(232,64,42,.9))}
 #onet .wshint{margin:0;font-size:.78rem;font-weight:800;min-height:1.2em}
 /* --- Даалгавар 3: ЯЛГААГ НЬ ОЛ --- */
-#t3o .qz{max-width:520px}
+#t3o .qz{max-width:560px}
 @media (max-width:640px){ #t3o{padding:8px} #t3o .qz{padding:16px 10px} }
 #t3o .pbar{display:flex;gap:7px;align-items:center;justify-content:center;flex-wrap:wrap;
   font-family:var(--display);font-weight:900;font-size:.8rem;margin:0 0 12px}
 #t3o .pbar span{background:var(--ink);color:var(--cream);border-radius:999px;padding:5px 11px}
-#t3o .t3grid{display:grid;gap:5px;margin:0 0 12px}
+#t3o .t3grid{display:grid;gap:5px;margin:0 0 12px;font-size:28px}
 #t3o .t3c{aspect-ratio:1;padding:0;cursor:pointer;line-height:1;
   font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;
-  font-size:clamp(16px,5vw,34px);
+  font-size:inherit;
   border:2px solid var(--ink);border-radius:8px;
   background:linear-gradient(165deg,#fff3e2,#f3d9bb);
   box-shadow:inset 0 -3px 0 rgba(0,0,0,.15),2px 2px 0 var(--ink);
@@ -2194,9 +2194,20 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     var EASY = [["🐺","🦉"],["🍬","🧪"],["🪦","🏚️"],["🦇","🕸️"],["🔮","🧿"],["🕯️","🗡️"],["🎃","🍊"]];
     var MED  = [["🍬","🍭"],["🧛","🧟"],["🤡","👺"],["🦂","🕷️"],["⚰️","🪦"],["🧙","🧌"],["🌹","🥀"]];
     var HARD = [["💀","☠️"],["😈","👿"],["🌕","🌝"],["👹","👺"],["🌝","🌚"],["🧟","🧌"],["😱","😨"]];
-    var SIZES = [3,3,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8];
-    var LVLS = SIZES.length;                       /* 20 түвшин */
-    var PEN_MS = 3000;                             /* буруу дарвал +3 сек */
+    /* ижил emoji дундаас ялгаа нь ЗӨВХӨН хувиргалт байх хэцүү түвшнүүд */
+    var ASYM = ["🐺","🧛","🧙","🗡️","🧹","🥀","🪄","🪓","🍭","🐀","🧟","🧌"];
+    var ANY  = ["🎃","👻","🦇","💀","🧟","🧛","🧙","👹","🤡","😈","🪦","⚰️",
+                "🕯️","🔮","🍬","🧪","🐺","🦴","🗝️","🕷️","☠️","🌕","🧿","🥀"];
+    var TWEAK = [
+      ["flip", ""], ["size", ".80"], ["spin", "16"], ["fade", ".66"],
+      ["flip", ""], ["size", ".86"], ["spin", "11"], ["fade", ".76"],
+      ["size", ".90"], ["spin", "8"],  ["fade", ".82"], ["size", ".93"]
+    ];
+    var SIZES = [4,4,5,5,6,6,6,7,7,7,8,8,8,9,9,9,10,10,10,10,
+                 10,10,11,11,11,11,12,12,12,12];
+    var LVLS = SIZES.length;                       /* 30 түвшин */
+    var TWEAK_FROM = 18;                           /* 19-р түвшнээс ижил emoji болно */
+    var PEN_MS = 5000;                             /* буруу дарвал +5 сек */
     var TOPN = 20, FREE_MS = 180000, STEP_MS = 30000;
     var DEAD_MS = FREE_MS + TOPN * STEP_MS;        /* 13:00 — үүнээс хойш оноо 0 */
     var SKEY = "zeely.t3";
@@ -2263,7 +2274,8 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       + '<p class="zlead">Бүх дүрс ижил — ганцхан нь өөр. Түүнийг нь ол!</p>'
       + '<ul class="zfacts">'
       +   '<li><span>🔎</span><span><b>' + LVLS + ' түвшин.</b> Түвшин бүрт нэг л дүрс бусдаасаа ялгаатай.</span></li>'
-      +   '<li><span>📈</span><span>Түвшин ахих тусам <b>талбай томорч</b>, ялгаа нь <b>нарийсна</b>.</span></li>'
+      +   '<li><span>📈</span><span>Түвшин ахих тусам <b>талбай томорч</b> (4×4 → 12×12), ялгаа нь <b>нарийсна</b>.</span></li>'
+      +   '<li><span>🫥</span><span>Сүүлийн түвшнүүдэд <b>бүгд яг ижил дүрс</b> болно — ганц нь л эргүүлсэн, бүдэг эсвэл жижиг байна.</span></li>'
       +   '<li><span>❌</span><span>Буруу дарвал <b>+' + (PEN_MS / 1000) + ' секунд</b> нэмэгдэнэ.</span></li>'
       +   '<li><span>⏱️</span><span><b>3 минут дотор</b> бүгдийг дуусгавал бүтэн <b>' + TOPN + ' оноо</b>.</span></li>'
       +   '<li><span>📉</span><span>Дараа нь <b>30 секунд тутамд 1 оноо</b> хасагдана.</span></li>'
@@ -2336,9 +2348,22 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     }
 
     function pairFor(i){
-      var set = (i < 7) ? EASY : (i < 14 ? MED : HARD);
+      var set = (i < 7) ? EASY : (i < 13 ? MED : HARD);
       var p = set[Math.floor(Math.random() * set.length)];
       return (Math.random() < 0.5) ? [p[0], p[1]] : [p[1], p[0]];
+    }
+    /* хэцүү түвшний хувиргалт: бүгд ижил emoji, ганц нь л өөрөөр харагдана */
+    function tweakFor(i){
+      var t = TWEAK[Math.min(i - TWEAK_FROM, TWEAK.length - 1)];
+      var em = (t[0] === "flip")
+             ? ASYM[Math.floor(Math.random() * ASYM.length)]
+             : ANY[Math.floor(Math.random() * ANY.length)];
+      var css = "";
+      if(t[0] === "flip") css = "transform:scaleX(-1)";
+      else if(t[0] === "size") css = "transform:scale(" + t[1] + ")";
+      else if(t[0] === "spin") css = "transform:rotate(" + t[1] + "deg)";
+      else css = "opacity:" + t[1];
+      return { em: em, css: css };
     }
 
     function play(st){
@@ -2367,10 +2392,13 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
 
     function level(){
       var n = SIZES[lv], total = n * n;
-      var pr = pairFor(lv);
+      var tw = (lv >= TWEAK_FROM) ? tweakFor(lv) : null;
+      var pr = tw ? [tw.em, tw.em] : pairFor(lv);
       oddAt = Math.floor(Math.random() * total);
       var g = body.querySelector("#t3grid");
-      g.style.gridTemplateColumns = "repeat(" + n + ", 1fr)";
+      g.style.gridTemplateColumns = "repeat(" + n + ", minmax(0, 1fr))";
+      g.style.gap = (n >= 10 ? 3 : (n >= 7 ? 4 : 6)) + "px";
+      g.style.fontSize = Math.max(13, Math.min(32, Math.round(310 / n))) + "px";
       g.innerHTML = "";
       for(var i = 0; i < total; i++){
         var d = document.createElement("button");
@@ -2378,8 +2406,10 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         d.className = "t3c";
         d.setAttribute("data-i", i);
         d.textContent = (i === oddAt) ? pr[1] : pr[0];
-        if(lv >= 11){                                   /* бага зэрэг эргүүлж төвөгтэй болгоно */
-          var a = (Math.random() * 24 - 12).toFixed(1);
+        if(tw){
+          if(i === oddAt) d.style.cssText = tw.css;     /* цэвэр тор — ялгаа нь зөвхөн энэ */
+        } else if(lv >= 9){                             /* бага зэрэг эргүүлж төвөгтэй болгоно */
+          var a = (Math.random() * 26 - 13).toFixed(1);
           d.style.transform = "rotate(" + a + "deg)";
         }
         g.appendChild(d);
