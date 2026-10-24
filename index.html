@@ -1351,6 +1351,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
   (function(){
     var PAIRS = MP_EMOJI.length, N = PAIRS * 2;     /* 25 хос · 50 карт */
     var TOPN = 20, FREE_MS = 180000, STEP_MS = 30000;
+    var DEAD_MS = FREE_MS + TOPN * STEP_MS;        /* 13:00 — үүнээс хойш оноо 0 */
     var o, body, xbtn, locked = false, player = "";
     var deck = [], up = [], done = 0, moves = 0, t0 = 0, tmr = 0, busy = false;
 
@@ -1418,6 +1419,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       +   '<li><span>🧠</span><span>Хаана юу байсныг <b>цээжилж</b> байвал хурдан дуусна.</span></li>'
       +   '<li><span>⏱️</span><span><b>3 минут дотор</b> бүгдийг олбол бүтэн <b>20 оноо</b>.</span></li>'
       +   '<li><span>📉</span><span>Дараа нь <b>30 секунд тутамд 1 оноо</b> хасагдана: 3:30 = <b>19</b> · 4:00 = <b>18</b> …</span></li>'
+      +   '<li><span>⌛</span><span><b>13 минутын дараа</b> оноо 0 болох тул даалгавар <b>автоматаар дуусч</b>, үр дүн бүртгэгдэнэ.</span></li>'
       +   '<li><span>↩️</span><span>Хуудсаа сэргээсэн ч <b>яг тэндээсээ үргэлжилнэ</b> — цаг зогсохгүй.</span></li>'
       +   '<li><span>🚪</span><span>Нэг л удаа бүртгэгдэнэ — <b>дахин оролцох боломжгүй</b>.</span></li>'
       + '</ul>'
@@ -1454,8 +1456,16 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       return Math.floor(s / 60) + ":" + ("0" + (s % 60)).slice(-2);
     }
     function tick(){
+      var ms = Date.now() - t0;
       var el = body.querySelector("#mptime");
-      if(el) el.textContent = "⏱️ " + fmt(Date.now() - t0);
+      if(el){
+        el.textContent = "⏱️ " + fmt(ms);
+        el.style.background = (ms > DEAD_MS - 60000) ? "#e8402a" : "";
+      }
+      if(ms >= DEAD_MS){                      /* оноо авах боломжгүй боллоо */
+        clearInterval(tmr); tmr = 0;
+        finish(true);
+      }
     }
 
     function play(st){
@@ -1588,24 +1598,31 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       return Math.max(0, TOPN - over);
     }
 
-    function finish(){
+    function finish(timeUp){
       clearInterval(tmr); tmr = 0;
       clearState();
       var ms = Date.now() - t0;
-      var sc = scoreOf(ms);
-      var det = "p" + Math.round(ms / 1000) + "m" + moves + "|" + ubStamp();
+      if(timeUp && ms > DEAD_MS) ms = DEAD_MS;
+      var restP = PAIRS - Math.floor(body.querySelectorAll('.mpc.got').length / 2);
+      var sc = timeUp ? 0 : scoreOf(ms);
+      var det = "p" + Math.round(ms / 1000) + "m" + moves
+              + (timeUp ? ("r" + restP) : "") + "|" + ubStamp();
       locked = true; xbtn.hidden = true;
       body.innerHTML =
-        '<h2>🎉 БҮХ ХОС ОЛДЛОО!</h2>'
+        (timeUp ? '<h2>⌛ ХУГАЦАА ДУУСЛАА</h2>' : '<h2>🎉 БҮХ ХОС ОЛДЛОО!</h2>')
       + '<p class="zstage">⏱️ ' + fmt(ms) + '</p>'
       + '<p class="zscore">+' + sc + '</p>'
-      + '<p class="zmeta">оноо · 🔁 ' + moves + ' хөдөлгөөн</p>'
-      + (sc >= TOPN
+      + '<p class="zmeta">оноо · 🔁 ' + moves + ' хөдөлгөөн'
+      +   (timeUp ? (' · 🃏 ' + restP + ' хос үлдсэн') : '') + '</p>'
+      + (timeUp
+          ? '<p class="znote">😿 13 минут өнгөрсөн тул оноо авах боломж дууссан — '
+            + 'даалгавар автоматаар дуусгаж, үр дүнг тань бүртгэлээ.</p>'
+          : (sc >= TOPN
           ? '<p class="znote">🏆 3 минут дотор амжлаа — бүтэн ' + TOPN + ' оноо!</p>'
           : (sc > 0
               ? '<p class="znote">⏳ 3 минутаас хойш 30 секунд тутамд 1 оноо хасагдсан.</p>'
               : '<p class="znote">😿 Хугацаа хэтэрсэн тул оноо нэмэгдэхгүй. '
-                + 'Гэхдээ дуусгасанд баяр хүргэе!</p>'))
+                + 'Гэхдээ дуусгасанд баяр хүргэе!</p>')))
       + '<p class="zmsg" id="mpm2">Хадгалж байна… 👻</p>';
       var m2 = body.querySelector("#mpm2");
       function ok(){
@@ -1639,6 +1656,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     var C = 16, R = 10, COPIES = 4;                /* 40 дүрс × 4 = 160 хөзөр */
     var N = C * R;
     var TOPN = 20, FREE_MS = 180000, STEP_MS = 30000;
+    var DEAD_MS = FREE_MS + TOPN * STEP_MS;        /* 13:00 — үүнээс хойш оноо 0 */
     var SKEY = "zeely.on2";
     var o, body, xbtn, locked = false, player = "";
     var grid = [], left = 0, sel = -1, moves = 0, t0 = 0, tmr = 0, busy = false;
@@ -1710,6 +1728,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       +   '<li><span>💡</span><span><b>3 сануулга</b> авч болно: холбогдох нэг хосыг гэрэлтүүлж өгнө. Дууссаны дараа дахиж авах боломжгүй.</span></li>'
       +   '<li><span>⏱️</span><span><b>3 минут дотор</b> бүгдийг арилгавал бүтэн <b>20 оноо</b>.</span></li>'
       +   '<li><span>📉</span><span>Дараа нь <b>30 секунд тутамд 1 оноо</b> хасагдана.</span></li>'
+      +   '<li><span>⌛</span><span><b>13 минутын дараа</b> оноо 0 болох тул даалгавар <b>автоматаар дуусч</b>, үр дүн бүртгэгдэнэ.</span></li>'
       +   '<li><span>↩️</span><span>Хуудсаа сэргээсэн ч <b>үргэлжилнэ</b> — цаг зогсохгүй.</span></li>'
       + '</ul>'
       + '<p class="zwho">👤 <b></b></p>'
@@ -1895,8 +1914,16 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       return Math.floor(s / 60) + ":" + ("0" + (s % 60)).slice(-2);
     }
     function tick(){
+      var ms = Date.now() - t0;
       var el = body.querySelector("#ontime");
-      if(el) el.textContent = "⏱️ " + fmt(Date.now() - t0);
+      if(el){
+        el.textContent = "⏱️ " + fmt(ms);
+        el.style.background = (ms > DEAD_MS - 60000) ? "#e8402a" : "";
+      }
+      if(ms >= DEAD_MS){                      /* оноо авах боломжгүй боллоо */
+        clearInterval(tmr); tmr = 0;
+        finish(true);
+      }
     }
     function count(){
       var n = 0;
@@ -2091,24 +2118,32 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       return Math.max(0, TOPN - over);
     }
 
-    function finish(){
+    function finish(timeUp){
       clearInterval(tmr); tmr = 0;
+      clearHint();
       clearState();
       var ms = Date.now() - t0;
-      var sc = scoreOf(ms);
-      var det = "o" + Math.round(ms / 1000) + "m" + moves + "|" + ubStamp();
+      if(timeUp && ms > DEAD_MS) ms = DEAD_MS;
+      var rest = count();
+      var sc = timeUp ? 0 : scoreOf(ms);
+      var det = "o" + Math.round(ms / 1000) + "m" + moves
+              + (timeUp ? ("r" + rest) : "") + "|" + ubStamp();
       locked = true; xbtn.hidden = true;
       body.innerHTML =
-        '<h2>🎉 САМБАР ЦЭВЭРЛЭГДЛЭЭ!</h2>'
+        (timeUp ? '<h2>⌛ ХУГАЦАА ДУУСЛАА</h2>' : '<h2>🎉 САМБАР ЦЭВЭРЛЭГДЛЭЭ!</h2>')
       + '<p class="zstage">⏱️ ' + fmt(ms) + '</p>'
       + '<p class="zscore">+' + sc + '</p>'
-      + '<p class="zmeta">оноо · 🔁 ' + moves + ' хөдөлгөөн</p>'
-      + (sc >= TOPN
-          ? '<p class="znote">🏆 3 минут дотор амжлаа — бүтэн ' + TOPN + ' оноо!</p>'
-          : (sc > 0
-              ? '<p class="znote">⏳ 3 минутаас хойш 30 секунд тутамд 1 оноо хасагдсан.</p>'
-              : '<p class="znote">😿 Хугацаа хэтэрсэн тул оноо нэмэгдэхгүй. '
-                + 'Гэхдээ дуусгасанд баяр хүргэе!</p>'))
+      + '<p class="zmeta">оноо · 🔁 ' + moves + ' хөдөлгөөн'
+      +   (timeUp ? (' · 🀄 ' + rest + ' хөзөр үлдсэн') : '') + '</p>'
+      + (timeUp
+          ? '<p class="znote">😿 13 минут өнгөрсөн тул оноо авах боломж дууссан — '
+            + 'даалгавар автоматаар дуусгаж, үр дүнг тань бүртгэлээ.</p>'
+          : (sc >= TOPN
+              ? '<p class="znote">🏆 3 минут дотор амжлаа — бүтэн ' + TOPN + ' оноо!</p>'
+              : (sc > 0
+                  ? '<p class="znote">⏳ 3 минутаас хойш 30 секунд тутамд 1 оноо хасагдсан.</p>'
+                  : '<p class="znote">😿 Хугацаа хэтэрсэн тул оноо нэмэгдэхгүй. '
+                    + 'Гэхдээ дуусгасанд баяр хүргэе!</p>')))
       + '<p class="zmsg" id="onm2">Хадгалж байна… 👻</p>';
       var m2 = body.querySelector("#onm2");
       function ok(){
