@@ -440,21 +440,21 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 /* --- QUIZ --- */
 .tlist li.now{cursor:pointer}
 .tlist li.now:active{transform:translate(2px,2px)}
-#quizo,#mpo,#eqo,#wso,#puzzo,#onet,#t3o{position:fixed;inset:0;z-index:220;display:grid;place-items:center;padding:16px;
-  background:rgba(12,6,3,.88);overflow-y:auto;animation:qfade .35s ease}#quizo .qz,#mpo .qz,#eqo .qz,#wso .qz,#puzzo .qz,#onet .qz,#t3o .qz{max-width:460px;width:100%;background:var(--cream);border:4px solid var(--ink);
+#quizo,#mpo,#eqo,#wso,#puzzo,#onet,#t3o,#t4o,#t5o{position:fixed;inset:0;z-index:220;display:grid;place-items:center;padding:16px;
+  background:rgba(12,6,3,.88);overflow-y:auto;animation:qfade .35s ease}#quizo .qz,#mpo .qz,#eqo .qz,#wso .qz,#puzzo .qz,#onet .qz,#t3o .qz,#t4o .qz,#t5o .qz{max-width:460px;width:100%;background:var(--cream);border:4px solid var(--ink);
   border-radius:14px;box-shadow:7px 7px 0 var(--ink);padding:24px 20px;position:relative;
-  text-align:center;animation:pop .4s cubic-bezier(.2,1.5,.4,1)}#quizo .qx,#mpo .qx,#eqo .qx,#wso .qx,#puzzo .qx,#onet .qx,#t3o .qx{position:absolute;right:-13px;top:-13px;width:38px;height:38px;border-radius:50%;
+  text-align:center;animation:pop .4s cubic-bezier(.2,1.5,.4,1)}#quizo .qx,#mpo .qx,#eqo .qx,#wso .qx,#puzzo .qx,#onet .qx,#t3o .qx,#t4o .qx,#t5o .qx{position:absolute;right:-13px;top:-13px;width:38px;height:38px;border-radius:50%;
   background:var(--cream);border:3px solid var(--ink);box-shadow:2px 2px 0 var(--ink);
-  font-size:17px;line-height:1;cursor:pointer;padding:0;z-index:2}#quizo h2,#mpo h2,#eqo h2,#wso h2,#puzzo h2,#onet h2,#t3o h2{font-family:var(--display);font-weight:900;margin:0 0 10px;color:#e8402a;
-  font-size:clamp(1.4rem,6.5vw,2rem);letter-spacing:.03em;line-height:1.1}#quizo .zlead,#mpo .zlead,#eqo .zlead,#wso .zlead,#puzzo .zlead,#onet .zlead,#t3o .zlead{margin:0 0 16px;font-weight:700;font-size:.88rem;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}#quizo .zfacts,#mpo .zfacts,#eqo .zfacts,#wso .zfacts,#puzzo .zfacts,#onet .zfacts,#t3o .zfacts{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:7px;text-align:left}#quizo .zfacts li,#mpo .zfacts li,#eqo .zfacts li,#wso .zfacts li,#puzzo .zfacts li,#onet .zfacts li,#t3o .zfacts li{display:flex;gap:9px;align-items:flex-start;font-size:.84rem;font-weight:700;
-  background:var(--cream-2);border:2px solid var(--ink);border-radius:9px;padding:8px 10px}#quizo .zbtn,#mpo .zbtn,#eqo .zbtn,#wso .zbtn,#puzzo .zbtn,#onet .zbtn,#t3o .zbtn{font-family:var(--display);font-weight:900;font-size:1rem;padding:13px 30px;
+  font-size:17px;line-height:1;cursor:pointer;padding:0;z-index:2}#quizo h2,#mpo h2,#eqo h2,#wso h2,#puzzo h2,#onet h2,#t3o h2,#t4o h2,#t5o h2{font-family:var(--display);font-weight:900;margin:0 0 10px;color:#e8402a;
+  font-size:clamp(1.4rem,6.5vw,2rem);letter-spacing:.03em;line-height:1.1}#quizo .zlead,#mpo .zlead,#eqo .zlead,#wso .zlead,#puzzo .zlead,#onet .zlead,#t3o .zlead,#t4o .zlead,#t5o .zlead{margin:0 0 16px;font-weight:700;font-size:.88rem;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}#quizo .zfacts,#mpo .zfacts,#eqo .zfacts,#wso .zfacts,#puzzo .zfacts,#onet .zfacts,#t3o .zfacts,#t4o .zfacts,#t5o .zfacts{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:7px;text-align:left}#quizo .zfacts li,#mpo .zfacts li,#eqo .zfacts li,#wso .zfacts li,#puzzo .zfacts li,#onet .zfacts li,#t3o .zfacts li,#t4o .zfacts li,#t5o .zfacts li{display:flex;gap:9px;align-items:flex-start;font-size:.84rem;font-weight:700;
+  background:var(--cream-2);border:2px solid var(--ink);border-radius:9px;padding:8px 10px}#quizo .zbtn,#mpo .zbtn,#eqo .zbtn,#wso .zbtn,#puzzo .zbtn,#onet .zbtn,#t3o .zbtn,#t4o .zbtn,#t5o .zbtn{font-family:var(--display);font-weight:900;font-size:1rem;padding:13px 30px;
   border-radius:11px;background:var(--yellow);color:var(--ink);border:3px solid var(--ink);
-  box-shadow:4px 4px 0 var(--ink);cursor:pointer}#quizo .zbtn:active,#mpo .zbtn:active,#eqo .zbtn:active,#wso .zbtn:active,#puzzo .zbtn:active,#onet .zbtn:active,#t3o .zbtn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}#quizo .zstage,#mpo .zstage,#eqo .zstage,#wso .zstage,#puzzo .zstage,#onet .zstage,#t3o .zstage{font-family:var(--display);font-weight:900;font-size:clamp(2.4rem,14vw,3.6rem);
-  color:#f0824a;margin:6px 0 2px;-webkit-text-stroke:3px var(--ink);paint-order:stroke fill}#quizo .zbar,#mpo .zbar,#eqo .zbar,#wso .zbar,#puzzo .zbar,#onet .zbar,#t3o .zbar{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-weight:800;font-size:.74rem}#quizo .zbar .zp,#mpo .zbar .zp,#eqo .zbar .zp,#wso .zbar .zp,#puzzo .zbar .zp,#onet .zbar .zp,#t3o .zbar .zp{flex:1;height:10px;border:2px solid var(--ink);border-radius:999px;overflow:hidden;
-  background:var(--cream-2)}#quizo .zbar .zp i,#mpo .zbar .zp i,#eqo .zbar .zp i,#wso .zbar .zp i,#puzzo .zbar .zp i,#onet .zbar .zp i,#t3o .zbar .zp i{display:block;height:100%;background:#f0824a;width:0;transition:width .3s}#quizo .ztime,#mpo .ztime,#eqo .ztime,#wso .ztime,#puzzo .ztime,#onet .ztime,#t3o .ztime{display:flex;align-items:center;gap:9px;margin:0 0 13px}#quizo .ztime .zt,#mpo .ztime .zt,#eqo .ztime .zt,#wso .ztime .zt,#puzzo .ztime .zt,#onet .ztime .zt,#t3o .ztime .zt{flex:none;min-width:40px;height:30px;padding:0 9px;border-radius:999px;
+  box-shadow:4px 4px 0 var(--ink);cursor:pointer}#quizo .zbtn:active,#mpo .zbtn:active,#eqo .zbtn:active,#wso .zbtn:active,#puzzo .zbtn:active,#onet .zbtn:active,#t3o .zbtn:active,#t4o .zbtn:active,#t5o .zbtn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}#quizo .zstage,#mpo .zstage,#eqo .zstage,#wso .zstage,#puzzo .zstage,#onet .zstage,#t3o .zstage,#t4o .zstage,#t5o .zstage{font-family:var(--display);font-weight:900;font-size:clamp(2.4rem,14vw,3.6rem);
+  color:#f0824a;margin:6px 0 2px;-webkit-text-stroke:3px var(--ink);paint-order:stroke fill}#quizo .zbar,#mpo .zbar,#eqo .zbar,#wso .zbar,#puzzo .zbar,#onet .zbar,#t3o .zbar,#t4o .zbar,#t5o .zbar{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-weight:800;font-size:.74rem}#quizo .zbar .zp,#mpo .zbar .zp,#eqo .zbar .zp,#wso .zbar .zp,#puzzo .zbar .zp,#onet .zbar .zp,#t3o .zbar .zp,#t4o .zbar .zp,#t5o .zbar .zp{flex:1;height:10px;border:2px solid var(--ink);border-radius:999px;overflow:hidden;
+  background:var(--cream-2)}#quizo .zbar .zp i,#mpo .zbar .zp i,#eqo .zbar .zp i,#wso .zbar .zp i,#puzzo .zbar .zp i,#onet .zbar .zp i,#t3o .zbar .zp i,#t4o .zbar .zp i,#t5o .zbar .zp i{display:block;height:100%;background:#f0824a;width:0;transition:width .3s}#quizo .ztime,#mpo .ztime,#eqo .ztime,#wso .ztime,#puzzo .ztime,#onet .ztime,#t3o .ztime,#t4o .ztime,#t5o .ztime{display:flex;align-items:center;gap:9px;margin:0 0 13px}#quizo .ztime .zt,#mpo .ztime .zt,#eqo .ztime .zt,#wso .ztime .zt,#puzzo .ztime .zt,#onet .ztime .zt,#t3o .ztime .zt,#t4o .ztime .zt,#t5o .ztime .zt{flex:none;min-width:40px;height:30px;padding:0 9px;border-radius:999px;
   display:grid;place-items:center;font-family:var(--display);font-weight:900;font-size:.9rem;
-  background:var(--ink);color:var(--cream)}#quizo .ztime .zt.warn,#mpo .ztime .zt.warn,#eqo .ztime .zt.warn,#wso .ztime .zt.warn,#puzzo .ztime .zt.warn,#onet .ztime .zt.warn,#t3o .ztime .zt.warn{background:#e8402a;color:#fff2ea;animation:ztick .5s steps(2) infinite}@keyframes ztick{from{transform:scale(1)}to{transform:scale(1.1)}}#quizo .ztime .ztp,#mpo .ztime .ztp,#eqo .ztime .ztp,#wso .ztime .ztp,#puzzo .ztime .ztp,#onet .ztime .ztp,#t3o .ztime .ztp{flex:1;height:9px;border:2px solid var(--ink);border-radius:999px;
-  overflow:hidden;background:var(--cream-2)}#quizo .ztime .ztp i,#mpo .ztime .ztp i,#eqo .ztime .ztp i,#wso .ztime .ztp i,#puzzo .ztime .ztp i,#onet .ztime .ztp i,#t3o .ztime .ztp i{display:block;height:100%;background:#f6c62a;width:100%;transition:width .9s linear}/* --- зохион байгуулагчийн харагдац (?admin) --- */
+  background:var(--ink);color:var(--cream)}#quizo .ztime .zt.warn,#mpo .ztime .zt.warn,#eqo .ztime .zt.warn,#wso .ztime .zt.warn,#puzzo .ztime .zt.warn,#onet .ztime .zt.warn,#t3o .ztime .zt.warn,#t4o .ztime .zt.warn,#t5o .ztime .zt.warn{background:#e8402a;color:#fff2ea;animation:ztick .5s steps(2) infinite}@keyframes ztick{from{transform:scale(1)}to{transform:scale(1.1)}}#quizo .ztime .ztp,#mpo .ztime .ztp,#eqo .ztime .ztp,#wso .ztime .ztp,#puzzo .ztime .ztp,#onet .ztime .ztp,#t3o .ztime .ztp,#t4o .ztime .ztp,#t5o .ztime .ztp{flex:1;height:9px;border:2px solid var(--ink);border-radius:999px;
+  overflow:hidden;background:var(--cream-2)}#quizo .ztime .ztp i,#mpo .ztime .ztp i,#eqo .ztime .ztp i,#wso .ztime .ztp i,#puzzo .ztime .ztp i,#onet .ztime .ztp i,#t3o .ztime .ztp i,#t4o .ztime .ztp i,#t5o .ztime .ztp i{display:block;height:100%;background:#f6c62a;width:100%;transition:width .9s linear}/* --- зохион байгуулагчийн харагдац (?admin) --- */
 #adm{position:fixed;inset:0;z-index:300;background:#141010;color:#f3ece0;
   overflow-y:auto;padding:18px 14px 60px;font-size:.84rem}#adm h2{font-family:var(--display);font-weight:900;margin:0 0 4px;color:#f6c62a;font-size:1.3rem}#adm .asub{margin:0 0 16px;opacity:.7;font-size:.78rem}#adm .ax{position:fixed;right:14px;top:14px;z-index:2;width:38px;height:38px;border-radius:50%;
   background:var(--cream);border:3px solid var(--ink);box-shadow:2px 2px 0 var(--ink);
@@ -493,10 +493,10 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 #eqo .eqdone small{display:block;margin-top:4px;font-family:inherit;font-weight:800;
   font-size:.72rem;opacity:.75;letter-spacing:0}
 #eqo input{text-align:center}
-#quizo .zwho,#puzzo .zwho,#onet .zwho,#t3o .zwho,#wso .zwho,#eqo .zwho{margin:14px 0 12px;padding:11px 14px;
+#quizo .zwho,#puzzo .zwho,#onet .zwho,#t3o .zwho,#t4o .zwho,#t5o .zwho,#wso .zwho,#eqo .zwho{margin:14px 0 12px;padding:11px 14px;
   border-radius:10px;background:var(--cream-2);border:3px solid var(--ink);
   font-weight:800;font-size:.9rem}
-#quizo .zwho b,#puzzo .zwho b,#onet .zwho b,#t3o .zwho b,#wso .zwho b,#eqo .zwho b{font-family:var(--display);
+#quizo .zwho b,#puzzo .zwho b,#onet .zwho b,#t3o .zwho b,#t4o .zwho b,#t5o .zwho b,#wso .zwho b,#eqo .zwho b{font-family:var(--display);
   font-weight:900;font-size:1rem;letter-spacing:.02em}
 #eqo .eqwait{margin-top:16px;padding:12px 10px;border-radius:12px;background:var(--cream-2);
   border:3px solid var(--ink);text-align:left}
@@ -583,32 +583,32 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
   border:3px solid var(--ink);border-radius:999px;background:var(--cream-2);
   box-shadow:2px 2px 0 var(--ink);cursor:pointer}
 /* --- PUZZLE (Даалгавар 3) --- */
-#puzzo .qz,#onet .qz,#t3o .qz{max-width:900px}
+#puzzo .qz,#onet .qz,#t3o .qz,#t4o .qz,#t5o .qz{max-width:900px}
 @media (max-width:640px){
-  #puzzo,#onet,#t3o{padding:8px}
-  #puzzo .qz,#onet .qz,#t3o .qz{padding:16px 10px;box-shadow:5px 5px 0 var(--ink)}
-  #puzzo .pgrid,#onet .pgrid,#t3o .pgrid{gap:1px}
+  #puzzo,#onet,#t3o,#t4o,#t5o{padding:8px}
+  #puzzo .qz,#onet .qz,#t3o .qz,#t4o .qz,#t5o .qz{padding:16px 10px;box-shadow:5px 5px 0 var(--ink)}
+  #puzzo .pgrid,#onet .pgrid,#t3o .pgrid,#t4o .pgrid,#t5o .pgrid{gap:1px}
 }
-#puzzo .zstage,#onet .zstage,#t3o .zstage{font-size:clamp(1.6rem,8vw,2.2rem);margin:6px 0 0}
-#puzzo .pgrid,#onet .pgrid,#t3o .pgrid{display:grid;gap:2px;max-width:860px;background:var(--ink);border:3px solid var(--ink);
+#puzzo .zstage,#onet .zstage,#t3o .zstage,#t4o .zstage,#t5o .zstage{font-size:clamp(1.6rem,8vw,2.2rem);margin:6px 0 0}
+#puzzo .pgrid,#onet .pgrid,#t3o .pgrid,#t4o .pgrid,#t5o .pgrid{display:grid;gap:2px;max-width:860px;background:var(--ink);border:3px solid var(--ink);
   border-radius:10px;overflow:hidden;margin:0 auto 12px;width:100%;
   touch-action:none;user-select:none;-webkit-user-select:none}
-#puzzo .pc,#onet .pc,#t3o .pc{position:relative;background-repeat:no-repeat;cursor:grab;
+#puzzo .pc,#onet .pc,#t3o .pc,#t4o .pc,#t5o .pc{position:relative;background-repeat:no-repeat;cursor:grab;
   background-color:var(--cream-2);transition:outline-color .15s,filter .15s}
-#puzzo .pc.sel,#onet .pc.sel,#t3o .pc.sel{outline:4px solid #f6c62a;outline-offset:-4px;z-index:3;filter:brightness(1.12)}
-#puzzo .pc.hov,#onet .pc.hov,#t3o .pc.hov{outline:4px dashed #6fd45a;outline-offset:-4px}
-#puzzo .pdrag,#onet .pdrag,#t3o .pdrag{position:fixed;z-index:400;pointer-events:none;border-radius:4px;
+#puzzo .pc.sel,#onet .pc.sel,#t3o .pc.sel,#t4o .pc.sel,#t5o .pc.sel{outline:4px solid #f6c62a;outline-offset:-4px;z-index:3;filter:brightness(1.12)}
+#puzzo .pc.hov,#onet .pc.hov,#t3o .pc.hov,#t4o .pc.hov,#t5o .pc.hov{outline:4px dashed #6fd45a;outline-offset:-4px}
+#puzzo .pdrag,#onet .pdrag,#t3o .pdrag,#t4o .pdrag,#t5o .pdrag{position:fixed;z-index:400;pointer-events:none;border-radius:4px;
   box-shadow:0 10px 22px rgba(0,0,0,.55);outline:3px solid #f6c62a;background-repeat:no-repeat}
-#puzzo .pbar,#onet .pbar,#t3o .pbar{display:flex;gap:8px;align-items:center;justify-content:center;
+#puzzo .pbar,#onet .pbar,#t3o .pbar,#t4o .pbar,#t5o .pbar{display:flex;gap:8px;align-items:center;justify-content:center;
   margin:0 0 12px;font-weight:800;font-size:.78rem;flex-wrap:wrap}
-#puzzo .pbar span,#onet .pbar span,#t3o .pbar span{background:var(--ink);color:var(--cream);border-radius:999px;padding:5px 12px}
-#puzzo .phint,#onet .phint,#t3o .phint{display:block;width:100%;max-width:230px;margin:0 auto 12px;border:3px solid var(--ink);
+#puzzo .pbar span,#onet .pbar span,#t3o .pbar span,#t4o .pbar span,#t5o .pbar span{background:var(--ink);color:var(--cream);border-radius:999px;padding:5px 12px}
+#puzzo .phint,#onet .phint,#t3o .phint,#t4o .phint,#t5o .phint{display:block;width:100%;max-width:230px;margin:0 auto 12px;border:3px solid var(--ink);
   border-radius:8px;box-shadow:3px 3px 0 var(--ink)}
-#puzzo .pmini,#onet .pmini,#t3o .pmini{margin:0 0 12px;font-size:.74rem;font-weight:700;opacity:.75}
-#puzzo .psmall,#onet .psmall,#t3o .psmall{font-family:inherit;font-weight:800;font-size:.76rem;padding:8px 16px;
+#puzzo .pmini,#onet .pmini,#t3o .pmini,#t4o .pmini,#t5o .pmini{margin:0 0 12px;font-size:.74rem;font-weight:700;opacity:.75}
+#puzzo .psmall,#onet .psmall,#t3o .psmall,#t4o .psmall,#t5o .psmall{font-family:inherit;font-weight:800;font-size:.76rem;padding:8px 16px;
   border:3px solid var(--ink);border-radius:999px;background:var(--cream-2);
   box-shadow:2px 2px 0 var(--ink);cursor:pointer;margin:0 4px}
-#puzzo .psmall:active,#onet .psmall:active,#t3o .psmall:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink)}
+#puzzo .psmall:active,#onet .psmall:active,#t3o .psmall:active,#t4o .psmall:active,#t5o .psmall:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink)}
 /* --- ХОС ОЛОХ (Даалгавар 1) --- */
 #mpo .qz{max-width:760px}
 @media (max-width:640px){ #mpo{padding:8px} #mpo .qz{padding:16px 10px} }
@@ -682,6 +682,45 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 #t3o .t3c.miss{background:#e8503a;animation:t3shake .32s}
 @keyframes t3shake{0%,100%{margin-left:0}25%{margin-left:-4px}75%{margin-left:4px}}
 #t3o .wshint{margin:0;font-size:.78rem;font-weight:800;min-height:1.2em}
+/* --- Даалгавар 4: ДАРААЛАЛ ЦЭЭЖЛЭХ --- */
+#t4o .qz{max-width:430px}
+#t4o .pbar{display:flex;gap:7px;align-items:center;justify-content:center;flex-wrap:wrap;
+  font-family:var(--display);font-weight:900;font-size:.8rem;margin:0 0 14px}
+#t4o .pbar span{background:var(--ink);color:var(--cream);border-radius:999px;padding:5px 11px}
+#t4o .t4grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 14px}
+#t4o .t4p{aspect-ratio:1;padding:0;cursor:pointer;line-height:1;
+  font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;
+  font-size:clamp(26px,9vw,46px);
+  border:3px solid var(--ink);border-radius:14px;
+  background:linear-gradient(165deg,#fff3e2,#f0d6b4);
+  box-shadow:inset 0 -4px 0 rgba(0,0,0,.16),3px 3px 0 var(--ink);
+  display:grid;place-items:center;filter:grayscale(.35) brightness(.94);
+  transition:transform .09s,filter .12s,background .12s}
+#t4o .t4p.lit{background:linear-gradient(165deg,#ffe07a,#f6c62a);filter:none;
+  transform:scale(1.07);box-shadow:inset 0 0 0 3px #e8402a,3px 3px 0 var(--ink)}
+#t4o .t4p.wrong{background:#e8503a;filter:none;animation:t3shake .32s}
+#t4o .wshint{margin:0;font-size:.82rem;font-weight:800;min-height:1.3em}
+/* --- Даалгавар 5: СҮНС БАРИХ --- */
+#t5o .qz{max-width:460px}
+#t5o .pbar{display:flex;gap:7px;align-items:center;justify-content:center;flex-wrap:wrap;
+  font-family:var(--display);font-weight:900;font-size:.8rem;margin:0 0 14px}
+#t5o .pbar span{background:var(--ink);color:var(--cream);border-radius:999px;padding:5px 11px}
+#t5o .t5grid{display:grid;gap:7px;margin:0 0 13px}
+#t5o .t5c{aspect-ratio:1;padding:0;cursor:pointer;line-height:1;
+  font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;
+  font-size:clamp(20px,6.5vw,38px);
+  border:2px solid #4a3a30;border-radius:10px;
+  background:radial-gradient(circle at 50% 35%,#2a211c,#17110e);
+  box-shadow:inset 0 2px 6px rgba(0,0,0,.6);
+  display:grid;place-items:center;transition:background .12s}
+#t5o .t5c.gh{background:radial-gradient(circle at 50% 40%,#4a3f74,#241d3a);
+  animation:t5pop .14s ease-out}
+#t5o .t5c.tr{background:radial-gradient(circle at 50% 40%,#6b3c12,#2c1708)}
+#t5o .t5c.hit{background:#2f7a22}
+#t5o .t5c.miss{background:#8c2a1c}
+#t5o .t5c.fade{background:#3a2a44}
+@keyframes t5pop{from{transform:scale(.72)}to{transform:scale(1)}}
+#t5o .wshint{margin:0;font-size:.82rem;font-weight:800;min-height:1.3em}
 #mpo .mpb,#mpo .mpf{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
 .secret{margin-top:18px;padding:16px 14px;border-radius:12px;text-align:center;
   background:linear-gradient(165deg,#2a1109,#140905 65%,#1d0b06);
@@ -1285,7 +1324,9 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     var READY = [
       { no: 1, title: "Даалгавар 1" },
       { no: 2, title: "Даалгавар 2" },
-      { no: 3, title: "Даалгавар 3" }
+      { no: 3, title: "Даалгавар 3" },
+      { no: 4, title: "Даалгавар 4" },
+      { no: 5, title: "Даалгавар 5" }
     ];
 
     if(!READY.length){
@@ -2507,6 +2548,612 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     }
   })();
 
+  /* ---------- Даалгавар 4: ДАРААЛАЛ ЦЭЭЖЛЭХ (Simon) ---------- */
+  (function(){
+    var PADS = ["🎃","👻","🦇","💀","🕷️","🧙","🔮","🍬","🪦"];
+    var LVLS = 10;                                 /* урт: 3 → 12 */
+    var PEN_MS = 6000;                             /* алдвал +6 сек */
+    var TOPN = 20, FREE_MS = 180000, STEP_MS = 30000;
+    var DEAD_MS = FREE_MS + TOPN * STEP_MS;
+    var SKEY = "zeely.t4";
+    var o, body, xbtn, locked = false, player = "";
+    var lv = 0, pen = 0, bad = 0, t0 = 0, tmr = 0;
+    var seq = [], pos = 0, showing = false, tos = [];
+
+    function hook(){
+      var row = document.querySelector('#tlist li[data-no="4"]');
+      if(!row) return;
+      row.setAttribute("role", "button");
+      row.setAttribute("tabindex", "0");
+      row.addEventListener("click", open);
+      row.addEventListener("keydown", function(e){ if(e.key === "Enter" || e.key === " ") open(); });
+    }
+    setTimeout(hook, 0);
+
+    function shell(){
+      o = document.createElement("div");
+      o.id = "t4o";
+      o.innerHTML = '<div class="qz"><button class="qx" type="button" aria-label="Хаах">✕</button>'
+                  + '<div id="t4body"></div></div>';
+      document.body.appendChild(o);
+      body = o.querySelector("#t4body");
+      xbtn = o.querySelector(".qx");
+      xbtn.addEventListener("click", function(){ if(!locked) close(); });
+      function blk(e){ e.preventDefault(); e.stopPropagation(); return false; }
+      ["copy","cut","dragstart","contextmenu"].forEach(function(ev){
+        o.addEventListener(ev, blk, true);
+      });
+    }
+    function stopTos(){ tos.forEach(clearTimeout); tos = []; }
+    function close(){ clearInterval(tmr); tmr = 0; stopTos(); if(o){ o.remove(); o = null; } }
+
+    function open(){
+      if(o && !document.body.contains(o)) o = null;
+      if(o) return;
+      shell();
+      body.innerHTML = '<p class="zlead">Шалгаж байна…</p>';
+      if(!(window.ZEELY && window.ZEELY.cfgAll)){
+        var st0 = loadState();
+        if(st0){ player = AUTH.name; play(st0); } else intro();
+        return;
+      }
+      window.ZEELY.cfgAll(function(cfg){
+        if(cfg && cfg.task4 === "closed"){ shut(cfg.task4msg); return; }
+        var st = loadState();
+        if(st){ player = AUTH.name; play(st); return; }
+        intro();
+      });
+    }
+    function shut(msg){
+      locked = false; xbtn.hidden = false;
+      body.innerHTML = '<h2>🔒 ХААЛТТАЙ</h2><p class="zlead" id="t4shut"></p>'
+                     + '<button class="zbtn" id="t4close">Хаах</button>';
+      body.querySelector("#t4shut").textContent =
+        (msg && msg !== "closed") ? msg
+        : "Энэ даалгавар одоогоор хаалттай байна. Зохион байгуулагч нээхийг хүлээгээрэй 🦇";
+      body.querySelector("#t4close").addEventListener("click", close);
+    }
+
+    function intro(){
+      locked = false; xbtn.hidden = false;
+      body.innerHTML =
+        '<h2>🧠 ДААЛГАВАР 4<br>ДАРААЛАЛ ЦЭЭЖЛЭХ</h2>'
+      + '<p class="zlead">Дүрснүүд ээлжлэн анивчина. Яг тэр дарааллаар нь давтаж дар!</p>'
+      + '<ul class="zfacts">'
+      +   '<li><span>🧠</span><span><b>' + LVLS + ' түвшин.</b> Эхний түвшинд 3 дүрс, сүүлчийнхэд <b>' + (LVLS + 2) + ' дүрс</b>.</span></li>'
+      +   '<li><span>👀</span><span>Эхлээд <b>анхааралтай хар</b> — дараа нь чиний ээлж. Харж байхад дарах боломжгүй.</span></li>'
+      +   '<li><span>⚡</span><span>Түвшин ахих тусам <b>анивчилт хурдасна</b>.</span></li>'
+      +   '<li><span>❌</span><span>Нэг алдвал <b>+' + (PEN_MS / 1000) + ' секунд</b>, тэр түвшнээ <b>эхнээс нь</b> дахин үзнэ.</span></li>'
+      +   '<li><span>⏱️</span><span><b>3 минут дотор</b> бүгдийг дуусгавал бүтэн <b>' + TOPN + ' оноо</b>, дараа нь 30 секунд тутамд 1 оноо хасагдана.</span></li>'
+      +   '<li><span>⌛</span><span><b>13 минутын дараа</b> автоматаар дуусч, үр дүн бүртгэгдэнэ.</span></li>'
+      +   '<li><span>🚪</span><span>Нэг л удаа бүртгэгдэнэ — <b>дахин оролцох боломжгүй</b>.</span></li>'
+      + '</ul>'
+      + '<p class="zwho">👤 <b></b></p>'
+      + '<button class="zbtn" id="t4go">ЭХЛЭХ 🧠</button>'
+      + '<p class="zmsg" id="t4msg"></p>';
+      var msg = body.querySelector("#t4msg");
+      body.querySelector(".zwho b").textContent = AUTH.name;
+      body.querySelector("#t4go").addEventListener("click", function(){
+        player = AUTH.name;
+        msg.textContent = "Шалгаж байна…";
+        body.querySelector("#t4go").disabled = true;
+        if(!(window.ZEELY && window.ZEELY.findTask4)){ play(); return; }
+        window.ZEELY.findTask4(player, function(hit){
+          if(hit){ already(hit); return; }
+          play();
+        });
+      });
+    }
+
+    function already(hit){
+      locked = false; xbtn.hidden = false;
+      body.innerHTML = '<h2>🦇 БҮРТГЭГДСЭН</h2><p class="zlead"></p>'
+        + '<p class="zscore">' + hit.score + '</p><p class="zmeta">цуглуулсан оноо</p>'
+        + '<button class="zbtn" id="t4close">Хаах</button>';
+      body.querySelector(".zlead").textContent =
+        player + ", та энэ даалгаврыг аль хэдийн биелүүлсэн байна. Дахин оролцох боломжгүй 👻";
+      body.querySelector("#t4close").addEventListener("click", close);
+    }
+
+    function saveState(){
+      try {
+        localStorage.setItem(SKEY, JSON.stringify({
+          u: AUTH.key || AUTH.name, t: t0, l: lv, p: pen, b: bad
+        }));
+      } catch(e){}
+    }
+    function clearState(){ try { localStorage.removeItem(SKEY); } catch(e){} }
+    function loadState(){
+      try {
+        var st = JSON.parse(localStorage.getItem(SKEY) || "null");
+        if(!st || !st.t || typeof st.l !== "number") return null;
+        if(st.u && AUTH.key && st.u !== AUTH.key) return null;
+        if(st.l >= LVLS) return null;
+        return st;
+      } catch(e){ return null; }
+    }
+
+    function fmt(ms){
+      var s = Math.floor(ms / 1000);
+      return Math.floor(s / 60) + ":" + ("0" + (s % 60)).slice(-2);
+    }
+    function spent(){ return Date.now() - t0 + pen; }
+    function tick(){
+      var ms = spent();
+      var el = body.querySelector("#t4time");
+      if(el){
+        el.textContent = "⏱️ " + fmt(ms);
+        el.style.background = (ms > DEAD_MS - 60000) ? "#e8402a" : "";
+      }
+      if(ms >= DEAD_MS){ clearInterval(tmr); tmr = 0; stopTos(); finish(true); }
+    }
+
+    function play(st){
+      locked = true; xbtn.hidden = true;
+      if(st){ lv = st.l || 0; pen = st.p || 0; bad = st.b || 0; t0 = st.t; }
+      else { lv = 0; pen = 0; bad = 0; t0 = Date.now(); }
+
+      body.innerHTML =
+        '<h2>🧠 ДАРААЛАЛ ЦЭЭЖЛЭХ</h2>'
+      + '<p class="pbar"><span id="t4time">⏱️ 0:00</span>'
+      +   '<span id="t4lv"></span><span id="t4pen"></span></p>'
+      + '<div class="t4grid" id="t4grid"></div>'
+      + '<p class="wshint" id="t4hint">Бэлтгэ…</p>';
+      var g = body.querySelector("#t4grid");
+      for(var i = 0; i < PADS.length; i++){
+        var d = document.createElement("button");
+        d.type = "button";
+        d.className = "t4p";
+        d.setAttribute("data-i", i);
+        d.textContent = PADS[i];
+        g.appendChild(d);
+      }
+      g.addEventListener("click", onTap);
+      clearInterval(tmr);
+      tmr = setInterval(tick, 300);
+      tick();
+      saveState();
+      newLevel();
+    }
+
+    function bars(){
+      var l = body.querySelector("#t4lv");
+      if(l) l.textContent = "🧠 " + (lv + 1) + "/" + LVLS;
+      var p = body.querySelector("#t4pen");
+      if(p) p.textContent = "❌ " + bad;
+    }
+
+    function newLevel(){
+      seq = [];
+      var len = lv + 3;
+      for(var i = 0; i < len; i++) seq.push(Math.floor(Math.random() * PADS.length));
+      bars();
+      showSeq();
+    }
+
+    function pad(i){ return body.querySelector('.t4p[data-i="' + i + '"]'); }
+
+    function showSeq(){
+      showing = true; pos = 0;
+      stopTos();
+      var h = body.querySelector("#t4hint");
+      if(h) h.textContent = "👀 Хараад байгаарай… (" + seq.length + " дүрс)";
+      var step = Math.max(380, 640 - lv * 26);
+      seq.forEach(function(v, k){
+        tos.push(setTimeout(function(){
+          var el = pad(v);
+          if(!el) return;
+          el.classList.add("lit");
+          tos.push(setTimeout(function(){ el.classList.remove("lit"); }, step * 0.55));
+        }, 600 + k * step));
+      });
+      tos.push(setTimeout(function(){
+        showing = false;
+        var h2 = body.querySelector("#t4hint");
+        if(h2) h2.textContent = "👉 Одоо чиний ээлж — дарааллаар нь дар";
+      }, 600 + seq.length * step + 120));
+    }
+
+    function onTap(e){
+      if(showing) return;
+      var el = e.target;
+      while(el && el !== body && !(el.classList && el.classList.contains("t4p"))) el = el.parentNode;
+      if(!el || !el.classList.contains("t4p")) return;
+      var i = parseInt(el.getAttribute("data-i"), 10);
+      var h = body.querySelector("#t4hint");
+      el.classList.add("lit");
+      setTimeout(function(){ el.classList.remove("lit"); }, 160);
+
+      if(i !== seq[pos]){
+        bad++; pen += PEN_MS;
+        saveState(); tick(); bars();
+        el.classList.add("wrong");
+        setTimeout(function(){ el.classList.remove("wrong"); }, 400);
+        if(h) h.textContent = "❌ Алдлаа — +" + (PEN_MS / 1000) + " сек. Дахин хараарай…";
+        showing = true;
+        stopTos();
+        tos.push(setTimeout(showSeq, 1000));
+        return;
+      }
+      pos++;
+      if(pos >= seq.length){
+        showing = true;
+        if(h) h.textContent = "✅ Зөв! Дараагийн түвшин…";
+        lv++;
+        saveState();
+        if(lv >= LVLS){ finish(); return; }
+        tos.push(setTimeout(newLevel, 850));
+      } else if(h){
+        h.textContent = "👉 " + pos + "/" + seq.length;
+      }
+    }
+
+    function scoreOf(ms){
+      var over = Math.ceil((ms - FREE_MS) / STEP_MS);
+      if(over < 0) over = 0;
+      return Math.max(0, TOPN - over);
+    }
+
+    function finish(timeUp){
+      clearInterval(tmr); tmr = 0; stopTos();
+      clearState();
+      var ms = spent();
+      if(timeUp && ms > DEAD_MS) ms = DEAD_MS;
+      var sc = timeUp ? 0 : scoreOf(ms);
+      var det = "q" + Math.round(ms / 1000) + "l" + lv + "x" + bad
+              + (timeUp ? "r1" : "") + "|" + ubStamp();
+      locked = true; xbtn.hidden = true;
+      body.innerHTML =
+        (timeUp ? '<h2>⌛ ХУГАЦАА ДУУСЛАА</h2>' : '<h2>🎉 БҮХ ДАРААЛАЛ ОРОЛОО!</h2>')
+      + '<p class="zstage">⏱️ ' + fmt(ms) + '</p>'
+      + '<p class="zscore">+' + sc + '</p>'
+      + '<p class="zmeta">оноо · 🧠 ' + lv + '/' + LVLS + ' түвшин · ❌ ' + bad + ' алдаа</p>'
+      + (timeUp
+          ? '<p class="znote">😿 13 минут өнгөрсөн тул оноо авах боломж дууссан — '
+            + 'даалгавар автоматаар дуусгаж, үр дүнг тань бүртгэлээ.</p>'
+          : (sc >= TOPN
+              ? '<p class="znote">🏆 3 минут дотор амжлаа — бүтэн ' + TOPN + ' оноо!</p>'
+              : (sc > 0
+                  ? '<p class="znote">⏳ 3 минутаас хойш 30 секунд тутамд 1 оноо хасагдсан.</p>'
+                  : '<p class="znote">😿 Хугацаа хэтэрсэн тул оноо нэмэгдэхгүй. '
+                    + 'Гэхдээ дуусгасанд баяр хүргэе!</p>')))
+      + '<p class="zmsg" id="t4m2">Хадгалж байна… 👻</p>';
+      var m2 = body.querySelector("#t4m2");
+      function ok(){
+        locked = false; xbtn.hidden = false;
+        m2.textContent = "Амжилттай бүртгэгдлээ ✅";
+        var bt = document.createElement("button");
+        bt.className = "zbtn"; bt.textContent = "Хаах";
+        bt.addEventListener("click", function(){ close(); if(window.ZEELY) window.ZEELY.refresh(); });
+        body.appendChild(bt);
+        if(window.ZEELY && window.ZEELY.refresh) window.ZEELY.refresh();
+      }
+      function dead(){
+        locked = false; xbtn.hidden = false;
+        var bt = document.createElement("button");
+        bt.className = "zbtn"; bt.textContent = "Хаах";
+        bt.addEventListener("click", close);
+        body.appendChild(bt);
+      }
+      if(window.ZEELY && window.ZEELY.task4){
+        autoSave(function(d, f){ window.ZEELY.task4(player, sc, TOPN, d, f, det); }, m2, ok, dead, 4000);
+      } else { dead(); }
+    }
+  })();
+
+  /* ---------- Даалгавар 5: СҮНС БАРИХ (реакц) ---------- */
+  (function(){
+    var C = 5, N = C * C;
+    var GOAL = 70;                                 /* барих ёстой сүнсний тоо */
+    var LIFE0 = 1050, LIFE1 = 520;                 /* сүнс харагдах хугацаа: эхэлж → эцэст */
+    var GAP = 230;
+    var MISS_MS = 3000, TRAP_MS = 4000, EMPTY_MS = 1000;
+    var TRAP_FROM = 15;                            /* хэдэн барьснаас хойш хулд гарч ирэх */
+    var TOPN = 20, FREE_MS = 180000, STEP_MS = 30000;
+    var DEAD_MS = FREE_MS + TOPN * STEP_MS;
+    var SKEY = "zeely.t5";
+    var o, body, xbtn, locked = false, player = "";
+    var got = 0, miss = 0, trap = 0, pen = 0, t0 = 0, tmr = 0;
+    var tos = [], alive = -1, decoy = -1, running = false;
+
+    function hook(){
+      var row = document.querySelector('#tlist li[data-no="5"]');
+      if(!row) return;
+      row.setAttribute("role", "button");
+      row.setAttribute("tabindex", "0");
+      row.addEventListener("click", open);
+      row.addEventListener("keydown", function(e){ if(e.key === "Enter" || e.key === " ") open(); });
+    }
+    setTimeout(hook, 0);
+
+    function shell(){
+      o = document.createElement("div");
+      o.id = "t5o";
+      o.innerHTML = '<div class="qz"><button class="qx" type="button" aria-label="Хаах">✕</button>'
+                  + '<div id="t5body"></div></div>';
+      document.body.appendChild(o);
+      body = o.querySelector("#t5body");
+      xbtn = o.querySelector(".qx");
+      xbtn.addEventListener("click", function(){ if(!locked) close(); });
+      function blk(e){ e.preventDefault(); e.stopPropagation(); return false; }
+      ["copy","cut","dragstart","contextmenu"].forEach(function(ev){
+        o.addEventListener(ev, blk, true);
+      });
+    }
+    function stopTos(){ tos.forEach(clearTimeout); tos = []; }
+    function close(){ running = false; clearInterval(tmr); tmr = 0; stopTos(); if(o){ o.remove(); o = null; } }
+
+    function open(){
+      if(o && !document.body.contains(o)) o = null;
+      if(o) return;
+      shell();
+      body.innerHTML = '<p class="zlead">Шалгаж байна…</p>';
+      if(!(window.ZEELY && window.ZEELY.cfgAll)){
+        var st0 = loadState();
+        if(st0){ player = AUTH.name; play(st0); } else intro();
+        return;
+      }
+      window.ZEELY.cfgAll(function(cfg){
+        if(cfg && cfg.task5 === "closed"){ shut(cfg.task5msg); return; }
+        var st = loadState();
+        if(st){ player = AUTH.name; play(st); return; }
+        intro();
+      });
+    }
+    function shut(msg){
+      locked = false; xbtn.hidden = false;
+      body.innerHTML = '<h2>🔒 ХААЛТТАЙ</h2><p class="zlead" id="t5shut"></p>'
+                     + '<button class="zbtn" id="t5close">Хаах</button>';
+      body.querySelector("#t5shut").textContent =
+        (msg && msg !== "closed") ? msg
+        : "Энэ даалгавар одоогоор хаалттай байна. Зохион байгуулагч нээхийг хүлээгээрэй 🦇";
+      body.querySelector("#t5close").addEventListener("click", close);
+    }
+
+    function intro(){
+      locked = false; xbtn.hidden = false;
+      body.innerHTML =
+        '<h2>👻 ДААЛГАВАР 5<br>СҮНС БАРИХ</h2>'
+      + '<p class="zlead">Сүнс гэнэт гарч ирээд агшаад алга болно. Алга болохоос нь өмнө дар!</p>'
+      + '<ul class="zfacts">'
+      +   '<li><span>👻</span><span><b>' + GOAL + ' сүнс</b> барьвал даалгавар дуусна.</span></li>'
+      +   '<li><span>⚡</span><span>Эхэндээ ~1 секунд харагдана, цаашаа <b>улам богино</b> болно.</span></li>'
+      +   '<li><span>💨</span><span>Барьж амжаагүй сүнс тутамд <b>+' + (MISS_MS / 1000) + ' секунд</b>.</span></li>'
+      +   '<li><span>🎃</span><span>Хааяа <b>хулгайч хулуу</b> гарч ирнэ — түүнийг дарвал <b>+' + (TRAP_MS / 1000) + ' секунд</b>. Бүү дар!</span></li>'
+      +   '<li><span>🫳</span><span>Хоосон нүд дарвал <b>+' + (EMPTY_MS / 1000) + ' секунд</b> — дураараа дарж болохгүй.</span></li>'
+      +   '<li><span>⏱️</span><span><b>3 минут дотор</b> дуусгавал бүтэн <b>' + TOPN + ' оноо</b>, дараа нь 30 секунд тутамд 1 оноо хасагдана.</span></li>'
+      +   '<li><span>⌛</span><span><b>13 минутын дараа</b> автоматаар дуусч, үр дүн бүртгэгдэнэ.</span></li>'
+      +   '<li><span>🚪</span><span>Нэг л удаа бүртгэгдэнэ — <b>дахин оролцох боломжгүй</b>.</span></li>'
+      + '</ul>'
+      + '<p class="zwho">👤 <b></b></p>'
+      + '<button class="zbtn" id="t5go">ЭХЛЭХ 👻</button>'
+      + '<p class="zmsg" id="t5msg"></p>';
+      var msg = body.querySelector("#t5msg");
+      body.querySelector(".zwho b").textContent = AUTH.name;
+      body.querySelector("#t5go").addEventListener("click", function(){
+        player = AUTH.name;
+        msg.textContent = "Шалгаж байна…";
+        body.querySelector("#t5go").disabled = true;
+        if(!(window.ZEELY && window.ZEELY.findTask5)){ play(); return; }
+        window.ZEELY.findTask5(player, function(hit){
+          if(hit){ already(hit); return; }
+          play();
+        });
+      });
+    }
+
+    function already(hit){
+      locked = false; xbtn.hidden = false;
+      body.innerHTML = '<h2>🦇 БҮРТГЭГДСЭН</h2><p class="zlead"></p>'
+        + '<p class="zscore">' + hit.score + '</p><p class="zmeta">цуглуулсан оноо</p>'
+        + '<button class="zbtn" id="t5close">Хаах</button>';
+      body.querySelector(".zlead").textContent =
+        player + ", та энэ даалгаврыг аль хэдийн биелүүлсэн байна. Дахин оролцох боломжгүй 👻";
+      body.querySelector("#t5close").addEventListener("click", close);
+    }
+
+    function saveState(){
+      try {
+        localStorage.setItem(SKEY, JSON.stringify({
+          u: AUTH.key || AUTH.name, t: t0, g: got, m: miss, k: trap, p: pen
+        }));
+      } catch(e){}
+    }
+    function clearState(){ try { localStorage.removeItem(SKEY); } catch(e){} }
+    function loadState(){
+      try {
+        var st = JSON.parse(localStorage.getItem(SKEY) || "null");
+        if(!st || !st.t || typeof st.g !== "number") return null;
+        if(st.u && AUTH.key && st.u !== AUTH.key) return null;
+        if(st.g >= GOAL) return null;
+        return st;
+      } catch(e){ return null; }
+    }
+
+    function fmt(ms){
+      var s = Math.floor(ms / 1000);
+      return Math.floor(s / 60) + ":" + ("0" + (s % 60)).slice(-2);
+    }
+    function spent(){ return Date.now() - t0 + pen; }
+    function tick(){
+      var ms = spent();
+      var el = body.querySelector("#t5time");
+      if(el){
+        el.textContent = "⏱️ " + fmt(ms);
+        el.style.background = (ms > DEAD_MS - 60000) ? "#e8402a" : "";
+      }
+      if(ms >= DEAD_MS){ running = false; clearInterval(tmr); tmr = 0; stopTos(); finish(true); }
+    }
+    function bars(){
+      var g = body.querySelector("#t5got");
+      if(g) g.textContent = "👻 " + got + "/" + GOAL;
+      var m = body.querySelector("#t5miss");
+      if(m) m.textContent = "💨 " + miss + " · 🎃 " + trap;
+    }
+
+    function play(st){
+      locked = true; xbtn.hidden = true;
+      if(st){ got = st.g || 0; miss = st.m || 0; trap = st.k || 0; pen = st.p || 0; t0 = st.t; }
+      else { got = 0; miss = 0; trap = 0; pen = 0; t0 = Date.now(); }
+
+      body.innerHTML =
+        '<h2>👻 СҮНС БАРИХ</h2>'
+      + '<p class="pbar"><span id="t5time">⏱️ 0:00</span>'
+      +   '<span id="t5got"></span><span id="t5miss"></span></p>'
+      + '<div class="t5grid" id="t5grid"></div>'
+      + '<p class="wshint" id="t5hint">Бэлтгэ… 👻</p>';
+      var g = body.querySelector("#t5grid");
+      g.style.gridTemplateColumns = "repeat(" + C + ", minmax(0, 1fr))";
+      for(var i = 0; i < N; i++){
+        var d = document.createElement("button");
+        d.type = "button";
+        d.className = "t5c";
+        d.setAttribute("data-i", i);
+        g.appendChild(d);
+      }
+      g.addEventListener("click", onTap);
+      bars();
+      clearInterval(tmr);
+      tmr = setInterval(tick, 300);
+      tick();
+      saveState();
+      running = true;
+      tos.push(setTimeout(spawn, 700));
+    }
+
+    function cell(i){ return body ? body.querySelector('.t5c[data-i="' + i + '"]') : null; }
+    function clearCell(i, cls){
+      var el = cell(i);
+      if(!el) return;
+      el.textContent = "";
+      el.classList.remove("gh", "tr");
+      if(cls){
+        el.classList.add(cls);
+        (function(e){ setTimeout(function(){ e.classList.remove(cls); }, 300); })(el);
+      }
+    }
+
+    function lifeNow(){
+      var p = Math.min(1, got / GOAL);
+      return Math.round(LIFE0 + (LIFE1 - LIFE0) * p);
+    }
+
+    function spawn(){
+      if(!running || !body) return;
+      var life = lifeNow();
+      alive = Math.floor(Math.random() * N);
+      var el = cell(alive);
+      if(!el) return;
+      el.textContent = "👻";
+      el.classList.add("gh");
+      decoy = -1;
+      if(got >= TRAP_FROM && Math.random() < 0.35){
+        do { decoy = Math.floor(Math.random() * N); } while(decoy === alive);
+        var dl = cell(decoy);
+        if(dl){ dl.textContent = "🎃"; dl.classList.add("tr"); }
+      }
+      tos.push(setTimeout(function(){
+        if(!running) return;
+        if(alive >= 0){                              /* барьж амжсангүй */
+          miss++; pen += MISS_MS;
+          clearCell(alive, "fade");
+          alive = -1;
+          if(decoy >= 0){ clearCell(decoy); decoy = -1; }
+          bars(); saveState(); tick();
+          var h = body.querySelector("#t5hint");
+          if(h) h.textContent = "💨 Алга болчихлоо — +" + (MISS_MS / 1000) + " сек";
+          tos.push(setTimeout(spawn, GAP));
+        }
+      }, life));
+    }
+
+    function onTap(e){
+      if(!running) return;
+      var el = e.target;
+      while(el && el !== body && !(el.classList && el.classList.contains("t5c"))) el = el.parentNode;
+      if(!el || !el.classList.contains("t5c")) return;
+      var i = parseInt(el.getAttribute("data-i"), 10);
+      var h = body.querySelector("#t5hint");
+
+      if(i === alive){
+        got++;
+        stopTos();
+        clearCell(alive, "hit"); alive = -1;
+        if(decoy >= 0){ clearCell(decoy); decoy = -1; }
+        bars(); saveState();
+        if(got >= GOAL){ running = false; finish(); return; }
+        if(h) h.textContent = "✅ Барилаа! " + got + "/" + GOAL;
+        tos.push(setTimeout(spawn, GAP));
+        return;
+      }
+      if(i === decoy){
+        trap++; pen += TRAP_MS;
+        clearCell(decoy, "miss"); decoy = -1;
+        bars(); saveState(); tick();
+        if(h) h.textContent = "🎃 Хулгайч хулуу! +" + (TRAP_MS / 1000) + " сек";
+        return;
+      }
+      pen += EMPTY_MS;
+      saveState(); tick();
+      el.classList.add("miss");
+      setTimeout(function(){ el.classList.remove("miss"); }, 260);
+      if(h) h.textContent = "🫳 Хоосон нүд — +" + (EMPTY_MS / 1000) + " сек";
+    }
+
+    function scoreOf(ms){
+      var over = Math.ceil((ms - FREE_MS) / STEP_MS);
+      if(over < 0) over = 0;
+      return Math.max(0, TOPN - over);
+    }
+
+    function finish(timeUp){
+      running = false;
+      clearInterval(tmr); tmr = 0; stopTos();
+      clearState();
+      var ms = spent();
+      if(timeUp && ms > DEAD_MS) ms = DEAD_MS;
+      var sc = timeUp ? 0 : scoreOf(ms);
+      var det = "g" + Math.round(ms / 1000) + "c" + got + "x" + (miss + trap)
+              + (timeUp ? "r1" : "") + "|" + ubStamp();
+      locked = true; xbtn.hidden = true;
+      body.innerHTML =
+        (timeUp ? '<h2>⌛ ХУГАЦАА ДУУСЛАА</h2>' : '<h2>🎉 БҮХ СҮНСИЙГ БАРИЛАА!</h2>')
+      + '<p class="zstage">⏱️ ' + fmt(ms) + '</p>'
+      + '<p class="zscore">+' + sc + '</p>'
+      + '<p class="zmeta">оноо · 👻 ' + got + '/' + GOAL + ' · 💨 ' + miss + ' алдсан · 🎃 ' + trap + '</p>'
+      + (timeUp
+          ? '<p class="znote">😿 13 минут өнгөрсөн тул оноо авах боломж дууссан — '
+            + 'даалгавар автоматаар дуусгаж, үр дүнг тань бүртгэлээ.</p>'
+          : (sc >= TOPN
+              ? '<p class="znote">🏆 3 минут дотор амжлаа — бүтэн ' + TOPN + ' оноо!</p>'
+              : (sc > 0
+                  ? '<p class="znote">⏳ 3 минутаас хойш 30 секунд тутамд 1 оноо хасагдсан.</p>'
+                  : '<p class="znote">😿 Хугацаа хэтэрсэн тул оноо нэмэгдэхгүй. '
+                    + 'Гэхдээ дуусгасанд баяр хүргэе!</p>')))
+      + '<p class="zmsg" id="t5m2">Хадгалж байна… 👻</p>';
+      var m2 = body.querySelector("#t5m2");
+      function ok(){
+        locked = false; xbtn.hidden = false;
+        m2.textContent = "Амжилттай бүртгэгдлээ ✅";
+        var bt = document.createElement("button");
+        bt.className = "zbtn"; bt.textContent = "Хаах";
+        bt.addEventListener("click", function(){ close(); if(window.ZEELY) window.ZEELY.refresh(); });
+        body.appendChild(bt);
+        if(window.ZEELY && window.ZEELY.refresh) window.ZEELY.refresh();
+      }
+      function dead(){
+        locked = false; xbtn.hidden = false;
+        var bt = document.createElement("button");
+        bt.className = "zbtn"; bt.textContent = "Хаах";
+        bt.addEventListener("click", close);
+        body.appendChild(bt);
+      }
+      if(window.ZEELY && window.ZEELY.task5){
+        autoSave(function(d, f){ window.ZEELY.task5(player, sc, TOPN, d, f, det); }, m2, ok, dead, 4000);
+      } else { dead(); }
+    }
+  })();
+
   /* ---------- зохион байгуулагчийн харагдац: хаягийн ард ?admin ---------- */
   (function(){
     if(!/[?&#]admin/.test(location.search + location.hash)) return;
@@ -2862,6 +3509,176 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
           });
         });
       })();
+
+      /* --- Даалгавар 4: нээх/хаах + үр дүн --- */
+      var t4 = document.createElement("div");
+      t4.className = "actl"; t4.id = "actl4";
+      t4.innerHTML =
+        '<div class="arow"><span class="alab">🧠 Даалгавар 4</span>'
+      +   '<span class="ast" id="ast4">шалгаж байна…</span>'
+      +   '<button class="abtn" id="atog4" disabled>…</button></div>'
+      + '<label class="amsgl" for="amsg4">Хаалттай үед оролцогчдод харуулах текст</label>'
+      + '<textarea id="amsg4" rows="3" maxlength="160" '
+      +   'placeholder="Жишээ: Маргааш 10:00 цагт нээгдэнэ 🦇"></textarea>'
+      + '<p class="ahint" id="ahint4">Хаах товч дарахад энэ текст хамт хадгалагдана.</p>'
+      + '<ul class="aulist" id="ares4"></ul>';
+      box.appendChild(t4);
+
+      (function(){
+        var st = t4.querySelector("#ast4"), tog = t4.querySelector("#atog4"),
+            msgEl = t4.querySelector("#amsg4"), hint = t4.querySelector("#ahint4"),
+            res = t4.querySelector("#ares4");
+        var state = "open";
+        function paint(){
+          var closed = (state === "closed");
+          st.textContent = closed ? "ХААЛТТАЙ" : "НЭЭЛТТЭЙ";
+          st.className = "ast " + (closed ? "sh" : "so");
+          tog.textContent = closed ? "Нээх" : "Хаах";
+          tog.disabled = false;
+        }
+        if(window.ZEELY && window.ZEELY.cfgAll){
+          window.ZEELY.cfgAll(function(cfg){
+            state = (cfg && cfg.task4 === "closed") ? "closed" : "open";
+            if(cfg && cfg.task4msg && cfg.task4msg !== "closed") msgEl.value = cfg.task4msg;
+            paint();
+          });
+        } else paint();
+        function bad(){ st.textContent = "алдаа"; tog.disabled = false; }
+        tog.addEventListener("click", function(){
+          var next = (state === "closed") ? "open" : "closed";
+          tog.disabled = true; st.textContent = "хадгалж байна…";
+          window.ZEELY.setCfgLong("task4msg", msgEl.value.trim(), function(){
+            window.ZEELY.setCfg("task4", next, function(){ state = next; paint(); }, bad);
+          }, bad);
+        });
+        var sbtn = document.createElement("button");
+        sbtn.className = "abtn asave"; sbtn.type = "button"; sbtn.textContent = "Текст хадгалах";
+        t4.appendChild(sbtn);
+        sbtn.addEventListener("click", function(){
+          sbtn.disabled = true; hint.textContent = "хадгалж байна…";
+          window.ZEELY.setCfgLong("task4msg", msgEl.value.trim(), function(){
+            sbtn.disabled = false; hint.textContent = "Хадгаллаа ✅";
+          }, function(){ sbtn.disabled = false; hint.textContent = "Алдаа гарлаа"; });
+        });
+
+        /* үр дүн */
+        if(window.ZEELY && window.ZEELY.fetchRows) window.ZEELY.fetchRows(function(rows){
+          if(!rows) return;
+          var list = [];
+          rows.forEach(function(v){
+            var q = window.ZEELY.parseQuiz(v);
+            if(q && q.pre === "QUIZ04") list.push(q);
+          });
+          list.sort(function(a, b){ return b.score - a.score; });
+          res.innerHTML = "";
+          if(!list.length){
+            var li0 = document.createElement("li");
+            li0.className = "off";
+            li0.innerHTML = '<span>Одоогоор хэн ч биелүүлээгүй</span>';
+            res.appendChild(li0);
+            return;
+          }
+          list.forEach(function(q){
+            var d = String(q.detail || "");
+            var mt = d.match(/q(\d+)/), mm = d.match(/x(\d+)/);
+            var li = document.createElement("li");
+            li.className = "on";
+            var extra = q.score + ' оноо'
+              + (mt ? ' · ⏱ ' + Math.floor(mt[1] / 60) + ":" + ("0" + (mt[1] % 60)).slice(-2) : '')
+              + (mm ? ' · ❌ ' + mm[1] : '')
+              + (q.at ? ' · 🕒 ' + q.at : '');
+            li.innerHTML = '<span></span><span class="amini"></span>';
+            li.querySelector("span").textContent = q.name;
+            li.querySelector(".amini").textContent = extra;
+            res.appendChild(li);
+          });
+        });
+      })();
+
+      /* --- Даалгавар 5: нээх/хаах + үр дүн --- */
+      var t5 = document.createElement("div");
+      t5.className = "actl"; t5.id = "actl5";
+      t5.innerHTML =
+        '<div class="arow"><span class="alab">👻 Даалгавар 5</span>'
+      +   '<span class="ast" id="ast5">шалгаж байна…</span>'
+      +   '<button class="abtn" id="atog5" disabled>…</button></div>'
+      + '<label class="amsgl" for="amsg5">Хаалттай үед оролцогчдод харуулах текст</label>'
+      + '<textarea id="amsg5" rows="3" maxlength="160" '
+      +   'placeholder="Жишээ: Маргааш 10:00 цагт нээгдэнэ 🦇"></textarea>'
+      + '<p class="ahint" id="ahint5">Хаах товч дарахад энэ текст хамт хадгалагдана.</p>'
+      + '<ul class="aulist" id="ares5"></ul>';
+      box.appendChild(t5);
+
+      (function(){
+        var st = t5.querySelector("#ast5"), tog = t5.querySelector("#atog5"),
+            msgEl = t5.querySelector("#amsg5"), hint = t5.querySelector("#ahint5"),
+            res = t5.querySelector("#ares5");
+        var state = "open";
+        function paint(){
+          var closed = (state === "closed");
+          st.textContent = closed ? "ХААЛТТАЙ" : "НЭЭЛТТЭЙ";
+          st.className = "ast " + (closed ? "sh" : "so");
+          tog.textContent = closed ? "Нээх" : "Хаах";
+          tog.disabled = false;
+        }
+        if(window.ZEELY && window.ZEELY.cfgAll){
+          window.ZEELY.cfgAll(function(cfg){
+            state = (cfg && cfg.task5 === "closed") ? "closed" : "open";
+            if(cfg && cfg.task5msg && cfg.task5msg !== "closed") msgEl.value = cfg.task5msg;
+            paint();
+          });
+        } else paint();
+        function bad(){ st.textContent = "алдаа"; tog.disabled = false; }
+        tog.addEventListener("click", function(){
+          var next = (state === "closed") ? "open" : "closed";
+          tog.disabled = true; st.textContent = "хадгалж байна…";
+          window.ZEELY.setCfgLong("task5msg", msgEl.value.trim(), function(){
+            window.ZEELY.setCfg("task5", next, function(){ state = next; paint(); }, bad);
+          }, bad);
+        });
+        var sbtn = document.createElement("button");
+        sbtn.className = "abtn asave"; sbtn.type = "button"; sbtn.textContent = "Текст хадгалах";
+        t5.appendChild(sbtn);
+        sbtn.addEventListener("click", function(){
+          sbtn.disabled = true; hint.textContent = "хадгалж байна…";
+          window.ZEELY.setCfgLong("task5msg", msgEl.value.trim(), function(){
+            sbtn.disabled = false; hint.textContent = "Хадгаллаа ✅";
+          }, function(){ sbtn.disabled = false; hint.textContent = "Алдаа гарлаа"; });
+        });
+
+        /* үр дүн */
+        if(window.ZEELY && window.ZEELY.fetchRows) window.ZEELY.fetchRows(function(rows){
+          if(!rows) return;
+          var list = [];
+          rows.forEach(function(v){
+            var q = window.ZEELY.parseQuiz(v);
+            if(q && q.pre === "QUIZ05") list.push(q);
+          });
+          list.sort(function(a, b){ return b.score - a.score; });
+          res.innerHTML = "";
+          if(!list.length){
+            var li0 = document.createElement("li");
+            li0.className = "off";
+            li0.innerHTML = '<span>Одоогоор хэн ч биелүүлээгүй</span>';
+            res.appendChild(li0);
+            return;
+          }
+          list.forEach(function(q){
+            var d = String(q.detail || "");
+            var mt = d.match(/g(\d+)/), mm = d.match(/x(\d+)/);
+            var li = document.createElement("li");
+            li.className = "on";
+            var extra = q.score + ' оноо'
+              + (mt ? ' · ⏱ ' + Math.floor(mt[1] / 60) + ":" + ("0" + (mt[1] % 60)).slice(-2) : '')
+              + (mm ? ' · ❌ ' + mm[1] : '')
+              + (q.at ? ' · 🕒 ' + q.at : '');
+            li.innerHTML = '<span></span><span class="amini"></span>';
+            li.querySelector("span").textContent = q.name;
+            li.querySelector(".amini").textContent = extra;
+            res.appendChild(li);
+          });
+        });
+      })();
     }
 
 
@@ -3111,6 +3928,16 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     findQuiz1: function(nm, cb){ findBy(["QUIZ1"], nm, cb); },
     quiz1: function(nm, sc, total, done, fail, detail){
       saveRow("QUIZ1-" + myId + "~" + sc + "/" + total, nm, detail || "1", done, fail);
+    },
+    /* Даалгавар 5 (сүнс барих) */
+    findTask5: function(nm, cb){ findBy(["QUIZ05"], nm, cb); },
+    task5: function(nm, sc, total, done, fail, detail){
+      saveRow("QUIZ05-" + myId + "~" + sc + "/" + total, nm, detail || "1", done, fail);
+    },
+    /* Даалгавар 4 (дараалал цээжлэх) */
+    findTask4: function(nm, cb){ findBy(["QUIZ04"], nm, cb); },
+    task4: function(nm, sc, total, done, fail, detail){
+      saveRow("QUIZ04-" + myId + "~" + sc + "/" + total, nm, detail || "1", done, fail);
     },
     /* Даалгавар 3 (ялгааг нь ол) — шинэ угтвар, хуучин QUIZ3-тай хольцгүй */
     findTask3: function(nm, cb){ findBy(["QUIZ03"], nm, cb); },
