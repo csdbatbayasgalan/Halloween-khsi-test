@@ -4,7 +4,33 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Шөнийн ээлж</title>
-<style>:root{padding-top:env(safe-area-inset-top,0);padding-bottom:env(safe-area-inset-bottom,0)}html{color-scheme:light}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<style>:root{padding-top:env(safe-area-inset-top,0);padding-bottom:env(safe-area-inset-bottom,0)}html{color-scheme:light}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}@supports not (aspect-ratio: 1 / 1){
+  #mpo .mpc{height:58px}
+  #onet .otc{height:46px}
+  #t3o .t3c{height:62px}
+  #t4o .t4p{height:84px}
+  #t5o .t5c{height:84px}
+}
+
+/* --- даалгавар дууссаны дараах ОНОО: том, тод --- */
+#quizo .zscore,#mpo .zscore,#eqo .zscore,#wso .zscore,#puzzo .zscore,#onet .zscore,#t3o .zscore,#t4o .zscore,#t5o .zscore{
+  display:inline-block;margin:10px auto 0;padding:8px 30px 14px;
+  border-radius:22px;background:linear-gradient(170deg,#ff6a3d,#e8402a);
+  color:#fff6ea;border:5px solid var(--ink);box-shadow:7px 7px 0 var(--ink);
+  font-family:var(--display);font-weight:900;line-height:1;
+  font-size:clamp(3.4rem,19vw,5.2rem);-webkit-text-stroke:0;
+  text-shadow:0 4px 0 rgba(0,0,0,.25);
+  animation:scpop .55s cubic-bezier(.2,1.7,.4,1) both}
+@keyframes scpop{0%{transform:scale(.3) rotate(-8deg);opacity:0}
+  60%{transform:scale(1.12) rotate(2deg);opacity:1}100%{transform:scale(1) rotate(0)}}
+#quizo .zmeta,#mpo .zmeta,#eqo .zmeta,#wso .zmeta,#puzzo .zmeta,#onet .zmeta,#t3o .zmeta,#t4o .zmeta,#t5o .zmeta{display:block;margin:12px 0 2px;font-size:.95rem;font-weight:900;opacity:1;
+  letter-spacing:.02em;color:#6b3a1e}
+#quizo .zstage,#mpo .zstage,#eqo .zstage,#wso .zstage,#puzzo .zstage,#onet .zstage,#t3o .zstage,#t4o .zstage,#t5o .zstage{font-size:clamp(2rem,11vw,2.9rem);margin:8px 0 0}
+@media (prefers-reduced-motion:reduce){#quizo .zscore,#mpo .zscore,#eqo .zscore,#wso .zscore,#puzzo .zscore,#onet .zscore,#t3o .zscore,#t4o .zscore,#t5o .zscore{animation:none}}
+
+#quizo .zlab,#mpo .zlab,#eqo .zlab,#wso .zlab,#puzzo .zlab,#onet .zlab,#t3o .zlab,#t4o .zlab,#t5o .zlab{margin:16px 0 0;font-family:var(--display);font-weight:900;font-size:.82rem;
+  letter-spacing:.22em;text-transform:uppercase;color:#b8401c;opacity:.95}
+</style>
 <link rel="preconnect" href="https://script.google.com" crossorigin>
 <link rel="preconnect" href="https://script.googleusercontent.com" crossorigin>
 <script>
@@ -50,7 +76,7 @@ body{
   line-height:1.5;
   overflow-x:hidden;
 }
-.stickers{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.stickers{position:absolute;top:0;right:0;bottom:0;left:0;inset:0;overflow:hidden;pointer-events:none;z-index:0}
 .stickers svg{position:absolute;filter:drop-shadow(3px 3px 0 rgba(23,19,16,.35))}
 
 .main-col{display:flex;flex-direction:column;gap:22px;min-width:0}
@@ -76,7 +102,7 @@ body{
 /* --- постер --- */
 /* --- НЭВТРЭХ --- */
 html.locked, body.locked{overflow:hidden}
-#login{position:fixed;inset:0;z-index:900;display:grid;place-items:center;padding:16px;
+#login{position:fixed;top:0;right:0;bottom:0;left:0;inset:0;z-index:900;display:grid;place-items:center;padding:16px;
   background:linear-gradient(170deg,#1c0d06,#120805 55%,#24100a);overflow-y:auto}
 #login .lgbox{width:100%;max-width:380px;background:var(--cream);border:4px solid var(--ink);
   border-radius:16px;box-shadow:8px 8px 0 var(--ink);padding:26px 20px;text-align:center;
@@ -192,12 +218,12 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
   line-height:1.3;white-space:normal}
 
 /* --- шагналын сангийн цонх --- */
-.overlay{position:fixed;inset:0;z-index:40;background:rgba(23,19,16,.72);
+.overlay{position:fixed;top:0;right:0;bottom:0;left:0;inset:0;z-index:40;background:rgba(23,19,16,.72);
   display:flex;align-items:center;justify-content:center;
   padding:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px));
   animation:fade .18s ease}
 .overlay[hidden]{display:none!important}
-#rain{position:fixed;inset:0;z-index:41;pointer-events:none}
+#rain{position:fixed;top:0;right:0;bottom:0;left:0;inset:0;z-index:41;pointer-events:none}
 .modal{position:relative;z-index:42;background:var(--cream);border:5px solid var(--ink);
   border-radius:10px;box-shadow:8px 8px 0 rgba(23,19,16,.6);padding:22px 18px 18px;
   width:100%;max-width:420px;max-height:88vh;overflow:auto;animation:pop .22s cubic-bezier(.2,1.5,.5,1)}
@@ -252,14 +278,14 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 .none{font-weight:700;font-size:.92rem;margin:0}
 
 /* --- хүүхэлдэй ба сарьсан багваахай --- */
-.webs{position:fixed;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+.webs{position:fixed;top:0;right:0;bottom:0;left:0;inset:0;z-index:2;pointer-events:none;overflow:hidden}
 .webs span{position:absolute;display:block;width:clamp(90px,17vw,190px)}
 .webs svg{display:block;width:100%;height:auto}
 .webs .w1{top:0;left:0}
 .webs .w2{top:0;right:0;transform:scaleX(-1)}
 .webs .w3{bottom:0;left:0;transform:scaleY(-1)}
 @media (max-width:640px){.webs .w3{display:none}}
-#play{position:fixed;inset:0;z-index:30;pointer-events:none;overflow:hidden}
+#play{position:fixed;top:0;right:0;bottom:0;left:0;inset:0;z-index:30;pointer-events:none;overflow:hidden}
 .doll{position:absolute;width:118px;pointer-events:auto;cursor:grab;touch-action:none;
   filter:drop-shadow(4px 5px 0 rgba(23,19,16,.35));will-change:transform;
   transform-origin:50% 30%}
@@ -360,7 +386,7 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 .gal .gi{margin:0}
 @media (min-width:560px){.gal{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}}
 @media (min-width:1000px){.gal{grid-template-columns:repeat(auto-fill,minmax(145px,1fr))}}
-.drops{position:absolute;inset:0;pointer-events:none;z-index:3}
+.drops{position:absolute;top:0;right:0;bottom:0;left:0;inset:0;pointer-events:none;z-index:3}
 .qbar{display:flex;align-items:center;gap:9px;margin-top:10px;padding:9px 12px;
   background:var(--cream);border:3px solid var(--ink);border-radius:10px;
   box-shadow:3px 3px 0 var(--ink);font-weight:700;font-size:.8rem}
@@ -371,7 +397,7 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 
 .winner{margin:10px 0 0;padding:10px 12px;background:#1b0d07;border:3px solid #f6c62a;
   border-radius:10px;color:#f6c62a;font-weight:800;font-size:.85rem;text-align:center}
-#gate{position:fixed;inset:0;z-index:200;display:grid;place-items:center;text-align:center;
+#gate{position:fixed;top:0;right:0;bottom:0;left:0;inset:0;z-index:200;display:grid;place-items:center;text-align:center;
   background:radial-gradient(circle at 50% 35%, #3a1a08, #140905 70%);
   transition:opacity .5s ease}
 #gate.go{opacity:0;pointer-events:none}
@@ -406,16 +432,27 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
   .sndbtn .ic{font-size:20px}}
 #ytwrap{position:fixed;width:1px;height:1px;left:-9999px;top:-9999px;opacity:0;pointer-events:none}
 .board{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-.board li{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:10px;
+.board li{display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:12px;
   background:var(--cream-2);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink)}
-.board li.top{background:var(--yellow)}
-.board .rk{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
-  font-family:var(--display);font-weight:900;font-size:.82rem;
+.board li.top{background:var(--yellow);box-shadow:5px 5px 0 var(--ink)}
+.board .rk{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;
+  font-family:var(--display);font-weight:900;font-size:.95rem;
   background:var(--ink);color:var(--cream)}
 .board li.top .rk{background:#f0824a;color:#fff6ea}
-.board .nmx{flex:1;min-width:0;font-weight:700;font-size:.88rem;word-break:break-word}
-.board .pt{flex:none;font-family:var(--display);font-weight:900;font-size:.95rem}
-.board .pt small{font-weight:700;font-size:.62rem;opacity:.7;margin-left:3px}
+.board .nmx{flex:1;min-width:0;font-weight:800;font-size:.95rem;word-break:break-word}
+/* --- цуглуулсан оноо: том, тод --- */
+.board .pt{flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-width:72px;padding:6px 12px 5px;border-radius:12px;line-height:1;
+  background:var(--ink);color:#ffd84d;border:3px solid var(--ink);
+  font-family:var(--display);font-weight:900;font-size:1.75rem;letter-spacing:.02em}
+.board .pt small{display:block;margin:4px 0 0;font-weight:800;font-size:.56rem;
+  letter-spacing:.18em;text-transform:uppercase;color:#fff2ea;opacity:.75}
+.board li.top .pt{background:#e8402a;color:#fff6ea;border-color:#7d1e0d;
+  box-shadow:0 0 0 3px #ffd84d inset;animation:ptglow 2.2s ease-in-out infinite alternate}
+@keyframes ptglow{from{transform:scale(1)}to{transform:scale(1.06)}}
+@media (prefers-reduced-motion:reduce){.board li.top .pt{animation:none}}
+@media (max-width:420px){.board .pt{min-width:62px;font-size:1.45rem;padding:5px 9px 4px}
+  .board .nmx{font-size:.9rem}}
 .bnone{margin:0;font-size:.84rem;font-weight:700;opacity:.7;text-align:center;padding:6px 0}
 /* --- даалгаврын хуваарь --- */
 .tasks{margin-top:14px;background:var(--cream);border:4px solid var(--ink);border-radius:12px;
@@ -440,7 +477,7 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 /* --- QUIZ --- */
 .tlist li.now{cursor:pointer}
 .tlist li.now:active{transform:translate(2px,2px)}
-#quizo,#mpo,#eqo,#wso,#puzzo,#onet,#t3o,#t4o,#t5o{position:fixed;inset:0;z-index:220;display:grid;place-items:center;padding:16px;
+#quizo,#mpo,#eqo,#wso,#puzzo,#onet,#t3o,#t4o,#t5o{position:fixed;top:0;right:0;bottom:0;left:0;inset:0;z-index:220;display:grid;place-items:center;padding:16px;
   background:rgba(12,6,3,.88);overflow-y:auto;animation:qfade .35s ease}#quizo .qz,#mpo .qz,#eqo .qz,#wso .qz,#puzzo .qz,#onet .qz,#t3o .qz,#t4o .qz,#t5o .qz{max-width:460px;width:100%;background:var(--cream);border:4px solid var(--ink);
   border-radius:14px;box-shadow:7px 7px 0 var(--ink);padding:24px 20px;position:relative;
   text-align:center;animation:pop .4s cubic-bezier(.2,1.5,.4,1)}#quizo .qx,#mpo .qx,#eqo .qx,#wso .qx,#puzzo .qx,#onet .qx,#t3o .qx,#t4o .qx,#t5o .qx{position:absolute;right:-13px;top:-13px;width:38px;height:38px;border-radius:50%;
@@ -455,7 +492,7 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
   display:grid;place-items:center;font-family:var(--display);font-weight:900;font-size:.9rem;
   background:var(--ink);color:var(--cream)}#quizo .ztime .zt.warn,#mpo .ztime .zt.warn,#eqo .ztime .zt.warn,#wso .ztime .zt.warn,#puzzo .ztime .zt.warn,#onet .ztime .zt.warn,#t3o .ztime .zt.warn,#t4o .ztime .zt.warn,#t5o .ztime .zt.warn{background:#e8402a;color:#fff2ea;animation:ztick .5s steps(2) infinite}@keyframes ztick{from{transform:scale(1)}to{transform:scale(1.1)}}#quizo .ztime .ztp,#mpo .ztime .ztp,#eqo .ztime .ztp,#wso .ztime .ztp,#puzzo .ztime .ztp,#onet .ztime .ztp,#t3o .ztime .ztp,#t4o .ztime .ztp,#t5o .ztime .ztp{flex:1;height:9px;border:2px solid var(--ink);border-radius:999px;
   overflow:hidden;background:var(--cream-2)}#quizo .ztime .ztp i,#mpo .ztime .ztp i,#eqo .ztime .ztp i,#wso .ztime .ztp i,#puzzo .ztime .ztp i,#onet .ztime .ztp i,#t3o .ztime .ztp i,#t4o .ztime .ztp i,#t5o .ztime .ztp i{display:block;height:100%;background:#f6c62a;width:100%;transition:width .9s linear}/* --- зохион байгуулагчийн харагдац (?admin) --- */
-#adm{position:fixed;inset:0;z-index:300;background:#141010;color:#f3ece0;
+#adm{position:fixed;top:0;right:0;bottom:0;left:0;inset:0;z-index:300;background:#141010;color:#f3ece0;
   overflow-y:auto;padding:18px 14px 60px;font-size:.84rem}#adm h2{font-family:var(--display);font-weight:900;margin:0 0 4px;color:#f6c62a;font-size:1.3rem}#adm .asub{margin:0 0 16px;opacity:.7;font-size:.78rem}#adm .ax{position:fixed;right:14px;top:14px;z-index:2;width:38px;height:38px;border-radius:50%;
   background:var(--cream);border:3px solid var(--ink);box-shadow:2px 2px 0 var(--ink);
   font-size:17px;cursor:pointer;padding:0}#adm .actl{display:block;
@@ -520,7 +557,7 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 #wso .wswrap.z{overflow:auto;max-height:62vh;border:3px solid var(--ink);border-radius:8px;
   -webkit-overflow-scrolling:touch}
 #wso .wswrap{position:relative}
-#wso .wsguard{position:absolute;inset:0;z-index:5;display:grid;place-items:center;
+#wso .wsguard{position:absolute;top:0;right:0;bottom:0;left:0;inset:0;z-index:5;display:grid;place-items:center;
   border-radius:8px;background:rgba(12,6,3,.92);color:#f6c62a;text-align:center;
   font-family:var(--display);font-weight:900;font-size:clamp(1rem,4vw,1.4rem);
   padding:14px;line-height:1.35;letter-spacing:.02em}
@@ -622,7 +659,7 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 #mpo .mpin{position:relative;display:block;width:100%;height:100%;
   transition:transform .32s cubic-bezier(.3,1.4,.5,1);transform-style:preserve-3d}
 #mpo .mpc.on .mpin,#mpo .mpc.got .mpin{transform:rotateY(180deg)}
-#mpo .mpb,#mpo .mpf{position:absolute;inset:0;display:grid;place-items:center;
+#mpo .mpb,#mpo .mpf{position:absolute;top:0;right:0;bottom:0;left:0;inset:0;display:grid;place-items:center;
   border:3px solid var(--ink);border-radius:9px;backface-visibility:hidden;
   -webkit-backface-visibility:hidden;line-height:1}
 #mpo .mpb{font-size:clamp(17px,4.4vw,30px)}
@@ -660,7 +697,7 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
   box-shadow:inset 0 0 0 2px #1d7a12,2px 2px 0 var(--ink);animation:ontip .55s steps(2) infinite}
 @keyframes ontip{from{filter:none}to{filter:brightness(1.35)}}
 #onet .psmall:disabled{opacity:.45;cursor:default;box-shadow:none;transform:none}
-#onet .onpath{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;
+#onet .onpath{position:absolute;top:0;right:0;bottom:0;left:0;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;
   filter:drop-shadow(0 0 3px rgba(232,64,42,.9))}
 #onet .wshint{margin:0;font-size:.78rem;font-weight:800;min-height:1.2em}
 /* --- Даалгавар 3: ЯЛГААГ НЬ ОЛ --- */
@@ -1677,8 +1714,9 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       body.innerHTML =
         (timeUp ? '<h2>⌛ ХУГАЦАА ДУУСЛАА</h2>' : '<h2>🎉 БҮХ ХОС ОЛДЛОО!</h2>')
       + '<p class="zstage">⏱️ ' + fmt(ms) + '</p>'
+      + '<p class="zlab">ТАНЫ АВСАН ОНОО</p>'
       + '<p class="zscore">+' + sc + '</p>'
-      + '<p class="zmeta">оноо · 🔁 ' + moves + ' хөдөлгөөн'
+      + '<p class="zmeta">🔁 ' + moves + ' хөдөлгөөн'
       +   (timeUp ? (' · 🃏 ' + restP + ' хос үлдсэн') : '') + '</p>'
       + (timeUp
           ? '<p class="znote">😿 13 минут өнгөрсөн тул оноо авах боломж дууссан — '
@@ -2198,8 +2236,9 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       body.innerHTML =
         (timeUp ? '<h2>⌛ ХУГАЦАА ДУУСЛАА</h2>' : '<h2>🎉 САМБАР ЦЭВЭРЛЭГДЛЭЭ!</h2>')
       + '<p class="zstage">⏱️ ' + fmt(ms) + '</p>'
+      + '<p class="zlab">ТАНЫ АВСАН ОНОО</p>'
       + '<p class="zscore">+' + sc + '</p>'
-      + '<p class="zmeta">оноо · 🔁 ' + moves + ' хөдөлгөөн'
+      + '<p class="zmeta">🔁 ' + moves + ' хөдөлгөөн'
       +   (timeUp ? (' · 🀄 ' + rest + ' хөзөр үлдсэн') : '') + '</p>'
       + (timeUp
           ? '<p class="znote">😿 13 минут өнгөрсөн тул оноо авах боломж дууссан — '
@@ -2572,8 +2611,9 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       body.innerHTML =
         (timeUp ? '<h2>⌛ ХУГАЦАА ДУУСЛАА</h2>' : '<h2>🎉 БҮХ ТҮВШИН ДУУСЛАА!</h2>')
       + '<p class="zstage">⏱️ ' + fmt(ms) + '</p>'
+      + '<p class="zlab">ТАНЫ АВСАН ОНОО</p>'
       + '<p class="zscore">+' + sc + '</p>'
-      + '<p class="zmeta">оноо · 🔎 ' + lv + '/' + LVLS + ' түвшин · ❌ ' + bad + ' алдаа</p>'
+      + '<p class="zmeta">🔎 ' + lv + '/' + LVLS + ' түвшин · ❌ ' + bad + ' алдаа</p>'
       + (timeUp
           ? '<p class="znote">😿 13 минут өнгөрсөн тул оноо авах боломж дууссан — '
             + 'даалгавар автоматаар дуусгаж, үр дүнг тань бүртгэлээ.</p>'
@@ -2870,8 +2910,9 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       body.innerHTML =
         (timeUp ? '<h2>⌛ ХУГАЦАА ДУУСЛАА</h2>' : '<h2>🎉 БҮХ ДАРААЛАЛ ОРОЛОО!</h2>')
       + '<p class="zstage">⏱️ ' + fmt(ms) + '</p>'
+      + '<p class="zlab">ТАНЫ АВСАН ОНОО</p>'
       + '<p class="zscore">+' + sc + '</p>'
-      + '<p class="zmeta">оноо · 🧠 ' + lv + '/' + LVLS + ' түвшин · ❌ ' + bad + ' алдаа</p>'
+      + '<p class="zmeta">🧠 ' + lv + '/' + LVLS + ' түвшин · ❌ ' + bad + ' алдаа</p>'
       + (timeUp
           ? '<p class="znote">😿 13 минут өнгөрсөн тул оноо авах боломж дууссан — '
             + 'даалгавар автоматаар дуусгаж, үр дүнг тань бүртгэлээ.</p>'
@@ -3190,8 +3231,9 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       body.innerHTML =
         (timeUp ? '<h2>⌛ ХУГАЦАА ДУУСЛАА</h2>' : '<h2>🎉 БҮХ СҮНСИЙГ БАРИЛАА!</h2>')
       + '<p class="zstage">⏱️ ' + fmt(ms) + '</p>'
+      + '<p class="zlab">ТАНЫ АВСАН ОНОО</p>'
       + '<p class="zscore">+' + sc + '</p>'
-      + '<p class="zmeta">оноо · 👻 ' + got + '/' + GOAL + ' · 💨 ' + miss + ' алдсан · 🎃 ' + trap + '</p>'
+      + '<p class="zmeta">👻 ' + got + '/' + GOAL + ' · 💨 ' + miss + ' алдсан · 🎃 ' + trap + '</p>'
       + (timeUp
           ? '<p class="znote">😿 13 минут өнгөрсөн тул оноо авах боломж дууссан — '
             + 'даалгавар автоматаар дуусгаж, үр дүнг тань бүртгэлээ.</p>'
