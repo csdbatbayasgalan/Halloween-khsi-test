@@ -2246,12 +2246,12 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     var ANY  = ["🎃","👻","🦇","💀","🧟","🧛","🧙","👹","🤡","😈","🪦","⚰️",
                 "🕯️","🔮","🍬","🧪","🐺","🦴","🗝️","🕷️","☠️","🌕","🧿","🥀"];
     var TWEAK = [
-      ["flip", ""], ["size", ".93"], ["spin", "9"], ["fade", ".84"],
-      ["flip", ""], ["size", ".94"], ["spin", "8"], ["fade", ".86"],
-      ["size", ".95"], ["spin", "7"], ["fade", ".87"], ["size", ".95"]
+      ["flip", ""], ["size", ".89"], ["spin", "13"], ["fade", ".78"],
+      ["flip", ""], ["size", ".90"], ["spin", "12"], ["fade", ".80"],
+      ["size", ".91"], ["spin", "11"], ["fade", ".82"], ["size", ".92"]
     ];
-    var SIZES = [4,4,5,5,6,6,6,7,7,7,8,8,8,9,9,9,10,10,10,10,
-                 10,10,11,11,11,11,12,12,12,12];
+    var SIZES = [4,4,5,5,6,6,6,7,7,7,8,8,8,9,9,9,9,10,10,10,
+                 10,10,10,10,11,11,11,11,11,11];
     var LVLS = SIZES.length;                       /* 30 түвшин */
     var TWEAK_FROM = 18;                           /* 19-р түвшнээс ижил emoji болно */
     var PEN_MS = 5000;                             /* буруу дарвал +5 сек */
@@ -2261,7 +2261,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     var o, body, xbtn, locked = false, player = "";
     var lv = 0, pen = 0, bad = 0, t0 = 0, tmr = 0, busy = false, oddAt = -1;
     var HINTS = 3, hints = HINTS, hintTmr = 0, autoTmr = 0;
-    var AUTO_MS = 60000;                           /* 1 минут гацвал өөрөө зөвлөнө */
+    var AUTO_MS = 40000;                           /* 40 секунд гацвал өөрөө зөвлөнө */
     var ADMIN = /[?&#]Baysaa-admin/.test(location.search + location.hash);
 
     function hook(){
@@ -2324,10 +2324,10 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       + '<p class="zlead">Бүх дүрс ижил — ганцхан нь өөр. Түүнийг нь ол!</p>'
       + '<ul class="zfacts">'
       +   '<li><span>🔎</span><span><b>' + LVLS + ' түвшин.</b> Түвшин бүрт нэг л дүрс бусдаасаа ялгаатай.</span></li>'
-      +   '<li><span>📈</span><span>Түвшин ахих тусам <b>талбай томорч</b> (4×4 → 12×12), ялгаа нь <b>нарийсна</b>.</span></li>'
+      +   '<li><span>📈</span><span>Түвшин ахих тусам <b>талбай томорч</b> (4×4 → 11×11), ялгаа нь <b>нарийсна</b>.</span></li>'
       +   '<li><span>🫥</span><span>Сүүлийн түвшнүүдэд <b>бүгд яг ижил дүрс</b> болно — ганц нь л эргүүлсэн, бүдэг эсвэл жижиг байна.</span></li>'
       +   '<li><span>❌</span><span>Буруу дарвал <b>+' + (PEN_MS / 1000) + ' секунд</b> нэмэгдэнэ.</span></li>'
-      +   '<li><span>💡</span><span><b>' + HINTS + ' сануулга</b> авч болно — зөв нүдийг гэрэлтүүлж өгнө. Нэг түвшин дээр <b>1 минут</b> гацвал үнэгүй өөрөө зааж өгнө.</span></li>'
+      +   '<li><span>💡</span><span><b>' + HINTS + ' сануулга</b> авч болно — зөв нүдийг гэрэлтүүлж өгнө. Нэг түвшин дээр <b>40 секунд</b> гацвал үнэгүй өөрөө зааж өгнө.</span></li>'
       +   '<li><span>⏱️</span><span><b>3 минут дотор</b> бүгдийг дуусгавал бүтэн <b>' + TOPN + ' оноо</b>.</span></li>'
       +   '<li><span>📉</span><span>Дараа нь <b>30 секунд тутамд 1 оноо</b> хасагдана.</span></li>'
       +   '<li><span>⌛</span><span><b>13 минутын дараа</b> оноо 0 болох тул даалгавар <b>автоматаар дуусч</b>, үр дүн бүртгэгдэнэ.</span></li>'
@@ -2909,7 +2909,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
   /* ---------- Даалгавар 5: СҮНС БАРИХ (реакц) ---------- */
   (function(){
     var C = 5, N = C * C;
-    var GOAL = 60;                                 /* барих ёстой сүнсний тоо */
+    var GOAL = 70;                                 /* барих ёстой сүнсний тоо */
     var LIFE0 = 1050, LIFE1 = 520;                 /* сүнс харагдах хугацаа: эхэлж → эцэст */
     var GAP = 230;
     var MISS_MS = 3000, TRAP_MS = 4000, EMPTY_MS = 1000;
@@ -3849,8 +3849,11 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       .then(function(rows){
         if(settled) return;
         settled = true; clearTimeout(timer);
+        if(!rows || !rows.length || typeof rows.forEach !== "function"){
+          fail(); return;                     /* {error:"busy"} гэх мэт — дахин оролдоно */
+        }
         var hit = false;
-        (rows || []).forEach(function(v){ if(String(v.id || "") === id) hit = true; });
+        rows.forEach(function(v){ if(String(v.id || "") === id) hit = true; });
         if(hit) done(); else fail();          /* бичигдээгүй бол дахин оролдоно */
       })
       .catch(function(){
@@ -3867,8 +3870,9 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       fetch(SHEET_URL + "?t=" + Date.now())
         .then(function(r){ return r.json(); })
         .then(function(rows){
+          if(!rows || typeof rows.forEach !== "function") return;   /* түр ачаалал — дараа шалгана */
           var hit = false;
-          (rows || []).forEach(function(v){ if(String(v.id || "") === id) hit = true; });
+          rows.forEach(function(v){ if(String(v.id || "") === id) hit = true; });
           if(!hit) writeVerified(id, nm, going, function(){ reVerify(id, nm, going, tries + 1); },
                                  function(){ reVerify(id, nm, going, tries + 1); });
         })
@@ -3894,14 +3898,19 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     }, fail);
   }
 
-  /* хуудас дахин нээгдэхэд хадгалагдаагүй үр дүнг чимээгүйхэн илгээнэ */
-  setTimeout(function(){
-    pendGet().forEach(function(o, i){
+  /* хадгалагдаагүй үр дүнг чимээгүйхэн дахин илгээнэ — нээгдэх үед БОЛОН 90 сек тутамд */
+  function pendFlush(){
+    var l = pendGet();
+    if(!l.length) return;
+    l.forEach(function(o, i){
       setTimeout(function(){
         writeVerified(o.id, o.nm, o.going, function(){ pendDel(o.id); }, function(){});
-      }, 1500 + i * 2500 + Math.random() * 2000);
+      }, i * 2500 + Math.random() * 2000);
     });
-  }, 4000);
+  }
+  setTimeout(pendFlush, 4000);
+  setInterval(pendFlush, 90000);
+  window.addEventListener("online", function(){ setTimeout(pendFlush, 1500); });
 
   function findBy(pres, nm, cb){
     var want = key(nm);
@@ -4207,9 +4216,22 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
   /* --- онооны самбарыг ачаалж, тогтмол шинэчилнэ --- */
   sheetLoad();
   clearInterval(sheetTimer);
-  sheetTimer = setInterval(sheetLoad, 30000);
+  /* 70+ хүн зэрэг онлайн байхад серверийг бөөгнүүлэхгүйн тулд
+     зөвхөн нээлттэй таб дээр, 50–70 секундын санамсаргүй зайтай татна */
+  function schedLoad(){
+    clearTimeout(sheetTimer);
+    sheetTimer = setTimeout(function(){
+      if(!document.hidden) sheetLoad();
+      schedLoad();
+    }, 50000 + Math.random() * 20000);
+  }
+  schedLoad();
+  var lastShow = 0;
   document.addEventListener("visibilitychange", function(){
-    if(!document.hidden) sheetLoad();
+    if(document.hidden) return;
+    if(Date.now() - lastShow < 20000) return;      /* давтан татахгүй */
+    lastShow = Date.now();
+    sheetLoad();
   });
 
   /* --- нүүрний зураг: энд 4 зургийн хаягийг тавина (data: URI эсвэл хуудастай хамт нийтэлсэн файл) --- */
