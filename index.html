@@ -680,18 +680,24 @@ button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
 #t3o .t3c:active{filter:brightness(.95)}
 #t3o .t3c.hit{background:#6fd45a;box-shadow:inset 0 0 0 3px #1d7a12,2px 2px 0 var(--ink)}
 #t3o .t3c.miss{background:#e8503a;animation:t3shake .32s}
+#t3o .t3c.tip{background:linear-gradient(165deg,#bdf2ad,#6fd45a);
+  box-shadow:inset 0 0 0 3px #1d7a12,2px 2px 0 var(--ink);animation:ontip .5s steps(2) infinite}
+#t3o .psmall{font-family:var(--display);font-weight:900;font-size:.76rem;padding:5px 12px;
+  border-radius:999px;border:2px solid var(--ink);background:#f6c62a;color:#2a1a10;
+  box-shadow:2px 2px 0 var(--ink);cursor:pointer}
+#t3o .psmall:disabled{opacity:.45;cursor:default;box-shadow:none}
 @keyframes t3shake{0%,100%{margin-left:0}25%{margin-left:-4px}75%{margin-left:4px}}
 #t3o .wshint{margin:0;font-size:.78rem;font-weight:800;min-height:1.2em}
 /* --- Даалгавар 4: ДАРААЛАЛ ЦЭЭЖЛЭХ --- */
-#t4o .qz{max-width:430px}
+#t4o .qz{max-width:520px}
 #t4o .pbar{display:flex;gap:7px;align-items:center;justify-content:center;flex-wrap:wrap;
   font-family:var(--display);font-weight:900;font-size:.8rem;margin:0 0 14px}
 #t4o .pbar span{background:var(--ink);color:var(--cream);border-radius:999px;padding:5px 11px}
-#t4o .t4grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 14px}
+#t4o .t4grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin:0 0 14px}
 #t4o .t4p{aspect-ratio:1;padding:0;cursor:pointer;line-height:1;
   font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;
-  font-size:clamp(26px,9vw,46px);
-  border:3px solid var(--ink);border-radius:14px;
+  font-size:clamp(17px,5.2vw,30px);
+  border:2px solid var(--ink);border-radius:10px;
   background:linear-gradient(165deg,#fff3e2,#f0d6b4);
   box-shadow:inset 0 -4px 0 rgba(0,0,0,.16),3px 3px 0 var(--ink);
   display:grid;place-items:center;filter:grayscale(.35) brightness(.94);
@@ -1087,7 +1093,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
   tick();
 
   /* ---------- НЭВТРЭХ ---------- */
-  /* Бүх хүнд нэг нууц үг. Өөрчлөхийг хүсвэл ?admin хуудаснаас солино. */
+  /* Бүх хүнд нэг нууц үг. Өөрчлөхийг хүсвэл ?Baysaa-admin хуудаснаас солино. */
   var DEF_PW = "252e26f6b9c15c37a78957d041e18932";   /* = Halloweenzeely123@ */
   var AUTH = { name: "", key: "" };
   (function(){
@@ -1138,7 +1144,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
   (function(){
     var box = document.getElementById("login");
     if(!box) return;
-    if(/[?&#]admin/.test(location.search + location.hash)){ box.remove(); return; }
+    if(/[?&#]Baysaa-admin/.test(location.search + location.hash)){ box.remove(); return; }
 
     document.documentElement.classList.add("locked");
     document.body.classList.add("locked");
@@ -2254,6 +2260,9 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     var SKEY = "zeely.t3";
     var o, body, xbtn, locked = false, player = "";
     var lv = 0, pen = 0, bad = 0, t0 = 0, tmr = 0, busy = false, oddAt = -1;
+    var HINTS = 3, hints = HINTS, hintTmr = 0, autoTmr = 0;
+    var AUTO_MS = 60000;                           /* 1 минут гацвал өөрөө зөвлөнө */
+    var ADMIN = /[?&#]Baysaa-admin/.test(location.search + location.hash);
 
     function hook(){
       var row = document.querySelector('#tlist li[data-no="3"]');
@@ -2318,6 +2327,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       +   '<li><span>📈</span><span>Түвшин ахих тусам <b>талбай томорч</b> (4×4 → 12×12), ялгаа нь <b>нарийсна</b>.</span></li>'
       +   '<li><span>🫥</span><span>Сүүлийн түвшнүүдэд <b>бүгд яг ижил дүрс</b> болно — ганц нь л эргүүлсэн, бүдэг эсвэл жижиг байна.</span></li>'
       +   '<li><span>❌</span><span>Буруу дарвал <b>+' + (PEN_MS / 1000) + ' секунд</b> нэмэгдэнэ.</span></li>'
+      +   '<li><span>💡</span><span><b>' + HINTS + ' сануулга</b> авч болно — зөв нүдийг гэрэлтүүлж өгнө. Нэг түвшин дээр <b>1 минут</b> гацвал үнэгүй өөрөө зааж өгнө.</span></li>'
       +   '<li><span>⏱️</span><span><b>3 минут дотор</b> бүгдийг дуусгавал бүтэн <b>' + TOPN + ' оноо</b>.</span></li>'
       +   '<li><span>📉</span><span>Дараа нь <b>30 секунд тутамд 1 оноо</b> хасагдана.</span></li>'
       +   '<li><span>⌛</span><span><b>13 минутын дараа</b> оноо 0 болох тул даалгавар <b>автоматаар дуусч</b>, үр дүн бүртгэгдэнэ.</span></li>'
@@ -2355,7 +2365,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     function saveState(){
       try {
         localStorage.setItem(SKEY, JSON.stringify({
-          u: AUTH.key || AUTH.name, t: t0, l: lv, p: pen, b: bad
+          u: AUTH.key || AUTH.name, t: t0, l: lv, p: pen, b: bad, h: hints
         }));
       } catch(e){}
     }
@@ -2410,19 +2420,27 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     function play(st){
       locked = true; xbtn.hidden = true;
       busy = false;
-      if(st){ lv = st.l || 0; pen = st.p || 0; bad = st.b || 0; t0 = st.t; }
-      else { lv = 0; pen = 0; bad = 0; t0 = Date.now(); }
+      if(st){
+        lv = st.l || 0; pen = st.p || 0; bad = st.b || 0; t0 = st.t;
+        hints = (typeof st.h === "number") ? st.h : HINTS;
+      } else { lv = 0; pen = 0; bad = 0; t0 = Date.now(); hints = HINTS; }
 
       body.innerHTML =
         '<h2>🔎 ЯЛГААГ НЬ ОЛ</h2>'
       + '<p class="pbar"><span id="t3time">⏱️ 0:00</span>'
       +   '<span id="t3lv"></span>'
-      +   '<span id="t3pen"></span></p>'
+      +   '<span id="t3pen"></span>'
+      +   '<button class="psmall" id="t3help" type="button"></button>'
+      +   (ADMIN ? '<button class="psmall" id="t3spy" type="button">👁️ Хариу</button>' : '')
+      + '</p>'
       + '<div class="t3grid" id="t3grid"></div>'
       + '<p class="wshint" id="t3hint">'
       +   (st ? "↩️ Үргэлжлүүллээ — цаг зогсоогүй шүү" : "Бусдаасаа өөр ганц дүрсийг ол")
       + '</p>';
       body.querySelector("#t3grid").addEventListener("click", onTap);
+      paintHelp();
+      body.querySelector("#t3help").addEventListener("click", useHint);
+      if(ADMIN) body.querySelector("#t3spy").addEventListener("click", function(){ mark(4000); });
 
       level();
       clearInterval(tmr);
@@ -2431,7 +2449,47 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       saveState();
     }
 
+    /* ---------- сануулга ---------- */
+    function paintHelp(){
+      var b = body ? body.querySelector("#t3help") : null;
+      if(!b) return;
+      b.textContent = "💡 Сануулга " + hints + "/" + HINTS;
+      b.disabled = (hints <= 0);
+    }
+    function clearMark(){
+      if(!body) return;
+      var old = body.querySelectorAll(".t3c.tip");
+      for(var i = 0; i < old.length; i++) old[i].classList.remove("tip");
+    }
+    function mark(ms){
+      if(!body) return;
+      var el = body.querySelector('.t3c[data-i="' + oddAt + '"]');
+      if(!el) return;
+      clearMark();
+      clearTimeout(hintTmr);
+      el.classList.add("tip");
+      hintTmr = setTimeout(clearMark, ms || 2500);
+    }
+    function useHint(){
+      if(busy || hints <= 0) return;
+      hints--;
+      paintHelp();
+      saveState();
+      mark(2500);
+      var h = body.querySelector("#t3hint");
+      if(h) h.textContent = hints > 0
+        ? ("💡 Энэ байна! Үлдсэн сануулга: " + hints)
+        : "💡 Сүүлчийн сануулга — цаашид өөрөө оллоо шүү 🦇";
+    }
+
     function level(){
+      clearMark();
+      clearTimeout(autoTmr);
+      autoTmr = setTimeout(function(){          /* 1 минут гацвал үнэгүй зөвлөнө */
+        var h = body && body.querySelector("#t3hint");
+        if(h) h.textContent = "🫶 Удаан хайлаа — энэ байна (оноо хасагдахгүй)";
+        mark(4000);
+      }, AUTO_MS);
       var n = SIZES[lv], total = n * n;
       var tw = (lv >= TWEAK_FROM) ? tweakFor(lv) : null;
       var pr = tw ? [tw.em, tw.em] : pairFor(lv);
@@ -2468,6 +2526,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       if(!el || !el.classList.contains("t3c")) return;
       var i = parseInt(el.getAttribute("data-i"), 10);
       var h = body.querySelector("#t3hint");
+      clearMark();
       if(i !== oddAt){
         bad++;
         pen += PEN_MS;
@@ -2502,6 +2561,8 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
 
     function finish(timeUp){
       clearInterval(tmr); tmr = 0;
+      clearTimeout(autoTmr); clearTimeout(hintTmr);
+      clearMark();
       clearState();
       var ms = spent();
       if(timeUp && ms > DEAD_MS) ms = DEAD_MS;
@@ -2550,9 +2611,12 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
 
   /* ---------- Даалгавар 4: ДАРААЛАЛ ЦЭЭЖЛЭХ (Simon) ---------- */
   (function(){
-    var PADS = ["🎃","👻","🦇","💀","🕷️","🧙","🔮","🍬","🪦"];
-    var LVLS = 10;                                 /* урт: 3 → 12 */
-    var PEN_MS = 6000;                             /* алдвал +6 сек */
+    var PADS = ["🎃","👻","🦇","💀","🕷️","🧙","🔮","🍬","🪦","🧛",
+                "🧟","👹","🤡","😈","⚰️","🕯️","🧪","🐺","🦴","🗝️",
+                "🕸️","☠️","🪄","🧹","🥀"];        /* 5×5 = 25 дүрс */
+    var COLS = 5;
+    var LVLS = 8;                                  /* урт: 3 → 10 */
+    var PEN_MS = 0;                                /* алдвал цаг нэмэгдэхгүй */
     var TOPN = 20, FREE_MS = 180000, STEP_MS = 30000;
     var DEAD_MS = FREE_MS + TOPN * STEP_MS;
     var SKEY = "zeely.t4";
@@ -2620,10 +2684,10 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         '<h2>🧠 ДААЛГАВАР 4<br>ДАРААЛАЛ ЦЭЭЖЛЭХ</h2>'
       + '<p class="zlead">Дүрснүүд ээлжлэн анивчина. Яг тэр дарааллаар нь давтаж дар!</p>'
       + '<ul class="zfacts">'
-      +   '<li><span>🧠</span><span><b>' + LVLS + ' түвшин.</b> Эхний түвшинд 3 дүрс, сүүлчийнхэд <b>' + (LVLS + 2) + ' дүрс</b>.</span></li>'
+      +   '<li><span>🧠</span><span><b>' + LVLS + ' түвшин.</b> ' + PADS.length + ' дүрсийн дундаас: эхэндээ 3, сүүлчийнхэд <b>' + (LVLS + 2) + ' дүрс</b>.</span></li>'
       +   '<li><span>👀</span><span>Эхлээд <b>анхааралтай хар</b> — дараа нь чиний ээлж. Харж байхад дарах боломжгүй.</span></li>'
       +   '<li><span>⚡</span><span>Түвшин ахих тусам <b>анивчилт хурдасна</b>.</span></li>'
-      +   '<li><span>❌</span><span>Нэг алдвал <b>+' + (PEN_MS / 1000) + ' секунд</b>, тэр түвшнээ <b>эхнээс нь</b> дахин үзнэ.</span></li>'
+      +   '<li><span>❌</span><span>Алдвал <b>оноо, цаг нэмэгдэхгүй</b> — зүгээр тэр түвшнээ <b>эхнээс нь</b> дахин үзээд дахин оролдоно.</span></li>'
       +   '<li><span>⏱️</span><span><b>3 минут дотор</b> бүгдийг дуусгавал бүтэн <b>' + TOPN + ' оноо</b>, дараа нь 30 секунд тутамд 1 оноо хасагдана.</span></li>'
       +   '<li><span>⌛</span><span><b>13 минутын дараа</b> автоматаар дуусч, үр дүн бүртгэгдэнэ.</span></li>'
       +   '<li><span>🚪</span><span>Нэг л удаа бүртгэгдэнэ — <b>дахин оролцох боломжгүй</b>.</span></li>'
@@ -2700,6 +2764,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       + '<div class="t4grid" id="t4grid"></div>'
       + '<p class="wshint" id="t4hint">Бэлтгэ…</p>';
       var g = body.querySelector("#t4grid");
+      g.style.gridTemplateColumns = "repeat(" + COLS + ", minmax(0, 1fr))";
       for(var i = 0; i < PADS.length; i++){
         var d = document.createElement("button");
         d.type = "button";
@@ -2769,7 +2834,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         saveState(); tick(); bars();
         el.classList.add("wrong");
         setTimeout(function(){ el.classList.remove("wrong"); }, 400);
-        if(h) h.textContent = "❌ Алдлаа — +" + (PEN_MS / 1000) + " сек. Дахин хараарай…";
+        if(h) h.textContent = "❌ Алдлаа — дахин хараад оролдоорой…";
         showing = true;
         stopTos();
         tos.push(setTimeout(showSeq, 1000));
@@ -2844,7 +2909,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
   /* ---------- Даалгавар 5: СҮНС БАРИХ (реакц) ---------- */
   (function(){
     var C = 5, N = C * C;
-    var GOAL = 70;                                 /* барих ёстой сүнсний тоо */
+    var GOAL = 60;                                 /* барих ёстой сүнсний тоо */
     var LIFE0 = 1050, LIFE1 = 520;                 /* сүнс харагдах хугацаа: эхэлж → эцэст */
     var GAP = 230;
     var MISS_MS = 3000, TRAP_MS = 4000, EMPTY_MS = 1000;
@@ -2854,7 +2919,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     var SKEY = "zeely.t5";
     var o, body, xbtn, locked = false, player = "";
     var got = 0, miss = 0, trap = 0, pen = 0, t0 = 0, tmr = 0;
-    var tos = [], alive = -1, decoy = -1, running = false;
+    var tos = [], alive = -1, decoys = [], running = false;
 
     function hook(){
       var row = document.querySelector('#tlist li[data-no="5"]');
@@ -2919,7 +2984,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       +   '<li><span>👻</span><span><b>' + GOAL + ' сүнс</b> барьвал даалгавар дуусна.</span></li>'
       +   '<li><span>⚡</span><span>Эхэндээ ~1 секунд харагдана, цаашаа <b>улам богино</b> болно.</span></li>'
       +   '<li><span>💨</span><span>Барьж амжаагүй сүнс тутамд <b>+' + (MISS_MS / 1000) + ' секунд</b>.</span></li>'
-      +   '<li><span>🎃</span><span>Хааяа <b>хулгайч хулуу</b> гарч ирнэ — түүнийг дарвал <b>+' + (TRAP_MS / 1000) + ' секунд</b>. Бүү дар!</span></li>'
+      +   '<li><span>🎃</span><span>Хааяа <b>2–3 хулгайч хулуу</b> зэрэг гарч ирнэ — тэднийг дарвал бүрд нь <b>+' + (TRAP_MS / 1000) + ' секунд</b>. Бүү дар!</span></li>'
       +   '<li><span>🫳</span><span>Хоосон нүд дарвал <b>+' + (EMPTY_MS / 1000) + ' секунд</b> — дураараа дарж болохгүй.</span></li>'
       +   '<li><span>⏱️</span><span><b>3 минут дотор</b> дуусгавал бүтэн <b>' + TOPN + ' оноо</b>, дараа нь 30 секунд тутамд 1 оноо хасагдана.</span></li>'
       +   '<li><span>⌛</span><span><b>13 минутын дараа</b> автоматаар дуусч, үр дүн бүртгэгдэнэ.</span></li>'
@@ -3046,11 +3111,17 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       if(!el) return;
       el.textContent = "👻";
       el.classList.add("gh");
-      decoy = -1;
-      if(got >= TRAP_FROM && Math.random() < 0.35){
-        do { decoy = Math.floor(Math.random() * N); } while(decoy === alive);
-        var dl = cell(decoy);
-        if(dl){ dl.textContent = "🎃"; dl.classList.add("tr"); }
+      decoys = [];
+      if(got >= TRAP_FROM && Math.random() < 0.45){
+        var want = 2 + (Math.random() < (got > GOAL / 2 ? 0.6 : 0.3) ? 1 : 0);  /* 2–3 хулуу */
+        var guard = 0;
+        while(decoys.length < want && guard++ < 40){
+          var k = Math.floor(Math.random() * N);
+          if(k === alive || decoys.indexOf(k) > -1) continue;
+          decoys.push(k);
+          var dl = cell(k);
+          if(dl){ dl.textContent = "🎃"; dl.classList.add("tr"); }
+        }
       }
       tos.push(setTimeout(function(){
         if(!running) return;
@@ -3058,7 +3129,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
           miss++; pen += MISS_MS;
           clearCell(alive, "fade");
           alive = -1;
-          if(decoy >= 0){ clearCell(decoy); decoy = -1; }
+          decoys.forEach(function(d){ clearCell(d); }); decoys = [];
           bars(); saveState(); tick();
           var h = body.querySelector("#t5hint");
           if(h) h.textContent = "💨 Алга болчихлоо — +" + (MISS_MS / 1000) + " сек";
@@ -3079,16 +3150,17 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         got++;
         stopTos();
         clearCell(alive, "hit"); alive = -1;
-        if(decoy >= 0){ clearCell(decoy); decoy = -1; }
+        decoys.forEach(function(d){ clearCell(d); }); decoys = [];
         bars(); saveState();
         if(got >= GOAL){ running = false; finish(); return; }
         if(h) h.textContent = "✅ Барилаа! " + got + "/" + GOAL;
         tos.push(setTimeout(spawn, GAP));
         return;
       }
-      if(i === decoy){
+      if(decoys.indexOf(i) > -1){
         trap++; pen += TRAP_MS;
-        clearCell(decoy, "miss"); decoy = -1;
+        clearCell(i, "miss");
+        decoys.splice(decoys.indexOf(i), 1);
         bars(); saveState(); tick();
         if(h) h.textContent = "🎃 Хулгайч хулуу! +" + (TRAP_MS / 1000) + " сек";
         return;
@@ -3154,9 +3226,9 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     }
   })();
 
-  /* ---------- зохион байгуулагчийн харагдац: хаягийн ард ?admin ---------- */
+  /* ---------- зохион байгуулагчийн харагдац: хаягийн ард ?Baysaa-admin ---------- */
   (function(){
-    if(!/[?&#]admin/.test(location.search + location.hash)) return;
+    if(!/[?&#]Baysaa-admin/.test(location.search + location.hash)) return;
 
     function draw(){
       var box = document.createElement("div");
