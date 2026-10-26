@@ -1180,7 +1180,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
   (function(){
     var box = document.getElementById("login");
     if(!box) return;
-    if(/[?&#]Baysaa-admin/.test(location.search + location.hash)){ box.remove(); return; }
+    if(/[?&#]baysaa-admin/i.test(location.search + location.hash)){ box.remove(); return; }
 
     document.documentElement.classList.add("locked");
     document.body.classList.add("locked");
@@ -2300,7 +2300,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
     var lv = 0, pen = 0, bad = 0, t0 = 0, tmr = 0, busy = false, oddAt = -1;
     var HINTS = 3, hints = HINTS, hintTmr = 0, autoTmr = 0;
     var AUTO_MS = 40000;                           /* 40 секунд гацвал өөрөө зөвлөнө */
-    var ADMIN = /[?&#]Baysaa-admin/.test(location.search + location.hash);
+    var ADMIN = /[?&#]baysaa-admin/i.test(location.search + location.hash);
 
     function hook(){
       var row = document.querySelector('#tlist li[data-no="3"]');
@@ -3269,7 +3269,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
 
   /* ---------- зохион байгуулагчийн харагдац: хаягийн ард ?Baysaa-admin ---------- */
   (function(){
-    if(!/[?&#]Baysaa-admin/.test(location.search + location.hash)) return;
+    if(!/[?&#]baysaa-admin/i.test(location.search + location.hash)) return;
 
     function draw(){
       var box = document.createElement("div");
