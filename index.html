@@ -3381,23 +3381,33 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       });
     });
 
-    function stage(rows){
-      var list = [];
+    var PRE = ["QUIZ1", "QUIZ2", "QUIZ03", "QUIZ04", "QUIZ05"];
+    function totals(rows){                     /* бүх 5 даалгаврын нийлбэр */
+      var by = {};
       rows.forEach(function(v){
         var q = window.ZEELY.parseQuiz(v);
-        if(q && q.pre === "QUIZ05") list.push(q);
+        if(!q || !q.name) return;
+        var ix = PRE.indexOf(q.pre);
+        if(ix < 0) return;
+        var k = window.ZEELY.nameKey(q.name);
+        if(!k) return;
+        if(!by[k]) by[k] = { name: q.name, total: 0, each: [null,null,null,null,null], done: 0 };
+        if(by[k].each[ix] === null){
+          by[k].each[ix] = q.score; by[k].total += q.score; by[k].done++;
+        }
       });
-      list.sort(function(a, b){
-        var d = b.score - a.score;
-        if(d) return d;
-        var ta = num(a.detail, "g"), tb = num(b.detail, "g");
-        if(ta !== tb) return (ta < 0 ? 1e9 : ta) - (tb < 0 ? 1e9 : tb);
-        return num(a.detail, "x") - num(b.detail, "x");
-      });
+      var list = Object.keys(by).map(function(k){ return by[k]; });
+      list.sort(function(a, b){ return b.total - a.total || b.done - a.done
+                                    || a.name.localeCompare(b.name); });
+      return list;
+    }
+
+    function stage(rows){
+      var list = totals(rows);
       if(!list.length){
         locked = false; xbtn.hidden = false;
         body.innerHTML = '<h2>🤷 ХЭН Ч АЛГА</h2>'
-          + '<p class="zlead">Даалгавар 5-ыг хараахан хэн ч биелүүлээгүй байна.</p>'
+          + '<p class="zlead">Хараахан хэн ч даалгавар биелүүлээгүй байна.</p>'
           + '<button class="zbtn" id="wcl">Хаах</button>';
         body.querySelector("#wcl").addEventListener("click", close);
         return;
@@ -3437,8 +3447,7 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       + '<button class="zbtn" id="wcl" style="margin-top:12px">Хаах</button>';
       body.querySelector(".wn").textContent = w.name;
       body.querySelector(".wm").textContent =
-        "🏆 " + w.score + " оноо · ⏱ " + mmss(num(w.detail, "g"))
-        + " · 👻 " + num(w.detail, "c") + " сүнс";
+        "🏆 " + w.total + " оноо · ✅ " + w.done + "/5 даалгавар";
       body.querySelector(".zmeta").textContent = total + " оролцогчоос шалгарлаа";
       var img = body.querySelector("#wpos");
       img.onload = function(){ img.hidden = false; };
@@ -3609,8 +3618,8 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
       tw.innerHTML =
         '<div class="arow"><span class="alab">🏆 Ялагч хэн бэ?</span>'
       +   '<span class="ast" id="awst">шалгаж байна…</span></div>'
-      + '<p class="ahint">👻 Даалгавар 5 (Сүнс барих) нь нийтийн онооны самбарт <b>нэмэгддэггүй</b> — '
-      +   'тусгай ялагчийг зөвхөн энд тодруулна. Тэнцвэл богино хугацаагаар нь эрэмбэлнэ.</p>'
+      + '<p class="ahint">🏆 <b>Бүх 5 даалгаврын нийлбэрээр</b> ялагчийг тодруулна (нийтийн самбарт зөвхөн 1–3 харагддаг). '
+      +   'Тэнцвэл илүү олон даалгавар биелүүлсэн нь түрүүлнэ.</p>'
       + '<div class="arow gorow"><span class="alab">📣 Хуудсан дээрх зарлал</span>'
       +   '<span class="ast" id="awopen">шалгаж байна…</span>'
       +   '<button class="abtn" id="awtog" disabled>…</button></div>'
@@ -3663,20 +3672,23 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         function num(d, ch){ var m = String(d || "").match(new RegExp(ch + "(\\d+)")); return m ? parseInt(m[1], 10) : -1; }
         function mmss(t){ return t < 0 ? "—" : (Math.floor(t / 60) + ":" + ("0" + (t % 60)).slice(-2)); }
         if(!(window.ZEELY && window.ZEELY.fetchRows)) return;
+        var PRE5 = ["QUIZ1", "QUIZ2", "QUIZ03", "QUIZ04", "QUIZ05"];
         window.ZEELY.fetchRows(function(rows){
           if(!rows){ st.textContent = "алдаа"; return; }
-          var list = [];
+          var by = {};
           rows.forEach(function(v){
             var q = window.ZEELY.parseQuiz(v);
-            if(q && q.pre === "QUIZ05") list.push(q);
+            if(!q || !q.name) return;
+            var ix = PRE5.indexOf(q.pre);
+            if(ix < 0) return;
+            var k = window.ZEELY.nameKey(q.name);
+            if(!k) return;
+            if(!by[k]) by[k] = { name: q.name, total: 0, each: [null,null,null,null,null], done: 0 };
+            if(by[k].each[ix] === null){ by[k].each[ix] = q.score; by[k].total += q.score; by[k].done++; }
           });
-          list.sort(function(a, b){
-            var d = b.score - a.score;
-            if(d) return d;
-            var ta = num(a.detail, "g"), tb = num(b.detail, "g");
-            if(ta !== tb) return (ta < 0 ? 1e9 : ta) - (tb < 0 ? 1e9 : tb);
-            return num(a.detail, "x") - num(b.detail, "x");
-          });
+          var list = Object.keys(by).map(function(k){ return by[k]; });
+          list.sort(function(a, b){ return b.total - a.total || b.done - a.done
+                                        || a.name.localeCompare(b.name); });
           st.textContent = list.length + " оролцогч";
           st.className = "ast so";
           if(!list.length){
@@ -3688,23 +3700,21 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
             + '<div class="awnm"></div>'
             + '<div class="awsc"><b></b><small>оноо</small></div>'
             + '<div class="awmeta"></div></div>';
+          function brk(r){
+            var a = [];
+            for(var j = 0; j < 5; j++) a.push((j + 1) + ":" + (r.each[j] === null ? "–" : r.each[j]));
+            return a.join(" · ");
+          }
           bx.querySelector(".awnm").textContent = w.name;
-          bx.querySelector(".awsc b").textContent = w.score;
-          bx.querySelector(".awmeta").textContent =
-            "⏱ " + mmss(num(w.detail, "g"))
-            + " · 👻 " + num(w.detail, "c") + " барьсан"
-            + " · 💨 " + num(w.detail, "x") + " алдсан"
-            + (w.at ? " · 🕒 " + w.at : "");
+          bx.querySelector(".awsc b").textContent = w.total;
+          bx.querySelector(".awmeta").textContent = "✅ " + w.done + "/5 даалгавар  ·  " + brk(w);
           ul.innerHTML = "";
-          list.slice(1).forEach(function(q, i){
+          list.slice(1).forEach(function(r, i){
             var li = document.createElement("li");
             li.className = "on";
             li.innerHTML = '<span></span><span class="amini"></span>';
-            li.querySelector("span").textContent = (i + 2) + ". " + q.name;
-            li.querySelector(".amini").textContent =
-              q.score + " оноо · ⏱ " + mmss(num(q.detail, "g"))
-              + " · 👻 " + num(q.detail, "c") + " · 💨 " + num(q.detail, "x")
-              + (q.at ? " · 🕒 " + q.at : "");
+            li.querySelector("span").textContent = (i + 2) + ". " + r.name;
+            li.querySelector(".amini").textContent = r.total + " оноо  (" + brk(r) + ")";
             ul.appendChild(li);
           });
         });
