@@ -3549,6 +3549,60 @@ footer{text-align:center;font-size:.78rem;font-weight:700;color:#f6d8c9;padding-
         step();
       });
 
+      /* --- НИЙТ ОНОО: бүх 5 даалгаврын нийлбэр (зөвхөн админ) --- */
+      var tt = document.createElement("div");
+      tt.className = "actl"; tt.id = "actlt";
+      tt.innerHTML =
+        '<div class="arow"><span class="alab">🧮 Нийт оноо</span>'
+      +   '<span class="ast" id="atst">шалгаж байна…</span></div>'
+      + '<p class="ahint">Бүх 5 даалгаврын нийлбэр. Нийтийн самбарт зөвхөн 1–3 харагддаг бол энд '
+      +   '<b>бүгд</b> тоологдоно. Хаалтанд даалгавар тус бүрийн оноо.</p>'
+      + '<ul class="aulist" id="atlist"></ul>';
+      box.appendChild(tt);
+
+      (function(){
+        var st = tt.querySelector("#atst"), ul = tt.querySelector("#atlist");
+        var PRE = [["QUIZ1","1"],["QUIZ2","2"],["QUIZ03","3"],["QUIZ04","4"],["QUIZ05","5"]];
+        if(!(window.ZEELY && window.ZEELY.fetchRows)) return;
+        window.ZEELY.fetchRows(function(rows){
+          if(!rows){ st.textContent = "алдаа"; return; }
+          var by = {};
+          rows.forEach(function(v){
+            var q = window.ZEELY.parseQuiz(v);
+            if(!q || !q.name) return;
+            var ix = -1;
+            for(var i = 0; i < PRE.length; i++) if(q.pre === PRE[i][0]) ix = i;
+            if(ix < 0) return;
+            var k = window.ZEELY.nameKey(q.name);
+            if(!k) return;
+            if(!by[k]) by[k] = { name: q.name, total: 0, each: [null,null,null,null,null] };
+            if(by[k].each[ix] === null){ by[k].each[ix] = q.score; by[k].total += q.score; }
+          });
+          var list = Object.keys(by).map(function(k){ return by[k]; });
+          list.sort(function(a, b){ return b.total - a.total || a.name.localeCompare(b.name); });
+          st.textContent = list.length + " хүн";
+          st.className = "ast so";
+          ul.innerHTML = "";
+          if(!list.length){
+            var li0 = document.createElement("li");
+            li0.className = "off";
+            li0.innerHTML = '<span>Одоогоор хэн ч оролцоогүй</span>';
+            ul.appendChild(li0);
+            return;
+          }
+          list.forEach(function(r, i){
+            var parts = [];
+            for(var j = 0; j < 5; j++) parts.push(PRE[j][1] + ":" + (r.each[j] === null ? "–" : r.each[j]));
+            var li = document.createElement("li");
+            li.className = "on";
+            li.innerHTML = '<span></span><span class="amini"></span>';
+            li.querySelector("span").textContent = (i + 1) + ". " + r.name;
+            li.querySelector(".amini").textContent = r.total + " оноо  (" + parts.join(" · ") + ")";
+            ul.appendChild(li);
+          });
+        });
+      })();
+
       /* --- ТУСГАЙ ЯЛАГЧ (Даалгавар 5) --- */
       var tw = document.createElement("div");
       tw.className = "actl"; tw.id = "actlw";
